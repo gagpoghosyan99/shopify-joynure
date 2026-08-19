@@ -44,3 +44,26 @@
     transition: none;
   }
 }
+
+/* Header: category-first navigation */
+.header-menu,
+.header__drawer,
+.menu-drawer-container {
+  display: none !important;
+}
+
+.header__column--center {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+
+.header__column--center .header-logo {
+  justify-content: center;
+}
+
+@media screen and (max-width: 749px) {
+  .header__column--center {
+    grid-column: 1 / -1;
+    justify-content: center;
+  }
+}

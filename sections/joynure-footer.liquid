@@ -1,0 +1,395 @@
+{{ 'joynure-footer.css' | asset_url | stylesheet_tag }}
+
+<footer class="joynure-footer section" data-section-id="{{ section.id }}">
+  <div class="joynure-footer__inner">
+    <div class="joynure-footer__top">
+      <div class="joynure-footer__newsletter">
+        {% if section.settings.newsletter_badge != blank %}
+          <p class="joynure-footer__newsletter-badge">{{ section.settings.newsletter_badge | escape }}</p>
+        {% endif %}
+
+        {% if section.settings.newsletter_heading != blank %}
+          <h2 class="joynure-footer__newsletter-title">{{ section.settings.newsletter_heading | escape }}</h2>
+        {% endif %}
+
+        {% if section.settings.newsletter_text != blank %}
+          <p class="joynure-footer__newsletter-text">{{ section.settings.newsletter_text | escape }}</p>
+        {% endif %}
+
+        {% form 'customer', class: 'joynure-footer__form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+
+          <div class="joynure-footer__field-row">
+            <label class="visually-hidden" for="JoynureFooterEmail-{{ section.id }}">
+              {{ 'blocks.email_signup.label' | t | default: 'Email address' }}
+            </label>
+            <input
+              id="JoynureFooterEmail-{{ section.id }}"
+              class="joynure-footer__input"
+              type="email"
+              name="contact[email]"
+              value="{{ form.email }}"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              placeholder="{{ section.settings.email_placeholder | escape }}"
+              required
+            >
+            <button class="joynure-footer__submit" type="submit">
+              {{ section.settings.button_label | escape }}
+            </button>
+          </div>
+
+          {% if form.posted_successfully? %}
+            <p class="joynure-footer__message joynure-footer__message--success">
+              {{ section.settings.success_message | escape }}
+            </p>
+          {% endif %}
+
+          {% if form.errors %}
+            <p class="joynure-footer__message joynure-footer__message--error">
+              {{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}
+            </p>
+          {% endif %}
+        {% endform %}
+
+        {% if section.settings.newsletter_fine_print != blank %}
+          <p class="joynure-footer__fine-print">{{ section.settings.newsletter_fine_print | escape }}</p>
+        {% endif %}
+      </div>
+
+      <div class="joynure-footer__links-grid">
+        <div>
+          <div class="joynure-footer__brand">
+            {% if section.settings.show_logo %}
+              <a href="{{ routes.root_url }}" class="joynure-footer__brand-mark">
+                <img
+                  src="{{ 'joynure-logo-primary.svg' | asset_url }}"
+                  alt="{{ shop.name | escape }}"
+                  width="180"
+                  height="48"
+                  loading="lazy"
+                >
+              </a>
+            {% endif %}
+
+            {% if section.settings.brand_text != blank %}
+              <p class="joynure-footer__brand-copy">{{ section.settings.brand_text | escape }}</p>
+            {% endif %}
+
+            {% if section.settings.show_social %}
+              <div class="joynure-footer__social">
+                {% if section.settings.instagram_url != blank %}
+                  <a class="joynure-footer__social-link" href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zm5.75-3.75a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25z"/></svg>
+                  </a>
+                {% endif %}
+                {% if section.settings.facebook_url != blank %}
+                  <a class="joynure-footer__social-link" href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13.5 3h3.2l-.4 3.8H13c-1.2 0-1.7.6-1.7 1.6v2.1h3.1l-.4 3.8h-2.7V21h-4V14.3H6V10.5h2.1V9.1c0-3 1.8-4.7 4.6-4.7z"/></svg>
+                  </a>
+                {% endif %}
+                {% if section.settings.tiktok_url != blank %}
+                  <a class="joynure-footer__social-link" href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16.5 3c.4 2.4 1.7 4.2 4 4.7v3.4c-1.4 0-2.7-.4-3.8-1.2v6.8a6.8 6.8 0 1 1-6.8-6.8c.3 0 .7 0 1 .1v3.7a3.2 3.2 0 1 0 2.3 3.1V3h2.3z"/></svg>
+                  </a>
+                {% endif %}
+                {% if section.settings.youtube_url != blank %}
+                  <a class="joynure-footer__social-link" href="{{ section.settings.youtube_url }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M21.6 7.2a2.8 2.8 0 0 0-2-2C17.8 4.6 12 4.6 12 4.6s-5.8 0-7.6.6a2.8 2.8 0 0 0-2 2A29.2 29.2 0 0 0 2 12a29.2 29.2 0 0 0 .4 4.8 2.8 2.8 0 0 0 2 2c1.8.6 7.6.6 7.6.6s5.8 0 7.6-.6a2.8 2.8 0 0 0 2-2 29.2 29.2 0 0 0 .4-4.8 29.2 29.2 0 0 0-.4-4.8zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+                  </a>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div>
+          <h3 class="joynure-footer__column-title">{{ section.settings.shop_heading | escape }}</h3>
+          <ul class="joynure-footer__list">
+            <li><a href="{{ routes.root_url }}">{{ section.settings.home_label | escape }}</a></li>
+            <li><a href="{{ routes.all_products_collection_url }}">{{ section.settings.catalog_label | escape }}</a></li>
+            {% if section.settings.about_url != blank %}
+              <li><a href="{{ section.settings.about_url }}">{{ section.settings.about_label | escape }}</a></li>
+            {% endif %}
+            {% if section.settings.contact_url != blank %}
+              <li><a href="{{ section.settings.contact_url }}">{{ section.settings.contact_label | escape }}</a></li>
+            {% endif %}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="joynure-footer__column-title">{{ section.settings.support_heading | escape }}</h3>
+          <ul class="joynure-footer__list">
+            {% if section.settings.faq_url != blank %}
+              <li><a href="{{ section.settings.faq_url }}">{{ section.settings.faq_label | escape }}</a></li>
+            {% endif %}
+            {% if section.settings.shipping_url != blank %}
+              <li><a href="{{ section.settings.shipping_url }}">{{ section.settings.shipping_label | escape }}</a></li>
+            {% endif %}
+            {% if section.settings.returns_url != blank %}
+              <li><a href="{{ section.settings.returns_url }}">{{ section.settings.returns_label | escape }}</a></li>
+            {% endif %}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="joynure-footer__column-title">{{ section.settings.legal_heading | escape }}</h3>
+          <ul class="joynure-footer__list">
+            {% if shop.policies.privacy_policy %}
+              <li><a href="{{ shop.policies.privacy_policy.url }}">{{ section.settings.privacy_label | escape }}</a></li>
+            {% endif %}
+            {% if shop.policies.terms_of_service %}
+              <li><a href="{{ shop.policies.terms_of_service.url }}">{{ section.settings.terms_label | escape }}</a></li>
+            {% endif %}
+            {% if shop.policies.refund_policy %}
+              <li><a href="{{ shop.policies.refund_policy.url }}">{{ section.settings.refund_label | escape }}</a></li>
+            {% endif %}
+            {% if shop.policies.shipping_policy %}
+              <li><a href="{{ shop.policies.shipping_policy.url }}">{{ section.settings.shipping_policy_label | escape }}</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="joynure-footer__bottom">
+      <p class="joynure-footer__copyright">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name | escape }}. {{ section.settings.copyright_text | escape }}
+      </p>
+
+      <div class="joynure-footer__legal">
+        {% if shop.policies.privacy_policy %}
+          <a href="{{ shop.policies.privacy_policy.url }}">{{ section.settings.privacy_label | escape }}</a>
+        {% endif %}
+        {% if shop.policies.terms_of_service %}
+          <a href="{{ shop.policies.terms_of_service.url }}">{{ section.settings.terms_label | escape }}</a>
+        {% endif %}
+        {% if section.settings.faq_url != blank %}
+          <a href="{{ section.settings.faq_url }}">{{ section.settings.faq_label | escape }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "JOYNURE footer",
+  "class": "joynure-footer-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_badge",
+      "label": "Newsletter badge",
+      "default": "Joy in your inbox"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "Join our email list"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_text",
+      "label": "Newsletter text",
+      "default": "Get exclusive deals, joyful product drops, and early access to new categories."
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "Enter your email address"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks for joining the JOYNURE list."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_fine_print",
+      "label": "Fine print",
+      "default": "No spam — just joyful updates. Unsubscribe anytime."
+    },
+    {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_logo",
+      "label": "Show logo",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "brand_text",
+      "label": "Brand text",
+      "default": "Care made joyful for active play, pets, and little ones."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social links",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "header",
+      "content": "Links"
+    },
+    {
+      "type": "text",
+      "id": "shop_heading",
+      "label": "Shop column heading",
+      "default": "Shop"
+    },
+    {
+      "type": "text",
+      "id": "home_label",
+      "label": "Home label",
+      "default": "Home"
+    },
+    {
+      "type": "text",
+      "id": "catalog_label",
+      "label": "Catalog label",
+      "default": "Catalog"
+    },
+    {
+      "type": "text",
+      "id": "about_label",
+      "label": "About label",
+      "default": "About"
+    },
+    {
+      "type": "url",
+      "id": "about_url",
+      "label": "About URL"
+    },
+    {
+      "type": "text",
+      "id": "contact_label",
+      "label": "Contact label",
+      "default": "Contact"
+    },
+    {
+      "type": "url",
+      "id": "contact_url",
+      "label": "Contact URL"
+    },
+    {
+      "type": "text",
+      "id": "support_heading",
+      "label": "Support column heading",
+      "default": "Support"
+    },
+    {
+      "type": "text",
+      "id": "faq_label",
+      "label": "FAQ label",
+      "default": "FAQ"
+    },
+    {
+      "type": "url",
+      "id": "faq_url",
+      "label": "FAQ URL"
+    },
+    {
+      "type": "text",
+      "id": "shipping_label",
+      "label": "Shipping label",
+      "default": "Shipping"
+    },
+    {
+      "type": "url",
+      "id": "shipping_url",
+      "label": "Shipping URL"
+    },
+    {
+      "type": "text",
+      "id": "returns_label",
+      "label": "Returns label",
+      "default": "Returns"
+    },
+    {
+      "type": "url",
+      "id": "returns_url",
+      "label": "Returns URL"
+    },
+    {
+      "type": "text",
+      "id": "legal_heading",
+      "label": "Legal column heading",
+      "default": "Legal"
+    },
+    {
+      "type": "text",
+      "id": "privacy_label",
+      "label": "Privacy label",
+      "default": "Privacy Policy"
+    },
+    {
+      "type": "text",
+      "id": "terms_label",
+      "label": "Terms label",
+      "default": "Terms of Service"
+    },
+    {
+      "type": "text",
+      "id": "refund_label",
+      "label": "Refund label",
+      "default": "Refund Policy"
+    },
+    {
+      "type": "text",
+      "id": "shipping_policy_label",
+      "label": "Shipping policy label",
+      "default": "Shipping Policy"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright suffix",
+      "default": "All rights reserved."
+    }
+  ],
+  "presets": [
+    {
+      "name": "JOYNURE footer"
+    }
+  ]
+}
+{% endschema %}
