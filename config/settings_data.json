@@ -88,7 +88,7 @@
     "quick_add_background": "{{ settings.color_palette.background }}",
     "quick_add_text": "{{ settings.color_palette.foreground }}",
     "product_corner_radius": 20,
-    "card_corner_radius": 20,
+    "card_corner_radius": 16,
     "show_variant_image": false,
     "variant_swatch_width": 34,
     "variant_swatch_height": 34,
