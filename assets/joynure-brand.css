@@ -1,0 +1,46 @@
+:root {
+  --joynure-teal: #1f5c55;
+  --joynure-coral: #ff7a68;
+  --joynure-cream: #fff8f0;
+  --joynure-gold: #f2c66d;
+  --joynure-charcoal: #24312e;
+  --joynure-white: #ffffff;
+  --joynure-surface: #ffffff;
+  --joynure-border: rgb(36 49 46 / 12%);
+  --joynure-shadow: 0 18px 48px rgb(31 92 85 / 10%);
+}
+
+::selection {
+  color: var(--joynure-charcoal);
+  background: var(--joynure-gold);
+}
+
+:where(a, button, input, textarea, select, summary):focus-visible {
+  outline-color: var(--joynure-teal);
+  box-shadow: 0 0 0 3px var(--joynure-cream);
+}
+
+:where(.button, .button-secondary):not(.button-unstyled) {
+  min-block-size: 48px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+@media (hover: hover) {
+  :where(.button, .button-secondary):not(.button-unstyled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgb(31 92 85 / 16%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(.button, .button-secondary):not(.button-unstyled) {
+    transition: none;
+  }
+}

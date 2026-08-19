@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720" viewBox="0 0 720 720" role="img" aria-label="JOYNURE pet care icon">
+<title>JOYNURE pet care icon</title>
+
+<rect width="720" height="720" rx="96" fill="#FFF8F0"/>
+<circle cx="360" cy="286" r="176" fill="#FFFFFF" stroke="#1F5C55" stroke-width="8"/>
+
+<circle cx="303" cy="235" r="29" fill="#FF7A68"/>
+<circle cx="364" cy="202" r="31" fill="#F2C66D"/>
+<circle cx="426" cy="235" r="29" fill="#FF7A68"/>
+<circle cx="270" cy="294" r="27" fill="#F2C66D"/>
+<circle cx="456" cy="294" r="27" fill="#F2C66D"/>
+<path d="M360 270c-67 0-114 66-97 117 13 39 58 48 97 22 39 26 84 17 97-22 17-51-30-117-97-117Z" fill="#1F5C55"/>
+
+<text x="360" y="540" text-anchor="middle" fill="#24312E" font-family='Inter,Arial,sans-serif' font-size="48" font-weight="700">Pet Care</text>
+<text x="360" y="592" text-anchor="middle" fill="#1F5C55" font-family='Inter,Arial,sans-serif' font-size="24" font-weight="600">Happy tails, easier days.</text>
+
+</svg>

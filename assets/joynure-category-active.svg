@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720" viewBox="0 0 720 720" role="img" aria-label="JOYNURE active play icon">
+<title>JOYNURE active play icon</title>
+
+<rect width="720" height="720" rx="96" fill="#FFF8F0"/>
+<circle cx="360" cy="286" r="176" fill="#FFFFFF" stroke="#1F5C55" stroke-width="8"/>
+
+<ellipse cx="360" cy="294" rx="132" ry="58" fill="none" stroke="#1F5C55" stroke-width="24"/>
+<path d="M269 210c31-42 62-66 91-66 32 0 64 25 95 70" fill="none" stroke="#FF7A68" stroke-width="22" stroke-linecap="round"/>
+<circle cx="465" cy="170" r="27" fill="#F2C66D"/>
+<path d="M360 236v112" stroke="#1F5C55" stroke-width="24" stroke-linecap="round"/>
+<path d="M315 372c28 20 61 20 90 0" fill="none" stroke="#FF7A68" stroke-width="17" stroke-linecap="round"/>
+
+<text x="360" y="540" text-anchor="middle" fill="#24312E" font-family='Inter,Arial,sans-serif' font-size="48" font-weight="700">Active Play</text>
+<text x="360" y="592" text-anchor="middle" fill="#1F5C55" font-family='Inter,Arial,sans-serif' font-size="24" font-weight="600">Move more. Smile more.</text>
+
+</svg>

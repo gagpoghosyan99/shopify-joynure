@@ -15,7 +15,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<p>Browse our latest products</p>",
+            "text": "<p>Care made joyful.</p>",
             "text_color": "{{ settings.color_palette.background }}",
             "width": "fit-content",
             "max_width": "normal",
@@ -41,7 +41,7 @@
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "Shop all",
+            "label": "Shop joyful finds",
             "link": "shopify://collections/all",
             "open_in_new_tab": false,
             "style_class": "button-custom",
@@ -89,6 +89,53 @@
         "reflection_opacity": 75,
         "padding-block-start": 100,
         "padding-block-end": 72
+      }
+    },
+    "joynure_categories": {
+      "type": "joynure-category-navigation",
+      "blocks": {
+        "hula_hoop": {
+          "type": "category",
+          "settings": {
+            "heading": "Hula Hoop",
+            "category": "active",
+            "product": "",
+            "image": "",
+            "link": "shopify://collections/all"
+          }
+        },
+        "pet_care": {
+          "type": "category",
+          "settings": {
+            "heading": "Pet Care",
+            "category": "pet",
+            "product": "",
+            "image": "",
+            "link": "shopify://collections/all"
+          }
+        },
+        "baby_care": {
+          "type": "category",
+          "settings": {
+            "heading": "Baby Care",
+            "category": "baby",
+            "product": "",
+            "image": "",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "hula_hoop",
+        "pet_care",
+        "baby_care"
+      ],
+      "settings": {
+        "eyebrow": "Choose your kind of joy",
+        "navigation_label": "Shop by category",
+        "background": "#FFF8F0",
+        "text_color": "#24312E",
+        "accent_color": "#FF7A68"
       }
     },
     "product_list_fa6P9H": {
@@ -280,6 +327,7 @@
   },
   "order": [
     "hero_jVaWmY",
+    "joynure_categories",
     "product_list_fa6P9H"
   ]
 }
