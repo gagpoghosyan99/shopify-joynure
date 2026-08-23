@@ -4,16 +4,22 @@
 {% liquid
   assign first_block = section.blocks.first
   assign first_image = blank
+  assign first_caption = first_block.settings.heading
+  assign first_tagline = ''
+
   if first_block.settings.image != blank
     assign first_image = first_block.settings.image | image_url: width: 1200
   elsif first_block.settings.product.featured_image != blank
     assign first_image = first_block.settings.product.featured_image | image_url: width: 1200
   elsif first_block.settings.category == 'pet'
-    assign first_image = 'joynure-category-pet.svg' | asset_url
+    assign first_image = 'joynure-category-pet.jpg' | asset_url
+    assign first_tagline = 'Happy tails, easier days.'
   elsif first_block.settings.category == 'baby'
-    assign first_image = 'joynure-category-baby.svg' | asset_url
+    assign first_image = 'joynure-category-baby.jpg' | asset_url
+    assign first_tagline = 'Soft care for little joys.'
   else
-    assign first_image = 'joynure-category-active.svg' | asset_url
+    assign first_image = 'joynure-category-active.jpg' | asset_url
+    assign first_tagline = 'Move more. Smile more.'
   endif
 %}
 
@@ -32,16 +38,21 @@
         {% for block in section.blocks %}
           {% liquid
             assign category_image = blank
+            assign category_tagline = ''
+
             if block.settings.image != blank
               assign category_image = block.settings.image | image_url: width: 1200
             elsif block.settings.product.featured_image != blank
               assign category_image = block.settings.product.featured_image | image_url: width: 1200
             elsif block.settings.category == 'pet'
-              assign category_image = 'joynure-category-pet.svg' | asset_url
+              assign category_image = 'joynure-category-pet.jpg' | asset_url
+              assign category_tagline = 'Happy tails, easier days.'
             elsif block.settings.category == 'baby'
-              assign category_image = 'joynure-category-baby.svg' | asset_url
+              assign category_image = 'joynure-category-baby.jpg' | asset_url
+              assign category_tagline = 'Soft care for little joys.'
             else
-              assign category_image = 'joynure-category-active.svg' | asset_url
+              assign category_image = 'joynure-category-active.jpg' | asset_url
+              assign category_tagline = 'Move more. Smile more.'
             endif
 
             assign category_link = block.settings.link
@@ -57,7 +68,8 @@
               data-joynure-category-trigger
               data-index="{{ forloop.index0 }}"
               data-image="{{ category_image | escape }}"
-              data-clip="joynure-clip-{{ forloop.index0 }}-{{ section.id }}"
+              data-caption="{{ block.settings.heading | escape }}"
+              data-tagline="{{ category_tagline | escape }}"
               aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
             >
               <span class="joynure-category-interactor__number" aria-hidden="true">{{ forloop.index | prepend: '0' }}</span>
@@ -76,44 +88,36 @@
 
   <div class="joynure-category-interactor__visual" aria-hidden="true">
     <div class="joynure-category-interactor__glow"></div>
-    <svg viewBox="0 0 500 500" role="presentation" focusable="false">
-      <defs>
-        <clipPath id="joynure-clip-0-{{ section.id }}" data-clip-index="0">
-          <path class="path" d="M480.6,235H19.4c-6,0-10.8-4.9-10.8-10.8v-9.5c0-6,4.9-10.8,10.8-10.8h461.1c6,0,10.8,4.9,10.8,10.8v9.5C491.4,230.2,486.6,235,480.6,235z" />
-          <path class="path" d="M483.1,362.4H16.9c-4.6,0-8.3-3.7-8.3-8.3v-1.8c0-4.6,3.7-8.3,8.3-8.3h466.1c4.6,0,8.3,3.7,8.3,8.3v1.8C491.4,358.7,487.7,362.4,483.1,362.4z" />
-          <path class="path" d="M460.3,336.3H39.7c-17.2,0-31.1-13.9-31.1-31.1v-31.5c0-17.2,13.9-31.1,31.1-31.1h420.7c17.2,0,31.1,13.9,31.1,31.1v31.5C491.4,322.4,477.5,336.3,460.3,336.3z" />
-          <path class="path" d="M459.2,196.2H40.8v-35c0-47.5,38.5-86,86-86h246.5c47.5,0,86,38.5,86,86V196.2z" />
-          <path class="path" d="M441.9,424.9H58.1c-9.6,0-17.3-7.8-17.3-17.3v-37.4h418.5v37.4C459.2,417.1,451.5,424.9,441.9,424.9z" />
-        </clipPath>
 
-        <clipPath id="joynure-clip-1-{{ section.id }}" data-clip-index="1">
-          <rect class="path" x="20" y="20" width="200" height="280" rx="12" />
-          <rect class="path" x="20" y="320" width="200" height="160" rx="12" />
-          <rect class="path" x="240" y="20" width="240" height="140" rx="12" />
-          <rect class="path" x="240" y="180" width="110" height="160" rx="12" />
-          <rect class="path" x="370" y="180" width="110" height="160" rx="12" />
-          <rect class="path" x="240" y="360" width="240" height="120" rx="12" />
-        </clipPath>
-
-        <clipPath id="joynure-clip-2-{{ section.id }}" data-clip-index="2">
-          {% for row in (0..2) %}
-            {% for column in (0..2) %}
-              <rect class="path" x="{{ column | times: 160 | plus: 20 }}" y="{{ row | times: 160 | plus: 20 }}" width="140" height="140" rx="4" />
-            {% endfor %}
-          {% endfor %}
-        </clipPath>
-      </defs>
-
-      <g data-joynure-category-image-group clip-path="url(#joynure-clip-0-{{ section.id }})">
-        <image
+    <div class="joynure-category-interactor__stage" data-joynure-category-stage>
+      <div class="joynure-category-interactor__photo-shell">
+        <img
+          class="joynure-category-interactor__photo"
           data-joynure-category-image
-          href="{{ first_image | escape }}"
-          width="500"
-          height="500"
-          preserveAspectRatio="xMidYMid slice"
-        />
-      </g>
-    </svg>
+          src="{{ first_image | escape }}"
+          alt=""
+          width="1200"
+          height="1200"
+          loading="eager"
+          decoding="async"
+        >
+
+        <div class="joynure-category-interactor__tiles" data-joynure-category-tiles>
+          {% for i in (1..9) %}
+            <span class="joynure-category-interactor__tile" data-tile-index="{{ i }}"></span>
+          {% endfor %}
+        </div>
+
+        <div class="joynure-category-interactor__caption">
+          <p class="joynure-category-interactor__caption-title" data-joynure-category-caption>
+            {{- first_caption | escape -}}
+          </p>
+          <p class="joynure-category-interactor__caption-tagline" data-joynure-category-tagline>
+            {{- first_tagline | escape -}}
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </joynure-category-interactor>
 
