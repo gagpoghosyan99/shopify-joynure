@@ -1,9 +1,9 @@
 {{ 'joynure-footer.css' | asset_url | stylesheet_tag }}
 
 <footer class="joynure-footer section" data-section-id="{{ section.id }}">
-  <div class="joynure-footer__inner">
-    <div class="joynure-footer__top">
-      <div class="joynure-footer__newsletter">
+  <div class="joynure-footer__newsletter-band">
+    <div class="joynure-footer__newsletter">
+      <div class="joynure-footer__newsletter-copy">
         {% if section.settings.newsletter_badge != blank %}
           <p class="joynure-footer__newsletter-badge">{{ section.settings.newsletter_badge | escape }}</p>
         {% endif %}
@@ -15,7 +15,9 @@
         {% if section.settings.newsletter_text != blank %}
           <p class="joynure-footer__newsletter-text">{{ section.settings.newsletter_text | escape }}</p>
         {% endif %}
+      </div>
 
+      <div class="joynure-footer__newsletter-action">
         {% form 'customer', class: 'joynure-footer__form' %}
           <input type="hidden" name="contact[tags]" value="newsletter">
 
@@ -57,99 +59,101 @@
           <p class="joynure-footer__fine-print">{{ section.settings.newsletter_fine_print | escape }}</p>
         {% endif %}
       </div>
+    </div>
+  </div>
 
-      <div class="joynure-footer__links-grid">
-        <div>
-          <div class="joynure-footer__brand">
-            {% if section.settings.show_logo %}
-              <a href="{{ routes.root_url }}" class="joynure-footer__brand-mark">
-                <img
-                  src="{{ 'joynure-logo-primary.svg' | asset_url }}"
-                  alt="{{ shop.name | escape }}"
-                  width="180"
-                  height="48"
-                  loading="lazy"
-                >
-              </a>
-            {% endif %}
+  <div class="joynure-footer__inner">
+    <div class="joynure-footer__links-grid">
+      <div>
+        <div class="joynure-footer__brand">
+          {% if section.settings.show_logo %}
+            <a href="{{ routes.root_url }}" class="joynure-footer__brand-mark">
+              <img
+                src="{{ 'joynure-logo-primary.svg' | asset_url }}"
+                alt="{{ shop.name | escape }}"
+                width="180"
+                height="48"
+                loading="lazy"
+              >
+            </a>
+          {% endif %}
 
-            {% if section.settings.brand_text != blank %}
-              <p class="joynure-footer__brand-copy">{{ section.settings.brand_text | escape }}</p>
-            {% endif %}
+          {% if section.settings.brand_text != blank %}
+            <p class="joynure-footer__brand-copy">{{ section.settings.brand_text | escape }}</p>
+          {% endif %}
 
-            {% if section.settings.show_social %}
-              <div class="joynure-footer__social">
-                {% if section.settings.instagram_url != blank %}
-                  <a class="joynure-footer__social-link" href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zm5.75-3.75a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25z"/></svg>
-                  </a>
-                {% endif %}
-                {% if section.settings.facebook_url != blank %}
-                  <a class="joynure-footer__social-link" href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13.5 3h3.2l-.4 3.8H13c-1.2 0-1.7.6-1.7 1.6v2.1h3.1l-.4 3.8h-2.7V21h-4V14.3H6V10.5h2.1V9.1c0-3 1.8-4.7 4.6-4.7z"/></svg>
-                  </a>
-                {% endif %}
-                {% if section.settings.tiktok_url != blank %}
-                  <a class="joynure-footer__social-link" href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16.5 3c.4 2.4 1.7 4.2 4 4.7v3.4c-1.4 0-2.7-.4-3.8-1.2v6.8a6.8 6.8 0 1 1-6.8-6.8c.3 0 .7 0 1 .1v3.7a3.2 3.2 0 1 0 2.3 3.1V3h2.3z"/></svg>
-                  </a>
-                {% endif %}
-                {% if section.settings.youtube_url != blank %}
-                  <a class="joynure-footer__social-link" href="{{ section.settings.youtube_url }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M21.6 7.2a2.8 2.8 0 0 0-2-2C17.8 4.6 12 4.6 12 4.6s-5.8 0-7.6.6a2.8 2.8 0 0 0-2 2A29.2 29.2 0 0 0 2 12a29.2 29.2 0 0 0 .4 4.8 2.8 2.8 0 0 0 2 2c1.8.6 7.6.6 7.6.6s5.8 0 7.6-.6a2.8 2.8 0 0 0 2-2 29.2 29.2 0 0 0 .4-4.8 29.2 29.2 0 0 0-.4-4.8zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
-                  </a>
-                {% endif %}
-              </div>
-            {% endif %}
-          </div>
+          {% if section.settings.show_social %}
+            <div class="joynure-footer__social">
+              {% if section.settings.instagram_url != blank %}
+                <a class="joynure-footer__social-link" href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zm5.75-3.75a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25z"/></svg>
+                </a>
+              {% endif %}
+              {% if section.settings.facebook_url != blank %}
+                <a class="joynure-footer__social-link" href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13.5 3h3.2l-.4 3.8H13c-1.2 0-1.7.6-1.7 1.6v2.1h3.1l-.4 3.8h-2.7V21h-4V14.3H6V10.5h2.1V9.1c0-3 1.8-4.7 4.6-4.7z"/></svg>
+                </a>
+              {% endif %}
+              {% if section.settings.tiktok_url != blank %}
+                <a class="joynure-footer__social-link" href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16.5 3c.4 2.4 1.7 4.2 4 4.7v3.4c-1.4 0-2.7-.4-3.8-1.2v6.8a6.8 6.8 0 1 1-6.8-6.8c.3 0 .7 0 1 .1v3.7a3.2 3.2 0 1 0 2.3 3.1V3h2.3z"/></svg>
+                </a>
+              {% endif %}
+              {% if section.settings.youtube_url != blank %}
+                <a class="joynure-footer__social-link" href="{{ section.settings.youtube_url }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M21.6 7.2a2.8 2.8 0 0 0-2-2C17.8 4.6 12 4.6 12 4.6s-5.8 0-7.6.6a2.8 2.8 0 0 0 2 2A29.2 29.2 0 0 0 2 12a29.2 29.2 0 0 0 .4 4.8 2.8 2.8 0 0 0 2 2c1.8.6 7.6.6 7.6.6s5.8 0 7.6-.6a2.8 2.8 0 0 0 2-2 29.2 29.2 0 0 0 .4-4.8 29.2 29.2 0 0 0-.4-4.8zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
         </div>
+      </div>
 
-        <div>
-          <h3 class="joynure-footer__column-title">{{ section.settings.shop_heading | escape }}</h3>
-          <ul class="joynure-footer__list">
-            <li><a href="{{ routes.root_url }}">{{ section.settings.home_label | escape }}</a></li>
-            <li><a href="{{ routes.all_products_collection_url }}">{{ section.settings.catalog_label | escape }}</a></li>
-            {% if section.settings.about_url != blank %}
-              <li><a href="{{ section.settings.about_url }}">{{ section.settings.about_label | escape }}</a></li>
-            {% endif %}
-            {% if section.settings.contact_url != blank %}
-              <li><a href="{{ section.settings.contact_url }}">{{ section.settings.contact_label | escape }}</a></li>
-            {% endif %}
-          </ul>
-        </div>
+      <div>
+        <h3 class="joynure-footer__column-title">{{ section.settings.shop_heading | escape }}</h3>
+        <ul class="joynure-footer__list">
+          <li><a href="{{ routes.root_url }}">{{ section.settings.home_label | escape }}</a></li>
+          <li><a href="{{ routes.all_products_collection_url }}">{{ section.settings.catalog_label | escape }}</a></li>
+          {% if section.settings.about_url != blank %}
+            <li><a href="{{ section.settings.about_url }}">{{ section.settings.about_label | escape }}</a></li>
+          {% endif %}
+          {% if section.settings.contact_url != blank %}
+            <li><a href="{{ section.settings.contact_url }}">{{ section.settings.contact_label | escape }}</a></li>
+          {% endif %}
+        </ul>
+      </div>
 
-        <div>
-          <h3 class="joynure-footer__column-title">{{ section.settings.support_heading | escape }}</h3>
-          <ul class="joynure-footer__list">
-            {% if section.settings.faq_url != blank %}
-              <li><a href="{{ section.settings.faq_url }}">{{ section.settings.faq_label | escape }}</a></li>
-            {% endif %}
-            {% if section.settings.shipping_url != blank %}
-              <li><a href="{{ section.settings.shipping_url }}">{{ section.settings.shipping_label | escape }}</a></li>
-            {% endif %}
-            {% if section.settings.returns_url != blank %}
-              <li><a href="{{ section.settings.returns_url }}">{{ section.settings.returns_label | escape }}</a></li>
-            {% endif %}
-          </ul>
-        </div>
+      <div>
+        <h3 class="joynure-footer__column-title">{{ section.settings.support_heading | escape }}</h3>
+        <ul class="joynure-footer__list">
+          {% if section.settings.faq_url != blank %}
+            <li><a href="{{ section.settings.faq_url }}">{{ section.settings.faq_label | escape }}</a></li>
+          {% endif %}
+          {% if section.settings.shipping_url != blank %}
+            <li><a href="{{ section.settings.shipping_url }}">{{ section.settings.shipping_label | escape }}</a></li>
+          {% endif %}
+          {% if section.settings.returns_url != blank %}
+            <li><a href="{{ section.settings.returns_url }}">{{ section.settings.returns_label | escape }}</a></li>
+          {% endif %}
+        </ul>
+      </div>
 
-        <div>
-          <h3 class="joynure-footer__column-title">{{ section.settings.legal_heading | escape }}</h3>
-          <ul class="joynure-footer__list">
-            {% if shop.policies.privacy_policy %}
-              <li><a href="{{ shop.policies.privacy_policy.url }}">{{ section.settings.privacy_label | escape }}</a></li>
-            {% endif %}
-            {% if shop.policies.terms_of_service %}
-              <li><a href="{{ shop.policies.terms_of_service.url }}">{{ section.settings.terms_label | escape }}</a></li>
-            {% endif %}
-            {% if shop.policies.refund_policy %}
-              <li><a href="{{ shop.policies.refund_policy.url }}">{{ section.settings.refund_label | escape }}</a></li>
-            {% endif %}
-            {% if shop.policies.shipping_policy %}
-              <li><a href="{{ shop.policies.shipping_policy.url }}">{{ section.settings.shipping_policy_label | escape }}</a></li>
-            {% endif %}
-          </ul>
-        </div>
+      <div>
+        <h3 class="joynure-footer__column-title">{{ section.settings.legal_heading | escape }}</h3>
+        <ul class="joynure-footer__list">
+          {% if shop.policies.privacy_policy %}
+            <li><a href="{{ shop.policies.privacy_policy.url }}">{{ section.settings.privacy_label | escape }}</a></li>
+          {% endif %}
+          {% if shop.policies.terms_of_service %}
+            <li><a href="{{ shop.policies.terms_of_service.url }}">{{ section.settings.terms_label | escape }}</a></li>
+          {% endif %}
+          {% if shop.policies.refund_policy %}
+            <li><a href="{{ shop.policies.refund_policy.url }}">{{ section.settings.refund_label | escape }}</a></li>
+          {% endif %}
+          {% if shop.policies.shipping_policy %}
+            <li><a href="{{ shop.policies.shipping_policy.url }}">{{ section.settings.shipping_policy_label | escape }}</a></li>
+          {% endif %}
+        </ul>
       </div>
     </div>
 
