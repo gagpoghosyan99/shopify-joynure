@@ -97,14 +97,29 @@
       %}
       {% capture list_items %}
         {% for product in products limit: section.settings.max_products %}
-          <div class="resource-list__item">
-            {% content_for 'block',
-              type: '_product-card',
-              id: 'static-product-card',
-              closest.product: product,
-              product_view_context: 'recommendation'
+          {% capture joynure_split_html %}
+            {% render 'joynure-split-product-cards',
+              product: product,
+              section: section,
+              product_view_context: 'recommendation',
+              wrapper: 'div',
+              item_class: 'resource-list__item',
+              emit_list_split: true
             %}
-          </div>
+          {% endcapture %}
+          {% assign joynure_split_html = joynure_split_html | strip %}
+          {% if joynure_split_html != blank %}
+            {{ joynure_split_html }}
+          {% else %}
+            <div class="resource-list__item">
+              {% content_for 'block',
+                type: '_product-card',
+                id: 'static-product-card',
+                closest.product: product,
+                product_view_context: 'recommendation'
+              %}
+            </div>
+          {% endif %}
           {% unless forloop.last %}
             <!--@list/split-->
           {% endunless %}

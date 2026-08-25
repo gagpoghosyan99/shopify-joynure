@@ -1,0 +1,136 @@
+{%- doc -%}
+  Expands a product tagged `split-variant-cards` into one storefront card per
+  available Color/Colour variant. Does not create Shopify products.
+
+  Callers should capture output and fall back to the default `_product-card`
+  when the capture is blank.
+
+  @param {object} product - Shopify product
+  @param {object} section - Parent section
+  @param {string} product_view_context - collection | search | recommendation
+  @param {string} [wrapper] - "li" (default) or "div"
+  @param {string} [item_class] - Extra classes for the wrapper
+  @param {number} [page] - Pagination page for data-page
+  @param {number} [index0] - Grid index for product-grid__item--N
+  @param {boolean} [emit_list_split] - Insert <!--@list/split--> between cards
+{%- enddoc -%}
+
+{% liquid
+  assign should_split = false
+  if product != blank and product.tags contains 'split-variant-cards'
+    assign should_split = true
+  endif
+
+  assign color_option_index = nil
+  assign color_option_values = nil
+
+  if should_split
+    for option in product.options_with_values
+      assign option_name = option.name | downcase | strip
+      if option_name == 'color' or option_name == 'colour'
+        assign color_option_index = forloop.index0
+        assign color_option_values = option.values
+        break
+      endif
+    endfor
+
+    if color_option_index == nil
+      assign should_split = false
+    endif
+  endif
+
+  assign wrapper_tag = wrapper | default: 'li'
+  assign seen_colors = '|'
+  assign cards_rendered = 0
+%}
+
+{% if should_split %}
+  {% for variant in product.variants %}
+    {% if variant.available %}
+      {% liquid
+        assign color_raw = variant.options[color_option_index]
+        assign color_key = color_raw | downcase | strip
+        assign needle = '|' | append: color_key | append: '|'
+        assign already_seen = false
+        if seen_colors contains needle
+          assign already_seen = true
+        endif
+      %}
+
+      {% unless already_seen %}
+        {% liquid
+          assign seen_colors = seen_colors | append: color_key | append: '|'
+
+          capture clean_color
+            render 'joynure-variant-label', label: color_raw
+          endcapture
+          assign clean_color = clean_color | strip
+
+          assign base_title = product.title
+          if color_option_values != blank
+            for option_value in color_option_values
+              capture option_clean
+                render 'joynure-variant-label', label: option_value
+              endcapture
+              assign option_clean = option_clean | strip
+              if option_clean != blank
+                assign base_title = base_title | replace_last: option_clean, ''
+              endif
+              assign base_title = base_title | replace_last: option_value, ''
+            endfor
+          endif
+          assign base_title = base_title | strip
+
+          if clean_color != blank
+            assign card_title = base_title | append: ' – ' | append: clean_color
+          else
+            assign card_title = base_title
+          endif
+
+          assign item_id = section.id | append: '-' | append: product.id | append: '-' | append: variant.id
+        %}
+
+        {% if emit_list_split and cards_rendered > 0 %}
+          <!--@list/split-->
+        {% endif %}
+
+        {% assign cards_rendered = cards_rendered | plus: 1 %}
+
+        {% if wrapper_tag == 'div' %}
+          <div
+            class="{{ item_class }}"
+            data-product-id="{{ product.id }}"
+            data-variant-id="{{ variant.id }}"
+          >
+            {% render 'joynure-variant-product-card',
+              product: product,
+              variant: variant,
+              card_title: card_title,
+              product_view_context: product_view_context,
+              section: section
+            %}
+          </div>
+        {% else %}
+          <li
+            id="{{ item_id }}"
+            class="product-grid__item{% if index0 != blank %} product-grid__item--{{ index0 }}{% endif %} {{ item_class }}"
+            {% if page != blank %}
+              data-page="{{ page }}"
+            {% endif %}
+            data-product-id="{{ product.id }}"
+            data-variant-id="{{ variant.id }}"
+            ref="cards[]"
+          >
+            {% render 'joynure-variant-product-card',
+              product: product,
+              variant: variant,
+              card_title: card_title,
+              product_view_context: product_view_context,
+              section: section
+            %}
+          </li>
+        {% endif %}
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+{% endif %}

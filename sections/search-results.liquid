@@ -48,20 +48,35 @@
 
       {% capture children %}
         {% for product in products %}
-          <li
-            id="{{ section.id }}-{{ product.id }}"
-            class="product-grid__item product-grid__item--{{ forloop.index0 }}"
-            data-page="{{ paginate.current_page }}"
-            data-product-id="{{ product.id }}"
-            ref="cards[]"
-          >
-            {% content_for 'block',
-              type: '_product-card',
-              id: 'product-card',
-              closest.product: product,
-              product_view_context: 'search'
+          {% capture joynure_split_html %}
+            {% render 'joynure-split-product-cards',
+              product: product,
+              section: section,
+              product_view_context: 'search',
+              wrapper: 'li',
+              page: paginate.current_page,
+              index0: forloop.index0
             %}
-          </li>
+          {% endcapture %}
+          {% assign joynure_split_html = joynure_split_html | strip %}
+          {% if joynure_split_html != blank %}
+            {{ joynure_split_html }}
+          {% else %}
+            <li
+              id="{{ section.id }}-{{ product.id }}"
+              class="product-grid__item product-grid__item--{{ forloop.index0 }}"
+              data-page="{{ paginate.current_page }}"
+              data-product-id="{{ product.id }}"
+              ref="cards[]"
+            >
+              {% content_for 'block',
+                type: '_product-card',
+                id: 'product-card',
+                closest.product: product,
+                product_view_context: 'search'
+              %}
+            </li>
+          {% endif %}
         {% endfor %}
       {% endcapture %}
 

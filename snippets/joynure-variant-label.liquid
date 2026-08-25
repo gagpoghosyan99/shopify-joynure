@@ -1,0 +1,30 @@
+{%- doc -%}
+  Cleans supplier-style Shopify variant/option labels for storefront display.
+  Does not mutate Shopify data; only returns a cleaned string.
+
+  @param {string} label - Raw option/variant label
+
+  Examples:
+  - "Color Box Pink 24Sections" → "Pink"
+  - "Color box blue 24Sections" → "Blue"
+  - "Green" → "Green"
+{%- enddoc -%}
+
+{%- liquid
+  assign cleaned = label | strip
+
+  if cleaned != blank
+    assign cleaned = cleaned | replace: 'Color Box', '' | replace: 'Color box', '' | replace: 'color box', '' | replace: 'COLOR BOX', ''
+    assign cleaned = cleaned | replace: 'ColorBox', '' | replace: 'colorbox', ''
+    assign cleaned = cleaned | replace: '24Sections', '' | replace: '24sections', '' | replace: '24 Sections', '' | replace: '24 sections', ''
+    assign cleaned = cleaned | replace: '  ', ' ' | strip
+
+    # Drop leading/trailing separators left by removals
+    assign cleaned = cleaned | remove_first: '-' | remove_first: '/' | strip
+  endif
+
+  if cleaned == blank
+    assign cleaned = label | strip
+  endif
+-%}
+{{- cleaned -}}

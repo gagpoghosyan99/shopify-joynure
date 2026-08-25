@@ -1,0 +1,200 @@
+{%- doc -%}
+  Renders one Horizon-style product card for a single Shopify product variant.
+  Used only for products tagged `split-variant-cards`.
+
+  @param {object} product - The Shopify product
+  @param {object} variant - The Shopify variant to feature
+  @param {string} card_title - Display title (product base + clean color)
+  @param {string} [product_view_context] - Analytics context
+  @param {object} [section] - Parent section (for quick-add section id)
+{%- enddoc -%}
+
+{% liquid
+  assign variant_url = product.url | append: '?variant=' | append: variant.id
+  assign card_image = variant.featured_image
+  if card_image == blank
+    assign card_image = product.featured_media.preview_image
+  endif
+
+  assign has_quick_add = false
+  if settings.quick_add and variant.available
+    assign has_quick_add = true
+  endif
+
+  assign has_mobile_quick_add = false
+  if has_quick_add and settings.mobile_quick_add
+    assign has_mobile_quick_add = true
+  endif
+
+  assign product_card_id = 'product-card-link-' | append: product.id | append: '-' | append: variant.id
+  assign product_form_id = 'QuickAdd-ProductForm-' | append: product.id | append: '-' | append: variant.id
+
+  assign use_currency = false
+  if settings.currency_code_enabled_product_cards
+    assign use_currency = true
+  endif
+
+  if use_currency
+    assign display_price = variant.price | money_with_currency
+    assign display_compare = variant.compare_at_price | money_with_currency
+  else
+    assign display_price = variant.price | money
+    assign display_compare = variant.compare_at_price | money
+  endif
+
+  assign show_compare_price = false
+  if variant.compare_at_price > variant.price
+    assign show_compare_price = true
+  endif
+
+  assign featured_media_url = blank
+  if settings.transition_to_main_product and card_image != blank
+    assign featured_media_url = card_image | image_url: width: 500
+  endif
+  assign add_label = 'actions.add' | t
+%}
+
+{% render 'product-card-styles' %}
+{% render 'price-styles' %}
+{% render 'quick-add-styles' %}
+{% render 'add-to-cart-button-styles' %}
+{% render 'product-badges-styles' %}
+
+<product-card
+  class="product-card size-style"
+  data-product-id="{{ product.id }}"
+  data-variant-id="{{ variant.id }}"
+  id="product-card-{{ product.id }}-{{ variant.id }}"
+  {% if settings.transition_to_main_product and featured_media_url != blank %}
+    data-product-transition="true"
+    data-featured-media-url="{{ featured_media_url }}"
+    on:click="/handleViewTransition"
+  {% endif %}
+  {% if product_view_context != blank %}
+    {% # theme-check-disable-next-line UnknownFilter %}
+    view-event-payload="{{ product | standard_event_data: 'view', context: product_view_context | escape }}"
+  {% endif %}
+>
+  <a
+    id="{{ product_card_id | md5 }}"
+    href="{{ variant_url }}"
+    class="product-card__link"
+    ref="productCardLink"
+    aria-label="{{ card_title | escape }}"
+  ></a>
+
+  <div
+    class="
+      product-card__content
+      layout-panel-flex
+      layout-panel-flex--column
+      product-grid__card
+      spacing-style
+      gap-style
+    "
+    style="
+      --product-card-gap: 4px;
+      --quick-add-display: {% if has_quick_add %}flex{% else %}none{% endif %};
+      --quick-add-mobile-display: {% if has_mobile_quick_add %}flex{% else %}none{% endif %};
+      --quick-add-mobile-opacity: {% if has_mobile_quick_add %}1{% else %}0{% endif %};
+    "
+  >
+    <div
+      ref="cardGallery"
+      class="card-gallery spacing-style"
+      style="--gallery-aspect-ratio: 4 / 5;"
+      data-product-id="{{ product.id }}"
+      {% if settings.transition_to_main_product %}
+        data-view-transition-to-main-product
+      {% endif %}
+      data-image-ratio="portrait"
+    >
+      <a
+        class="contents"
+        ref="cardGalleryLink"
+        href="{{ variant_url }}"
+        aria-label="{{ card_title | escape }}"
+      >
+        {% if card_image != blank %}
+          {{
+            card_image
+            | image_url: width: 800
+            | image_tag:
+              loading: 'lazy',
+              sizes: '(min-width: 750px) 25vw, 50vw',
+              widths: '200, 300, 400, 500, 600, 800',
+              class: 'product-media-container media-fit product-media-container--image',
+              alt: card_title
+          }}
+        {% endif %}
+      </a>
+
+      {% if has_quick_add %}
+        {% render 'fly-to-cart-styles' %}
+        <quick-add-component
+          class="quick-add custom-color-quick-add"
+          ref="quickAdd"
+          data-product-title="{{ card_title | escape }}"
+          data-product-id="{{ product.id }}"
+          data-quick-add-button="add"
+          data-product-options-count="1"
+          data-uses-selling-plans="false"
+          data-renders-both-buttons=""
+        >
+          <product-form-component
+            data-section-id="{{ section.id }}"
+            data-product-id="{{ product.id }}"
+            on:submit="/handleSubmit"
+            class="quick-add__product-form-component"
+          >
+            <div
+              class="visually-hidden"
+              aria-live="assertive"
+              role="status"
+              aria-atomic="true"
+              ref="liveRegion"
+            ></div>
+            {%- form 'product', product, id: product_form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+              <input
+                type="hidden"
+                name="id"
+                ref="variantId"
+                value="{{ variant.id }}"
+              >
+              <input type="hidden" name="quantity" value="1">
+              {% render 'add-to-cart-button',
+                add_to_cart_text: add_label,
+                class: 'quick-add__button quick-add__button--add add-to-cart-button',
+                can_add_to_cart: true,
+                show_icon: true,
+                product: product
+              %}
+            {%- endform -%}
+          </product-form-component>
+        </quick-add-component>
+      {% endif %}
+    </div>
+
+    <a class="contents user-select-text" ref="productTitleLink" href="{{ variant_url }}">
+      <p role="heading" aria-level="3" class="text-block">{{ card_title | escape }}</p>
+    </a>
+
+    <div ref="priceContainer">
+      {% if show_compare_price %}
+        <span class="price-item__group price">
+          <span class="visually-hidden">{{ 'content.price_sale' | t }}&nbsp;</span>
+          {{ display_price }}
+        </span>
+        <span class="price-item__group price-item--regular compare-at-price">
+          <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
+          {{ display_compare }}
+        </span>
+      {% else %}
+        <span class="price-item__group price">
+          <span class="visually-hidden">{{ 'content.price' | t }}&nbsp;</span>
+          {{ display_price }}
+        </span>
+      {% endif %}
+    </div>
+  </div>
+</product-card>
