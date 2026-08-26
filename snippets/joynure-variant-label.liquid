@@ -26,5 +26,24 @@
   if cleaned == blank
     assign cleaned = label | strip
   endif
+
+  # Title-case each word so supplier casing like "blue" becomes "Blue"
+  assign normalized = ''
+  assign cleaned_words = cleaned | split: ' '
+  for word in cleaned_words
+    if word == blank
+      continue
+    endif
+    assign titled = word | capitalize
+    if normalized == blank
+      assign normalized = titled
+    else
+      assign normalized = normalized | append: ' ' | append: titled
+    endif
+  endfor
+
+  if normalized != blank
+    assign cleaned = normalized
+  endif
 -%}
 {{- cleaned -}}
