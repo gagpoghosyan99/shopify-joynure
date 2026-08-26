@@ -18,7 +18,7 @@
             "category": "active",
             "product": "",
             "image": "",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/fitness-health"
           }
         },
         "pet_care": {
@@ -28,7 +28,7 @@
             "category": "pet",
             "product": "",
             "image": "",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/pet-care"
           }
         },
         "baby_care": {
@@ -38,7 +38,7 @@
             "category": "baby",
             "product": "",
             "image": "",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/baby-care"
           }
         }
       },
