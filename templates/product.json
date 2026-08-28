@@ -150,6 +150,11 @@
                   },
                   "blocks": {}
                 },
+                "joynure_benefit_subtitle": {
+                  "type": "joynure-hula-pdp-benefit-subtitle",
+                  "settings": {},
+                  "blocks": {}
+                },
                 "price_tVjtKg": {
                   "type": "price",
                   "settings": {
@@ -175,6 +180,7 @@
               },
               "block_order": [
                 "text_xrnftG",
+                "joynure_benefit_subtitle",
                 "price_tVjtKg"
               ]
             },

@@ -34,10 +34,15 @@
     assign current_variant = product.selected_or_first_available_variant
     # Get the initial quantity based on quantity rules
     assign initial_quantity = current_variant.quantity_rule.min | default: 1
+    render 'joynure-hula-pdp-config', product: product
+    assign sticky_atc_class = 'sticky-add-to-cart'
+    if joynure_hula_pdp_enabled
+      assign sticky_atc_class = sticky_atc_class | append: ' joynure-pdp-phase-b-sticky'
+    endif
   %}
 
   <sticky-add-to-cart
-    class="sticky-add-to-cart"
+    class="{{ sticky_atc_class }}"
     data-variant-available="{{ current_variant.available }}"
     data-product-id="{{ product.id }}"
     data-current-variant-id="{{ current_variant.id }}"

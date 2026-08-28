@@ -1,0 +1,26 @@
+{% render 'joynure-hula-pdp-config', product: closest.product %}
+
+{%- if joynure_hula_pdp_enabled -%}
+  {{ 'joynure-pdp-phase-b.css' | asset_url | stylesheet_tag }}
+
+  <p
+    class="joynure-pdp-benefit-subtitle"
+    {{ block.shopify_attributes }}
+  >
+    Adjustable home fitness made simple — choose your fit, get moving, and enjoy a more engaging workout routine.
+  </p>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE benefit subtitle",
+  "tag": null,
+  "settings": [],
+  "presets": [
+    {
+      "name": "JOYNURE benefit subtitle",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

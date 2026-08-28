@@ -1,0 +1,115 @@
+.joynure-pdp-benefit-subtitle {
+  margin: 0;
+  max-width: 42ch;
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+  font-size: var(--font-paragraph-small--size, 0.9375rem);
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+.joynure-pdp-buybox-meta {
+  flex: 1 0 100%;
+  width: 100%;
+  margin-block-start: var(--gap-sm);
+}
+
+.joynure-pdp-trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-xs) var(--gap-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.joynure-pdp-trust-row__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+  font-size: var(--font-size--xs, 0.8125rem);
+  line-height: 1.35;
+}
+
+.joynure-pdp-trust-row__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--joynure-teal, var(--color-foreground));
+}
+
+.joynure-pdp-trust-row__icon svg {
+  display: block;
+}
+
+.joynure-pdp-shipping-note {
+  margin: var(--gap-xs) 0 0;
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+  font-size: var(--font-size--xs, 0.8125rem);
+  line-height: 1.4;
+}
+
+/* CTA hierarchy — Hula PDP only */
+.joynure-pdp-phase-b .product-form-buttons {
+  row-gap: var(--gap-sm);
+}
+
+.joynure-pdp-phase-b .quantity-selector-wrapper,
+.joynure-pdp-phase-b .quantity-selector {
+  flex: 0 0 auto;
+  max-width: 9.5rem;
+}
+
+.joynure-pdp-phase-b .add-to-cart-button {
+  flex: 1 1 100%;
+  font-weight: 600;
+}
+
+.joynure-pdp-phase-b shopify-accelerated-checkout,
+.joynure-pdp-phase-b .accelerated-checkout-block {
+  flex: 1 1 100%;
+  opacity: 0.96;
+}
+
+.joynure-pdp-phase-b .product-form-buttons--stacked .add-to-cart-button {
+  order: 1;
+}
+
+.joynure-pdp-phase-b .product-form-buttons--stacked shopify-accelerated-checkout,
+.joynure-pdp-phase-b .product-form-buttons--stacked .accelerated-checkout-block {
+  order: 2;
+}
+
+/* Sticky bar visual consistency */
+.joynure-pdp-phase-b-sticky .sticky-add-to-cart__title {
+  font-size: var(--font-paragraph-small--size, 0.9375rem);
+}
+
+.joynure-pdp-phase-b-sticky .sticky-add-to-cart__variant {
+  color: var(--joynure-teal, rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text)));
+}
+
+@media screen and (max-width: 749px) {
+  .joynure-pdp-benefit-subtitle {
+    max-width: none;
+    font-size: var(--font-paragraph--size, 1rem);
+  }
+
+  .joynure-pdp-trust-row {
+    gap: var(--gap-xs) var(--gap-sm);
+  }
+
+  .joynure-pdp-trust-row__item {
+    flex: 1 1 calc(50% - var(--gap-sm));
+    min-width: 8.5rem;
+  }
+
+  .joynure-pdp-trust-row__item:last-child {
+    flex-basis: 100%;
+  }
+}
+
+@media screen and (max-width: 389px) {
+  .joynure-pdp-trust-row__item {
+    flex: 1 1 100%;
+  }
+}
