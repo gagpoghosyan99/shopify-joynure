@@ -1,4 +1,12 @@
-{% render 'joynure-hula-pdp-config', product: closest.product %}
+{%- capture joynure_hula_pdp_flag -%}
+  {%- render 'joynure-hula-pdp-enabled', product: closest.product -%}
+{%- endcapture -%}
+{%- liquid
+  assign joynure_hula_pdp_enabled = false
+  if joynure_hula_pdp_flag | strip == 'true'
+    assign joynure_hula_pdp_enabled = true
+  endif
+-%}
 
 {%- if joynure_hula_pdp_enabled -%}
   {{ 'joynure-pdp-phase-b.css' | asset_url | stylesheet_tag }}

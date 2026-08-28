@@ -35,7 +35,11 @@
     endif
   endif
 
-  render 'joynure-hula-pdp-config', product: product
+  assign joynure_hula_pdp_enabled = false
+  if product.handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop'
+    assign joynure_hula_pdp_enabled = true
+  endif
+
   assign buy_buttons_block_class = 'buy-buttons-block buy-buttons-block--' | append: block.id
   if joynure_hula_pdp_enabled
     assign buy_buttons_block_class = buy_buttons_block_class | append: ' joynure-pdp-phase-b'

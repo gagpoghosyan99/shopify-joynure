@@ -34,7 +34,10 @@
     assign current_variant = product.selected_or_first_available_variant
     # Get the initial quantity based on quantity rules
     assign initial_quantity = current_variant.quantity_rule.min | default: 1
-    render 'joynure-hula-pdp-config', product: product
+    assign joynure_hula_pdp_enabled = false
+    if product.handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop'
+      assign joynure_hula_pdp_enabled = true
+    endif
     assign sticky_atc_class = 'sticky-add-to-cart'
     if joynure_hula_pdp_enabled
       assign sticky_atc_class = sticky_atc_class | append: ' joynure-pdp-phase-b-sticky'
