@@ -29,10 +29,6 @@
   assign selected_variant_media = selected_product.selected_or_first_available_variant.featured_media
   assign first_3d_model = selected_product.media | where: 'media_type', 'model' | first
 
-  if block_settings.hide_variants
-    assign variant_images = selected_product.images | where: 'attached_to_variant?', true | map: 'src'
-  endif
-
   if block_settings.slideshow_controls_style == 'thumbnails'
     assign controls_on_media = false
   else
@@ -103,18 +99,20 @@
 
   assign sorted_media = '' | split: ','
   if selected_variant_media
-    assign sorted_media = sorted_media | concat: selected_product.media | where: 'id', selected_variant_media.id
+    if block_settings.hide_variants
+      # Color isolation: show ONLY the selected variant's featured media.
+      # Unattached lifestyle images (mixed colors) and other variants are excluded.
+      assign sorted_media = selected_product.media | where: 'id', selected_variant_media.id
+    else
+      assign sorted_media = sorted_media | concat: selected_product.media | where: 'id', selected_variant_media.id
 
-    for media in selected_product.media
-      if block_settings.hide_variants and variant_images contains media.src and sorted_media.size > 0
-        continue
-      endif
-
-      if media.id != selected_variant_media.id
-        assign found_media = selected_product.media | where: 'id', media.id
-        assign sorted_media = sorted_media | concat: found_media
-      endif
-    endfor
+      for media in selected_product.media
+        if media.id != selected_variant_media.id
+          assign found_media = selected_product.media | where: 'id', media.id
+          assign sorted_media = sorted_media | concat: found_media
+        endif
+      endfor
+    endif
   else
     assign sorted_media = selected_product.media
   endif
