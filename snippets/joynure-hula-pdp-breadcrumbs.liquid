@@ -5,7 +5,8 @@
 {%- capture joynure_hula_pdp_flag -%}
   {%- render 'joynure-hula-pdp-enabled', product: product -%}
 {%- endcapture -%}
-{%- if joynure_hula_pdp_flag | strip == 'true' -%}
+{%- assign joynure_hula_pdp_flag = joynure_hula_pdp_flag | strip -%}
+{%- if joynure_hula_pdp_flag == 'true' -%}
 <nav class="joynure-pdp-breadcrumbs" aria-label="Breadcrumb">
   <ol class="joynure-pdp-breadcrumbs__list">
     <li class="joynure-pdp-breadcrumbs__item">
