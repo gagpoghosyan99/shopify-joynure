@@ -1,0 +1,183 @@
+.joynure-collection-hero-section {
+  background: var(--joynure-collection-hero-bg, #fff8f0);
+}
+
+.joynure-collection-hero {
+  --joynure-collection-hero-bg: #fff8f0;
+  --joynure-collection-hero-text: #24312e;
+  --joynure-collection-hero-muted: #5b6662;
+  --joynure-collection-hero-accent: #ff7a68;
+  position: relative;
+  overflow: clip;
+  background:
+    radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--joynure-collection-hero-accent) 12%, transparent), transparent 55%),
+    linear-gradient(180deg, var(--joynure-collection-hero-bg) 0%, color-mix(in srgb, var(--joynure-collection-hero-bg) 88%, #fff) 100%);
+  color: var(--joynure-collection-hero-text);
+}
+
+.joynure-collection-hero__inner {
+  display: grid;
+  align-items: end;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  width: min(100% - (var(--page-margin, 16px) * 2), var(--page-content-width, 1200px));
+  margin-inline: auto;
+  padding-block: clamp(2.25rem, 5vw, 4.5rem) clamp(1.75rem, 3.5vw, 3rem);
+}
+
+.joynure-collection-hero--with-media .joynure-collection-hero__inner {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+}
+
+.joynure-collection-hero--text-only .joynure-collection-hero__inner {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+}
+
+.joynure-collection-hero__copy {
+  max-width: 40rem;
+  min-width: 0;
+}
+
+.joynure-collection-hero__eyebrow {
+  margin: 0 0 0.85rem;
+  color: #1f5c55;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.joynure-collection-hero__title {
+  margin: 0;
+  color: var(--joynure-collection-hero-text);
+  font-family: var(--font-heading--family, var(--font-body--family, Georgia, 'Times New Roman', serif));
+  font-size: clamp(2.35rem, 5.5vw, 4.25rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  text-wrap: balance;
+}
+
+.joynure-collection-hero__subtitle {
+  margin: 1rem 0 0;
+  max-width: 34rem;
+  color: var(--joynure-collection-hero-muted);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.55;
+}
+
+.joynure-collection-hero__subtitle > *:first-child {
+  margin-top: 0;
+}
+
+.joynure-collection-hero__subtitle > *:last-child {
+  margin-bottom: 0;
+}
+
+.joynure-collection-hero__subtitle p {
+  margin: 0;
+}
+
+.joynure-collection-hero__meta {
+  margin: 1.15rem 0 0;
+  color: color-mix(in srgb, var(--joynure-collection-hero-text) 55%, transparent);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.joynure-collection-hero__media {
+  position: relative;
+  min-width: 0;
+  justify-self: stretch;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  aspect-ratio: 4 / 3;
+  background: color-mix(in srgb, var(--joynure-collection-hero-bg) 70%, #fff);
+  box-shadow: 0 18px 40px rgb(36 49 46 / 8%);
+}
+
+.joynure-collection-hero__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.joynure-collection-hero__accent {
+  display: grid;
+  place-items: end;
+  align-content: end;
+  gap: 1rem;
+  min-height: 4.5rem;
+  padding-bottom: 0.35rem;
+}
+
+.joynure-collection-hero__accent-orb {
+  display: block;
+  width: clamp(3.5rem, 8vw, 5rem);
+  height: clamp(3.5rem, 8vw, 5rem);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, #fff 0%, transparent 45%),
+    linear-gradient(145deg, color-mix(in srgb, var(--joynure-collection-hero-accent) 80%, #fff), #1f5c55);
+  opacity: 0.9;
+}
+
+.joynure-collection-hero__accent-rule {
+  display: block;
+  width: clamp(4rem, 10vw, 7rem);
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--joynure-collection-hero-accent), transparent);
+}
+
+@media (max-width: 899px) {
+  .joynure-collection-hero--with-media .joynure-collection-hero__inner,
+  .joynure-collection-hero--text-only .joynure-collection-hero__inner {
+    grid-template-columns: 1fr;
+    align-items: start;
+    padding-block: clamp(1.75rem, 6vw, 2.5rem) clamp(1.25rem, 4vw, 1.75rem);
+  }
+
+  .joynure-collection-hero__title {
+    font-size: clamp(2.1rem, 10vw, 3rem);
+  }
+
+  .joynure-collection-hero__media {
+    order: 2;
+    max-height: 14rem;
+    aspect-ratio: 16 / 10;
+  }
+
+  .joynure-collection-hero__accent {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .joynure-collection-hero__copy {
+    animation: joynure-collection-hero-rise 520ms ease both;
+  }
+
+  .joynure-collection-hero__media,
+  .joynure-collection-hero__accent {
+    animation: joynure-collection-hero-rise 640ms 80ms ease both;
+  }
+}
+
+@keyframes joynure-collection-hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.6rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
