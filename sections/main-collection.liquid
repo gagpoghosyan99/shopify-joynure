@@ -45,7 +45,7 @@
     {% render 'skip-to-content-link', href: '#ResultsList', text: 'accessibility.skip_to_results_list' %}
 
     <div
-      class="collection-wrapper grid gap-style{% if section.settings.product_grid_width == 'full-width' %} collection-wrapper--grid-full-width{% endif %}"
+      class="collection-wrapper grid gap-style{% if section.settings.product_grid_width == 'full-width' or collection.handle == 'fitness-health' or collection.handle == 'pet-care' or collection.handle == 'baby-care' %} collection-wrapper--grid-full-width{% endif %}{% if collection.handle == 'fitness-health' %} joynure-collection-hula-grid{% elsif collection.handle == 'pet-care' %} joynure-collection-pet-grid{% elsif collection.handle == 'baby-care' %} joynure-collection-baby-grid{% endif %}"
     >
       {% content_for 'block',
         type: 'filters',

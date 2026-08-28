@@ -34,10 +34,18 @@
     assign current_variant = product.selected_or_first_available_variant
     # Get the initial quantity based on quantity rules
     assign initial_quantity = current_variant.quantity_rule.min | default: 1
+    assign joynure_hula_pdp_enabled = false
+    if product.handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop'
+      assign joynure_hula_pdp_enabled = true
+    endif
+    assign sticky_atc_class = 'sticky-add-to-cart'
+    if joynure_hula_pdp_enabled
+      assign sticky_atc_class = sticky_atc_class | append: ' joynure-pdp-phase-b-sticky'
+    endif
   %}
 
   <sticky-add-to-cart
-    class="sticky-add-to-cart"
+    class="{{ sticky_atc_class }}"
     data-variant-available="{{ current_variant.available }}"
     data-product-id="{{ product.id }}"
     data-current-variant-id="{{ current_variant.id }}"
@@ -75,8 +83,31 @@
       {% endif %}
 
       {% liquid
+        # Count options that customers can actually choose (more than one value).
+        # Used for sticky layout and for building a clean display-only variant label.
+        assign selectable_option_count = 0
+        assign sticky_variant_label = ''
+        if current_variant != blank
+          for option in product.options_with_values
+            if option.values.size > 1
+              assign selectable_option_count = selectable_option_count | plus: 1
+              assign option_index = forloop.index0
+              assign raw_option_value = current_variant.options[option_index]
+              capture cleaned_option_part
+                render 'joynure-variant-label', label: raw_option_value
+              endcapture
+              assign cleaned_option_part = cleaned_option_part | strip
+              if sticky_variant_label == blank
+                assign sticky_variant_label = cleaned_option_part
+              else
+                assign sticky_variant_label = sticky_variant_label | append: ' / ' | append: cleaned_option_part
+              endif
+            endif
+          endfor
+        endif
+
         assign has_single_option = false
-        if product.has_only_default_variant != true and product.options.size == 1
+        if product.has_only_default_variant != true and selectable_option_count == 1
           assign has_single_option = true
         endif
 
@@ -101,15 +132,12 @@
         <div
           class="sticky-add-to-cart__variant"
           data-testid="sticky-variant-title"
-          {% if product.has_only_default_variant %}
+          {% if product.has_only_default_variant or sticky_variant_label == blank %}
             style="display: none;"
           {% endif %}
         >
           {% unless product.has_only_default_variant %}
-            {% if current_variant != blank %}
-              {% assign variant_title = current_variant.title | escape %}
-            {% endif %}
-            {{ variant_title }}
+            {{ sticky_variant_label | escape }}
           {% endunless %}
         </div>
       </div>
@@ -174,13 +202,29 @@
   {% render 'add-to-cart-button-styles' %}
 {% endif %}
 
+{% capture joynure_hula_pdp_flag %}
+  {% render 'joynure-hula-pdp-enabled', product: closest.product %}
+{% endcapture %}
+{% assign joynure_hula_pdp_flag = joynure_hula_pdp_flag | strip %}
+{% assign joynure_section_extra_class = '' %}
+{% if joynure_hula_pdp_flag == 'true' %}
+  {% assign joynure_section_extra_class = 'joynure-pdp-modern' %}
+{% endif %}
+
+{% if joynure_section_extra_class != blank %}
+  {{ 'joynure-pdp-modern.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+{% render 'joynure-hula-pdp-breadcrumbs', product: closest.product %}
+
 {% render 'product-information-content',
   product: closest.product,
   section_id: section.id,
   settings: section.settings,
   media_gallery: media_gallery,
   product_details: product_details,
-  additional_blocks: additional_blocks
+  additional_blocks: additional_blocks,
+  section_extra_class: joynure_section_extra_class
 %}
 
 {% stylesheet %}

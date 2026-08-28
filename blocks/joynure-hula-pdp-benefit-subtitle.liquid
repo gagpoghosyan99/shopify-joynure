@@ -1,0 +1,48 @@
+{%- capture joynure_hula_pdp_flag -%}
+  {%- render 'joynure-hula-pdp-enabled', product: closest.product -%}
+{%- endcapture -%}
+{%- assign joynure_hula_pdp_flag = joynure_hula_pdp_flag | strip -%}
+
+{%- if joynure_hula_pdp_flag == 'true' -%}
+  {{ 'joynure-pdp-phase-b.css' | asset_url | stylesheet_tag }}
+
+  {%- capture joynure_shop_collection_handle -%}
+    {%- render 'joynure-product-shop-collection', product: closest.product -%}
+  {%- endcapture -%}
+  {%- assign joynure_shop_collection_handle = joynure_shop_collection_handle | strip -%}
+  {%- assign joynure_benefit_copy = '' -%}
+
+  {%- case joynure_shop_collection_handle -%}
+    {%- when 'fitness-health' -%}
+      {%- assign joynure_benefit_copy = 'Adjustable home fitness made simple — choose your fit, get moving, and enjoy a more engaging workout routine.' -%}
+    {%- when 'pet-care' -%}
+      {%- assign joynure_benefit_copy = 'Everyday pet care made simple — keep fur under control and your space feeling fresher at home.' -%}
+    {%- when 'baby-care' -%}
+      {%- assign joynure_benefit_copy = 'Gentle care for little ones — thoughtful tools that help make daily routines smoother for parents.' -%}
+    {%- else -%}
+      {%- assign joynure_benefit_copy = 'Care made joyful — thoughtfully chosen products for everyday routines.' -%}
+  {%- endcase -%}
+
+  {%- if joynure_benefit_copy != blank -%}
+    <p
+      class="joynure-pdp-benefit-subtitle"
+      {{ block.shopify_attributes }}
+    >
+      {{ joynure_benefit_copy | escape }}
+    </p>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE benefit subtitle",
+  "tag": null,
+  "settings": [],
+  "presets": [
+    {
+      "name": "JOYNURE benefit subtitle",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

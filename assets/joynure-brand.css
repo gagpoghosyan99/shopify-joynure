@@ -67,3 +67,29 @@
     justify-content: center;
   }
 }
+
+/* Collection grids: fill the row for common split-card counts */
+@media screen and (min-width: 750px) {
+  .joynure-collection-hula-grid .product-grid.product-grid--grid,
+  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(3):last-child) {
+    --product-grid-columns-desktop: repeat(3, minmax(0, 1fr));
+  }
+
+  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(4):last-child) {
+    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr));
+  }
+
+  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(8):last-child) {
+    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .joynure-collection-pet-grid .product-grid.product-grid--grid {
+    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr));
+  }
+
+  .joynure-collection-baby-grid .product-grid.product-grid--grid {
+    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr));
+  }
+}
