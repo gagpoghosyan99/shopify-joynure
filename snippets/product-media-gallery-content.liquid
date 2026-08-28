@@ -26,8 +26,28 @@
 {%- endif -%}
 {%- liquid
   assign selected_product = closest.product
-  assign selected_variant_media = selected_product.selected_or_first_available_variant.featured_media
+  assign selected_variant = selected_product.selected_or_first_available_variant
+  assign selected_variant_media = selected_variant.featured_media
+  assign variant_images = selected_product.images | where: 'attached_to_variant?', true | map: 'src'
   assign first_3d_model = selected_product.media | where: 'media_type', 'model' | first
+
+  # Normalize Color/Colour option to Pink / Purple / Blue for gallery isolation.
+  assign selected_color_label = ''
+  for option in selected_product.options_with_values
+    assign opt_name = option.name | downcase
+    if opt_name == 'color' or opt_name == 'colour'
+      assign option_index = option.position | minus: 1
+      assign raw_color = selected_variant.options[option_index] | downcase
+      if raw_color contains 'pink'
+        assign selected_color_label = 'Pink'
+      elsif raw_color contains 'purple'
+        assign selected_color_label = 'Purple'
+      elsif raw_color contains 'blue'
+        assign selected_color_label = 'Blue'
+      endif
+      break
+    endif
+  endfor
 
   if block_settings.slideshow_controls_style == 'thumbnails'
     assign controls_on_media = false
@@ -58,22 +78,6 @@
   endif
 
   assign slideshow_controls_style = block_settings.slideshow_controls_style
-  # Use a counter instead of dots when there are many images to avoid cropping/overflow.
-  if slideshow_controls_style == 'dots' and selected_product.media.size > 15
-    assign slideshow_controls_style = 'counter'
-  endif
-
-  assign render_slideshow_arrows = false
-
-  if selected_product.media.size <= 1
-    assign slideshow_class = 'product-media-gallery__slideshow--single-media slideshow--single-media'
-  else
-    assign slideshow_class = ''
-
-    if media_presentation == 'carousel'
-      assign render_slideshow_arrows = true
-    endif
-  endif
 
   if slideshow_controls_style == 'thumbnails'
     assign pagination_position = block_settings.thumbnail_position
@@ -96,26 +100,76 @@
       assign icons_position = 'left'
     endif
   endif
-
+-%}
+{%- capture joynure_color_media_ids -%}
+  {%- if block_settings.hide_variants and selected_color_label != blank -%}
+    {%- render 'joynure-color-media-ids', color: selected_color_label -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- liquid
+  assign joynure_color_media_ids = joynure_color_media_ids | strip
   assign sorted_media = '' | split: ','
-  if selected_variant_media
-    if block_settings.hide_variants
-      # Color isolation: show ONLY the selected variant's featured media.
-      # Unattached lifestyle images (mixed colors) and other variants are excluded.
-      assign sorted_media = selected_product.media | where: 'id', selected_variant_media.id
-    else
-      assign sorted_media = sorted_media | concat: selected_product.media | where: 'id', selected_variant_media.id
 
-      for media in selected_product.media
-        if media.id != selected_variant_media.id
-          assign found_media = selected_product.media | where: 'id', media.id
-          assign sorted_media = sorted_media | concat: found_media
-        endif
-      endfor
-    endif
+  if block_settings.hide_variants and joynure_color_media_ids != blank
+    # Strict color isolation via curated media IDs (excludes other colors + mixed group shots).
+    assign color_id_list = joynure_color_media_ids | split: ','
+    for id_str in color_id_list
+      assign id_str = id_str | strip
+      if id_str == blank
+        continue
+      endif
+      assign media_id_num = id_str | plus: 0
+      assign found_media = selected_product.media | where: 'id', media_id_num
+      if found_media.size > 0
+        assign sorted_media = sorted_media | concat: found_media
+      endif
+    endfor
+  elsif selected_variant_media
+    assign sorted_media = sorted_media | concat: selected_product.media | where: 'id', selected_variant_media.id
+
+    for media in selected_product.media
+      if block_settings.hide_variants and variant_images contains media.src and sorted_media.size > 0
+        continue
+      endif
+
+      if media.id != selected_variant_media.id
+        assign found_media = selected_product.media | where: 'id', media.id
+        assign sorted_media = sorted_media | concat: found_media
+      endif
+    endfor
   else
     assign sorted_media = selected_product.media
   endif
+
+  # If color map matched nothing (stale IDs), fall back to featured / all media.
+  if sorted_media.size == 0
+    if selected_variant_media
+      assign sorted_media = selected_product.media | where: 'id', selected_variant_media.id
+      if sorted_media.size == 0
+        assign sorted_media = selected_product.media
+      endif
+    else
+      assign sorted_media = selected_product.media
+    endif
+  endif
+
+  # Use a counter instead of dots when there are many images to avoid cropping/overflow.
+  if slideshow_controls_style == 'dots' and sorted_media.size > 15
+    assign slideshow_controls_style = 'counter'
+  endif
+
+  assign render_slideshow_arrows = false
+
+  if sorted_media.size <= 1
+    assign slideshow_class = 'product-media-gallery__slideshow--single-media slideshow--single-media'
+  else
+    assign slideshow_class = ''
+
+    if media_presentation == 'carousel'
+      assign render_slideshow_arrows = true
+    endif
+  endif
+
   assign has_image_drop = sorted_media | has: 'media_type', 'image'
 
   # Determine if we're in single column mode (carousel or grid with one column)

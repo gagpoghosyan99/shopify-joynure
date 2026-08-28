@@ -1,0 +1,23 @@
+{%- doc -%}
+  Returns a comma-separated list of product media IDs for a color on the Hula hoop PDP.
+  Used when Admin has not attached per-variant featured images (all colors share one gallery).
+
+  @param {string} color - Normalized color label: Pink, Purple, or Blue
+
+  Outputs blank for unknown colors.
+{%- enddoc -%}
+{%- liquid
+  assign color_key = color | strip | downcase
+  assign ids = ''
+
+  # Ordered hero-first (studio pedestal / primary shot, then lifestyle, details, assembly).
+  # Mixed three-color group shot intentionally omitted from every color.
+  if color_key == 'pink'
+    assign ids = '45010727797009,45010736709905,45010744803601,45010788942097,45010794578193,45010801230097,45010994266385,45011023102225'
+  elsif color_key == 'purple'
+    assign ids = '45011048431889,45011048595729,45011048726801,45011021922577,45011048530193,45011048497425'
+  elsif color_key == 'blue'
+    assign ids = '45011048562961,45011048661265,45011048694033,45011048628497,45011048464657'
+  endif
+-%}
+{{- ids -}}
