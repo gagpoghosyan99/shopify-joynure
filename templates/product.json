@@ -314,9 +314,24 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "joynure_reveal": {
+      "type": "joynure-reveal",
+      "settings": {
+        "heading": "See the difference",
+        "description": "Drag the slider to compare before and after.",
+        "before_label": "Before",
+        "after_label": "After",
+        "orientation": "horizontal",
+        "initial_position": 50,
+        "show_labels": true,
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "joynure_reveal"
   ]
 }

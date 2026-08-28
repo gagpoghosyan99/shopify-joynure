@@ -1,7 +1,6 @@
 {%- liquid
-  assign joynure_hula_pdp_handle = 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop'
-
-  if product != blank and product.handle == joynure_hula_pdp_handle
+  # Modern PDP enhancements apply to all product pages.
+  if product != blank
     echo 'true'
   else
     echo 'false'
