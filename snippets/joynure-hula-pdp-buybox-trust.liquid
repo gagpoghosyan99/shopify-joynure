@@ -1,0 +1,44 @@
+{%- doc -%}
+  Trust row and shipping note for Hula Hoop PDP Phase B buy box.
+  @param {product} product - Current product
+{%- enddoc -%}
+
+{%- capture joynure_hula_pdp_flag -%}
+  {%- render 'joynure-hula-pdp-enabled', product: product -%}
+{%- endcapture -%}
+{%- assign joynure_hula_pdp_flag = joynure_hula_pdp_flag | strip -%}
+{%- assign joynure_hula_pdp_enabled = false -%}
+{%- if joynure_hula_pdp_flag == 'true' -%}
+  {%- assign joynure_hula_pdp_enabled = true -%}
+{%- endif -%}
+
+{%- if joynure_hula_pdp_enabled -%}
+  {{ 'joynure-pdp-phase-b.css' | asset_url | stylesheet_tag }}
+
+  <div class="joynure-pdp-buybox-meta">
+    <ul class="joynure-pdp-trust-row" aria-label="Purchase reassurance">
+      <li class="joynure-pdp-trust-row__item">
+        <span class="joynure-pdp-trust-row__icon" aria-hidden="true">
+          {% render 'icon-or-image', icon: 'lock', width: 14, class_name: 'joynure-pdp-trust-row__icon-svg' %}
+        </span>
+        <span>Secure checkout</span>
+      </li>
+      <li class="joynure-pdp-trust-row__item">
+        <span class="joynure-pdp-trust-row__icon" aria-hidden="true">
+          {% render 'icon-or-image', icon: 'truck', width: 14, class_name: 'joynure-pdp-trust-row__icon-svg' %}
+        </span>
+        <span>Tracked shipping</span>
+      </li>
+      <li class="joynure-pdp-trust-row__item">
+        <span class="joynure-pdp-trust-row__icon" aria-hidden="true">
+          {% render 'icon-or-image', icon: 'chat_bubble', width: 14, class_name: 'joynure-pdp-trust-row__icon-svg' %}
+        </span>
+        <span>Easy support</span>
+      </li>
+    </ul>
+
+    <p class="joynure-pdp-shipping-note">
+      Tracked shipping available at checkout.
+    </p>
+  </div>
+{%- endif -%}
