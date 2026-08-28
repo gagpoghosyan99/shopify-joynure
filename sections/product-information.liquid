@@ -202,13 +202,30 @@
   {% render 'add-to-cart-button-styles' %}
 {% endif %}
 
+{% liquid
+  capture joynure_hula_pdp_flag
+    render 'joynure-hula-pdp-enabled', product: closest.product
+  endcapture
+  assign joynure_section_extra_class = ''
+  if joynure_hula_pdp_flag | strip == 'true'
+    assign joynure_section_extra_class = 'joynure-pdp-modern'
+  endif
+%}
+
+{% if joynure_section_extra_class != blank %}
+  {{ 'joynure-pdp-modern.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+{% render 'joynure-hula-pdp-breadcrumbs', product: closest.product %}
+
 {% render 'product-information-content',
   product: closest.product,
   section_id: section.id,
   settings: section.settings,
   media_gallery: media_gallery,
   product_details: product_details,
-  additional_blocks: additional_blocks
+  additional_blocks: additional_blocks,
+  section_extra_class: joynure_section_extra_class
 %}
 
 {% stylesheet %}

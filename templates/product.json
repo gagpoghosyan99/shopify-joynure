@@ -34,19 +34,19 @@
           "type": "_product-media-gallery",
           "static": true,
           "settings": {
-            "media_presentation": "grid",
+            "media_presentation": "carousel",
             "media_columns": "two",
             "image_gap": 4,
             "large_first_image": false,
-            "slideshow_controls_style": "counter",
-            "slideshow_mobile_controls_style": "dots",
-            "thumbnail_position": "right",
-            "thumbnail_width": 44,
-            "thumbnail_radius": 0,
-            "aspect_ratio": "adapt",
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "thumbnails",
+            "thumbnail_position": "bottom",
+            "thumbnail_width": 64,
+            "thumbnail_radius": 8,
+            "aspect_ratio": "1",
             "constrain_to_viewport": true,
             "media_fit": "contain",
-            "media_radius": 0,
+            "media_radius": 16,
             "extend_media": false,
             "zoom": true,
             "video_loop": false,
@@ -176,12 +176,18 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
+                },
+                "joynure_availability": {
+                  "type": "joynure-hula-pdp-availability",
+                  "settings": {},
+                  "blocks": {}
                 }
               },
               "block_order": [
                 "text_xrnftG",
                 "joynure_benefit_subtitle",
-                "price_tVjtKg"
+                "price_tVjtKg",
+                "joynure_availability"
               ]
             },
             "divider_VJhene": {
@@ -195,6 +201,11 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0
               },
+              "blocks": {}
+            },
+            "joynure_pdp_tabs": {
+              "type": "joynure-hula-pdp-tabs",
+              "settings": {},
               "blocks": {}
             },
             "variant_picker_R3rGDr": {
@@ -278,40 +289,14 @@
                 }
               },
               "block_order": []
-            },
-            "text_aEtTtq": {
-              "type": "text",
-              "name": "t:names.product_description",
-              "settings": {
-                "text": "{{ closest.product.description }}",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
             }
           },
           "block_order": [
             "group_icgrde",
             "divider_VJhene",
+            "joynure_pdp_tabs",
             "variant_picker_R3rGDr",
-            "buy_buttons_eYQEYi",
-            "text_aEtTtq"
+            "buy_buttons_eYQEYi"
           ]
         }
       },
@@ -321,7 +306,7 @@
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
-        "equal_columns": false,
+        "equal_columns": true,
         "limit_details_width": false,
         "gap": 48,
         "enable_sticky_add_to_cart": true,

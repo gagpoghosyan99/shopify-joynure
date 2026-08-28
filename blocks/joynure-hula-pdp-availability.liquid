@@ -1,0 +1,37 @@
+{%- capture joynure_hula_pdp_flag -%}
+  {%- render 'joynure-hula-pdp-enabled', product: closest.product -%}
+{%- endcapture -%}
+{%- assign joynure_hula_pdp_flag = joynure_hula_pdp_flag | strip -%}
+
+{%- if joynure_hula_pdp_flag == 'true' -%}
+  {%- liquid
+    assign variant = closest.product.selected_or_first_available_variant
+    assign in_stock = false
+    if variant.available
+      assign in_stock = true
+    endif
+  -%}
+  <p class="joynure-pdp-availability{% if in_stock %} joynure-pdp-availability--in-stock{% else %} joynure-pdp-availability--out{% endif %}" {{ block.shopify_attributes }}>
+    {%- if in_stock -%}
+      In stock
+    {%- elsif variant == blank -%}
+      Unavailable
+    {%- else -%}
+      Sold out
+    {%- endif -%}
+  </p>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE availability",
+  "tag": null,
+  "settings": [],
+  "presets": [
+    {
+      "name": "JOYNURE availability",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

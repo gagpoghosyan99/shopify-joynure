@@ -1,0 +1,260 @@
+/* Modern Hula PDP — React-inspired layout, scoped via .joynure-pdp-modern */
+
+.joynure-pdp-modern .product-information__grid {
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.joynure-pdp-modern.product-information.section--page-width {
+  --page-width: min(1280px, 100%);
+}
+
+.joynure-pdp-breadcrumbs {
+  margin-block: clamp(0.75rem, 2vw, 1.25rem) clamp(1rem, 2.5vw, 1.5rem);
+  padding-inline: max(var(--page-margin, 16px), var(--padding-inline-start, 0));
+}
+
+.joynure-pdp-breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--font-size--sm, 0.875rem);
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+}
+
+.joynure-pdp-breadcrumbs__item a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.joynure-pdp-breadcrumbs__item a:hover {
+  color: var(--joynure-teal, var(--color-foreground));
+}
+
+.joynure-pdp-breadcrumbs__item--current {
+  color: var(--color-foreground);
+  font-weight: 600;
+}
+
+/* Price + availability row */
+.joynure-pdp-modern .group-block:has(.price) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.75rem;
+}
+
+.joynure-pdp-availability {
+  margin: 0;
+  font-size: var(--font-size--sm, 0.875rem);
+  font-weight: 600;
+}
+
+.joynure-pdp-availability--in-stock {
+  color: var(--joynure-teal, #1f5c55);
+}
+
+.joynure-pdp-availability--out {
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+}
+
+/* Gallery — carousel hero + thumbnail strip */
+.joynure-pdp-modern .product-media-gallery__slideshow {
+  border-radius: 1rem;
+  overflow: clip;
+  background: rgb(var(--color-foreground-rgb) / var(--opacity-5));
+}
+
+.joynure-pdp-modern .product-media-container {
+  border-radius: 1rem;
+}
+
+.joynure-pdp-modern .slideshow-controls__thumbnails {
+  gap: 0.75rem;
+  margin-block-start: 1rem;
+}
+
+.joynure-pdp-modern .slideshow-controls__thumbnail {
+  border-radius: 0.65rem;
+  overflow: clip;
+}
+
+.joynure-pdp-modern .slideshow-control--next,
+.joynure-pdp-modern .slideshow-control--previous {
+  background: var(--color-background);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgb(36 49 46 / 12%);
+}
+
+/* Title typography */
+.joynure-pdp-modern .product-details h1 {
+  font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.joynure-pdp-modern .joynure-pdp-benefit-subtitle {
+  max-width: none;
+  font-size: var(--font-paragraph--size, 1rem);
+}
+
+/* Tabs */
+.joynure-pdp-tabs {
+  display: block;
+  width: 100%;
+  margin-block: 0.5rem 1.25rem;
+}
+
+.joynure-pdp-tabs__nav {
+  display: flex;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--joynure-border, rgb(36 49 46 / 12%));
+  margin-block-end: 1rem;
+}
+
+.joynure-pdp-tabs__trigger {
+  position: relative;
+  margin: 0;
+  padding: 0.85rem 0.15rem;
+  border: 0;
+  background: transparent;
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+  font: inherit;
+  font-size: var(--font-size--sm, 0.875rem);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.joynure-pdp-tabs__trigger.is-active {
+  color: var(--joynure-teal, var(--color-foreground));
+}
+
+.joynure-pdp-tabs__trigger.is-active::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--joynure-teal, var(--color-foreground));
+}
+
+.joynure-pdp-tabs__panel {
+  color: rgb(var(--color-foreground-rgb) / 0.88);
+  font-size: var(--font-paragraph--size, 1rem);
+  line-height: 1.6;
+}
+
+.joynure-pdp-tabs__rte :is(p, ul, ol) {
+  margin-block: 0 0.85rem;
+}
+
+.joynure-pdp-details-list,
+.joynure-pdp-shipping-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.joynure-pdp-details-list li + li {
+  margin-block-start: 0.5rem;
+}
+
+.joynure-pdp-shipping-list__item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.joynure-pdp-shipping-list__item + .joynure-pdp-shipping-list__item {
+  margin-block-start: 1rem;
+}
+
+.joynure-pdp-shipping-list__icon {
+  flex-shrink: 0;
+  color: var(--joynure-teal, var(--color-foreground));
+}
+
+.joynure-pdp-shipping-list__item p {
+  margin: 0.15rem 0 0;
+  font-size: var(--font-size--sm, 0.875rem);
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+}
+
+/* Variant pills */
+.joynure-pdp-modern .variant-option__button-label {
+  border-radius: 0.5rem;
+  min-height: 2.5rem;
+  padding-inline: 1rem;
+  font-weight: 600;
+}
+
+/* Buy box — qty + ATC inline like reference */
+.joynure-pdp-modern.joynure-pdp-phase-b .product-form-buttons {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.joynure-pdp-modern.joynure-pdp-phase-b .quantity-selector-wrapper,
+.joynure-pdp-modern.joynure-pdp-phase-b .quantity-selector {
+  grid-column: 1;
+  grid-row: 1;
+  max-width: none;
+}
+
+.joynure-pdp-modern.joynure-pdp-phase-b .add-to-cart-button {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.joynure-pdp-modern.joynure-pdp-phase-b shopify-accelerated-checkout,
+.joynure-pdp-modern.joynure-pdp-phase-b .accelerated-checkout-block {
+  grid-column: 1 / -1;
+  grid-row: 2;
+}
+
+.joynure-pdp-modern.joynure-pdp-phase-b .joynure-pdp-buybox-meta {
+  grid-column: 1 / -1;
+  display: none;
+}
+
+.joynure-pdp-modern .add-to-cart-button,
+.joynure-pdp-modern .button {
+  border-radius: 0.5rem;
+}
+
+/* Hide legacy full-width description below buy box */
+.joynure-pdp-modern .joynure-pdp-legacy-description {
+  display: none !important;
+}
+
+@media screen and (max-width: 749px) {
+  .joynure-pdp-modern.joynure-pdp-phase-b .product-form-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .joynure-pdp-modern.joynure-pdp-phase-b .add-to-cart-button {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .joynure-pdp-modern.joynure-pdp-phase-b .quantity-selector-wrapper,
+  .joynure-pdp-modern.joynure-pdp-phase-b .quantity-selector {
+    grid-row: 1;
+    width: 100%;
+  }
+
+  .joynure-pdp-tabs__nav {
+    gap: 1rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .joynure-pdp-tabs__nav::-webkit-scrollbar {
+    display: none;
+  }
+}
