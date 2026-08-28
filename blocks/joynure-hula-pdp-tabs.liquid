@@ -1,0 +1,106 @@
+{%- capture joynure_hula_pdp_flag -%}
+  {%- render 'joynure-hula-pdp-enabled', product: closest.product -%}
+{%- endcapture -%}
+{%- assign joynure_hula_pdp_flag = joynure_hula_pdp_flag | strip -%}
+
+{%- if joynure_hula_pdp_flag == 'true' -%}
+  {{ 'joynure-pdp-modern.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'joynure-pdp-tabs.js' | asset_url }}" type="module"></script>
+
+  <joynure-pdp-tabs class="joynure-pdp-tabs" {{ block.shopify_attributes }}>
+    <div class="joynure-pdp-tabs__nav" role="tablist" aria-label="Product information">
+      <button type="button" class="joynure-pdp-tabs__trigger is-active" role="tab" aria-selected="true" aria-controls="joynure-pdp-panel-description-{{ block.id }}" id="joynure-pdp-tab-description-{{ block.id }}" data-tab="description">
+        Description
+      </button>
+      <button type="button" class="joynure-pdp-tabs__trigger" role="tab" aria-selected="false" aria-controls="joynure-pdp-panel-details-{{ block.id }}" id="joynure-pdp-tab-details-{{ block.id }}" data-tab="details">
+        Details
+      </button>
+      <button type="button" class="joynure-pdp-tabs__trigger" role="tab" aria-selected="false" aria-controls="joynure-pdp-panel-shipping-{{ block.id }}" id="joynure-pdp-tab-shipping-{{ block.id }}" data-tab="shipping">
+        Shipping
+      </button>
+    </div>
+
+    <div class="joynure-pdp-tabs__panels">
+      <div
+        class="joynure-pdp-tabs__panel is-active"
+        role="tabpanel"
+        id="joynure-pdp-panel-description-{{ block.id }}"
+        aria-labelledby="joynure-pdp-tab-description-{{ block.id }}"
+        data-panel="description"
+      >
+        <div class="joynure-pdp-tabs__rte rte">
+          {{ closest.product.description }}
+        </div>
+      </div>
+
+      <div
+        class="joynure-pdp-tabs__panel"
+        role="tabpanel"
+        id="joynure-pdp-panel-details-{{ block.id }}"
+        aria-labelledby="joynure-pdp-tab-details-{{ block.id }}"
+        data-panel="details"
+        hidden
+      >
+        <ul class="joynure-pdp-details-list">
+          <li><strong>Type:</strong> {{ closest.product.type | default: 'Fitness' | escape }}</li>
+          <li><strong>Brand:</strong> {{ closest.product.vendor | default: shop.name | escape }}</li>
+          {%- if closest.product.selected_or_first_available_variant.sku != blank -%}
+            <li><strong>SKU:</strong> {{ closest.product.selected_or_first_available_variant.sku | escape }}</li>
+          {%- endif -%}
+          <li><strong>Price:</strong> {{ closest.product.selected_or_first_available_variant.price | money }}</li>
+        </ul>
+      </div>
+
+      <div
+        class="joynure-pdp-tabs__panel"
+        role="tabpanel"
+        id="joynure-pdp-panel-shipping-{{ block.id }}"
+        aria-labelledby="joynure-pdp-tab-shipping-{{ block.id }}"
+        data-panel="shipping"
+        hidden
+      >
+        <ul class="joynure-pdp-shipping-list">
+          <li class="joynure-pdp-shipping-list__item">
+            {% render 'icon-or-image', icon: 'lock', width: 20, class_name: 'joynure-pdp-shipping-list__icon' %}
+            <div>
+              <strong>Secure checkout</strong>
+              <p>Shopify secure payment processing at checkout.</p>
+            </div>
+          </li>
+          <li class="joynure-pdp-shipping-list__item">
+            {% render 'icon-or-image', icon: 'truck', width: 20, class_name: 'joynure-pdp-shipping-list__icon' %}
+            <div>
+              <strong>Tracked shipping</strong>
+              <p>Tracked shipping available at checkout.</p>
+            </div>
+          </li>
+          <li class="joynure-pdp-shipping-list__item">
+            {% render 'icon-or-image', icon: 'chat_bubble', width: 20, class_name: 'joynure-pdp-shipping-list__icon' %}
+            <div>
+              <strong>Easy support</strong>
+              <p>Reach out anytime if you need help with your order.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </joynure-pdp-tabs>
+{%- else -%}
+  <div class="joynure-pdp-tabs__fallback rte" {{ block.shopify_attributes }}>
+    {{ closest.product.description }}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE product tabs",
+  "tag": null,
+  "settings": [],
+  "presets": [
+    {
+      "name": "JOYNURE product tabs",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

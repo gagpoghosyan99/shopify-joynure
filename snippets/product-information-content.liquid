@@ -11,6 +11,8 @@
   @param {string} product_details - Captured HTML for the product details block
   @param {string} additional_blocks - Captured HTML for additional section blocks
 
+  @param {string} [section_extra_class] - Optional extra class on the section wrapper
+
   @example
   {% capture media_gallery %}
     {% content_for 'block', type: '_product-media-gallery', id: 'media-gallery', closest.product: product %}
@@ -86,7 +88,7 @@
   class="section-background{% if settings.background_color != blank %} color-custom-{{ section_id }}{% endif %}"
 ></div>
 <div
-  class="product-information section section--{{ content_width }} spacing-style{% if settings.background_color != blank %} color-custom-{{ section_id }}{% endif %} relative"
+  class="product-information section section--{{ content_width }} spacing-style{% if settings.background_color != blank %} color-custom-{{ section_id }}{% endif %}{% if section_extra_class != blank %} {{ section_extra_class }}{% endif %} relative"
   style="{% render 'spacing-style', settings: settings %} --gap: {{ settings.gap }}px;"
   data-testid="product-information"
 >

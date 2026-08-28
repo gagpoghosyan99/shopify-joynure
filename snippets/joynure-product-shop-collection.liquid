@@ -1,0 +1,19 @@
+{%- doc -%}
+  Resolves the JOYNURE shop collection for a product (fitness-health, pet-care, baby-care).
+  Outputs the collection handle, or blank if none of the category collections match.
+
+  @param {product} product - Current product
+{%- enddoc -%}
+
+{%- liquid
+  assign joynure_shop_collection_handle = ''
+  if product != blank
+    for collection in product.collections
+      if collection.handle == 'fitness-health' or collection.handle == 'pet-care' or collection.handle == 'baby-care'
+        assign joynure_shop_collection_handle = collection.handle
+        break
+      endif
+    endfor
+  endif
+  echo joynure_shop_collection_handle
+-%}

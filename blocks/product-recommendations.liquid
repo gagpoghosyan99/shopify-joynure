@@ -84,15 +84,31 @@
             assign products = products | split: ','
           endfor
         elsif recommendations.performed and recommendations.products_count == 0
-          # No recommendations found, pull from catalog
-          if block_settings.recommendation_type == 'related'
-            assign products = collections.all.products | reject: 'id', closest.product.id
-          elsif block_settings.recommendation_type == 'complementary'
-            # Do not recommend the All collection as complementary products
-            assign products = null
+          # Collection isolation: never fall back to collections.all
+          assign products = null
+          capture joynure_shop_collection_handle
+            render 'joynure-product-shop-collection', product: closest.product
+          endcapture
+          assign joynure_shop_collection_handle = joynure_shop_collection_handle | strip
+          if joynure_shop_collection_handle != blank and block_settings.recommendation_type == 'related'
+            assign joynure_shop_collection = collections[joynure_shop_collection_handle]
+            if joynure_shop_collection != blank
+              assign products = joynure_shop_collection.products | reject: 'id', closest.product.id
+            endif
           endif
         else
-          assign products = recommendations.products
+          # Filter Shopify recommendations to the same JOYNURE category collection
+          assign products = null
+          capture joynure_shop_collection_handle
+            render 'joynure-product-shop-collection', product: closest.product
+          endcapture
+          assign joynure_shop_collection_handle = joynure_shop_collection_handle | strip
+          if joynure_shop_collection_handle != blank
+            assign joynure_shop_collection = collections[joynure_shop_collection_handle]
+            if joynure_shop_collection != blank
+              assign products = joynure_shop_collection.products | reject: 'id', closest.product.id
+            endif
+          endif
         endif
       %}
       {% capture list_items %}

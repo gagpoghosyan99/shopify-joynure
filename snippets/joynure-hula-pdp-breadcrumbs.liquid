@@ -1,0 +1,25 @@
+{%- doc -%}
+  Breadcrumb trail for Hula PDP modern layout.
+{%- enddoc -%}
+
+{%- capture joynure_hula_pdp_flag -%}
+  {%- render 'joynure-hula-pdp-enabled', product: product -%}
+{%- endcapture -%}
+{%- assign joynure_hula_pdp_flag = joynure_hula_pdp_flag | strip -%}
+{%- if joynure_hula_pdp_flag == 'true' -%}
+<nav class="joynure-pdp-breadcrumbs" aria-label="Breadcrumb">
+  <ol class="joynure-pdp-breadcrumbs__list">
+    <li class="joynure-pdp-breadcrumbs__item">
+      <a href="{{ routes.root_url }}">Home</a>
+    </li>
+    <li class="joynure-pdp-breadcrumbs__item" aria-hidden="true">/</li>
+    <li class="joynure-pdp-breadcrumbs__item">
+      <a href="{{ routes.collections_url }}/fitness-health">Hula Hoop</a>
+    </li>
+    <li class="joynure-pdp-breadcrumbs__item" aria-hidden="true">/</li>
+    <li class="joynure-pdp-breadcrumbs__item joynure-pdp-breadcrumbs__item--current" aria-current="page">
+      {{ product.title | escape }}
+    </li>
+  </ol>
+</nav>
+{%- endif -%}

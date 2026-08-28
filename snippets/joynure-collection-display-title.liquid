@@ -1,0 +1,11 @@
+{%- doc -%}
+  Display-only collection title for storefront heroes.
+  Does not change Shopify Admin collection data.
+{%- enddoc -%}
+
+{%- case collection.handle -%}
+  {%- when 'fitness-health' -%}
+    HULA HOOP
+  {%- else -%}
+    {{- collection.title -}}
+{%- endcase -%}
