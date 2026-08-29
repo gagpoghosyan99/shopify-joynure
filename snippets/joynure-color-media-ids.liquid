@@ -1,23 +1,41 @@
 {%- doc -%}
-  Returns a comma-separated list of product media IDs for a color on the Hula hoop PDP.
-  Used when Admin has not attached per-variant featured images (all colors share one gallery).
+  Returns a comma-separated list of product media IDs for a color on a Joynure PDP.
+  Used when Admin has not attached every image to a variant (shared gallery), or when
+  hide_variants alone would still leave cross-color lifestyle shots visible.
 
-  @param {string} color - Normalized color label: Pink, Purple, or Blue
+  @param {string} color - Normalized color label (e.g. Pink, Purple, Blue, Green, White)
+  @param {object} [product] - Product object (handle selects the correct map)
 
-  Outputs blank for unknown colors.
+  Outputs blank for unknown product/color pairs.
 {%- enddoc -%}
 {%- liquid
   assign color_key = color | strip | downcase
   assign ids = ''
+  assign product_handle = ''
+  if product != blank
+    assign product_handle = product.handle
+  endif
 
-  # Ordered hero-first (studio pedestal / primary shot, then lifestyle, details, assembly).
-  # Mixed three-color group shot intentionally omitted from every color.
-  if color_key == 'pink'
-    assign ids = '45010727797009,45010736709905,45010744803601,45010788942097,45010794578193,45010801230097,45010994266385,45011023102225'
-  elsif color_key == 'purple'
-    assign ids = '45011048431889,45011048595729,45011048726801,45011021922577,45011048530193,45011048497425'
-  elsif color_key == 'blue'
-    assign ids = '45011048562961,45011048661265,45011048694033,45011048628497,45011048464657'
+  if product_handle == '2-in-1-reusable-pet-hair-remover'
+    # Pet hair remover — hero-first; every media ID belongs to exactly one color.
+    if color_key == 'blue'
+      assign ids = '45015236018449,45015235363089,45015235199249,45015235625233,45015235494161,45015236182289,45015235985681,45015236509969,45015236346129,45015236641041,45015235723537,45015236378897,45015236215057,45015236903185,45015236935953'
+    elsif color_key == 'green'
+      assign ids = '45015236083985,45015235166481,45015235592465,45015235428625,45015235330321,45015235526929,45015236313361,45015236444433,45015235887377,45015236673809,45015236247825,45015236706577,45015235756305,45015236870417'
+    elsif color_key == 'pink'
+      assign ids = '45015235952913,45015235297553,45015235395857,45015235559697,45015235690769,45015236149521,45015236608273,45015235821841,45015236477201,45015236739345,45015236575505,45015235789073,45015236968721,45015237001489'
+    elsif color_key == 'white'
+      assign ids = '45015236116753,45015235264785,45015235232017,45015235461393,45015236051217,45015235658001,45015236804881,45015236411665,45015235854609,45015236837649,45015236280593,45015236542737,45015236772113'
+    endif
+  elsif product_handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop' or product_handle == blank
+    # Hula hoop — ordered hero-first. Mixed three-color group shot omitted.
+    if color_key == 'pink'
+      assign ids = '45010727797009,45010736709905,45010744803601,45010788942097,45010794578193,45010801230097,45010994266385,45011023102225'
+    elsif color_key == 'purple'
+      assign ids = '45011048431889,45011048595729,45011048726801,45011021922577,45011048530193,45011048497425'
+    elsif color_key == 'blue'
+      assign ids = '45011048562961,45011048661265,45011048694033,45011048628497,45011048464657'
+    endif
   endif
 -%}
 {{- ids -}}
