@@ -317,9 +317,49 @@
     },
     "joynure_reveal": {
       "type": "joynure-reveal",
+      "blocks": {
+        "review_1": {
+          "type": "review_card",
+          "settings": {
+            "author": "Ava M.",
+            "quote": "Two weeks in and my core feels stronger already.",
+            "rating": 5
+          }
+        },
+        "review_2": {
+          "type": "review_card",
+          "settings": {
+            "author": "Chris D.",
+            "quote": "I actually look forward to workouts at home now.",
+            "rating": 5
+          }
+        },
+        "review_3": {
+          "type": "review_card",
+          "settings": {
+            "author": "Lena K.",
+            "quote": "Drag the slider — the difference is wild.",
+            "rating": 5
+          }
+        },
+        "review_4": {
+          "type": "review_card",
+          "settings": {
+            "author": "Marcus T.",
+            "quote": "Fits my apartment routine and keeps me consistent.",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4"
+      ],
       "settings": {
         "heading": "See the difference",
-        "description": "Drag the slider to compare before and after.",
+        "description": "Real customer results — drag each card to compare, then swipe the row.",
         "before_label": "Before",
         "after_label": "After",
         "orientation": "horizontal",
