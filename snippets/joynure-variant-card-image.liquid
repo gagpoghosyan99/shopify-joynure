@@ -1,0 +1,50 @@
+{%- doc -%}
+  Resolves the best storefront card image for a color variant.
+  Prefers variant.featured_image when it is color-specific; otherwise uses the
+  curated color media map (first ID) from joynure-color-media-ids.
+
+  @param {object} product
+  @param {object} variant
+  @param {string} color - Normalized color label (Pink / Purple / Blue)
+
+  Outputs nothing; sets `joynure_card_image` in parent scope via capture pattern —
+  callers should use the liquid assigns below by rendering into a capture of the
+  image URL, or use the echo of the image URL.
+
+  Echoes the image URL (blank if none).
+{%- enddoc -%}
+{%- liquid
+  assign joynure_card_image_url = ''
+  assign color_key = color | strip | downcase
+
+  assign featured = variant.featured_image
+  assign use_featured = false
+  if featured != blank
+    assign featured_name = featured | image_url: width: 100 | downcase
+    # Skip shared multi-color group shot used as default featured for all variants
+    unless featured_name contains '07_38_56_pm_1'
+      assign use_featured = true
+    endunless
+  endif
+
+  if use_featured
+    assign joynure_card_image_url = featured | image_url: width: 800
+  else
+    capture color_ids
+      render 'joynure-color-media-ids', color: color_key
+    endcapture
+    assign color_ids = color_ids | strip
+    if color_ids != blank
+      assign first_id = color_ids | split: ',' | first | strip | plus: 0
+      assign matched = product.media | where: 'id', first_id | first
+      if matched != blank
+        assign joynure_card_image_url = matched | image_url: width: 800
+      endif
+    endif
+  endif
+
+  if joynure_card_image_url == blank and product.featured_media != blank
+    assign joynure_card_image_url = product.featured_media | image_url: width: 800
+  endif
+-%}
+{{- joynure_card_image_url -}}

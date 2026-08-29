@@ -5,13 +5,37 @@
   @param {object} product - The Shopify product
   @param {object} variant - The Shopify variant to feature
   @param {string} card_title - Display title (product base + clean color)
+  @param {string} [color_label] - Clean color name (Pink / Purple / Blue) for image isolation
   @param {string} [product_view_context] - Analytics context
   @param {object} [section] - Parent section (for quick-add section id)
 {%- enddoc -%}
 
 {% liquid
   assign variant_url = product.url | append: '?variant=' | append: variant.id
-  assign card_image = variant.featured_image
+  assign card_image = blank
+
+  # Prefer curated color hero over shared multi-color featured image
+  if color_label != blank
+    capture color_ids
+      render 'joynure-color-media-ids', color: color_label
+    endcapture
+    assign color_ids = color_ids | strip
+    if color_ids != blank
+      assign first_id = color_ids | split: ',' | first | strip | plus: 0
+      assign matched_media = product.media | where: 'id', first_id | first
+      if matched_media != blank
+        assign card_image = matched_media.preview_image
+      endif
+    endif
+  endif
+
+  if card_image == blank and variant.featured_image != blank
+    assign featured_src = variant.featured_image | image_url: width: 80 | downcase
+    unless featured_src contains '07_38_56_pm_1'
+      assign card_image = variant.featured_image
+    endunless
+  endif
+
   if card_image == blank
     assign card_image = product.featured_media.preview_image
   endif

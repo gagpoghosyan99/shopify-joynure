@@ -68,28 +68,35 @@
   }
 }
 
-/* Collection grids: fill the row for common split-card counts */
+/* Collection grids: fill the row based on item count (beat Horizon {% style %} auto-fill) */
 @media screen and (min-width: 750px) {
-  .joynure-collection-hula-grid .product-grid.product-grid--grid,
+  .joynure-collection-hula-grid .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(1):last-child) {
+    --product-grid-columns-desktop: minmax(0, 1fr) !important;
+  }
+
+  .joynure-collection-hula-grid .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(2):last-child),
+  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(2):last-child) {
+    --product-grid-columns-desktop: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .joynure-collection-hula-grid .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(3):last-child),
   .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(3):last-child) {
-    --product-grid-columns-desktop: repeat(3, minmax(0, 1fr));
+    --product-grid-columns-desktop: repeat(3, minmax(0, 1fr)) !important;
   }
 
-  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(4):last-child) {
-    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr));
-  }
-
+  .joynure-collection-hula-grid .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(4)),
+  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(4):last-child),
   .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(8):last-child) {
-    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr));
+    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
   }
 }
 
 @media screen and (min-width: 990px) {
   .joynure-collection-pet-grid .product-grid.product-grid--grid {
-    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr));
+    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
   }
 
   .joynure-collection-baby-grid .product-grid.product-grid--grid {
-    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr));
+    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
   }
 }

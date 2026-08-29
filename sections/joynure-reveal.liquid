@@ -135,6 +135,19 @@
               assign card_after_src = after_src
               assign card_before_alt = before_alt
               assign card_after_alt = after_alt
+
+              # Unique default before/after per card so the carousel is not identical
+              assign card_slot = forloop.index
+              if card_slot > 4
+                assign card_slot = forloop.index0 | modulo: 4 | plus: 1
+              endif
+              if shop_handle == 'fitness-health' or shop_handle == blank
+                assign card_before_src = 'joynure-reveal-before-fitness-' | append: card_slot | append: '.jpg' | asset_url
+                assign card_after_src = 'joynure-reveal-after-fitness-' | append: card_slot | append: '.jpg' | asset_url
+                assign card_before_alt = 'Before — customer story ' | append: card_slot
+                assign card_after_alt = 'After — customer story ' | append: card_slot
+              endif
+
               if block.settings.before_image != blank
                 assign card_before_src = block.settings.before_image | image_url: width: 900
                 assign card_before_alt = block.settings.before_image.alt | default: before_label
@@ -216,10 +229,19 @@
         {%- else -%}
           {%- assign review_pairs = default_reviews | split: '|' -%}
           {%- for i in (0..3) -%}
-            {%- assign author_index = i | times: 2 -%}
-            {%- assign quote_index = author_index | plus: 1 -%}
-            {%- assign review_author = review_pairs[author_index] -%}
-            {%- assign review_quote = review_pairs[quote_index] -%}
+            {%- liquid
+              assign author_index = i | times: 2
+              assign quote_index = author_index | plus: 1
+              assign review_author = review_pairs[author_index]
+              assign review_quote = review_pairs[quote_index]
+              assign card_slot = i | plus: 1
+              assign card_before_src = before_src
+              assign card_after_src = after_src
+              if shop_handle == 'fitness-health' or shop_handle == blank
+                assign card_before_src = 'joynure-reveal-before-fitness-' | append: card_slot | append: '.jpg' | asset_url
+                assign card_after_src = 'joynure-reveal-after-fitness-' | append: card_slot | append: '.jpg' | asset_url
+              endif
+            -%}
             <article class="joynure-reveal-card">
               <joynure-reveal
                 class="joynure-reveal-card__slider"
@@ -239,8 +261,8 @@
                 >
                   <div class="joynure-reveal__layer joynure-reveal__after">
                     <img
-                      src="{{ after_src }}"
-                      alt="{{ after_alt | escape }}"
+                      src="{{ card_after_src }}"
+                      alt="After — {{ review_author | escape }}"
                       width="900"
                       height="900"
                       loading="lazy"
@@ -249,8 +271,8 @@
                   </div>
                   <div class="joynure-reveal__layer joynure-reveal__before" data-joynure-reveal-before>
                     <img
-                      src="{{ before_src }}"
-                      alt="{{ before_alt | escape }}"
+                      src="{{ card_before_src }}"
+                      alt="Before — {{ review_author | escape }}"
                       width="900"
                       height="900"
                       loading="lazy"
