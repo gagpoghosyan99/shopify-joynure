@@ -349,13 +349,31 @@
             "quote": "Fits my apartment routine and keeps me consistent.",
             "rating": 5
           }
+        },
+        "review_5": {
+          "type": "review_card",
+          "settings": {
+            "author": "Sofia R.",
+            "quote": "Friends asked what changed — the slider says it all.",
+            "rating": 5
+          }
+        },
+        "review_6": {
+          "type": "review_card",
+          "settings": {
+            "author": "Devon J.",
+            "quote": "Easy at home, and I can feel the difference after each session.",
+            "rating": 5
+          }
         }
       },
       "block_order": [
         "review_1",
         "review_2",
         "review_3",
-        "review_4"
+        "review_4",
+        "review_5",
+        "review_6"
       ],
       "settings": {
         "heading": "See the difference",
