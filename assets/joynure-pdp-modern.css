@@ -8,7 +8,12 @@
   --page-width: min(1280px, 100%);
 }
 
+/* Breadcrumbs hidden — keep styles for easy restore if re-enabled */
 .joynure-pdp-breadcrumbs {
+  display: none !important;
+}
+
+.joynure-pdp-breadcrumbs-hidden {
   margin-block: clamp(0.75rem, 2vw, 1.25rem) clamp(1rem, 2.5vw, 1.5rem);
   padding-inline: max(var(--page-margin, 16px), var(--padding-inline-start, 0));
 }
