@@ -68,25 +68,43 @@
   }
 }
 
-/* Collection grids: fill the row based on item count (beat Horizon {% style %} auto-fill) */
+/*
+  Collection grids: fill the row based on item count (beat Horizon {% style %} auto-fill).
+  Count only .product-grid__item — Horizon injects a <script> as the first child of
+  .product-grid, so plain :nth-child(N):last-child miscounts and leaves an empty 4th slot.
+*/
 @media screen and (min-width: 750px) {
-  .joynure-collection-hula-grid .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(1):last-child) {
+  .joynure-collection-hula-grid .product-grid.product-grid--grid:has(
+      > .product-grid__item:nth-child(1 of .product-grid__item)
+    ):not(:has(> .product-grid__item:nth-child(2 of .product-grid__item))),
+  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(1 of .product-grid__item)):not(
+      :has(> .product-grid__item:nth-child(2 of .product-grid__item))
+    ) {
     --product-grid-columns-desktop: minmax(0, 1fr) !important;
   }
 
-  .joynure-collection-hula-grid .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(2):last-child),
-  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(2):last-child) {
+  .joynure-collection-hula-grid .product-grid.product-grid--grid:has(
+      > .product-grid__item:nth-child(2 of .product-grid__item)
+    ):not(:has(> .product-grid__item:nth-child(3 of .product-grid__item))),
+  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(2 of .product-grid__item)):not(
+      :has(> .product-grid__item:nth-child(3 of .product-grid__item))
+    ) {
     --product-grid-columns-desktop: repeat(2, minmax(0, 1fr)) !important;
   }
 
-  .joynure-collection-hula-grid .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(3):last-child),
-  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(3):last-child) {
+  .joynure-collection-hula-grid .product-grid.product-grid--grid:has(
+      > .product-grid__item:nth-child(3 of .product-grid__item)
+    ):not(:has(> .product-grid__item:nth-child(4 of .product-grid__item))),
+  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(3 of .product-grid__item)):not(
+      :has(> .product-grid__item:nth-child(4 of .product-grid__item))
+    ) {
     --product-grid-columns-desktop: repeat(3, minmax(0, 1fr)) !important;
   }
 
-  .joynure-collection-hula-grid .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(4)),
-  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(4):last-child),
-  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(8):last-child) {
+  .joynure-collection-hula-grid .product-grid.product-grid--grid:has(
+      > .product-grid__item:nth-child(4 of .product-grid__item)
+    ),
+  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(4 of .product-grid__item)) {
     --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
   }
 }
