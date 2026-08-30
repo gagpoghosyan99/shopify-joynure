@@ -31,20 +31,13 @@
   assign variant_images = selected_product.images | where: 'attached_to_variant?', true | map: 'src'
   assign first_3d_model = selected_product.media | where: 'media_type', 'model' | first
 
-  # Normalize Color/Colour option to Pink / Purple / Blue for gallery isolation.
+  # Pass the raw Color/Colour option value through for curated media maps.
   assign selected_color_label = ''
   for option in selected_product.options_with_values
     assign opt_name = option.name | downcase
     if opt_name == 'color' or opt_name == 'colour'
       assign option_index = option.position | minus: 1
-      assign raw_color = selected_variant.options[option_index] | downcase
-      if raw_color contains 'pink'
-        assign selected_color_label = 'Pink'
-      elsif raw_color contains 'purple'
-        assign selected_color_label = 'Purple'
-      elsif raw_color contains 'blue'
-        assign selected_color_label = 'Blue'
-      endif
+      assign selected_color_label = selected_variant.options[option_index] | strip
       break
     endif
   endfor
@@ -103,7 +96,7 @@
 -%}
 {%- capture joynure_color_media_ids -%}
   {%- if block_settings.hide_variants and selected_color_label != blank -%}
-    {%- render 'joynure-color-media-ids', color: selected_color_label -%}
+    {%- render 'joynure-color-media-ids', color: selected_color_label, product: selected_product -%}
   {%- endif -%}
 {%- endcapture -%}
 {%- liquid

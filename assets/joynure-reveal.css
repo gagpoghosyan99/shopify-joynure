@@ -5,20 +5,20 @@
 
 .joynure-reveal {
   display: block;
-  width: min(100% - (var(--page-margin, 16px) * 2), 72rem);
+  width: min(100% - (var(--page-margin, 16px) * 2), 78rem);
   margin-inline: auto;
-  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  padding-block: clamp(2rem, 5vw, 3.5rem);
 }
 
 .joynure-reveal__header {
   max-width: 40rem;
-  margin: 0 auto 1.75rem;
+  margin: 0 auto 1.5rem;
   text-align: center;
 }
 
 .joynure-reveal__heading {
-  margin: 0 0 0.75rem;
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
   line-height: 1.15;
   letter-spacing: -0.02em;
 }
@@ -26,18 +26,91 @@
 .joynure-reveal__description {
   margin: 0;
   color: rgb(36 49 46 / 72%);
-  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  font-size: clamp(0.95rem, 1.5vw, 1.0625rem);
   line-height: 1.55;
+}
+
+/* —— Carousel shell —— */
+.joynure-reveal-carousel {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.joynure-reveal-carousel__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - (3 * 0.85rem)) / 4);
+  gap: 0.85rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding-block: 0.35rem 0.5rem;
+  padding-inline: 0.15rem;
+}
+
+.joynure-reveal-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.joynure-reveal-carousel__nav {
+  display: inline-grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid rgb(36 49 46 / 14%);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--joynure-charcoal, #24312e);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.joynure-reveal-carousel__nav svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.joynure-reveal-carousel__nav:hover,
+.joynure-reveal-carousel__nav:focus-visible {
+  background: var(--joynure-teal, #1f5c55);
+  border-color: var(--joynure-teal, #1f5c55);
+  color: #fff;
+  outline: none;
+}
+
+.joynure-reveal-carousel__nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* —— Mini review card —— */
+.joynure-reveal-card {
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid rgb(36 49 46 / 10%);
+  border-radius: 0.85rem;
+  background: #fff;
+  overflow: clip;
+  box-shadow: 0 10px 28px rgb(31 92 85 / 8%);
+  container-type: inline-size;
+}
+
+.joynure-reveal-card__slider {
+  display: block;
 }
 
 .joynure-reveal__frame {
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 1;
   width: 100%;
   overflow: clip;
-  border: 1px solid var(--joynure-border, rgb(36 49 46 / 12%));
-  border-radius: 0.75rem;
-  box-shadow: var(--joynure-shadow, 0 18px 48px rgb(31 92 85 / 10%));
   background: #ddd;
   cursor: ew-resize;
   touch-action: none;
@@ -50,7 +123,7 @@
 
 .joynure-reveal__frame:focus-visible {
   outline: 3px solid var(--joynure-teal, #1f5c55);
-  outline-offset: 3px;
+  outline-offset: -3px;
 }
 
 .joynure-reveal__layer {
@@ -75,9 +148,9 @@
   z-index: 2;
   top: 0;
   bottom: 0;
-  width: 4px;
+  width: 3px;
   background: #fff;
-  box-shadow: 0 0 18px rgb(0 0 0 / 25%);
+  box-shadow: 0 0 14px rgb(0 0 0 / 25%);
   transform: translateX(-50%);
 }
 
@@ -85,7 +158,7 @@
   left: 0;
   right: 0;
   width: auto;
-  height: 4px;
+  height: 3px;
   transform: translateY(-50%);
 }
 
@@ -95,13 +168,13 @@
   top: 50%;
   display: grid;
   place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 3px solid #fff;
+  width: 1.85rem;
+  height: 1.85rem;
+  border: 2px solid #fff;
   border-radius: 999px;
   background: var(--joynure-teal, #1f5c55);
   color: #fff;
-  box-shadow: 0 10px 24px rgb(0 0 0 / 22%);
+  box-shadow: 0 8px 18px rgb(0 0 0 / 22%);
   transform: translate(-50%, -50%);
 }
 
@@ -114,31 +187,114 @@
 .joynure-reveal__label {
   position: absolute;
   z-index: 3;
-  top: 1rem;
-  padding: 0.4rem 0.8rem;
+  top: 0.55rem;
+  padding: 0.22rem 0.5rem;
   border-radius: 999px;
-  background: rgb(0 0 0 / 70%);
+  background: rgb(0 0 0 / 68%);
   color: #fff;
-  font-size: 0.8125rem;
+  font-size: 0.65rem;
   font-weight: 600;
+  letter-spacing: 0.02em;
   backdrop-filter: blur(6px);
 }
 
 .joynure-reveal__label--before {
-  left: 1rem;
+  left: 0.55rem;
 }
 
 .joynure-reveal__label--after {
-  right: 1rem;
+  right: 0.55rem;
+}
+
+.joynure-reveal-card__review {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.85rem 0.9rem 1rem;
+}
+
+.joynure-reveal-card__stars {
+  display: flex;
+  gap: 0.1rem;
+  color: #c4a35a;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.joynure-reveal-card__star--empty {
+  color: rgb(36 49 46 / 22%);
+}
+
+.joynure-reveal-card__quote {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--joynure-charcoal, #24312e);
+}
+
+.joynure-reveal-card__author {
+  font-style: normal;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgb(36 49 46 / 62%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (container-type: scroll-state) {
+    .joynure-reveal-card {
+      container-type: scroll-state;
+      transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.35s ease;
+    }
+
+    @container scroll-state(snapped: x) {
+      .joynure-reveal-card__review {
+        /* Keep interactive cards readable; subtle lift only via parent unsupported on self.
+           Fallback: no-op styles on descendants. */
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1099px) {
+  .joynure-reveal-carousel__track {
+    grid-auto-columns: calc((100% - 0.85rem) / 2);
+  }
 }
 
 @media screen and (max-width: 749px) {
-  .joynure-reveal__frame {
-    border-radius: 0.5rem;
+  .joynure-reveal-carousel {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      'track track'
+      'prev next';
+    gap: 0.75rem;
+  }
+
+  .joynure-reveal-carousel__track {
+    grid-area: track;
+    grid-auto-columns: min(86%, 18.5rem);
+    gap: 0.75rem;
+    padding-inline: 0.25rem;
+    scroll-padding-inline: 0.25rem;
+  }
+
+  .joynure-reveal-carousel__nav--prev {
+    grid-area: prev;
+    justify-self: end;
+  }
+
+  .joynure-reveal-carousel__nav--next {
+    grid-area: next;
+    justify-self: start;
   }
 
   .joynure-reveal__handle {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+
+  .joynure-reveal__label {
+    font-size: 0.6rem;
+    padding: 0.18rem 0.42rem;
   }
 }
