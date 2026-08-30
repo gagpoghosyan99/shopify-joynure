@@ -116,29 +116,12 @@
                 "padding-inline-end": 0
               },
               "blocks": {
-                "text_xrnftG": {
-                  "type": "text",
-                  "name": "t:names.product_title",
+                "joynure_hula_title": {
+                  "type": "joynure-hula-pdp-title",
                   "settings": {
-                    "text": "<h1 class=\"joynure-hula-title\"><span class=\"joynure-hula-title__brand\">JOYNURE</span> Smart Weighted Hula Hoop</h1><p class=\"joynure-hula-title__sub\">Adjustable 24-Section Fitness Hoop</p>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "h3",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "text_color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "brand": "JOYNURE",
+                    "title": "Smart Weighted Hula Hoop",
+                    "subtitle": "Adjustable 24-Section Fitness Hoop"
                   },
                   "blocks": {}
                 },
@@ -176,7 +159,7 @@
                 }
               },
               "block_order": [
-                "text_xrnftG",
+                "joynure_hula_title",
                 "joynure_benefit_subtitle",
                 "price_tVjtKg",
                 "joynure_availability"
