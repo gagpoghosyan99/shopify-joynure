@@ -215,7 +215,7 @@
   {{ 'joynure-pdp-modern.css' | asset_url | stylesheet_tag }}
 {% endif %}
 
-{% render 'joynure-hula-pdp-breadcrumbs', product: closest.product %}
+{% comment %} Breadcrumb trail hidden — was: joynure-hula-pdp-breadcrumbs {% endcomment %}
 
 {% render 'product-information-content',
   product: closest.product,
