@@ -86,7 +86,7 @@
             <div class="joynure-footer__social">
               {% if section.settings.instagram_url != blank %}
                 <a class="joynure-footer__social-link" href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zm5.75-3.75a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25z"/></svg>
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zm5.75-3.75a1.25 1.25 0 1 1-1.25 1.25A1.25 1.25 0 0 1 18.75 6.5z"/></svg>
                 </a>
               {% endif %}
               {% if section.settings.facebook_url != blank %}
@@ -113,12 +113,29 @@
         <h3 class="joynure-footer__column-title">{{ section.settings.shop_heading | escape }}</h3>
         <ul class="joynure-footer__list">
           <li><a href="{{ routes.root_url }}">{{ section.settings.home_label | escape }}</a></li>
+          <li>
+            <a href="{{ routes.collections_url }}/fitness-health">
+              {{ section.settings.hula_label | default: 'Hula Hoop' | escape }}
+            </a>
+          </li>
+          <li>
+            <a href="{{ routes.collections_url }}/pet-care">
+              {{ section.settings.pet_label | default: 'Pet Care' | escape }}
+            </a>
+          </li>
+          <li>
+            <a href="{{ routes.collections_url }}/baby-care">
+              {{ section.settings.baby_label | default: 'Baby Care' | escape }}
+            </a>
+          </li>
           <li><a href="{{ routes.all_products_collection_url }}">{{ section.settings.catalog_label | escape }}</a></li>
           {% if section.settings.about_url != blank %}
             <li><a href="{{ section.settings.about_url }}">{{ section.settings.about_label | escape }}</a></li>
           {% endif %}
           {% if section.settings.contact_url != blank %}
             <li><a href="{{ section.settings.contact_url }}">{{ section.settings.contact_label | escape }}</a></li>
+          {% else %}
+            <li><a href="/pages/contact">{{ section.settings.contact_label | escape }}</a></li>
           {% endif %}
         </ul>
       </div>
@@ -126,32 +143,75 @@
       <div>
         <h3 class="joynure-footer__column-title">{{ section.settings.support_heading | escape }}</h3>
         <ul class="joynure-footer__list">
+          {% if section.settings.contact_url != blank %}
+            <li><a href="{{ section.settings.contact_url }}">{{ section.settings.contact_label | escape }}</a></li>
+          {% else %}
+            <li><a href="/pages/contact">{{ section.settings.contact_label | escape }}</a></li>
+          {% endif %}
+
           {% if section.settings.faq_url != blank %}
             <li><a href="{{ section.settings.faq_url }}">{{ section.settings.faq_label | escape }}</a></li>
           {% endif %}
+
           {% if section.settings.shipping_url != blank %}
             <li><a href="{{ section.settings.shipping_url }}">{{ section.settings.shipping_label | escape }}</a></li>
+          {% elsif shop.shipping_policy != blank and shop.shipping_policy.url != blank and shop.shipping_policy.body != blank %}
+            <li><a href="{{ shop.shipping_policy.url }}">{{ section.settings.shipping_label | escape }}</a></li>
           {% endif %}
+
           {% if section.settings.returns_url != blank %}
             <li><a href="{{ section.settings.returns_url }}">{{ section.settings.returns_label | escape }}</a></li>
+          {% elsif shop.refund_policy != blank and shop.refund_policy.url != blank %}
+            <li><a href="{{ shop.refund_policy.url }}">{{ section.settings.returns_label | escape }}</a></li>
+          {% else %}
+            <li><a href="/policies/refund-policy">{{ section.settings.returns_label | escape }}</a></li>
           {% endif %}
+
+          <li>
+            <a href="/policies/contact-information">
+              {{ section.settings.contact_info_label | default: 'Contact information' | escape }}
+            </a>
+          </li>
         </ul>
       </div>
 
       <div>
         <h3 class="joynure-footer__column-title">{{ section.settings.legal_heading | escape }}</h3>
         <ul class="joynure-footer__list">
-          {% if shop.policies.privacy_policy %}
-            <li><a href="{{ shop.policies.privacy_policy.url }}">{{ section.settings.privacy_label | escape }}</a></li>
+          {% assign joynure_legal_count = 0 %}
+          {% if shop.policies.size > 0 %}
+            {% for policy in shop.policies %}
+              {% if policy != blank and policy.url != blank and policy.body != blank %}
+                {% unless policy.url contains 'contact-information' %}
+                  <li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>
+                  {% assign joynure_legal_count = joynure_legal_count | plus: 1 %}
+                {% endunless %}
+              {% endif %}
+            {% endfor %}
           {% endif %}
-          {% if shop.policies.terms_of_service %}
-            <li><a href="{{ shop.policies.terms_of_service.url }}">{{ section.settings.terms_label | escape }}</a></li>
-          {% endif %}
-          {% if shop.policies.refund_policy %}
-            <li><a href="{{ shop.policies.refund_policy.url }}">{{ section.settings.refund_label | escape }}</a></li>
-          {% endif %}
-          {% if shop.policies.shipping_policy %}
-            <li><a href="{{ shop.policies.shipping_policy.url }}">{{ section.settings.shipping_policy_label | escape }}</a></li>
+
+          {% if joynure_legal_count == 0 %}
+            {% if shop.privacy_policy != blank and shop.privacy_policy.url != blank %}
+              <li><a href="{{ shop.privacy_policy.url }}">{{ section.settings.privacy_label | escape }}</a></li>
+            {% else %}
+              <li><a href="/policies/privacy-policy">{{ section.settings.privacy_label | escape }}</a></li>
+            {% endif %}
+
+            {% if shop.terms_of_service != blank and shop.terms_of_service.url != blank %}
+              <li><a href="{{ shop.terms_of_service.url }}">{{ section.settings.terms_label | escape }}</a></li>
+            {% else %}
+              <li><a href="/policies/terms-of-service">{{ section.settings.terms_label | escape }}</a></li>
+            {% endif %}
+
+            {% if shop.refund_policy != blank and shop.refund_policy.url != blank %}
+              <li><a href="{{ shop.refund_policy.url }}">{{ section.settings.refund_label | escape }}</a></li>
+            {% else %}
+              <li><a href="/policies/refund-policy">{{ section.settings.refund_label | escape }}</a></li>
+            {% endif %}
+
+            {% if shop.shipping_policy != blank and shop.shipping_policy.url != blank and shop.shipping_policy.body != blank %}
+              <li><a href="{{ shop.shipping_policy.url }}">{{ section.settings.shipping_policy_label | escape }}</a></li>
+            {% endif %}
           {% endif %}
         </ul>
       </div>
@@ -163,14 +223,20 @@
       </p>
 
       <div class="joynure-footer__legal">
-        {% if shop.policies.privacy_policy %}
-          <a href="{{ shop.policies.privacy_policy.url }}">{{ section.settings.privacy_label | escape }}</a>
+        {% if shop.privacy_policy != blank and shop.privacy_policy.url != blank %}
+          <a href="{{ shop.privacy_policy.url }}">{{ section.settings.privacy_label | escape }}</a>
+        {% else %}
+          <a href="/policies/privacy-policy">{{ section.settings.privacy_label | escape }}</a>
         {% endif %}
-        {% if shop.policies.terms_of_service %}
-          <a href="{{ shop.policies.terms_of_service.url }}">{{ section.settings.terms_label | escape }}</a>
+        {% if shop.terms_of_service != blank and shop.terms_of_service.url != blank %}
+          <a href="{{ shop.terms_of_service.url }}">{{ section.settings.terms_label | escape }}</a>
+        {% else %}
+          <a href="/policies/terms-of-service">{{ section.settings.terms_label | escape }}</a>
         {% endif %}
-        {% if section.settings.faq_url != blank %}
-          <a href="{{ section.settings.faq_url }}">{{ section.settings.faq_label | escape }}</a>
+        {% if shop.refund_policy != blank and shop.refund_policy.url != blank %}
+          <a href="{{ shop.refund_policy.url }}">{{ section.settings.refund_label | escape }}</a>
+        {% else %}
+          <a href="/policies/refund-policy">{{ section.settings.refund_label | escape }}</a>
         {% endif %}
       </div>
     </div>
@@ -294,6 +360,24 @@
     },
     {
       "type": "text",
+      "id": "hula_label",
+      "label": "Hula Hoop label",
+      "default": "Hula Hoop"
+    },
+    {
+      "type": "text",
+      "id": "pet_label",
+      "label": "Pet Care label",
+      "default": "Pet Care"
+    },
+    {
+      "type": "text",
+      "id": "baby_label",
+      "label": "Baby Care label",
+      "default": "Baby Care"
+    },
+    {
+      "type": "text",
       "id": "about_label",
       "label": "About label",
       "default": "About"
@@ -346,12 +430,18 @@
       "type": "text",
       "id": "returns_label",
       "label": "Returns label",
-      "default": "Returns"
+      "default": "Returns & refunds"
     },
     {
       "type": "url",
       "id": "returns_url",
       "label": "Returns URL"
+    },
+    {
+      "type": "text",
+      "id": "contact_info_label",
+      "label": "Contact information label",
+      "default": "Contact information"
     },
     {
       "type": "text",
