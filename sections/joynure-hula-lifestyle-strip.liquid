@@ -1,0 +1,62 @@
+{%- capture enabled_flag -%}
+  {%- render 'joynure-hula-landing-enabled', product: product -%}
+{%- endcapture -%}
+{%- if enabled_flag == 'true' -%}
+  {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
+  <section class="joynure-hula-landing joynure-hula-landing__section" {{ section.shopify_attributes }}>
+    <div class="joynure-hula-landing__inner">
+      <p class="joynure-hula-landing__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <div class="joynure-hula-strip__track">
+        {% for i in (1..4) %}
+          {% liquid
+            assign img_key = 'image_' | append: i
+            assign cap_key = 'caption_' | append: i
+            assign mid_key = 'media_id_' | append: i
+            assign img = section.settings[img_key]
+            assign caption = section.settings[cap_key]
+            assign mid = section.settings[mid_key]
+          %}
+          <figure class="joynure-hula-strip__card">
+            {% render 'joynure-hula-media',
+              product: product,
+              setting_image: img,
+              media_id: mid,
+              alt: caption,
+              class: 'joynure-hula-landing__media',
+              loading: 'lazy',
+              sizes: '(min-width: 750px) 25vw, 70vw'
+            %}
+            {% if caption != blank %}
+              <figcaption class="joynure-hula-strip__caption">{{ caption | escape }}</figcaption>
+            {% endif %}
+          </figure>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Hula lifestyle strip",
+  "tag": "section",
+  "class": "joynure-hula-landing-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Home movement, your way" },
+    { "type": "image_picker", "id": "image_1", "label": "Image 1" },
+    { "type": "text", "id": "media_id_1", "label": "Fallback media ID 1", "default": "45010736709905" },
+    { "type": "text", "id": "caption_1", "label": "Caption 1", "default": "Easy home movement" },
+    { "type": "image_picker", "id": "image_2", "label": "Image 2" },
+    { "type": "text", "id": "media_id_2", "label": "Fallback media ID 2", "default": "45011048595729" },
+    { "type": "text", "id": "caption_2", "label": "Caption 2", "default": "Adjustable fit" },
+    { "type": "image_picker", "id": "image_3", "label": "Image 3" },
+    { "type": "text", "id": "media_id_3", "label": "Fallback media ID 3", "default": "45011048661265" },
+    { "type": "text", "id": "caption_3", "label": "Caption 3", "default": "Compact home fitness" },
+    { "type": "image_picker", "id": "image_4", "label": "Image 4" },
+    { "type": "text", "id": "media_id_4", "label": "Fallback media ID 4", "default": "45011023069457" },
+    { "type": "text", "id": "caption_4", "label": "Caption 4", "default": "Choose your color" }
+  ],
+  "presets": [{ "name": "JOYNURE Hula lifestyle strip" }]
+}
+{% endschema %}

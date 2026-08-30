@@ -1,0 +1,51 @@
+{%- doc -%}
+  Renders an <img> from product.media by id, or from a theme setting image.
+
+  @param {object} product
+  @param {object} [setting_image] - Theme editor image
+  @param {string|number} [media_id] - Fallback product media id
+  @param {string} alt
+  @param {string} [class]
+  @param {string} [loading] - lazy|eager
+  @param {string} [sizes]
+{%- enddoc -%}
+{%- liquid
+  assign img_class = class | default: 'joynure-hula-landing__media'
+  assign img_loading = loading | default: 'lazy'
+  assign img_sizes = sizes | default: '(min-width: 750px) 50vw, 100vw'
+  assign rendered = false
+-%}
+{%- if setting_image != blank -%}
+  {{
+    setting_image
+    | image_url: width: 2000
+    | image_tag:
+      class: img_class,
+      alt: alt,
+      loading: img_loading,
+      sizes: img_sizes,
+      widths: '400, 600, 800, 1000, 1400, 2000'
+  }}
+  {%- assign rendered = true -%}
+{%- elsif media_id != blank and product != blank -%}
+  {%- assign media_id_num = media_id | plus: 0 -%}
+  {%- assign found = product.media | where: 'id', media_id_num -%}
+  {%- if found.size > 0 -%}
+    {{
+      found.first
+      | image_url: width: 2000
+      | image_tag:
+        class: img_class,
+        alt: alt,
+        loading: img_loading,
+        sizes: img_sizes,
+        widths: '400, 600, 800, 1000, 1400, 2000'
+    }}
+    {%- assign rendered = true -%}
+  {%- endif -%}
+{%- endif -%}
+{%- unless rendered -%}
+  <div class="{{ img_class }} joynure-hula-landing__media-slot" role="img" aria-label="{{ alt | escape }}">
+    <span class="joynure-hula-demo-note">Image slot — assign in Theme Editor or product media.</span>
+  </div>
+{%- endunless -%}
