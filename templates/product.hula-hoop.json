@@ -120,7 +120,7 @@
                   "type": "text",
                   "name": "t:names.product_title",
                   "settings": {
-                    "text": "<h1>{{ closest.product.title }}</h1>",
+                    "text": "<h1 class=\"joynure-hula-title\"><span class=\"joynure-hula-title__brand\">JOYNURE</span> Smart Weighted Hula Hoop</h1><p class=\"joynure-hula-title__sub\">Adjustable 24-Section Fitness Hoop</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
@@ -337,8 +337,9 @@
     },
     "joynure_hula_motion_gallery": {
       "type": "joynure-hula-motion-gallery",
+      "disabled": true,
       "settings": {
-        "enabled": true
+        "enabled": false
       }
     },
     "joynure_hula_color_story": {

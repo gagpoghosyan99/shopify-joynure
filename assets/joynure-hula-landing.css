@@ -55,6 +55,10 @@
   font-weight: 700;
 }
 
+.joynure-hula-landing__title-accent {
+  color: var(--jh-pink);
+}
+
 .joynure-hula-landing__title--center {
   text-align: center;
 }
@@ -398,7 +402,104 @@
   flex: 0 0 auto;
 }
 
-/* Color showcase */
+/* Color showcase — full-width banners (mockup) */
+.joynure-hula-colors__banners {
+  display: grid;
+  gap: 1rem;
+}
+
+.joynure-hula-colors__banner {
+  position: relative;
+  display: grid;
+  border-radius: var(--jh-radius-lg);
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--jh-line);
+  box-shadow: 0 10px 32px rgb(26 26 26 / 5%);
+  min-height: 12rem;
+}
+
+.joynure-hula-colors__banner-media {
+  grid-area: 1 / 1;
+  min-height: 12rem;
+}
+
+.joynure-hula-colors__banner-media img {
+  width: 100%;
+  height: 100%;
+  min-height: 12rem;
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
+
+.joynure-hula-colors__banner-meta {
+  grid-area: 1 / 1;
+  align-self: end;
+  justify-self: start;
+  z-index: 1;
+  padding: 1.15rem 1.25rem;
+  max-width: min(100%, 28rem);
+  color: #fff;
+  text-shadow: 0 1px 12px rgb(0 0 0 / 45%);
+}
+
+.joynure-hula-colors__badge {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0.55rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 92%);
+  color: var(--jh-ink);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: none;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 12%);
+}
+
+.joynure-hula-colors__banner-meta h3 {
+  margin: 0 0 0.3rem;
+  font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+}
+
+.joynure-hula-colors__banner-meta p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: rgb(255 255 255 / 92%);
+}
+
+.joynure-hula-colors__banner--pink .joynure-hula-colors__banner-media::after,
+.joynure-hula-colors__banner--purple .joynure-hula-colors__banner-media::after,
+.joynure-hula-colors__banner--blue .joynure-hula-colors__banner-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgb(0 0 0 / 48%) 0%, rgb(0 0 0 / 8%) 55%, transparent 100%);
+}
+
+.joynure-hula-colors__banner-media {
+  position: relative;
+}
+
+@media screen and (max-width: 749px) {
+  .joynure-hula-colors__banner-media img {
+    aspect-ratio: 16 / 10;
+  }
+
+  .joynure-hula-colors__banner-meta {
+    max-width: 100%;
+    background: linear-gradient(0deg, rgb(0 0 0 / 55%) 0%, transparent 100%);
+    width: 100%;
+  }
+}
+
+/* Legacy 3-col cards (optional reuse) */
 .joynure-hula-colors__grid {
   display: grid;
   gap: 1rem;
@@ -482,6 +583,10 @@
   border-bottom: 0;
 }
 
+.joynure-hula-compare__table th:nth-child(2) {
+  color: var(--jh-pink);
+}
+
 .joynure-hula-compare__table td:nth-child(2) {
   font-weight: 600;
   color: var(--jh-ink);
@@ -489,6 +594,20 @@
 
 .joynure-hula-compare__table td:nth-child(3) {
   color: var(--jh-muted);
+}
+
+.joynure-hula-compare__yes {
+  display: inline-block;
+  margin-right: 0.35rem;
+  color: #15803d;
+  font-weight: 700;
+}
+
+.joynure-hula-compare__no {
+  display: inline-block;
+  margin-right: 0.35rem;
+  color: #b91c1c;
+  font-weight: 700;
 }
 
 @media screen and (max-width: 749px) {
@@ -529,6 +648,46 @@
 }
 
 /* Specs */
+.joynure-hula-specs__grid {
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+@media screen and (min-width: 750px) {
+  .joynure-hula-specs__grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 2rem;
+  }
+}
+
+.joynure-hula-specs__media {
+  margin: 0;
+  border-radius: var(--jh-radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--jh-line);
+  background: #fff;
+  box-shadow: 0 10px 32px rgb(26 26 26 / 5%);
+  aspect-ratio: 1;
+}
+
+.joynure-hula-specs__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
+
+@media screen and (max-width: 749px) {
+  .joynure-hula-specs__media {
+    order: -1;
+    max-width: 22rem;
+    width: 100%;
+    margin-inline: auto;
+  }
+}
+
 .joynure-hula-specs__list {
   display: grid;
   gap: 0;
@@ -646,6 +805,7 @@
   margin: 0.35rem 0 1rem;
   font-size: 1.35rem;
   font-weight: 700;
+  color: var(--jh-pink);
 }
 
 .joynure-hula-final__colors {
@@ -700,12 +860,21 @@
   padding: 0.85rem 1.25rem;
   border: 0;
   border-radius: 999px;
-  background: var(--jh-ink);
+  background: var(--jh-pink);
   color: #fff;
   font: inherit;
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
+  box-shadow: 0 10px 24px rgb(255 122 154 / 28%);
+}
+
+.joynure-hula-final__atc:hover {
+  filter: brightness(0.95);
+}
+
+.joynure-hula-final__price {
+  color: var(--jh-pink);
 }
 
 .joynure-hula-final__note {

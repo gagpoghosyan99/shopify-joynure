@@ -1,0 +1,157 @@
+/* JOYNURE Hula PDP buy-box polish — mockup-aligned, Hula-only via .joynure-hula-pdp */
+
+.joynure-hula-pdp {
+  --jh-pink: #ff4d8d;
+  --jh-pink-deep: #e83a78;
+  --jh-pink-soft: #fff1f6;
+  --jh-pink-wash: #ffe6ef;
+  --jh-ink: #171717;
+  --jh-muted: rgb(23 23 23 / 68%);
+  --jh-line: rgb(23 23 23 / 10%);
+  --jh-radius: 0.85rem;
+}
+
+.joynure-hula-pdp .product-information,
+.joynure-hula-pdp .product-details {
+  color: var(--jh-ink);
+}
+
+/* Title hierarchy */
+.joynure-hula-pdp .joynure-hula-title {
+  margin: 0;
+  font-size: clamp(1.55rem, 2.4vw, 2.15rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.joynure-hula-pdp .joynure-hula-title__brand {
+  color: var(--jh-pink);
+}
+
+.joynure-hula-pdp .joynure-hula-title__sub {
+  margin: 0.4rem 0 0;
+  color: var(--jh-muted);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.joynure-hula-pdp .joynure-pdp-benefit-subtitle {
+  max-width: 36ch;
+  color: var(--jh-muted);
+  font-size: 0.98rem;
+}
+
+/* Pink price */
+.joynure-hula-pdp .price,
+.joynure-hula-pdp .price-item,
+.joynure-hula-pdp [ref='priceContainer'] {
+  color: var(--jh-pink);
+  font-weight: 700;
+  font-size: 1.45rem;
+}
+
+/* Color buttons → pill swatches with color dots */
+.joynure-hula-pdp .variant-option--buttons {
+  gap: 0.55rem;
+}
+
+.joynure-hula-pdp .variant-option__button-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0.45rem 1rem;
+  border-radius: 999px !important;
+  border: 1.5px solid var(--jh-line) !important;
+  background: #fff !important;
+  color: var(--jh-ink) !important;
+  font-weight: 600;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.joynure-hula-pdp .variant-option__button-label::before {
+  content: '';
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 12%);
+  background: #ccc;
+}
+
+.joynure-hula-pdp .variant-option__button-label:has([data-display-label='Pink'])::before,
+.joynure-hula-pdp .variant-option__button-label:has([value*='Pink' i])::before {
+  background: #ff4d8d;
+}
+
+.joynure-hula-pdp .variant-option__button-label:has([data-display-label='Purple'])::before,
+.joynure-hula-pdp .variant-option__button-label:has([value*='Purple' i])::before {
+  background: #8b5cf6;
+}
+
+.joynure-hula-pdp .variant-option__button-label:has([data-display-label='Blue'])::before,
+.joynure-hula-pdp .variant-option__button-label:has([value*='blue' i])::before {
+  background: #38bdf8;
+}
+
+.joynure-hula-pdp .variant-option__button-label:has(:checked),
+.joynure-hula-pdp .variant-option__button-label:has([data-current-checked='true']) {
+  border-color: var(--jh-ink) !important;
+  box-shadow: 0 0 0 1px var(--jh-ink);
+  background: #fff !important;
+  color: var(--jh-ink) !important;
+}
+
+.joynure-hula-pdp .variant-option__button-label:focus-within {
+  outline: 2px solid var(--jh-pink);
+  outline-offset: 2px;
+}
+
+/* Primary ATC — JOYNURE pink */
+.joynure-hula-pdp .add-to-cart-button,
+.joynure-hula-pdp .product-form-buttons .button {
+  border-radius: 999px !important;
+  background: var(--jh-pink) !important;
+  border-color: var(--jh-pink) !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  min-height: 3.15rem;
+  box-shadow: 0 10px 24px rgb(255 77 141 / 28%);
+}
+
+.joynure-hula-pdp .add-to-cart-button:hover,
+.joynure-hula-pdp .product-form-buttons .button:hover {
+  background: var(--jh-pink-deep) !important;
+  border-color: var(--jh-pink-deep) !important;
+}
+
+/* Soft buy-box surface */
+.joynure-hula-pdp .product-details {
+  background: linear-gradient(180deg, #fffdfb 0%, #fff 100%);
+}
+
+.joynure-hula-pdp .joynure-pdp-trust-row__icon {
+  color: var(--jh-pink);
+}
+
+/* Sticky ATC accents */
+.joynure-hula-pdp .joynure-pdp-phase-b-sticky .add-to-cart-button,
+.joynure-pdp-phase-b-sticky.joynure-hula-sticky .add-to-cart-button {
+  background: var(--jh-pink, #ff4d8d) !important;
+  border-color: var(--jh-pink, #ff4d8d) !important;
+  color: #fff !important;
+  border-radius: 999px !important;
+}
+
+.joynure-hula-pdp .media-gallery__grid,
+.joynure-hula-pdp .product-media-container {
+  border-radius: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .joynure-hula-pdp .variant-option__button-label,
+  .joynure-hula-pdp .add-to-cart-button {
+    transition: none;
+  }
+}

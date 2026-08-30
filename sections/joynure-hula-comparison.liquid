@@ -5,31 +5,41 @@
   {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
   <section class="joynure-hula-landing joynure-hula-landing__section joynure-hula-landing__section--blush" {{ section.shopify_attributes }}>
     <div class="joynure-hula-landing__inner">
-      <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">{{ section.settings.heading | escape }}</h2>
+      <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">
+        Why Choose <span class="joynure-hula-landing__title-accent">JOYNURE</span>?
+      </h2>
       <p class="joynure-hula-landing__lede joynure-hula-landing__lede--center">{{ section.settings.lede | escape }}</p>
-      <table class="joynure-hula-compare__table">
-        <thead>
-          <tr>
-            <th scope="col">Feature</th>
-            <th scope="col">{{ section.settings.col_a | escape }}</th>
-            <th scope="col">{{ section.settings.col_b | escape }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for i in (1..5) %}
-            {% liquid
-              assign fk = 'r' | append: i | append: '_feature'
-              assign ak = 'r' | append: i | append: '_a'
-              assign bk = 'r' | append: i | append: '_b'
-            %}
+      <div class="joynure-hula-compare__wrap">
+        <table class="joynure-hula-compare__table">
+          <thead>
             <tr>
-              <td data-label="Feature">{{ section.settings[fk] | escape }}</td>
-              <td data-label="{{ section.settings.col_a | escape }}">{{ section.settings[ak] | escape }}</td>
-              <td data-label="{{ section.settings.col_b | escape }}">{{ section.settings[bk] | escape }}</td>
+              <th scope="col">Feature</th>
+              <th scope="col">{{ section.settings.col_a | escape }}</th>
+              <th scope="col">{{ section.settings.col_b | escape }}</th>
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {% for i in (1..5) %}
+              {% liquid
+                assign fk = 'r' | append: i | append: '_feature'
+                assign ak = 'r' | append: i | append: '_a'
+                assign bk = 'r' | append: i | append: '_b'
+              %}
+              <tr>
+                <td data-label="Feature">{{ section.settings[fk] | escape }}</td>
+                <td data-label="{{ section.settings.col_a | escape }}">
+                  <span class="joynure-hula-compare__yes" aria-hidden="true">✓</span>
+                  {{ section.settings[ak] | escape }}
+                </td>
+                <td data-label="{{ section.settings.col_b | escape }}">
+                  <span class="joynure-hula-compare__no" aria-hidden="true">–</span>
+                  {{ section.settings[bk] | escape }}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 {%- endif -%}
@@ -41,10 +51,9 @@
   "class": "joynure-hula-landing-section",
   "enabled_on": { "templates": ["product"] },
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Why Choose JOYNURE?" },
     { "type": "textarea", "id": "lede", "label": "Supporting copy", "default": "A factual look at design differences — not workout outcome claims." },
-    { "type": "text", "id": "col_a", "label": "Column A", "default": "JOYNURE Smart Weighted Hula Hoop" },
-    { "type": "text", "id": "col_b", "label": "Column B", "default": "Traditional Fitness Hoop" },
+    { "type": "text", "id": "col_a", "label": "Column A", "default": "JOYNURE Smart Weighted Hoop" },
+    { "type": "text", "id": "col_b", "label": "Column B", "default": "Traditional Hula Hoop" },
     { "type": "text", "id": "r1_feature", "label": "Row 1 feature", "default": "Adjustable sizing" },
     { "type": "text", "id": "r1_a", "label": "Row 1 JOYNURE", "default": "Yes — add or remove sections" },
     { "type": "text", "id": "r1_b", "label": "Row 1 traditional", "default": "Usually fixed" },

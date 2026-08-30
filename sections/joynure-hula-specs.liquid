@@ -4,20 +4,33 @@
 {%- if enabled_flag == 'true' -%}
   {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
   <section class="joynure-hula-landing joynure-hula-landing__section" {{ section.shopify_attributes }}>
-    <div class="joynure-hula-landing__inner">
-      <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">{{ section.settings.heading | escape }}</h2>
-      <ul class="joynure-hula-specs__list">
-        {% for i in (1..7) %}
-          {% liquid
-            assign lk = 'l' | append: i
-            assign vk = 'v' | append: i
-          %}
-          <li>
-            <strong>{{ section.settings[lk] | escape }}</strong>
-            <span>{{ section.settings[vk] | escape }}</span>
-          </li>
-        {% endfor %}
-      </ul>
+    <div class="joynure-hula-landing__inner joynure-hula-specs__grid">
+      <div>
+        <h2 class="joynure-hula-landing__title">Product <span class="joynure-hula-landing__title-accent">Specifications</span></h2>
+        <ul class="joynure-hula-specs__list">
+          {% for i in (1..7) %}
+            {% liquid
+              assign lk = 'l' | append: i
+              assign vk = 'v' | append: i
+            %}
+            <li>
+              <strong>{{ section.settings[lk] | escape }}</strong>
+              <span>{{ section.settings[vk] | escape }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="joynure-hula-specs__media">
+        {% render 'joynure-hula-media',
+          product: product,
+          setting_image: section.settings.image,
+          media_id: section.settings.media_id,
+          alt: 'JOYNURE Smart Weighted Hula Hoop',
+          class: 'joynure-hula-landing__media joynure-hula-landing__media--contain',
+          loading: 'lazy',
+          sizes: '(min-width: 750px) 40vw, 100vw'
+        %}
+      </div>
     </div>
   </section>
 {%- endif -%}
@@ -29,7 +42,8 @@
   "class": "joynure-hula-landing-section",
   "enabled_on": { "templates": ["product"] },
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Product Specifications" },
+    { "type": "image_picker", "id": "image", "label": "Specs image" },
+    { "type": "text", "id": "media_id", "label": "Fallback media ID", "default": "45010727797009" },
     { "type": "text", "id": "l1", "label": "Label 1", "default": "Sections" },
     { "type": "text", "id": "v1", "label": "Value 1", "default": "24 adjustable / removable sections" },
     { "type": "text", "id": "l2", "label": "Label 2", "default": "Max waist" },
