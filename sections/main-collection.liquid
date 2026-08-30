@@ -31,7 +31,7 @@
 
 {% if collection.handle == 'baby-care' %}
   <script src="{{ 'joynure-baby-collection.js' | asset_url }}" type="module"></script>
-  {% stylesheet %}
+  <style>
     @media screen and (min-width: 750px) {
       .joynure-collection-baby-grid .product-grid.product-grid--grid {
         --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
@@ -47,7 +47,7 @@
         min-width: 0;
       }
     }
-  {% endstylesheet %}
+  </style>
 {% endif %}
 
 {% render 'collection-wrapper-styles' %}
