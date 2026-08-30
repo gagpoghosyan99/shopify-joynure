@@ -103,6 +103,13 @@
   color: var(--jh-ink) !important;
 }
 
+.joynure-hula-pdp .variant-option__button-label:has(:checked) .variant-option__button-label__pill,
+.joynure-hula-pdp .variant-option__button-label:has([data-current-checked='true']) .variant-option__button-label__pill,
+.joynure-hula-pdp .variant-option__button-label:has(:checked) span,
+.joynure-hula-pdp .variant-option__button-label:has([data-current-checked='true']) span {
+  color: var(--jh-ink) !important;
+}
+
 .joynure-hula-pdp .variant-option__button-label:focus-within {
   outline: 2px solid var(--jh-pink);
   outline-offset: 2px;
