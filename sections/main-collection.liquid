@@ -29,6 +29,53 @@
   endif
 %}
 
+{% if collection.handle == 'baby-care' %}
+  <script src="{{ 'joynure-baby-collection.js' | asset_url }}" type="module"></script>
+  <style>
+    /* Reinforce grid spans so Horizon section styles cannot collapse the baby layout */
+    .joynure-collection-baby-grid .product-grid__item.joynure-baby-mat-row {
+      grid-column: 1 / -1;
+      min-width: 0;
+    }
+
+    @media screen and (max-width: 749px) {
+      .joynure-collection-baby-grid .product-grid.product-grid--grid {
+        grid-template-columns: 1fr 1fr !important;
+      }
+    }
+
+    @media screen and (min-width: 750px) and (max-width: 989px) {
+      .joynure-collection-baby-grid .product-grid.product-grid--grid {
+        --product-grid-columns-desktop: repeat(12, minmax(0, 1fr)) !important;
+        grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+      }
+
+      .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card:nth-child(1 of .joynure-baby-nail-card) {
+        grid-column: 1 / span 6;
+      }
+
+      .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card:nth-child(2 of .joynure-baby-nail-card) {
+        grid-column: 7 / span 6;
+      }
+    }
+
+    @media screen and (min-width: 990px) {
+      .joynure-collection-baby-grid .product-grid.product-grid--grid {
+        --product-grid-columns-desktop: repeat(12, minmax(0, 1fr)) !important;
+        grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+      }
+
+      .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card:nth-child(1 of .joynure-baby-nail-card) {
+        grid-column: 2 / span 5;
+      }
+
+      .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card:nth-child(2 of .joynure-baby-nail-card) {
+        grid-column: 7 / span 5;
+      }
+    }
+  </style>
+{% endif %}
+
 {% render 'collection-wrapper-styles' %}
 
 <div
@@ -62,37 +109,93 @@
 
       {% paginate collection.products by products_per_page %}
         {% capture children %}
-          {% for product in collection.products %}
-            {% capture joynure_split_html %}
-              {% render 'joynure-split-product-cards',
-                product: product,
-                section: section,
-                product_view_context: 'collection',
-                wrapper: 'li',
-                page: paginate.current_page,
-                index0: forloop.index0
-              %}
-            {% endcapture %}
-            {% assign joynure_split_html = joynure_split_html | strip %}
-            {% if joynure_split_html != blank %}
-              {{ joynure_split_html }}
-            {% else %}
-              <li
-                id="{{ section.id }}-{{ product.id }}"
-                class="product-grid__item product-grid__item--{{ forloop.index0 }}"
-                data-page="{{ paginate.current_page }}"
-                data-product-id="{{ product.id }}"
-                ref="cards[]"
-              >
-                {% content_for 'block',
-                  type: '_product-card',
-                  id: 'product-card',
-                  closest.product: product,
-                  product_view_context: 'collection'
+          {% if collection.handle == 'baby-care' %}
+            {% liquid
+              assign baby_nail_id = nil
+              assign baby_mat_id = nil
+              for product in collection.products
+                assign handle_l = product.handle | downcase
+                assign title_l = product.title | downcase
+                if handle_l contains 'nail-trimmer' or title_l contains 'nail trimmer'
+                  assign baby_nail_id = product.id
+                elsif handle_l contains 'changing-mat' or handle_l contains 'changing-pad' or title_l contains 'changing mat' or title_l contains 'changing pad'
+                  assign baby_mat_id = product.id
+                endif
+              endfor
+            %}
+
+            {% render 'joynure-baby-collection-grid', section: section, paginate: paginate %}
+
+            {% assign baby_extra_index = 2 %}
+            {% for product in collection.products %}
+              {% if product.id == baby_nail_id or product.id == baby_mat_id %}
+                {% continue %}
+              {% endif %}
+
+              {% capture joynure_split_html %}
+                {% render 'joynure-split-product-cards',
+                  product: product,
+                  section: section,
+                  product_view_context: 'collection',
+                  wrapper: 'li',
+                  page: paginate.current_page,
+                  index0: baby_extra_index
                 %}
-              </li>
-            {% endif %}
-          {% endfor %}
+              {% endcapture %}
+              {% assign joynure_split_html = joynure_split_html | strip %}
+              {% if joynure_split_html != blank %}
+                {{ joynure_split_html }}
+              {% else %}
+                <li
+                  id="{{ section.id }}-{{ product.id }}"
+                  class="product-grid__item product-grid__item--{{ baby_extra_index }}"
+                  data-page="{{ paginate.current_page }}"
+                  data-product-id="{{ product.id }}"
+                  ref="cards[]"
+                >
+                  {% content_for 'block',
+                    type: '_product-card',
+                    id: 'product-card',
+                    closest.product: product,
+                    product_view_context: 'collection'
+                  %}
+                </li>
+              {% endif %}
+              {% assign baby_extra_index = baby_extra_index | plus: 1 %}
+            {% endfor %}
+          {% else %}
+            {% for product in collection.products %}
+              {% capture joynure_split_html %}
+                {% render 'joynure-split-product-cards',
+                  product: product,
+                  section: section,
+                  product_view_context: 'collection',
+                  wrapper: 'li',
+                  page: paginate.current_page,
+                  index0: forloop.index0
+                %}
+              {% endcapture %}
+              {% assign joynure_split_html = joynure_split_html | strip %}
+              {% if joynure_split_html != blank %}
+                {{ joynure_split_html }}
+              {% else %}
+                <li
+                  id="{{ section.id }}-{{ product.id }}"
+                  class="product-grid__item product-grid__item--{{ forloop.index0 }}"
+                  data-page="{{ paginate.current_page }}"
+                  data-product-id="{{ product.id }}"
+                  ref="cards[]"
+                >
+                  {% content_for 'block',
+                    type: '_product-card',
+                    id: 'product-card',
+                    closest.product: product,
+                    product_view_context: 'collection'
+                  %}
+                </li>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
         {% endcapture %}
 
         {% render 'product-grid',
