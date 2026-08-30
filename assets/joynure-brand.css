@@ -109,12 +109,9 @@
   }
 }
 
-@media screen and (min-width: 990px) {
-  .joynure-collection-pet-grid .product-grid.product-grid--grid {
-    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
-  }
-
-  .joynure-collection-baby-grid .product-grid.product-grid--grid {
+@media screen and (min-width: 750px) {
+  .joynure-collection-pet-grid .product-grid.product-grid--grid:has(> .product-grid__item),
+  .joynure-collection-baby-grid .product-grid.product-grid--grid:has(> .product-grid__item) {
     --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
   }
 
@@ -126,6 +123,14 @@
   /* Changing mat carousel spans the full second row */
   .joynure-collection-baby-grid .product-grid__item.joynure-baby-mat-row {
     grid-column: 1 / -1;
+    min-width: 0;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .joynure-collection-pet-grid .product-grid.product-grid--grid:has(> .product-grid__item),
+  .joynure-collection-baby-grid .product-grid.product-grid--grid:has(> .product-grid__item) {
+    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
   }
 }
 
