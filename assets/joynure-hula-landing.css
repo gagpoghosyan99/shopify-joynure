@@ -873,10 +873,6 @@
   filter: brightness(0.95);
 }
 
-.joynure-hula-final__price {
-  color: var(--jh-pink);
-}
-
 .joynure-hula-final__note {
   margin: 0.75rem 0 0;
   color: var(--jh-muted);
