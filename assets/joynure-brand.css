@@ -68,28 +68,260 @@
   }
 }
 
-/* Collection grids: fill the row for common split-card counts */
+/*
+  Collection grids: fill the row based on item count (beat Horizon {% style %} auto-fill).
+  Count only .product-grid__item — Horizon injects a <script> as the first child of
+  .product-grid, so plain :nth-child(N):last-child miscounts and leaves an empty 4th slot.
+*/
 @media screen and (min-width: 750px) {
-  .joynure-collection-hula-grid .product-grid.product-grid--grid,
-  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(3):last-child) {
-    --product-grid-columns-desktop: repeat(3, minmax(0, 1fr));
+  .joynure-collection-hula-grid .product-grid.product-grid--grid:has(
+      > .product-grid__item:nth-child(1 of .product-grid__item)
+    ):not(:has(> .product-grid__item:nth-child(2 of .product-grid__item))),
+  .collection-wrapper:not(.joynure-collection-baby-grid):not(.joynure-collection-pet-grid)
+    .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(1 of .product-grid__item)):not(
+      :has(> .product-grid__item:nth-child(2 of .product-grid__item))
+    ) {
+    --product-grid-columns-desktop: minmax(0, 1fr) !important;
   }
 
-  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(4):last-child) {
-    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr));
+  .joynure-collection-hula-grid .product-grid.product-grid--grid:has(
+      > .product-grid__item:nth-child(2 of .product-grid__item)
+    ):not(:has(> .product-grid__item:nth-child(3 of .product-grid__item))),
+  .collection-wrapper:not(.joynure-collection-baby-grid):not(.joynure-collection-pet-grid)
+    .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(2 of .product-grid__item)):not(
+      :has(> .product-grid__item:nth-child(3 of .product-grid__item))
+    ) {
+    --product-grid-columns-desktop: repeat(2, minmax(0, 1fr)) !important;
   }
 
-  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(8):last-child) {
-    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr));
+  .joynure-collection-hula-grid .product-grid.product-grid--grid:has(
+      > .product-grid__item:nth-child(3 of .product-grid__item)
+    ):not(:has(> .product-grid__item:nth-child(4 of .product-grid__item))),
+  .collection-wrapper:not(.joynure-collection-baby-grid):not(.joynure-collection-pet-grid)
+    .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(3 of .product-grid__item)):not(
+      :has(> .product-grid__item:nth-child(4 of .product-grid__item))
+    ) {
+    --product-grid-columns-desktop: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .joynure-collection-hula-grid .product-grid.product-grid--grid:has(
+      > .product-grid__item:nth-child(4 of .product-grid__item)
+    ),
+  .collection-wrapper:not(.joynure-collection-baby-grid):not(.joynure-collection-pet-grid)
+    .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(4 of .product-grid__item)) {
+    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  .joynure-collection-pet-grid .product-grid.product-grid--grid {
+    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  /* Baby Care tablet+: 12-col grid so nail cards can sit slightly under half-width */
+  .joynure-collection-baby-grid .product-grid.product-grid--grid {
+    --product-grid-columns-desktop: repeat(12, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  }
+
+  /* Tablet: nail cards side-by-side at half width */
+  .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card:nth-child(1 of .joynure-baby-nail-card) {
+    grid-column: 1 / span 6;
+  }
+
+  .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card:nth-child(2 of .joynure-baby-nail-card) {
+    grid-column: 7 / span 6;
+  }
+
+  .joynure-collection-baby-grid .product-grid__item.joynure-baby-mat-row {
+    grid-column: 1 / -1;
+    min-width: 0;
   }
 }
 
+/* Desktop: slightly smaller, centered nail cards */
 @media screen and (min-width: 990px) {
-  .joynure-collection-pet-grid .product-grid.product-grid--grid {
-    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr));
+  .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card:nth-child(1 of .joynure-baby-nail-card) {
+    grid-column: 2 / span 5;
   }
 
-  .joynure-collection-baby-grid .product-grid.product-grid--grid {
-    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr));
+  .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card:nth-child(2 of .joynure-baby-nail-card) {
+    grid-column: 7 / span 5;
+  }
+}
+
+/* —— Baby Care grid: mobile base (Horizon uses 2-col product grid) —— */
+.joynure-collection-baby-grid .product-grid.product-grid--grid {
+  min-width: 0;
+}
+
+.joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card,
+.joynure-collection-baby-grid .product-grid__item.joynure-baby-mat-row {
+  min-width: 0;
+}
+
+/* Mat carousel must always span the full product-grid row */
+.joynure-collection-baby-grid .product-grid__item.joynure-baby-mat-row {
+  grid-column: 1 / -1;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+@media screen and (max-width: 749px) {
+  .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card .text-block,
+  .joynure-baby-mat-carousel__slide .text-block {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+    font-size: 0.875rem;
+    line-height: 1.3;
+  }
+
+  .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card .card-gallery,
+  .joynure-baby-mat-carousel__slide .card-gallery {
+    --gallery-aspect-ratio: 1 / 1;
+  }
+}
+
+/* —— Baby Care changing-mat color carousel —— */
+.joynure-baby-mat-carousel {
+  --joynure-baby-mat-gap: 0.65rem;
+  /* 1.15 = one full card + peek of the next on phones */
+  --joynure-baby-mat-visible: 1.15;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.35rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+.joynure-baby-mat-carousel__track {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: var(--joynure-baby-mat-gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  padding-block: 0.15rem 0.35rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Tablet: 2.5 cards with peek */
+@media screen and (min-width: 750px) {
+  .joynure-baby-mat-carousel {
+    --joynure-baby-mat-gap: 0.85rem;
+    --joynure-baby-mat-visible: 2.5;
+    gap: 0.5rem;
+  }
+}
+
+/* Desktop: 4 cards fully visible */
+@media screen and (min-width: 990px) {
+  .joynure-baby-mat-carousel {
+    --joynure-baby-mat-gap: 1rem;
+    --joynure-baby-mat-visible: 4;
+    gap: 0.65rem;
+  }
+}
+
+.joynure-baby-mat-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.joynure-baby-mat-carousel__slide {
+  box-sizing: border-box;
+  flex: 0 0
+    calc(
+      (100% - (var(--joynure-baby-mat-visible) - 1) * var(--joynure-baby-mat-gap)) /
+        var(--joynure-baby-mat-visible)
+    );
+  inline-size: calc(
+    (100% - (var(--joynure-baby-mat-visible) - 1) * var(--joynure-baby-mat-gap)) /
+      var(--joynure-baby-mat-visible)
+  );
+  max-inline-size: calc(
+    (100% - (var(--joynure-baby-mat-visible) - 1) * var(--joynure-baby-mat-gap)) /
+      var(--joynure-baby-mat-visible)
+  );
+  scroll-snap-align: start;
+  min-width: 0;
+}
+
+.joynure-baby-mat-carousel__slide .product-grid__card,
+.joynure-baby-mat-carousel__slide .product-card {
+  height: 100%;
+  min-width: 0;
+}
+
+.joynure-baby-mat-carousel__slide img {
+  inline-size: 100%;
+  block-size: auto;
+  max-inline-size: 100%;
+  object-fit: contain;
+}
+
+.joynure-baby-mat-carousel__nav {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border: none;
+  border-radius: 0.35rem;
+  background: var(--joynure-teal, #1f5c55);
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  touch-action: manipulation;
+}
+
+.joynure-baby-mat-carousel__nav svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+@media screen and (min-width: 750px) {
+  .joynure-baby-mat-carousel__nav {
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+  }
+}
+
+@media (hover: hover) {
+  .joynure-baby-mat-carousel__nav:hover {
+    opacity: 0.92;
+  }
+}
+
+.joynure-baby-mat-carousel__nav:focus-visible {
+  opacity: 0.92;
+  outline: 2px solid var(--joynure-teal, #1f5c55);
+  outline-offset: 2px;
+}
+
+.joynure-baby-mat-carousel__nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .joynure-baby-mat-carousel__track {
+    scroll-behavior: auto;
+  }
+
+  .joynure-baby-mat-carousel__nav {
+    transition: none;
   }
 }

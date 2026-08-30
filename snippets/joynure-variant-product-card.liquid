@@ -11,8 +11,54 @@
 
 {% liquid
   assign variant_url = product.url | append: '?variant=' | append: variant.id
-  assign card_image = variant.featured_image
-  if card_image == blank
+
+  # Prefer curated per-color hero media so split cards don't share one product photo.
+  assign card_image = blank
+  assign card_image_url = blank
+  assign color_for_media = blank
+  for option in product.options_with_values
+    assign option_name = option.name | downcase | strip
+    if option_name == 'color' or option_name == 'colour'
+      assign color_for_media = variant.options[forloop.index0]
+      break
+    endif
+  endfor
+%}
+{% if color_for_media != blank and product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad' %}
+  {% capture joynure_mat_packshot %}
+    {% render 'joynure-mat-packshot-asset', color: color_for_media, mode: 'folded' %}
+  {% endcapture %}
+  {% assign joynure_mat_packshot = joynure_mat_packshot | strip %}
+  {% if joynure_mat_packshot != blank %}
+    {% assign card_image_url = joynure_mat_packshot | asset_url %}
+  {% endif %}
+{% endif %}
+{% if card_image_url == blank and color_for_media != blank %}
+  {% capture joynure_card_media_ids %}
+    {% render 'joynure-color-media-ids', color: color_for_media, product: product %}
+  {% endcapture %}
+  {% assign joynure_card_media_ids = joynure_card_media_ids | strip %}
+  {% if joynure_card_media_ids != blank %}
+    {% assign color_id_list = joynure_card_media_ids | split: ',' %}
+    {% for id_str in color_id_list %}
+      {% assign id_str = id_str | strip %}
+      {% if id_str == blank %}
+        {% continue %}
+      {% endif %}
+      {% assign media_id_num = id_str | plus: 0 %}
+      {% assign found_media = product.media | where: 'id', media_id_num %}
+      {% if found_media.size > 0 %}
+        {% assign card_image = found_media.first.preview_image %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endif %}
+{% liquid
+  if card_image_url == blank and card_image == blank
+    assign card_image = variant.featured_image
+  endif
+  if card_image_url == blank and card_image == blank
     assign card_image = product.featured_media.preview_image
   endif
 
@@ -48,8 +94,12 @@
   endif
 
   assign featured_media_url = blank
-  if settings.transition_to_main_product and card_image != blank
-    assign featured_media_url = card_image | image_url: width: 500
+  if settings.transition_to_main_product
+    if card_image_url != blank
+      assign featured_media_url = card_image_url
+    elsif card_image != blank
+      assign featured_media_url = card_image | image_url: width: 500
+    endif
   endif
   assign add_label = 'actions.add' | t
 %}
@@ -115,7 +165,16 @@
         href="{{ variant_url }}"
         aria-label="{{ card_title | escape }}"
       >
-        {% if card_image != blank %}
+        {% if card_image_url != blank %}
+          <img
+            src="{{ card_image_url }}"
+            alt="{{ card_title | escape }}"
+            loading="lazy"
+            width="800"
+            height="800"
+            class="product-media-container media-fit product-media-container--image"
+          >
+        {% elsif card_image != blank %}
           {{
             card_image
             | image_url: width: 800
