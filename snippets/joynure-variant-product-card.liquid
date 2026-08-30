@@ -11,7 +11,43 @@
 
 {% liquid
   assign variant_url = product.url | append: '?variant=' | append: variant.id
-  assign card_image = variant.featured_image
+
+  # Prefer curated per-color hero media so split cards don't share one product photo.
+  assign card_image = blank
+  assign color_for_media = blank
+  for option in product.options_with_values
+    assign option_name = option.name | downcase | strip
+    if option_name == 'color' or option_name == 'colour'
+      assign color_for_media = variant.options[forloop.index0]
+      break
+    endif
+  endfor
+%}
+{% if color_for_media != blank %}
+  {% capture joynure_card_media_ids %}
+    {% render 'joynure-color-media-ids', color: color_for_media, product: product %}
+  {% endcapture %}
+  {% assign joynure_card_media_ids = joynure_card_media_ids | strip %}
+  {% if joynure_card_media_ids != blank %}
+    {% assign color_id_list = joynure_card_media_ids | split: ',' %}
+    {% for id_str in color_id_list %}
+      {% assign id_str = id_str | strip %}
+      {% if id_str == blank %}
+        {% continue %}
+      {% endif %}
+      {% assign media_id_num = id_str | plus: 0 %}
+      {% assign found_media = product.media | where: 'id', media_id_num %}
+      {% if found_media.size > 0 %}
+        {% assign card_image = found_media.first.preview_image %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endif %}
+{% liquid
+  if card_image == blank
+    assign card_image = variant.featured_image
+  endif
   if card_image == blank
     assign card_image = product.featured_media.preview_image
   endif
