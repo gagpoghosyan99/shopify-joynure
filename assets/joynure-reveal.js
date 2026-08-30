@@ -1,7 +1,7 @@
 /**
- * Before/After comparison slider (Liquid port of Reveal1).
- * Pointer + keyboard accessible.
+ * Before/After comparison slider + review card carousel.
  */
+
 class JoynureReveal extends HTMLElement {
   connectedCallback() {
     this.container = this.querySelector('[data-joynure-reveal-frame]');
@@ -33,6 +33,7 @@ class JoynureReveal extends HTMLElement {
   onPointerDown(event) {
     if (event.button != null && event.button !== 0) return;
     event.preventDefault();
+    event.stopPropagation();
     this.dragging = true;
     this.container.setPointerCapture?.(event.pointerId);
     this.moveFromEvent(event);
@@ -103,6 +104,71 @@ class JoynureReveal extends HTMLElement {
   }
 }
 
+class JoynureRevealCarousel extends HTMLElement {
+  connectedCallback() {
+    this.track = this.querySelector('[data-joynure-reveal-track]');
+    this.prevBtn = this.querySelector('[data-joynure-reveal-prev]');
+    this.nextBtn = this.querySelector('[data-joynure-reveal-next]');
+    if (!this.track) return;
+
+    this.onPrev = () => this.scrollByCards(-1);
+    this.onNext = () => this.scrollByCards(1);
+    this.onScroll = () => this.updateNav();
+    this.onKeyDown = this.onKeyDown.bind(this);
+    this.onResize = () => this.updateNav();
+
+    this.prevBtn?.addEventListener('click', this.onPrev);
+    this.nextBtn?.addEventListener('click', this.onNext);
+    this.track.addEventListener('scroll', this.onScroll, { passive: true });
+    this.track.addEventListener('keydown', this.onKeyDown);
+    window.addEventListener('resize', this.onResize);
+
+    this.updateNav();
+  }
+
+  disconnectedCallback() {
+    this.prevBtn?.removeEventListener('click', this.onPrev);
+    this.nextBtn?.removeEventListener('click', this.onNext);
+    this.track?.removeEventListener('scroll', this.onScroll);
+    this.track?.removeEventListener('keydown', this.onKeyDown);
+    window.removeEventListener('resize', this.onResize);
+  }
+
+  cardStep() {
+    const card = this.track.querySelector('.joynure-reveal-card');
+    if (!card) return this.track.clientWidth * 0.8;
+    const styles = getComputedStyle(this.track);
+    const gap = Number.parseFloat(styles.columnGap || styles.gap || '0') || 0;
+    return card.getBoundingClientRect().width + gap;
+  }
+
+  scrollByCards(direction) {
+    this.track.scrollBy({ left: direction * this.cardStep(), behavior: 'smooth' });
+  }
+
+  onKeyDown(event) {
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      this.scrollByCards(-1);
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      this.scrollByCards(1);
+    }
+  }
+
+  updateNav() {
+    if (!this.prevBtn || !this.nextBtn) return;
+    const max = this.track.scrollWidth - this.track.clientWidth - 2;
+    const left = this.track.scrollLeft;
+    this.prevBtn.disabled = left <= 2;
+    this.nextBtn.disabled = left >= max;
+  }
+}
+
 if (!customElements.get('joynure-reveal')) {
   customElements.define('joynure-reveal', JoynureReveal);
+}
+
+if (!customElements.get('joynure-reveal-carousel')) {
+  customElements.define('joynure-reveal-carousel', JoynureRevealCarousel);
 }
