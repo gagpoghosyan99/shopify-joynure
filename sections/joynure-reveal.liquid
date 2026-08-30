@@ -24,15 +24,14 @@
   assign after_alt = after_label
 
   if before_image != blank
-    assign before_src = before_image | image_url: width: 1600
+    assign before_src = before_image | image_url: width: 900
     assign before_alt = before_image.alt | default: before_label
   endif
   if after_image != blank
-    assign after_src = after_image | image_url: width: 1600
+    assign after_src = after_image | image_url: width: 900
     assign after_alt = after_image.alt | default: after_label
   endif
 
-  # Category defaults when Theme Editor images are empty
   if before_src == blank or after_src == blank
     case shop_handle
       when 'fitness-health'
@@ -44,12 +43,6 @@
           assign after_src = 'joynure-reveal-after-fitness.jpg' | asset_url
           assign after_alt = 'After — active hula hoop workout at home'
         endif
-        if heading == blank
-          assign heading = 'See the difference'
-        endif
-        if description == blank
-          assign description = 'Drag to compare — a simple way to picture a more engaging at-home workout routine.'
-        endif
       when 'pet-care'
         if before_src == blank
           assign before_src = 'joynure-reveal-before-pet.jpg' | asset_url
@@ -58,12 +51,6 @@
         if after_src == blank
           assign after_src = 'joynure-reveal-after-pet.jpg' | asset_url
           assign after_alt = 'After — cleaner sofa and calmer pet care'
-        endif
-        if heading == blank
-          assign heading = 'See the difference'
-        endif
-        if description == blank
-          assign description = 'Drag to compare everyday pet-care cleanup before and after.'
         endif
       when 'baby-care'
         if before_src == blank
@@ -74,12 +61,6 @@
           assign after_src = 'joynure-reveal-after-baby.jpg' | asset_url
           assign after_alt = 'After — calmer baby care routine'
         endif
-        if heading == blank
-          assign heading = 'See the difference'
-        endif
-        if description == blank
-          assign description = 'Drag to compare a calmer, more organized baby-care moment.'
-        endif
       else
         if before_src == blank
           assign before_src = 'joynure-reveal-before-fitness.jpg' | asset_url
@@ -87,14 +68,24 @@
         if after_src == blank
           assign after_src = 'joynure-reveal-after-fitness.jpg' | asset_url
         endif
-        if heading == blank
-          assign heading = 'See the difference'
-        endif
-        if description == blank
-          assign description = 'Drag the slider to compare before and after.'
-        endif
     endcase
   endif
+
+  if heading == blank
+    assign heading = 'See the difference'
+  endif
+  if description == blank
+    assign description = 'Real customer results — drag each card to compare, then swipe the row.'
+  endif
+
+  case shop_handle
+    when 'pet-care'
+      assign default_reviews = 'Maya R.|Our sofa finally looks clean again after one week.|Jordan P.|Less hair everywhere and our dog actually enjoys the routine.|Sam T.|The before/after is real — guests noticed immediately.|Alex K.|Simple daily habit, huge difference at home.'
+    when 'baby-care'
+      assign default_reviews = 'Priya S.|Nights feel calmer and our setup finally makes sense.|Elena M.|Cleanup is faster and the nursery feels less chaotic.|Noah L.|Wish we had this earlier — the difference is obvious.|Harper C.|Gentle, practical, and the results speak for themselves.'
+    else
+      assign default_reviews = 'Ava M.|Two weeks in and my core feels stronger already.|Chris D.|I actually look forward to workouts at home now.|Lena K.|Drag the slider — the difference is wild.|Marcus T.|Fits my apartment routine and keeps me consistent.'
+  endcase
 -%}
 
 <section
@@ -106,11 +97,7 @@
   "
   {{ section.shopify_attributes }}
 >
-  <joynure-reveal
-    class="joynure-reveal"
-    data-orientation="{{ orientation }}"
-    data-initial-position="{{ initial_position }}"
-  >
+  <div class="joynure-reveal">
     {% if heading != blank or description != blank %}
       <div class="joynure-reveal__header">
         {% if heading != blank %}
@@ -122,53 +109,218 @@
       </div>
     {% endif %}
 
-    <div
-      class="joynure-reveal__frame"
-      data-joynure-reveal-frame
-      data-orientation="{{ orientation }}"
-      role="slider"
-      tabindex="0"
-      aria-label="Before and after comparison"
-      aria-valuemin="0"
-      aria-valuemax="100"
-      aria-valuenow="{{ initial_position }}"
-    >
-      <div class="joynure-reveal__layer joynure-reveal__after">
-        <img
-          src="{{ after_src }}"
-          alt="{{ after_alt | escape }}"
-          width="1600"
-          height="900"
-          loading="lazy"
-          decoding="async"
-        >
+    <joynure-reveal-carousel class="joynure-reveal-carousel" data-joynure-reveal-carousel>
+      <button
+        type="button"
+        class="joynure-reveal-carousel__nav joynure-reveal-carousel__nav--prev"
+        data-joynure-reveal-prev
+        aria-label="Previous reviews"
+      >
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M12.5 4.5 7 10l5.5 5.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div
+        class="joynure-reveal-carousel__track"
+        data-joynure-reveal-track
+        tabindex="0"
+        role="region"
+        aria-label="Customer before and after reviews"
+      >
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign card_before_src = before_src
+              assign card_after_src = after_src
+              assign card_before_alt = before_alt
+              assign card_after_alt = after_alt
+
+              # Unique default before/after per card so the carousel is not identical
+              assign card_slot = forloop.index
+              if card_slot > 4
+                assign card_slot = forloop.index0 | modulo: 4 | plus: 1
+              endif
+              if shop_handle == 'fitness-health' or shop_handle == blank
+                assign card_before_src = 'joynure-reveal-before-fitness-' | append: card_slot | append: '.jpg' | asset_url
+                assign card_after_src = 'joynure-reveal-after-fitness-' | append: card_slot | append: '.jpg' | asset_url
+                assign card_before_alt = 'Before — customer story ' | append: card_slot
+                assign card_after_alt = 'After — customer story ' | append: card_slot
+              endif
+
+              if block.settings.before_image != blank
+                assign card_before_src = block.settings.before_image | image_url: width: 900
+                assign card_before_alt = block.settings.before_image.alt | default: before_label
+              endif
+              if block.settings.after_image != blank
+                assign card_after_src = block.settings.after_image | image_url: width: 900
+                assign card_after_alt = block.settings.after_image.alt | default: after_label
+              endif
+              assign review_quote = block.settings.quote
+              assign review_author = block.settings.author
+              assign review_rating = block.settings.rating | default: 5
+            -%}
+            <article class="joynure-reveal-card" {{ block.shopify_attributes }}>
+              <joynure-reveal
+                class="joynure-reveal-card__slider"
+                data-orientation="{{ orientation }}"
+                data-initial-position="{{ initial_position }}"
+              >
+                <div
+                  class="joynure-reveal__frame"
+                  data-joynure-reveal-frame
+                  data-orientation="{{ orientation }}"
+                  role="slider"
+                  tabindex="0"
+                  aria-label="Before and after comparison"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-valuenow="{{ initial_position }}"
+                >
+                  <div class="joynure-reveal__layer joynure-reveal__after">
+                    <img
+                      src="{{ card_after_src }}"
+                      alt="{{ card_after_alt | escape }}"
+                      width="900"
+                      height="900"
+                      loading="lazy"
+                      decoding="async"
+                    >
+                  </div>
+                  <div class="joynure-reveal__layer joynure-reveal__before" data-joynure-reveal-before>
+                    <img
+                      src="{{ card_before_src }}"
+                      alt="{{ card_before_alt | escape }}"
+                      width="900"
+                      height="900"
+                      loading="lazy"
+                      decoding="async"
+                    >
+                  </div>
+                  <div class="joynure-reveal__divider" data-joynure-reveal-divider aria-hidden="true">
+                    <span class="joynure-reveal__handle" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true">
+                        <path d="M14.5 6.5 9 12l5.5 5.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9.5 6.5 15 12l-5.5 5.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                  </div>
+                  {% if show_labels %}
+                    <span class="joynure-reveal__label joynure-reveal__label--before">{{ before_label | escape }}</span>
+                    <span class="joynure-reveal__label joynure-reveal__label--after">{{ after_label | escape }}</span>
+                  {% endif %}
+                </div>
+              </joynure-reveal>
+
+              <div class="joynure-reveal-card__review">
+                <div class="joynure-reveal-card__stars" aria-label="{{ review_rating }} out of 5 stars">
+                  {%- for i in (1..5) -%}
+                    <span class="joynure-reveal-card__star{% if i > review_rating %} joynure-reveal-card__star--empty{% endif %}" aria-hidden="true">★</span>
+                  {%- endfor -%}
+                </div>
+                {% if review_quote != blank %}
+                  <blockquote class="joynure-reveal-card__quote">“{{ review_quote | escape }}”</blockquote>
+                {% endif %}
+                {% if review_author != blank %}
+                  <cite class="joynure-reveal-card__author">{{ review_author | escape }}</cite>
+                {% endif %}
+              </div>
+            </article>
+          {%- endfor -%}
+        {%- else -%}
+          {%- assign review_pairs = default_reviews | split: '|' -%}
+          {%- for i in (0..3) -%}
+            {%- liquid
+              assign author_index = i | times: 2
+              assign quote_index = author_index | plus: 1
+              assign review_author = review_pairs[author_index]
+              assign review_quote = review_pairs[quote_index]
+              assign card_slot = i | plus: 1
+              assign card_before_src = before_src
+              assign card_after_src = after_src
+              if shop_handle == 'fitness-health' or shop_handle == blank
+                assign card_before_src = 'joynure-reveal-before-fitness-' | append: card_slot | append: '.jpg' | asset_url
+                assign card_after_src = 'joynure-reveal-after-fitness-' | append: card_slot | append: '.jpg' | asset_url
+              endif
+            -%}
+            <article class="joynure-reveal-card">
+              <joynure-reveal
+                class="joynure-reveal-card__slider"
+                data-orientation="{{ orientation }}"
+                data-initial-position="{{ initial_position }}"
+              >
+                <div
+                  class="joynure-reveal__frame"
+                  data-joynure-reveal-frame
+                  data-orientation="{{ orientation }}"
+                  role="slider"
+                  tabindex="0"
+                  aria-label="Before and after comparison"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-valuenow="{{ initial_position }}"
+                >
+                  <div class="joynure-reveal__layer joynure-reveal__after">
+                    <img
+                      src="{{ card_after_src }}"
+                      alt="After — {{ review_author | escape }}"
+                      width="900"
+                      height="900"
+                      loading="lazy"
+                      decoding="async"
+                    >
+                  </div>
+                  <div class="joynure-reveal__layer joynure-reveal__before" data-joynure-reveal-before>
+                    <img
+                      src="{{ card_before_src }}"
+                      alt="Before — {{ review_author | escape }}"
+                      width="900"
+                      height="900"
+                      loading="lazy"
+                      decoding="async"
+                    >
+                  </div>
+                  <div class="joynure-reveal__divider" data-joynure-reveal-divider aria-hidden="true">
+                    <span class="joynure-reveal__handle" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true">
+                        <path d="M14.5 6.5 9 12l5.5 5.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9.5 6.5 15 12l-5.5 5.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                  </div>
+                  {% if show_labels %}
+                    <span class="joynure-reveal__label joynure-reveal__label--before">{{ before_label | escape }}</span>
+                    <span class="joynure-reveal__label joynure-reveal__label--after">{{ after_label | escape }}</span>
+                  {% endif %}
+                </div>
+              </joynure-reveal>
+
+              <div class="joynure-reveal-card__review">
+                <div class="joynure-reveal-card__stars" aria-label="5 out of 5 stars">
+                  {%- for s in (1..5) -%}
+                    <span class="joynure-reveal-card__star" aria-hidden="true">★</span>
+                  {%- endfor -%}
+                </div>
+                <blockquote class="joynure-reveal-card__quote">“{{ review_quote | escape }}”</blockquote>
+                <cite class="joynure-reveal-card__author">{{ review_author | escape }}</cite>
+              </div>
+            </article>
+          {%- endfor -%}
+        {%- endif -%}
       </div>
 
-      <div class="joynure-reveal__layer joynure-reveal__before" data-joynure-reveal-before>
-        <img
-          src="{{ before_src }}"
-          alt="{{ before_alt | escape }}"
-          width="1600"
-          height="900"
-          loading="lazy"
-          decoding="async"
-        >
-      </div>
-
-      <div class="joynure-reveal__divider" data-joynure-reveal-divider aria-hidden="true">
-        <span class="joynure-reveal__handle">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M9 6v12M15 6v12" stroke-linecap="round"/>
-          </svg>
-        </span>
-      </div>
-
-      {% if show_labels %}
-        <span class="joynure-reveal__label joynure-reveal__label--before">{{ before_label | escape }}</span>
-        <span class="joynure-reveal__label joynure-reveal__label--after">{{ after_label | escape }}</span>
-      {% endif %}
-    </div>
-  </joynure-reveal>
+      <button
+        type="button"
+        class="joynure-reveal-carousel__nav joynure-reveal-carousel__nav--next"
+        data-joynure-reveal-next
+        aria-label="Next reviews"
+      >
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M7.5 4.5 13 10l-5.5 5.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </joynure-reveal-carousel>
+  </div>
 </section>
 
 {% schema %}
@@ -190,19 +342,19 @@
       "type": "textarea",
       "id": "description",
       "label": "Description",
-      "default": "Drag the slider to compare before and after."
+      "default": "Real customer results — drag each card to compare, then swipe the row."
     },
     {
       "type": "image_picker",
       "id": "before_image",
-      "label": "Before image",
-      "info": "Optional. If empty, category defaults are used."
+      "label": "Default before image",
+      "info": "Used when a review card has no before image of its own."
     },
     {
       "type": "image_picker",
       "id": "after_image",
-      "label": "After image",
-      "info": "Optional. If empty, category defaults are used."
+      "label": "Default after image",
+      "info": "Used when a review card has no after image of its own."
     },
     {
       "type": "text",
@@ -263,10 +415,83 @@
       "default": 48
     }
   ],
+  "blocks": [
+    {
+      "type": "review_card",
+      "name": "Review card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Customer name",
+          "default": "Ava M."
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Customer review",
+          "default": "Two weeks in and my core feels stronger already."
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "image_picker",
+          "id": "before_image",
+          "label": "Before image"
+        },
+        {
+          "type": "image_picker",
+          "id": "after_image",
+          "label": "After image"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
       "name": "JOYNURE before/after",
-      "category": "JOYNURE"
+      "category": "JOYNURE",
+      "blocks": [
+        {
+          "type": "review_card",
+          "settings": {
+            "author": "Ava M.",
+            "quote": "Two weeks in and my core feels stronger already.",
+            "rating": 5
+          }
+        },
+        {
+          "type": "review_card",
+          "settings": {
+            "author": "Chris D.",
+            "quote": "I actually look forward to workouts at home now.",
+            "rating": 5
+          }
+        },
+        {
+          "type": "review_card",
+          "settings": {
+            "author": "Lena K.",
+            "quote": "Drag the slider — the difference is wild.",
+            "rating": 5
+          }
+        },
+        {
+          "type": "review_card",
+          "settings": {
+            "author": "Marcus T.",
+            "quote": "Fits my apartment routine and keeps me consistent.",
+            "rating": 5
+          }
+        }
+      ]
     }
   ]
 }
