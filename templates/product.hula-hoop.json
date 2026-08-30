@@ -316,7 +316,13 @@
     },
     "joynure_hula_included": {
       "type": "joynure-hula-included",
-      "settings": {}
+      "settings": {
+        "heading": "What's Included",
+        "lede": "Everything you need to get started.",
+        "item_1": "1 × Adjustable 24-section hoop",
+        "item_2": "1 × Weighted gravity ball",
+        "item_3": "1 × Adjustable rope/cord"
+      }
     },
     "joynure_hula_motion_gallery": {
       "type": "joynure-hula-motion-gallery",
