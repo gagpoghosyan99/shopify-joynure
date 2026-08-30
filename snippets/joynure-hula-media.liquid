@@ -1,13 +1,13 @@
 {%- doc -%}
-  Renders an <img> from product.media by id, or from a theme setting image.
+  Renders an img from product.media by id, or from a theme setting image.
 
-  @param {object} product
+  @param {object} product - Product object
   @param {object} [setting_image] - Theme editor image
-  @param {string|number} [media_id] - Fallback product media id
-  @param {string} alt
-  @param {string} [class]
-  @param {string} [loading] - lazy|eager
-  @param {string} [sizes]
+  @param {string} [media_id] - Fallback product media id
+  @param {string} alt - Image alt text
+  @param {string} [class] - CSS class name
+  @param {string} [loading] - lazy or eager
+  @param {string} [sizes] - sizes attribute
 {%- enddoc -%}
 {%- liquid
   assign img_class = class | default: 'joynure-hula-landing__media'
