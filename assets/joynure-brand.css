@@ -112,15 +112,24 @@
     --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
   }
 
-  .joynure-collection-pet-grid .product-grid.product-grid--grid,
-  .joynure-collection-baby-grid .product-grid.product-grid--grid {
+  .joynure-collection-pet-grid .product-grid.product-grid--grid {
     --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
   }
 
-  /* Nail trimmer: two cards fill the first row */
-  .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card {
-    grid-column: span 2;
+  /* Baby Care: 12-col grid so nail cards can sit slightly under half-width */
+  .joynure-collection-baby-grid .product-grid.product-grid--grid {
+    --product-grid-columns-desktop: repeat(12, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  }
+
+  /* Nail trimmer: two cards, a bit smaller than full half-width, centered */
+  .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card:nth-child(1 of .joynure-baby-nail-card) {
+    grid-column: 2 / span 5;
+  }
+
+  .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card:nth-child(2 of .joynure-baby-nail-card) {
+    grid-column: 7 / span 5;
   }
 
   /* Changing mat carousel spans the full second row */

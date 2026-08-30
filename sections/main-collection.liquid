@@ -34,12 +34,16 @@
   <style>
     @media screen and (min-width: 750px) {
       .joynure-collection-baby-grid .product-grid.product-grid--grid {
-        --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
-        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        --product-grid-columns-desktop: repeat(12, minmax(0, 1fr)) !important;
+        grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
       }
 
-      .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card {
-        grid-column: span 2;
+      .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card:nth-child(1 of .joynure-baby-nail-card) {
+        grid-column: 2 / span 5;
+      }
+
+      .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card:nth-child(2 of .joynure-baby-nail-card) {
+        grid-column: 7 / span 5;
       }
 
       .joynure-collection-baby-grid .product-grid__item.joynure-baby-mat-row {
