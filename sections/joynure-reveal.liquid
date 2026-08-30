@@ -75,7 +75,11 @@
     assign heading = 'See the difference'
   endif
   if description == blank
-    assign description = 'Real customer results — drag each card to compare, then swipe the row.'
+    if shop_handle == 'pet-care'
+      assign description = 'Real customer results — drag each card to compare their story.'
+    else
+      assign description = 'Real customer results — drag each card to compare, then swipe the row.'
+    endif
   endif
 
   case shop_handle
