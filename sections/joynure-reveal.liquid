@@ -77,6 +77,8 @@
   if description == blank
     if shop_handle == 'pet-care'
       assign description = 'Real customer results — drag each card to compare their story.'
+    elsif shop_handle == 'baby-care'
+      assign description = 'Real parent results — drag each card to compare their story.'
     else
       assign description = 'Real customer results — drag each card to compare, then swipe the row.'
     endif
@@ -86,7 +88,7 @@
     when 'pet-care'
       assign default_reviews = 'Maya R.|Our dark sofa was covered in fur every single day — one week with this and it finally looks clean again.|Jordan P.|I was lint-rolling my coats forever. Now a few swipes and the hair is gone.|Sam T.|Dog hair in the car used to embarrass me. Guests actually noticed it was clean this time.|Alex K.|Cat hair on the bedding drove me crazy. Drag the slider — the difference is real.'
     when 'baby-care'
-      assign default_reviews = 'Priya S.|Nights feel calmer and our setup finally makes sense.|Elena M.|Cleanup is faster and the nursery feels less chaotic.|Noah L.|Wish we had this earlier — the difference is obvious.|Harper C.|Gentle, practical, and the results speak for themselves.'
+      assign default_reviews = 'Priya S.|Our changing table was chaos every night — this mat finally made the routine feel calm.|Elena M.|I was terrified of scissors. The electric trimmer is gentle and I actually feel safe.|Noah L.|Diaper changes on the go used to be a nightmare. The travel mat changed everything.|Harper C.|Bedtime used to feel frantic. Now the nursery setup is simple and the difference is obvious.'
     else
       assign default_reviews = 'Ava M.|Two weeks in and my core feels stronger already.|Chris D.|I actually look forward to workouts at home now.|Lena K.|Drag the slider — the difference is wild.|Marcus T.|Fits my apartment routine and keeps me consistent.'
   endcase
@@ -157,6 +159,11 @@
                 assign card_after_src = 'joynure-reveal-after-pet-' | append: card_slot | append: '.jpg' | asset_url
                 assign card_before_alt = 'Before — pet care story ' | append: card_slot
                 assign card_after_alt = 'After — pet care story ' | append: card_slot
+              elsif shop_handle == 'baby-care'
+                assign card_before_src = 'joynure-reveal-before-baby-' | append: card_slot | append: '.jpg' | asset_url
+                assign card_after_src = 'joynure-reveal-after-baby-' | append: card_slot | append: '.jpg' | asset_url
+                assign card_before_alt = 'Before — baby care story ' | append: card_slot
+                assign card_after_alt = 'After — baby care story ' | append: card_slot
               endif
 
               if block.settings.before_image != blank
@@ -266,6 +273,9 @@
               elsif shop_handle == 'pet-care'
                 assign card_before_src = 'joynure-reveal-before-pet-' | append: card_slot | append: '.jpg' | asset_url
                 assign card_after_src = 'joynure-reveal-after-pet-' | append: card_slot | append: '.jpg' | asset_url
+              elsif shop_handle == 'baby-care'
+                assign card_before_src = 'joynure-reveal-before-baby-' | append: card_slot | append: '.jpg' | asset_url
+                assign card_after_src = 'joynure-reveal-after-baby-' | append: card_slot | append: '.jpg' | asset_url
               endif
             -%}
             <article class="joynure-reveal-card">

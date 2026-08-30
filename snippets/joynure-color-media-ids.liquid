@@ -3,7 +3,7 @@
   Used when Admin has not attached every image to a variant (shared gallery), or when
   hide_variants alone would still leave cross-color lifestyle shots visible.
 
-  @param {string} color - Normalized color label (e.g. Pink, Purple, Blue, Green, White)
+  @param {string} color - Color option value (e.g. Pink, Blue, Black grey, Colorful)
   @param {object} [product] - Product object (handle selects the correct map)
 
   Outputs blank for unknown product/color pairs.
@@ -35,6 +35,28 @@
       assign ids = '45011048431889,45011048595729,45011048726801,45011021922577,45011048530193,45011048497425'
     elsif color_key == 'blue'
       assign ids = '45011048562961,45011048661265,45011048694033,45011048628497,45011048464657'
+    endif
+  elsif product_handle == 'lectric-baby-nail-trimmer-set-gentle-safe-nail-care'
+    # Electric baby nail trimmer — Blue (mint) / Pink; mixed two-color shots omitted.
+    if color_key == 'blue'
+      assign ids = '45018613186833,45018612629777,45018613514513,45018613743889,45018613678353,45018613711121,45018614169873,45018614202641,45018614300945,45018614399249,45018614563089,45018614366481,45018614464785,45018614628625,45018614497553,45018614595857,45018614890769,45018614759697,45018614825233,45018614726929,45018614956305,45018615185681,45018615021841,45018615283985,45018615087377,45018615316753'
+    elsif color_key == 'pink'
+      assign ids = '45018613219601,45018613874961,45018613645585,45018614071569,45018614137105,45018614268177,45018614661393,45018614432017,45018614333713,45018614530321,45018614923537,45018614694161,45018614792465,45018615349521,45018615120145,45018615382289,45018615251217,45018615152913,45018615054609,45018615218449,45018614989073'
+    endif
+  elsif product_handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
+    # Changing mat — match Shopify Color option labels exactly (compound names first).
+    if color_key == 'black grey' or color_key == 'black gray'
+      assign ids = '44992155123985,45018740621585,45018741506321,45018741342481,45018741408017'
+    elsif color_key == 'white black'
+      assign ids = '44992155255057,45018740785425,45018740949265,45018740982033,45018741539089,45018741473553,45018741145873,45018741604625'
+    elsif color_key == 'white grey' or color_key == 'white gray'
+      assign ids = '44992155091217,45018740556049,45018740719889,45018741113105,45018741571857'
+    elsif color_key == 'colorful'
+      assign ids = '44992155058449,45018740752657,45018740818193,45018740883729,45018741244177,45018741178641'
+    elsif color_key == 'gray' or color_key == 'grey'
+      assign ids = '44992155156753,45018740523281,45018740588817,45018740850961,45018741440785,45018741211409'
+    elsif color_key == 'black'
+      assign ids = '44992155189521,45018740687121,45018741014801,45018741080337'
     endif
   endif
 -%}
