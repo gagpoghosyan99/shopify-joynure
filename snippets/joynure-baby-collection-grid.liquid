@@ -1,0 +1,95 @@
+{%- doc -%}
+  Baby Care collection layout:
+  - Row 1: nail trimmer color cards (2-up)
+  - Row 2: changing mat color cards in a 4-visible horizontal carousel
+
+  Only renders nail + mat rows. Callers should append any other products.
+
+  @param {object} section - Parent section
+  @param {object} paginate - Pagination object
+{%- enddoc -%}
+
+{% liquid
+  assign nail_product = nil
+  assign mat_product = nil
+
+  for product in collection.products
+    assign handle_l = product.handle | downcase
+    assign title_l = product.title | downcase
+
+    if handle_l contains 'nail-trimmer' or title_l contains 'nail trimmer'
+      assign nail_product = product
+    elsif handle_l contains 'changing-mat' or handle_l contains 'changing-pad' or title_l contains 'changing mat' or title_l contains 'changing pad'
+      assign mat_product = product
+    endif
+  endfor
+%}
+
+{% if nail_product != blank %}
+  {% render 'joynure-split-product-cards',
+    product: nail_product,
+    section: section,
+    product_view_context: 'collection',
+    wrapper: 'li',
+    page: paginate.current_page,
+    index0: 0,
+    item_class: 'joynure-baby-nail-card'
+  %}
+{% endif %}
+
+{% if mat_product != blank %}
+  {% capture joynure_mat_slides %}
+    {% render 'joynure-split-product-cards',
+      product: mat_product,
+      section: section,
+      product_view_context: 'collection',
+      wrapper: 'div',
+      item_class: 'joynure-baby-mat-carousel__slide'
+    %}
+  {% endcapture %}
+  {% assign joynure_mat_slides = joynure_mat_slides | strip %}
+
+  <li
+    id="{{ section.id }}-{{ mat_product.id }}-carousel"
+    class="product-grid__item product-grid__item--1 joynure-baby-mat-row"
+    data-page="{{ paginate.current_page }}"
+    data-product-id="{{ mat_product.id }}"
+    ref="cards[]"
+  >
+    {% if joynure_mat_slides != blank %}
+      <joynure-baby-mat-carousel class="joynure-baby-mat-carousel" data-joynure-baby-mat-carousel>
+        <button
+          type="button"
+          class="joynure-baby-mat-carousel__nav joynure-baby-mat-carousel__nav--prev"
+          data-joynure-baby-mat-prev
+          aria-label="Previous changing mat colors"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M15.4 4.6 8 12l7.4 7.4 1.4-1.4L10.8 12l6-6z"/>
+          </svg>
+        </button>
+
+        <div
+          class="joynure-baby-mat-carousel__track"
+          data-joynure-baby-mat-track
+          tabindex="0"
+          role="list"
+          aria-label="Changing mat colors"
+        >
+          {{ joynure_mat_slides }}
+        </div>
+
+        <button
+          type="button"
+          class="joynure-baby-mat-carousel__nav joynure-baby-mat-carousel__nav--next"
+          data-joynure-baby-mat-next
+          aria-label="Next changing mat colors"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="m8.6 4.6-1.4 1.4 6 6-6 6 1.4 1.4L16 12z"/>
+          </svg>
+        </button>
+      </joynure-baby-mat-carousel>
+    {% endif %}
+  </li>
+{% endif %}
