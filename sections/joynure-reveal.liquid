@@ -80,12 +80,14 @@
 
   case shop_handle
     when 'pet-care'
-      assign default_reviews = 'Maya R.|Our sofa finally looks clean again after one week.|Jordan P.|Less hair everywhere and our dog actually enjoys the routine.|Sam T.|The before/after is real — guests noticed immediately.|Alex K.|Simple daily habit, huge difference at home.'
+      assign default_reviews = 'Maya R.|Our dark sofa was covered in fur every single day — one week with this and it finally looks clean again.|Jordan P.|I was lint-rolling my coats forever. Now a few swipes and the hair is gone.|Sam T.|Dog hair in the car used to embarrass me. Guests actually noticed it was clean this time.|Alex K.|Cat hair on the bedding drove me crazy. Drag the slider — the difference is real.'
     when 'baby-care'
       assign default_reviews = 'Priya S.|Nights feel calmer and our setup finally makes sense.|Elena M.|Cleanup is faster and the nursery feels less chaotic.|Noah L.|Wish we had this earlier — the difference is obvious.|Harper C.|Gentle, practical, and the results speak for themselves.'
     else
       assign default_reviews = 'Ava M.|Two weeks in and my core feels stronger already.|Chris D.|I actually look forward to workouts at home now.|Lena K.|Drag the slider — the difference is wild.|Marcus T.|Fits my apartment routine and keeps me consistent.'
   endcase
+
+  assign review_pairs = default_reviews | split: '|'
 -%}
 
 <section
@@ -146,6 +148,11 @@
                 assign card_after_src = 'joynure-reveal-after-fitness-' | append: card_slot | append: '.jpg' | asset_url
                 assign card_before_alt = 'Before — customer story ' | append: card_slot
                 assign card_after_alt = 'After — customer story ' | append: card_slot
+              elsif shop_handle == 'pet-care'
+                assign card_before_src = 'joynure-reveal-before-pet-' | append: card_slot | append: '.jpg' | asset_url
+                assign card_after_src = 'joynure-reveal-after-pet-' | append: card_slot | append: '.jpg' | asset_url
+                assign card_before_alt = 'Before — pet care story ' | append: card_slot
+                assign card_after_alt = 'After — pet care story ' | append: card_slot
               endif
 
               if block.settings.before_image != blank
@@ -156,8 +163,20 @@
                 assign card_after_src = block.settings.after_image | image_url: width: 900
                 assign card_after_alt = block.settings.after_image.alt | default: after_label
               endif
-              assign review_quote = block.settings.quote
-              assign review_author = block.settings.author
+
+              assign author_index = forloop.index0 | times: 2
+              assign quote_index = author_index | plus: 1
+              assign review_author = review_pairs[author_index]
+              assign review_quote = review_pairs[quote_index]
+              # Fitness keeps theme-editor copy when set; pet/baby always use category stories
+              if shop_handle == 'fitness-health' or shop_handle == blank
+                if block.settings.author != blank
+                  assign review_author = block.settings.author
+                endif
+                if block.settings.quote != blank
+                  assign review_quote = block.settings.quote
+                endif
+              endif
               assign review_rating = block.settings.rating | default: 5
             -%}
             <article class="joynure-reveal-card" {{ block.shopify_attributes }}>
@@ -228,7 +247,6 @@
             </article>
           {%- endfor -%}
         {%- else -%}
-          {%- assign review_pairs = default_reviews | split: '|' -%}
           {%- for i in (0..3) -%}
             {%- liquid
               assign author_index = i | times: 2
@@ -241,6 +259,9 @@
               if shop_handle == 'fitness-health' or shop_handle == blank
                 assign card_before_src = 'joynure-reveal-before-fitness-' | append: card_slot | append: '.jpg' | asset_url
                 assign card_after_src = 'joynure-reveal-after-fitness-' | append: card_slot | append: '.jpg' | asset_url
+              elsif shop_handle == 'pet-care'
+                assign card_before_src = 'joynure-reveal-before-pet-' | append: card_slot | append: '.jpg' | asset_url
+                assign card_after_src = 'joynure-reveal-after-pet-' | append: card_slot | append: '.jpg' | asset_url
               endif
             -%}
             <article class="joynure-reveal-card">
