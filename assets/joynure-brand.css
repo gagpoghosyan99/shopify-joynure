@@ -131,38 +131,43 @@
 
 /* —— Baby Care changing-mat color carousel —— */
 .joynure-baby-mat-carousel {
+  --joynure-baby-mat-gap: 0.75rem;
+  --joynure-baby-mat-visible: 2;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 0.5rem;
   width: 100%;
+  min-width: 0;
 }
 
 .joynure-baby-mat-carousel__track {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: calc((100% - (1 * 0.75rem)) / 2);
-  gap: 0.75rem;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: var(--joynure-baby-mat-gap);
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   scrollbar-width: none;
   padding-block: 0.15rem 0.35rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 @media screen and (min-width: 750px) {
-  .joynure-baby-mat-carousel__track {
-    grid-auto-columns: calc((100% - (2 * 0.85rem)) / 3);
-    gap: 0.85rem;
+  .joynure-baby-mat-carousel {
+    --joynure-baby-mat-gap: 0.85rem;
+    --joynure-baby-mat-visible: 3;
   }
 }
 
 @media screen and (min-width: 990px) {
-  .joynure-baby-mat-carousel__track {
-    /* 4 cards visible; remaining colors slide */
-    grid-auto-columns: calc((100% - (3 * var(--product-grid-gap-desktop, 16px))) / 4);
-    gap: var(--product-grid-gap-desktop, 16px);
+  .joynure-baby-mat-carousel {
+    --joynure-baby-mat-gap: 1rem;
+    --joynure-baby-mat-visible: 4;
   }
 }
 
@@ -171,9 +176,22 @@
 }
 
 .joynure-baby-mat-carousel__slide {
+  box-sizing: border-box;
+  flex: 0 0
+    calc(
+      (100% - (var(--joynure-baby-mat-visible) - 1) * var(--joynure-baby-mat-gap)) /
+        var(--joynure-baby-mat-visible)
+    );
+  width: calc(
+    (100% - (var(--joynure-baby-mat-visible) - 1) * var(--joynure-baby-mat-gap)) /
+      var(--joynure-baby-mat-visible)
+  );
+  max-width: calc(
+    (100% - (var(--joynure-baby-mat-visible) - 1) * var(--joynure-baby-mat-gap)) /
+      var(--joynure-baby-mat-visible)
+  );
   scroll-snap-align: start;
   min-width: 0;
-  height: 100%;
 }
 
 .joynure-baby-mat-carousel__slide .product-grid__card,
