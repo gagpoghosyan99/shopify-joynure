@@ -162,6 +162,8 @@
 /* Mat carousel must always span the full product-grid row */
 .joynure-collection-baby-grid .product-grid__item.joynure-baby-mat-row {
   grid-column: 1 / -1;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 @media screen and (max-width: 749px) {
@@ -194,6 +196,7 @@
   width: 100%;
   max-width: 100%;
   min-width: 0;
+  overflow-x: clip;
 }
 
 .joynure-baby-mat-carousel__track {
