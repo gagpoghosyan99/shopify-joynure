@@ -1,13 +1,16 @@
-/* JOYNURE Hula PDP buy-box polish — mockup-aligned, Hula-only via .joynure-hula-pdp */
+/* JOYNURE Hula PDP buy-box — brand palette (teal / coral / cream / charcoal)
+   Scoped to .joynure-hula-pdp only (hula-hoop template).
+*/
 
 .joynure-hula-pdp {
-  --jh-pink: #ff4d8d;
-  --jh-pink-deep: #e83a78;
-  --jh-pink-soft: #fff1f6;
-  --jh-pink-wash: #ffe6ef;
-  --jh-ink: #171717;
-  --jh-muted: rgb(23 23 23 / 68%);
-  --jh-line: rgb(23 23 23 / 10%);
+  --jh-teal: var(--joynure-teal, #1f5c55);
+  --jh-teal-deep: #174842;
+  --jh-coral: var(--joynure-coral, #ff7a68);
+  --jh-cream: var(--joynure-cream, #fff8f0);
+  --jh-gold: var(--joynure-gold, #f2c66d);
+  --jh-ink: var(--joynure-charcoal, #24312e);
+  --jh-muted: rgb(36 49 46 / 68%);
+  --jh-line: var(--joynure-border, rgb(36 49 46 / 12%));
   --jh-radius: 0.85rem;
 }
 
@@ -23,10 +26,11 @@
   line-height: 1.15;
   letter-spacing: -0.02em;
   font-weight: 700;
+  color: var(--jh-ink);
 }
 
 .joynure-hula-pdp .joynure-hula-title__brand {
-  color: var(--jh-pink);
+  color: var(--jh-teal);
 }
 
 .joynure-hula-pdp .joynure-hula-title__sub {
@@ -42,16 +46,16 @@
   font-size: 0.98rem;
 }
 
-/* Pink price */
+/* Price — nurture teal */
 .joynure-hula-pdp .price,
 .joynure-hula-pdp .price-item,
 .joynure-hula-pdp [ref='priceContainer'] {
-  color: var(--jh-pink);
+  color: var(--jh-teal);
   font-weight: 700;
   font-size: 1.45rem;
 }
 
-/* Color buttons → pill swatches with color dots */
+/* Color buttons → pill swatches with product color dots */
 .joynure-hula-pdp .variant-option--buttons {
   gap: 0.55rem;
 }
@@ -64,7 +68,7 @@
   padding: 0.45rem 1rem;
   border-radius: 999px !important;
   border: 1.5px solid var(--jh-line) !important;
-  background: #fff !important;
+  background: var(--joynure-white, #fff) !important;
   color: var(--jh-ink) !important;
   font-weight: 600;
   transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
@@ -82,7 +86,7 @@
 
 .joynure-hula-pdp .variant-option__button-label:has([data-display-label='Pink'])::before,
 .joynure-hula-pdp .variant-option__button-label:has([value*='Pink' i])::before {
-  background: #ff4d8d;
+  background: #f472b6;
 }
 
 .joynure-hula-pdp .variant-option__button-label:has([data-display-label='Purple'])::before,
@@ -97,9 +101,9 @@
 
 .joynure-hula-pdp .variant-option__button-label:has(:checked),
 .joynure-hula-pdp .variant-option__button-label:has([data-current-checked='true']) {
-  border-color: var(--jh-ink) !important;
-  box-shadow: 0 0 0 1px var(--jh-ink);
-  background: #fff !important;
+  border-color: var(--jh-teal) !important;
+  box-shadow: 0 0 0 1px var(--jh-teal);
+  background: var(--joynure-white, #fff) !important;
   color: var(--jh-ink) !important;
 }
 
@@ -111,42 +115,42 @@
 }
 
 .joynure-hula-pdp .variant-option__button-label:focus-within {
-  outline: 2px solid var(--jh-pink);
+  outline: 2px solid var(--jh-teal);
   outline-offset: 2px;
 }
 
-/* Primary ATC — JOYNURE pink */
+/* Primary ATC — nurture teal */
 .joynure-hula-pdp .add-to-cart-button,
 .joynure-hula-pdp .product-form-buttons .button {
   border-radius: 999px !important;
-  background: var(--jh-pink) !important;
-  border-color: var(--jh-pink) !important;
+  background: var(--jh-teal) !important;
+  border-color: var(--jh-teal) !important;
   color: #fff !important;
   font-weight: 700 !important;
   min-height: 3.15rem;
-  box-shadow: 0 10px 24px rgb(255 77 141 / 28%);
+  box-shadow: 0 10px 24px rgb(31 92 85 / 22%);
 }
 
 .joynure-hula-pdp .add-to-cart-button:hover,
 .joynure-hula-pdp .product-form-buttons .button:hover {
-  background: var(--jh-pink-deep) !important;
-  border-color: var(--jh-pink-deep) !important;
+  background: var(--jh-teal-deep) !important;
+  border-color: var(--jh-teal-deep) !important;
 }
 
-/* Soft buy-box surface */
+/* Soft cream buy-box surface */
 .joynure-hula-pdp .product-details {
-  background: linear-gradient(180deg, #fffdfb 0%, #fff 100%);
+  background: linear-gradient(180deg, var(--jh-cream) 0%, #fff 100%);
 }
 
 .joynure-hula-pdp .joynure-pdp-trust-row__icon {
-  color: var(--jh-pink);
+  color: var(--jh-coral);
 }
 
-/* Sticky ATC accents */
+/* Sticky ATC — teal */
 .joynure-hula-pdp .joynure-pdp-phase-b-sticky .add-to-cart-button,
 .joynure-pdp-phase-b-sticky.joynure-hula-sticky .add-to-cart-button {
-  background: var(--jh-pink, #ff4d8d) !important;
-  border-color: var(--jh-pink, #ff4d8d) !important;
+  background: var(--jh-teal) !important;
+  border-color: var(--jh-teal) !important;
   color: #fff !important;
   border-radius: 999px !important;
 }
@@ -154,6 +158,13 @@
 .joynure-hula-pdp .media-gallery__grid,
 .joynure-hula-pdp .product-media-container {
   border-radius: 1rem;
+}
+
+/* Quantity controls — soft coral tint */
+.joynure-hula-pdp .quantity-selector,
+.joynure-hula-pdp .quantity {
+  background: rgb(255 122 104 / 10%);
+  border-radius: 999px;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,14 +1,20 @@
-/* JOYNURE Hula Hoop long-form landing — premium DTC layout
+/* JOYNURE Hula Hoop long-form landing — brand palette
    Scoped under .joynure-hula-landing to avoid leaking to other PDPs.
 */
 
 .joynure-hula-landing {
-  --jh-pink: #ff7a9a;
-  --jh-pink-soft: #fff0f4;
-  --jh-pink-wash: #ffe6ee;
-  --jh-ink: #1a1a1a;
-  --jh-muted: rgb(26 26 26 / 68%);
-  --jh-line: rgb(26 26 26 / 10%);
+  --jh-teal: var(--joynure-teal, #1f5c55);
+  --jh-teal-deep: #174842;
+  --jh-coral: var(--joynure-coral, #ff7a68);
+  --jh-cream: var(--joynure-cream, #fff8f0);
+  --jh-gold: var(--joynure-gold, #f2c66d);
+  --jh-ink: var(--joynure-charcoal, #24312e);
+  --jh-muted: rgb(36 49 46 / 68%);
+  --jh-line: var(--joynure-border, rgb(36 49 46 / 12%));
+  /* Semantic aliases used across section rules */
+  --jh-pink: var(--jh-coral);
+  --jh-pink-soft: #fff3ee;
+  --jh-pink-wash: #ffe8e1;
   --jh-radius: 1rem;
   --jh-radius-lg: 1.5rem;
   --jh-max: 72rem;
@@ -31,16 +37,16 @@
 }
 
 .joynure-hula-landing__section--blush {
-  background: var(--jh-pink-soft);
+  background: var(--jh-cream);
 }
 
 .joynure-hula-landing__section--wash {
-  background: linear-gradient(180deg, #fff 0%, var(--jh-pink-wash) 100%);
+  background: linear-gradient(180deg, #fff 0%, var(--jh-cream) 55%, var(--jh-pink-soft) 100%);
 }
 
 .joynure-hula-landing__eyebrow {
   margin: 0 0 0.75rem;
-  color: var(--jh-pink);
+  color: var(--jh-coral);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -53,10 +59,11 @@
   line-height: 1.1;
   letter-spacing: -0.02em;
   font-weight: 700;
+  color: var(--jh-ink);
 }
 
 .joynure-hula-landing__title-accent {
-  color: var(--jh-pink);
+  color: var(--jh-teal);
 }
 
 .joynure-hula-landing__title--center {
@@ -119,7 +126,7 @@
 .joynure-hula-benefits__icon {
   width: 2rem;
   height: 2rem;
-  color: var(--jh-pink);
+  color: var(--jh-teal);
 }
 
 .joynure-hula-benefits__label {
@@ -212,7 +219,7 @@
 
 .joynure-hula-how__num {
   margin: 0 0 0.5rem;
-  color: var(--jh-pink);
+  color: var(--jh-coral);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -253,7 +260,7 @@
 
 .joynure-hula-mechanism__list li {
   padding: 1rem 1.1rem;
-  border-left: 3px solid var(--jh-pink);
+  border-left: 3px solid var(--jh-teal);
   background: #fff;
   border-radius: 0 var(--jh-radius) var(--jh-radius) 0;
 }
@@ -398,7 +405,7 @@
   height: 0.55rem;
   margin-top: 0.45rem;
   border-radius: 50%;
-  background: var(--jh-pink);
+  background: var(--jh-coral);
   flex: 0 0 auto;
 }
 
@@ -584,7 +591,7 @@
 }
 
 .joynure-hula-compare__table th:nth-child(2) {
-  color: var(--jh-pink);
+  color: var(--jh-teal);
 }
 
 .joynure-hula-compare__table td:nth-child(2) {
@@ -752,7 +759,7 @@
 
 .joynure-hula-faq__item summary::after {
   content: '+';
-  color: var(--jh-pink);
+  color: var(--jh-teal);
   font-size: 1.25rem;
   line-height: 1;
 }
@@ -798,14 +805,14 @@
   width: 100%;
   border-radius: var(--jh-radius);
   object-fit: contain;
-  background: var(--jh-pink-soft);
+  background: var(--jh-cream);
 }
 
 .joynure-hula-final__price {
   margin: 0.35rem 0 1rem;
   font-size: 1.35rem;
   font-weight: 700;
-  color: var(--jh-pink);
+  color: var(--jh-teal);
 }
 
 .joynure-hula-final__colors {
@@ -840,7 +847,7 @@
 }
 
 .joynure-hula-final__swatch--pink {
-  box-shadow: inset 0 0 0 999px rgb(255 122 154 / 18%);
+  box-shadow: inset 0 0 0 999px rgb(244 114 182 / 16%);
 }
 
 .joynure-hula-final__swatch--purple {
@@ -860,17 +867,18 @@
   padding: 0.85rem 1.25rem;
   border: 0;
   border-radius: 999px;
-  background: var(--jh-pink);
+  background: var(--jh-teal);
   color: #fff;
   font: inherit;
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 10px 24px rgb(255 122 154 / 28%);
+  box-shadow: 0 10px 24px rgb(31 92 85 / 22%);
 }
 
 .joynure-hula-final__atc:hover {
-  filter: brightness(0.95);
+  background: var(--jh-teal-deep);
+  filter: none;
 }
 
 .joynure-hula-final__note {
