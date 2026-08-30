@@ -77,7 +77,8 @@
   .joynure-collection-hula-grid .product-grid.product-grid--grid:has(
       > .product-grid__item:nth-child(1 of .product-grid__item)
     ):not(:has(> .product-grid__item:nth-child(2 of .product-grid__item))),
-  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(1 of .product-grid__item)):not(
+  .collection-wrapper:not(.joynure-collection-baby-grid):not(.joynure-collection-pet-grid)
+    .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(1 of .product-grid__item)):not(
       :has(> .product-grid__item:nth-child(2 of .product-grid__item))
     ) {
     --product-grid-columns-desktop: minmax(0, 1fr) !important;
@@ -86,7 +87,8 @@
   .joynure-collection-hula-grid .product-grid.product-grid--grid:has(
       > .product-grid__item:nth-child(2 of .product-grid__item)
     ):not(:has(> .product-grid__item:nth-child(3 of .product-grid__item))),
-  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(2 of .product-grid__item)):not(
+  .collection-wrapper:not(.joynure-collection-baby-grid):not(.joynure-collection-pet-grid)
+    .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(2 of .product-grid__item)):not(
       :has(> .product-grid__item:nth-child(3 of .product-grid__item))
     ) {
     --product-grid-columns-desktop: repeat(2, minmax(0, 1fr)) !important;
@@ -95,7 +97,8 @@
   .joynure-collection-hula-grid .product-grid.product-grid--grid:has(
       > .product-grid__item:nth-child(3 of .product-grid__item)
     ):not(:has(> .product-grid__item:nth-child(4 of .product-grid__item))),
-  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(3 of .product-grid__item)):not(
+  .collection-wrapper:not(.joynure-collection-baby-grid):not(.joynure-collection-pet-grid)
+    .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(3 of .product-grid__item)):not(
       :has(> .product-grid__item:nth-child(4 of .product-grid__item))
     ) {
     --product-grid-columns-desktop: repeat(3, minmax(0, 1fr)) !important;
@@ -104,15 +107,15 @@
   .joynure-collection-hula-grid .product-grid.product-grid--grid:has(
       > .product-grid__item:nth-child(4 of .product-grid__item)
     ),
-  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(4 of .product-grid__item)) {
+  .collection-wrapper:not(.joynure-collection-baby-grid):not(.joynure-collection-pet-grid)
+    .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(4 of .product-grid__item)) {
     --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
   }
-}
 
-@media screen and (min-width: 750px) {
-  .joynure-collection-pet-grid .product-grid.product-grid--grid:has(> .product-grid__item),
-  .joynure-collection-baby-grid .product-grid.product-grid--grid:has(> .product-grid__item) {
+  .joynure-collection-pet-grid .product-grid.product-grid--grid,
+  .joynure-collection-baby-grid .product-grid.product-grid--grid {
     --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
   }
 
   /* Nail trimmer: two cards fill the first row */
@@ -124,13 +127,6 @@
   .joynure-collection-baby-grid .product-grid__item.joynure-baby-mat-row {
     grid-column: 1 / -1;
     min-width: 0;
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .joynure-collection-pet-grid .product-grid.product-grid--grid:has(> .product-grid__item),
-  .joynure-collection-baby-grid .product-grid.product-grid--grid:has(> .product-grid__item) {
-    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
   }
 }
 
