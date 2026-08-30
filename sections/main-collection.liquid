@@ -31,6 +31,23 @@
 
 {% if collection.handle == 'baby-care' %}
   <script src="{{ 'joynure-baby-collection.js' | asset_url }}" type="module"></script>
+  {% stylesheet %}
+    @media screen and (min-width: 750px) {
+      .joynure-collection-baby-grid .product-grid.product-grid--grid {
+        --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+      }
+
+      .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card {
+        grid-column: span 2;
+      }
+
+      .joynure-collection-baby-grid .product-grid__item.joynure-baby-mat-row {
+        grid-column: 1 / -1;
+        min-width: 0;
+      }
+    }
+  {% endstylesheet %}
 {% endif %}
 
 {% render 'collection-wrapper-styles' %}
