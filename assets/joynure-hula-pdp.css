@@ -55,29 +55,50 @@
   font-size: 1.45rem;
 }
 
-/* Color buttons → pill swatches with product color dots */
+/* Color buttons — full-width Pink / Purple / Blue with subtle 3D */
 .joynure-hula-pdp .variant-option--buttons {
-  gap: 0.55rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+@media screen and (min-width: 480px) {
+  .joynure-hula-pdp .variant-option--buttons {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .joynure-hula-pdp .variant-option__button-label {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.45rem;
-  min-height: 2.75rem;
-  padding: 0.45rem 1rem;
-  border-radius: 999px !important;
+  justify-content: center;
+  gap: 0.55rem;
+  width: 100%;
+  min-height: 3.35rem;
+  padding: 0.65rem 1rem;
+  border-radius: 14px !important;
   border: 1.5px solid var(--jh-line) !important;
-  background: var(--joynure-white, #fff) !important;
+  background: linear-gradient(180deg, #fff 0%, #faf9f7 100%) !important;
   color: var(--jh-ink) !important;
-  font-weight: 600;
-  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  font-weight: 650;
+  font-size: 0.98rem;
+  letter-spacing: 0.02em;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 90%) inset,
+    0 4px 0 rgb(36 49 46 / 6%),
+    0 10px 22px rgb(31 92 85 / 8%);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
 }
 
 .joynure-hula-pdp .variant-option__button-label::before {
   content: '';
-  width: 0.85rem;
-  height: 0.85rem;
+  width: 1rem;
+  height: 1rem;
   border-radius: 50%;
   flex: 0 0 auto;
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 12%);
@@ -86,25 +107,54 @@
 
 .joynure-hula-pdp .variant-option__button-label:has([data-display-label='Pink'])::before,
 .joynure-hula-pdp .variant-option__button-label:has([value*='Pink' i])::before {
-  background: #f472b6;
+  background: linear-gradient(145deg, #fb7185, #f472b6);
 }
 
 .joynure-hula-pdp .variant-option__button-label:has([data-display-label='Purple'])::before,
 .joynure-hula-pdp .variant-option__button-label:has([value*='Purple' i])::before {
-  background: #8b5cf6;
+  background: linear-gradient(145deg, #a78bfa, #8b5cf6);
 }
 
 .joynure-hula-pdp .variant-option__button-label:has([data-display-label='Blue'])::before,
 .joynure-hula-pdp .variant-option__button-label:has([value*='blue' i])::before {
-  background: #38bdf8;
+  background: linear-gradient(145deg, #7dd3fc, #38bdf8);
+}
+
+@media (hover: hover) {
+  .joynure-hula-pdp .variant-option__button-label:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 90%) inset,
+      0 6px 0 rgb(36 49 46 / 7%),
+      0 16px 28px rgb(31 92 85 / 12%);
+  }
 }
 
 .joynure-hula-pdp .variant-option__button-label:has(:checked),
 .joynure-hula-pdp .variant-option__button-label:has([data-current-checked='true']) {
+  transform: translateY(2px);
   border-color: var(--jh-teal) !important;
-  box-shadow: 0 0 0 1px var(--jh-teal);
-  background: var(--joynure-white, #fff) !important;
+  background: linear-gradient(180deg, #fff 0%, var(--jh-cream) 100%) !important;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 80%) inset,
+    0 2px 0 rgb(31 92 85 / 18%),
+    0 6px 16px rgb(31 92 85 / 14%);
   color: var(--jh-ink) !important;
+}
+
+.joynure-hula-pdp .variant-option__button-label:has([data-display-label='Pink']:checked),
+.joynure-hula-pdp .variant-option__button-label:has([value*='Pink' i]:checked) {
+  background: linear-gradient(180deg, #fff5f8 0%, #ffe8f0 100%) !important;
+}
+
+.joynure-hula-pdp .variant-option__button-label:has([data-display-label='Purple']:checked),
+.joynure-hula-pdp .variant-option__button-label:has([value*='Purple' i]:checked) {
+  background: linear-gradient(180deg, #f8f5ff 0%, #ede8ff 100%) !important;
+}
+
+.joynure-hula-pdp .variant-option__button-label:has([data-display-label='Blue']:checked),
+.joynure-hula-pdp .variant-option__button-label:has([value*='blue' i]:checked) {
+  background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%) !important;
 }
 
 .joynure-hula-pdp .variant-option__button-label:has(:checked) .variant-option__button-label__pill,
@@ -153,6 +203,10 @@
   border-color: var(--jh-teal) !important;
   color: #fff !important;
   border-radius: 999px !important;
+}
+
+.joynure-hula-pdp .joynure-pdp-breadcrumbs {
+  display: none !important;
 }
 
 .joynure-hula-pdp .media-gallery__grid,

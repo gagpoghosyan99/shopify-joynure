@@ -898,4 +898,227 @@
   .joynure-hula-colors__grid {
     scroll-behavior: auto;
   }
+
+  .joynure-hula-card-3d,
+  .joynure-hula-pdp .variant-option__button-label {
+    transition: none;
+  }
+}
+
+/* ── Shared 3D card system ── */
+.joynure-hula-card-3d {
+  position: relative;
+  border-radius: calc(var(--jh-radius-lg) + 2px);
+  background: linear-gradient(165deg, #fff 0%, #faf8f5 100%);
+  border: 1px solid var(--jh-line);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 95%) inset,
+    0 6px 0 rgb(36 49 46 / 5%),
+    0 18px 40px rgb(31 92 85 / 10%);
+  overflow: hidden;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+@media (hover: hover) {
+  .joynure-hula-card-3d:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 95%) inset,
+      0 10px 0 rgb(36 49 46 / 6%),
+      0 28px 48px rgb(31 92 85 / 14%);
+  }
+}
+
+.joynure-hula-card-3d__media {
+  overflow: hidden;
+}
+
+.joynure-hula-card-3d__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.joynure-hula-card-3d__body {
+  padding: 1.15rem 1.25rem 1.35rem;
+}
+
+.joynure-hula-card-3d__body h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  line-height: 1.25;
+  color: var(--jh-ink);
+}
+
+.joynure-hula-card-3d__body p {
+  margin: 0;
+  color: var(--jh-muted);
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+.joynure-hula-card-3d--hero {
+  margin-bottom: 1.75rem;
+}
+
+.joynure-hula-card-3d--hero .joynure-hula-card-3d__media img {
+  aspect-ratio: 21 / 10;
+  min-height: 280px;
+}
+
+/* Lifestyle strip — larger 3D cards (+30px feel) */
+.joynure-hula-strip__track--3d {
+  gap: 1.15rem;
+}
+
+.joynure-hula-strip__track--3d .joynure-hula-strip__card .joynure-hula-card-3d__media img {
+  aspect-ratio: 4 / 5;
+  min-height: calc(16rem + 30px);
+}
+
+.joynure-hula-strip__track--3d .joynure-hula-strip__caption {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+/* See the difference — 4 compact cards */
+.joynure-hula-difference__grid {
+  display: grid;
+  gap: 1.15rem;
+  grid-template-columns: 1fr;
+}
+
+@media screen and (min-width: 750px) {
+  .joynure-hula-difference__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .joynure-hula-difference__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.joynure-hula-difference__card .joynure-hula-card-3d__media img {
+  aspect-ratio: 1;
+  min-height: 11rem;
+}
+
+/* How it works — 3D step cards with images */
+.joynure-hula-how__steps--3d {
+  display: grid;
+  gap: 1.15rem;
+  grid-template-columns: 1fr;
+}
+
+@media screen and (min-width: 750px) {
+  .joynure-hula-how__steps--3d {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.joynure-hula-how__step.joynure-hula-card-3d {
+  padding: 0;
+  border: 1px solid var(--jh-line);
+  background: #fff;
+}
+
+.joynure-hula-how__step-media img {
+  aspect-ratio: 4 / 3;
+  min-height: 10.5rem;
+}
+
+.joynure-hula-how__hero.joynure-hula-card-3d {
+  padding: 0;
+}
+
+/* Mechanism — feature mini-cards */
+.joynure-hula-mechanism__cards {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1.25rem;
+}
+
+.joynure-hula-mechanism__card {
+  padding: 0;
+}
+
+.joynure-hula-mechanism__card .joynure-hula-card-3d__body {
+  padding: 1rem 1.15rem;
+  border-left: 3px solid var(--jh-teal);
+}
+
+.joynure-hula-mechanism__card .joynure-hula-card-3d__body h3 {
+  font-size: 0.92rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.joynure-hula-mechanism__visual {
+  padding: 0;
+}
+
+.joynure-hula-mechanism__visual img {
+  aspect-ratio: 1;
+  min-height: calc(18rem + 30px);
+}
+
+/* Four steps — 3D cards bigger */
+.joynure-hula-steps__grid--3d .joynure-hula-steps__card {
+  padding: 0;
+  min-height: calc(100% + 30px);
+}
+
+.joynure-hula-steps__grid--3d .joynure-hula-card-3d__media img {
+  aspect-ratio: 1;
+  min-height: calc(12rem + 30px);
+}
+
+.joynure-hula-steps__grid--3d .joynure-hula-steps__body {
+  padding: 0;
+}
+
+/* Final CTA — full color buttons match buy box */
+.joynure-hula-final__colors {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+  width: 100%;
+}
+
+.joynure-hula-final__swatch {
+  appearance: none;
+  border: 1.5px solid var(--jh-line);
+  border-radius: 14px;
+  min-height: 3rem;
+  padding: 0.55rem 0.75rem;
+  background: linear-gradient(180deg, #fff 0%, #faf9f7 100%);
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 90%) inset,
+    0 4px 0 rgb(36 49 46 / 6%),
+    0 8px 18px rgb(31 92 85 / 8%);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+@media (hover: hover) {
+  .joynure-hula-final__swatch:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.joynure-hula-final__swatch[aria-pressed='true'] {
+  transform: translateY(2px);
+  border-color: var(--jh-teal);
+  box-shadow:
+    0 2px 0 rgb(31 92 85 / 16%),
+    0 6px 14px rgb(31 92 85 / 12%);
 }

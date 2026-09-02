@@ -5,38 +5,37 @@
   {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
   <section class="joynure-hula-landing joynure-hula-landing__section" {{ section.shopify_attributes }}>
     <div class="joynure-hula-landing__inner joynure-hula-mechanism__grid">
-      <div>
-        {% render 'joynure-hula-media',
-          product: product,
-          setting_image: section.settings.image,
-          media_id: section.settings.media_id,
-          alt: section.settings.heading,
-          class: 'joynure-hula-landing__media joynure-hula-landing__media--contain',
-          loading: 'lazy',
-          sizes: '(min-width: 990px) 50vw, 100vw'
-        %}
+      <div class="joynure-hula-card-3d joynure-hula-card-3d--hero joynure-hula-mechanism__visual">
+        <div class="joynure-hula-card-3d__media">
+          {% render 'joynure-hula-media',
+            product: product,
+            setting_image: section.settings.image,
+            media_id: section.settings.media_id,
+            alt: section.settings.heading,
+            class: 'joynure-hula-landing__media joynure-hula-landing__media--contain',
+            loading: 'lazy',
+            sizes: '(min-width: 990px) 50vw, 100vw'
+          %}
+        </div>
       </div>
       <div>
         <p class="joynure-hula-landing__eyebrow">{{ section.settings.eyebrow | escape }}</p>
         <h2 class="joynure-hula-landing__title">{{ section.settings.heading | escape }}</h2>
-        <ul class="joynure-hula-mechanism__list">
-          <li>
-            <strong>{{ section.settings.i1_title | escape }}</strong>
-            <span>{{ section.settings.i1_text | escape }}</span>
-          </li>
-          <li>
-            <strong>{{ section.settings.i2_title | escape }}</strong>
-            <span>{{ section.settings.i2_text | escape }}</span>
-          </li>
-          <li>
-            <strong>{{ section.settings.i3_title | escape }}</strong>
-            <span>{{ section.settings.i3_text | escape }}</span>
-          </li>
-          <li>
-            <strong>{{ section.settings.i4_title | escape }}</strong>
-            <span>{{ section.settings.i4_text | escape }}</span>
-          </li>
-        </ul>
+        <p class="joynure-hula-landing__lede">{{ section.settings.lede | escape }}</p>
+        <div class="joynure-hula-mechanism__cards">
+          {% for i in (1..4) %}
+            {% liquid
+              assign tk = 'i' | append: i | append: '_title'
+              assign xk = 'i' | append: i | append: '_text'
+            %}
+            <article class="joynure-hula-card-3d joynure-hula-mechanism__card">
+              <div class="joynure-hula-card-3d__body">
+                <h3>{{ section.settings[tk] | escape }}</h3>
+                <p>{{ section.settings[xk] | escape }}</p>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </section>
@@ -51,10 +50,16 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Product design" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Designed to Move With You" },
+    {
+      "type": "textarea",
+      "id": "lede",
+      "label": "Supporting copy",
+      "default": "Modular sections, a smooth track, and an adjustable cord work together for home movement."
+    },
     { "type": "image_picker", "id": "image", "label": "Detail image" },
     { "type": "text", "id": "media_id", "label": "Fallback media ID", "default": "45010788942097" },
-    { "type": "text", "id": "i1_title", "label": "Point 1 title", "default": "Adjustable detachable sections" },
-    { "type": "textarea", "id": "i1_text", "label": "Point 1 text", "default": "24 interlocking sections let you refine the hoop size for a comfortable waist fit." },
+    { "type": "text", "id": "i1_title", "label": "Point 1 title", "default": "Adjustable 24-section design" },
+    { "type": "textarea", "id": "i1_text", "label": "Point 1 text", "default": "Add or remove sections to refine the hoop size for a comfortable waist fit." },
     { "type": "text", "id": "i2_title", "label": "Point 2 title", "default": "Smooth internal track" },
     { "type": "textarea", "id": "i2_text", "label": "Point 2 text", "default": "The outer track guides the sliding attachment as you move." },
     { "type": "text", "id": "i3_title", "label": "Point 3 title", "default": "Adjustable cord" },

@@ -7,7 +7,7 @@
     <div class="joynure-hula-landing__inner">
       <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">{{ section.settings.heading | escape }}</h2>
       <p class="joynure-hula-landing__lede joynure-hula-landing__lede--center">{{ section.settings.lede | escape }}</p>
-      <div class="joynure-hula-steps__grid">
+      <div class="joynure-hula-steps__grid joynure-hula-steps__grid--3d">
         {% for i in (1..4) %}
           {% liquid
             assign tkey = 't' | append: i | append: '_title'
@@ -19,21 +19,20 @@
             assign img = section.settings[ikey]
             assign mid = section.settings[mkey]
             assign num = i | prepend: '0'
-            if i > 9
-              assign num = i
-            endif
           %}
-          <article class="joynure-hula-steps__card">
-            {% render 'joynure-hula-media',
-              product: product,
-              setting_image: img,
-              media_id: mid,
-              alt: title,
-              class: 'joynure-hula-landing__media',
-              loading: 'lazy',
-              sizes: '(min-width: 990px) 25vw, (min-width: 750px) 50vw, 100vw'
-            %}
-            <div class="joynure-hula-steps__body">
+          <article class="joynure-hula-card-3d joynure-hula-steps__card">
+            <div class="joynure-hula-card-3d__media">
+              {% render 'joynure-hula-media',
+                product: product,
+                setting_image: img,
+                media_id: mid,
+                alt: title,
+                class: 'joynure-hula-landing__media',
+                loading: 'lazy',
+                sizes: '(min-width: 990px) 25vw, (min-width: 750px) 50vw, 100vw'
+              %}
+            </div>
+            <div class="joynure-hula-card-3d__body joynure-hula-steps__body">
               <p class="joynure-hula-how__num">{{ num }}</p>
               <h3>{{ title | escape }}</h3>
               <p>{{ text | escape }}</p>

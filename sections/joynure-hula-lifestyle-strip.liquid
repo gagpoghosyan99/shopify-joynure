@@ -5,8 +5,13 @@
   {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
   <section class="joynure-hula-landing joynure-hula-landing__section" {{ section.shopify_attributes }}>
     <div class="joynure-hula-landing__inner">
-      <p class="joynure-hula-landing__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-      <div class="joynure-hula-strip__track">
+      <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">
+        <span class="joynure-hula-landing__title-accent">{{ section.settings.eyebrow | escape }}</span>
+      </h2>
+      {% if section.settings.lede != blank %}
+        <p class="joynure-hula-landing__lede joynure-hula-landing__lede--center">{{ section.settings.lede | escape }}</p>
+      {% endif %}
+      <div class="joynure-hula-strip__track joynure-hula-strip__track--3d">
         {% for i in (1..4) %}
           {% liquid
             assign img_key = 'image_' | append: i
@@ -16,18 +21,20 @@
             assign caption = section.settings[cap_key]
             assign mid = section.settings[mid_key]
           %}
-          <figure class="joynure-hula-strip__card">
-            {% render 'joynure-hula-media',
-              product: product,
-              setting_image: img,
-              media_id: mid,
-              alt: caption,
-              class: 'joynure-hula-landing__media',
-              loading: 'lazy',
-              sizes: '(min-width: 750px) 25vw, 70vw'
-            %}
+          <figure class="joynure-hula-card-3d joynure-hula-strip__card">
+            <div class="joynure-hula-card-3d__media">
+              {% render 'joynure-hula-media',
+                product: product,
+                setting_image: img,
+                media_id: mid,
+                alt: caption,
+                class: 'joynure-hula-landing__media',
+                loading: 'lazy',
+                sizes: '(min-width: 750px) 25vw, 70vw'
+              %}
+            </div>
             {% if caption != blank %}
-              <figcaption class="joynure-hula-strip__caption">{{ caption | escape }}</figcaption>
+              <figcaption class="joynure-hula-card-3d__body joynure-hula-strip__caption">{{ caption | escape }}</figcaption>
             {% endif %}
           </figure>
         {% endfor %}
@@ -43,7 +50,13 @@
   "class": "joynure-hula-landing-section",
   "enabled_on": { "templates": ["product"] },
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Home movement, your way" },
+    { "type": "text", "id": "eyebrow", "label": "Heading", "default": "Home movement, your way" },
+    {
+      "type": "textarea",
+      "id": "lede",
+      "label": "Supporting copy",
+      "default": "Real home-fitness moments in Pink, Purple, and Blue."
+    },
     { "type": "image_picker", "id": "image_1", "label": "Image 1" },
     { "type": "text", "id": "media_id_1", "label": "Fallback media ID 1", "default": "45010736709905" },
     { "type": "text", "id": "caption_1", "label": "Caption 1", "default": "Easy home movement" },

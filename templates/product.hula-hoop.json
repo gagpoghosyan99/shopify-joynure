@@ -298,6 +298,10 @@
       "type": "joynure-hula-lifestyle-strip",
       "settings": {}
     },
+    "joynure_hula_difference": {
+      "type": "joynure-hula-difference",
+      "settings": {}
+    },
     "joynure_hula_how_it_works": {
       "type": "joynure-hula-how-it-works",
       "settings": {}
@@ -356,6 +360,7 @@
     "main",
     "joynure_hula_benefits",
     "joynure_hula_lifestyle_strip",
+    "joynure_hula_difference",
     "joynure_hula_how_it_works",
     "joynure_hula_mechanism",
     "joynure_hula_steps",
