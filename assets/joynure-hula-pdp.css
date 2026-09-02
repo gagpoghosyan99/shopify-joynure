@@ -240,6 +240,127 @@
   border-radius: 1rem;
 }
 
+/* Main photo — clear left/right arrow controls on both sides */
+.joynure-hula-pdp slideshow-component,
+.joynure-hula-pdp .product-media-gallery__slideshow {
+  position: relative;
+}
+
+.joynure-hula-pdp slideshow-arrows,
+.joynure-hula-pdp slideshow-arrows.mobile\:hidden {
+  display: flex !important;
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 0.7rem;
+  pointer-events: none;
+  mix-blend-mode: normal !important;
+}
+
+.joynure-hula-pdp slideshow-arrows .slideshow-control--previous,
+.joynure-hula-pdp slideshow-arrows .slideshow-control--next {
+  pointer-events: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 2.85rem !important;
+  height: 2.85rem !important;
+  min-width: 2.85rem !important;
+  min-height: 2.85rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: rgb(36 49 46 / 82%) !important;
+  color: #fff !important;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 25%) inset,
+    0 8px 20px rgb(0 0 0 / 28%) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.joynure-hula-pdp slideshow-arrows .slideshow-control .svg-wrapper,
+.joynure-hula-pdp slideshow-arrows .slideshow-control .svg-wrapper svg {
+  display: block !important;
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+  opacity: 1 !important;
+  color: #fff !important;
+  --icon-stroke-width: 2px;
+}
+
+.joynure-hula-pdp slideshow-arrows .slideshow-control .svg-wrapper svg path {
+  stroke: #fff !important;
+  stroke-width: 2px !important;
+  opacity: 1 !important;
+}
+
+@media (hover: hover) {
+  .joynure-hula-pdp slideshow-arrows .slideshow-control--previous:hover,
+  .joynure-hula-pdp slideshow-arrows .slideshow-control--next:hover {
+    background: var(--jh-teal) !important;
+    transform: scale(1.07);
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 30%) inset,
+      0 10px 24px rgb(31 92 85 / 35%) !important;
+  }
+}
+
+/* Wider left/right click zones on the main photo */
+.joynure-hula-pdp slideshow-arrows .slideshow-control--previous::after,
+.joynure-hula-pdp slideshow-arrows .slideshow-control--next::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3.5rem;
+  height: min(70%, 22rem);
+  border-radius: 1rem;
+  background: transparent;
+}
+
+.joynure-hula-pdp slideshow-arrows .slideshow-control--previous {
+  position: relative;
+}
+
+.joynure-hula-pdp slideshow-arrows .slideshow-control--previous::after {
+  right: 0;
+  left: -0.35rem;
+}
+
+.joynure-hula-pdp slideshow-arrows .slideshow-control--next {
+  position: relative;
+}
+
+.joynure-hula-pdp slideshow-arrows .slideshow-control--next::after {
+  left: 0;
+  right: -0.35rem;
+}
+
+@media screen and (max-width: 749px) {
+  .joynure-hula-pdp slideshow-arrows,
+  .joynure-hula-pdp slideshow-arrows.mobile\:hidden {
+    display: flex !important;
+  }
+
+  .joynure-hula-pdp slideshow-arrows .slideshow-control--previous,
+  .joynure-hula-pdp slideshow-arrows .slideshow-control--next {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    min-width: 2.5rem !important;
+    min-height: 2.5rem !important;
+  }
+}
+
 /* Quantity controls — soft coral tint */
 .joynure-hula-pdp .quantity-selector,
 .joynure-hula-pdp .quantity {
