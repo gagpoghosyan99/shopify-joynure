@@ -42,11 +42,11 @@
     if joynure_hula_pdp_enabled
       assign sticky_atc_class = sticky_atc_class | append: ' joynure-pdp-phase-b-sticky'
     endif
-    if product.handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop' and template.suffix == 'hula-hoop'
+    if product.handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop'
       assign sticky_atc_class = sticky_atc_class | append: ' joynure-hula-sticky'
     endif
   %}
-  {% if product.handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop' and template.suffix == 'hula-hoop' %}
+  {% if product.handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop' %}
     {{ 'joynure-hula-pdp.css' | asset_url | stylesheet_tag }}
   {% endif %}
 
@@ -220,9 +220,7 @@
 {% liquid
   assign joynure_hula_landing = false
   if closest.product.handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop'
-    if template.suffix == 'hula-hoop'
-      assign joynure_hula_landing = true
-    endif
+    assign joynure_hula_landing = true
   endif
 %}
 {% if joynure_hula_landing %}
