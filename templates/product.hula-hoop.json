@@ -302,6 +302,10 @@
       "type": "joynure-hula-difference",
       "settings": {}
     },
+    "joynure_hula_survey": {
+      "type": "joynure-hula-survey",
+      "settings": {}
+    },
     "joynure_hula_how_it_works": {
       "type": "joynure-hula-how-it-works",
       "settings": {}
