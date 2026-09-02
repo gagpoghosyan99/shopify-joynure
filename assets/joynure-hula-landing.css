@@ -986,23 +986,118 @@
   font-weight: 650;
 }
 
-/* See the difference — 4 compact cards */
-.joynure-hula-difference__grid {
+/* See the difference — 4 before/after review cards */
+.joynure-hula-difference__grid,
+.joynure-hula-reviews__grid {
   display: grid;
-  gap: 1.15rem;
+  gap: 1.25rem;
   grid-template-columns: 1fr;
 }
 
 @media screen and (min-width: 750px) {
-  .joynure-hula-difference__grid {
+  .joynure-hula-difference__grid,
+  .joynure-hula-reviews__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media screen and (min-width: 990px) {
-  .joynure-hula-difference__grid {
+@media screen and (min-width: 1100px) {
+  .joynure-hula-difference__grid,
+  .joynure-hula-reviews__grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+}
+
+.joynure-hula-review-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.joynure-hula-review-card__ba {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem;
+  padding: 0.45rem 0.45rem 0;
+}
+
+.joynure-hula-review-card__shot {
+  margin: 0;
+  position: relative;
+  min-width: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f3efe8;
+}
+
+.joynure-hula-review-card__shot .joynure-hula-card-3d__media img,
+.joynure-hula-review-card__shot img {
+  aspect-ratio: 1;
+  min-height: calc(8.5rem + 20px);
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.joynure-hula-review-card__badge {
+  position: absolute;
+  top: 0.45rem;
+  left: 0.45rem;
+  z-index: 2;
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  box-shadow: 0 4px 12px rgb(36 49 46 / 16%);
+}
+
+.joynure-hula-review-card__badge--before {
+  background: rgb(36 49 46 / 82%);
+  color: #fff;
+}
+
+.joynure-hula-review-card__badge--after {
+  background: var(--jh-teal);
+  color: #fff;
+}
+
+.joynure-hula-review-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+}
+
+.joynure-hula-review-card__stars {
+  color: var(--jh-gold, #f2c66d);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.joynure-hula-review-card__quote {
+  margin: 0;
+  color: var(--jh-ink);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  font-weight: 550;
+}
+
+.joynure-hula-review-card__name {
+  margin: 0.35rem 0 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--jh-teal);
+}
+
+.joynure-hula-review-card__meta {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--jh-muted);
+  letter-spacing: 0.02em;
 }
 
 .joynure-hula-difference__card .joynure-hula-card-3d__media img {

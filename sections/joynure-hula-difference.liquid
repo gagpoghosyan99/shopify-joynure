@@ -9,31 +9,59 @@
         {{ section.settings.heading | escape }}
       </h2>
       <p class="joynure-hula-landing__lede joynure-hula-landing__lede--center">{{ section.settings.lede | escape }}</p>
-      <div class="joynure-hula-difference__grid">
+      <div class="joynure-hula-difference__grid joynure-hula-reviews__grid">
         {% for i in (1..4) %}
           {% liquid
-            assign tk = 't' | append: i | append: '_title'
-            assign xk = 't' | append: i | append: '_text'
-            assign ik = 'image_' | append: i
-            assign mk = 'media_id_' | append: i
-            assign ak = 'asset_' | append: i
+            assign quote_key = 'r' | append: i | append: '_quote'
+            assign name_key = 'r' | append: i | append: '_name'
+            assign meta_key = 'r' | append: i | append: '_meta'
+            assign before_picker = 'before_image_' | append: i
+            assign after_picker = 'after_image_' | append: i
+            assign before_asset = 'before_asset_' | append: i
+            assign after_asset = 'after_asset_' | append: i
+            assign before_mid = 'before_media_id_' | append: i
+            assign after_mid = 'after_media_id_' | append: i
           %}
-          <article class="joynure-hula-card-3d joynure-hula-difference__card">
-            <div class="joynure-hula-card-3d__media">
-              {% render 'joynure-hula-media',
-                product: product,
-                setting_image: section.settings[ik],
-                asset_file: section.settings[ak],
-                media_id: section.settings[mk],
-                alt: section.settings[tk],
-                class: 'joynure-hula-landing__media',
-                loading: 'lazy',
-                sizes: '(min-width: 990px) 22vw, (min-width: 750px) 45vw, 88vw'
-              %}
+          <article class="joynure-hula-card-3d joynure-hula-review-card">
+            <div class="joynure-hula-review-card__ba" aria-label="Before and after photos">
+              <figure class="joynure-hula-review-card__shot">
+                <span class="joynure-hula-review-card__badge joynure-hula-review-card__badge--before">{{ section.settings.before_label | escape }}</span>
+                <div class="joynure-hula-card-3d__media">
+                  {% render 'joynure-hula-media',
+                    product: product,
+                    setting_image: section.settings[before_picker],
+                    asset_file: section.settings[before_asset],
+                    media_id: section.settings[before_mid],
+                    alt: section.settings.before_label,
+                    class: 'joynure-hula-landing__media',
+                    loading: 'lazy',
+                    sizes: '(min-width: 990px) 11vw, (min-width: 750px) 22vw, 44vw'
+                  %}
+                </div>
+              </figure>
+              <figure class="joynure-hula-review-card__shot">
+                <span class="joynure-hula-review-card__badge joynure-hula-review-card__badge--after">{{ section.settings.after_label | escape }}</span>
+                <div class="joynure-hula-card-3d__media">
+                  {% render 'joynure-hula-media',
+                    product: product,
+                    setting_image: section.settings[after_picker],
+                    asset_file: section.settings[after_asset],
+                    media_id: section.settings[after_mid],
+                    alt: section.settings.after_label,
+                    class: 'joynure-hula-landing__media',
+                    loading: 'lazy',
+                    sizes: '(min-width: 990px) 11vw, (min-width: 750px) 22vw, 44vw'
+                  %}
+                </div>
+              </figure>
             </div>
-            <div class="joynure-hula-card-3d__body">
-              <h3>{{ section.settings[tk] | escape }}</h3>
-              <p>{{ section.settings[xk] | escape }}</p>
+            <div class="joynure-hula-card-3d__body joynure-hula-review-card__body">
+              <div class="joynure-hula-review-card__stars" aria-hidden="true">★★★★★</div>
+              <p class="joynure-hula-review-card__quote">“{{ section.settings[quote_key] | escape }}”</p>
+              <p class="joynure-hula-review-card__name">{{ section.settings[name_key] | escape }}</p>
+              {% if section.settings[meta_key] != blank %}
+                <p class="joynure-hula-review-card__meta">{{ section.settings[meta_key] | escape }}</p>
+              {% endif %}
             </div>
           </article>
         {% endfor %}
@@ -54,28 +82,54 @@
       "type": "textarea",
       "id": "lede",
       "label": "Supporting copy",
-      "default": "Four reasons the JOYNURE hoop feels different from a basic fixed hoop."
+      "default": "Real home-movement moments — before a traditional hoop, after switching to JOYNURE."
     },
-    { "type": "image_picker", "id": "image_1", "label": "Card 1 image" },
-    { "type": "text", "id": "asset_1", "label": "Card 1 theme asset", "default": "hula-diff-adjustable.jpg" },
-    { "type": "text", "id": "media_id_1", "label": "Card 1 media ID", "default": "45010736709905" },
-    { "type": "text", "id": "t1_title", "label": "Card 1 title", "default": "Adjustable fit" },
-    { "type": "textarea", "id": "t1_text", "label": "Card 1 text", "default": "Add or remove sections for a waist fit that feels personal." },
-    { "type": "image_picker", "id": "image_2", "label": "Card 2 image" },
-    { "type": "text", "id": "asset_2", "label": "Card 2 theme asset", "default": "hula-diff-weighted.jpg" },
-    { "type": "text", "id": "media_id_2", "label": "Card 2 media ID", "default": "45010744803601" },
-    { "type": "text", "id": "t2_title", "label": "Card 2 title", "default": "Weighted movement" },
-    { "type": "textarea", "id": "t2_text", "label": "Card 2 text", "default": "A gravity ball on the track adds engaging motion to home workouts." },
-    { "type": "image_picker", "id": "image_3", "label": "Card 3 image" },
-    { "type": "text", "id": "asset_3", "label": "Card 3 theme asset", "default": "hula-diff-compact.jpg" },
-    { "type": "text", "id": "media_id_3", "label": "Card 3 media ID", "default": "45011048595729" },
-    { "type": "text", "id": "t3_title", "label": "Card 3 title", "default": "Compact storage" },
-    { "type": "textarea", "id": "t3_text", "label": "Card 3 text", "default": "Detachable sections pack down when you are done." },
-    { "type": "image_picker", "id": "image_4", "label": "Card 4 image" },
-    { "type": "text", "id": "asset_4", "label": "Card 4 theme asset", "default": "hula-diff-colors.jpg" },
-    { "type": "text", "id": "media_id_4", "label": "Card 4 media ID", "default": "45011048661265" },
-    { "type": "text", "id": "t4_title", "label": "Card 4 title", "default": "Three colors" },
-    { "type": "textarea", "id": "t4_text", "label": "Card 4 text", "default": "Pink, Purple, and Blue finishes to match your space." }
+    { "type": "text", "id": "before_label", "label": "Before label", "default": "Before" },
+    { "type": "text", "id": "after_label", "label": "After label", "default": "After" },
+
+    { "type": "header", "content": "Review 1" },
+    { "type": "image_picker", "id": "before_image_1", "label": "Before image 1" },
+    { "type": "text", "id": "before_asset_1", "label": "Before asset 1", "default": "hula-review-1-before.jpg" },
+    { "type": "text", "id": "before_media_id_1", "label": "Before media ID 1" },
+    { "type": "image_picker", "id": "after_image_1", "label": "After image 1" },
+    { "type": "text", "id": "after_asset_1", "label": "After asset 1", "default": "hula-review-1-after.jpg" },
+    { "type": "text", "id": "after_media_id_1", "label": "After media ID 1" },
+    { "type": "textarea", "id": "r1_quote", "label": "Quote 1", "default": "My old hoop kept falling every few seconds. The weighted track made home movement feel steady and fun." },
+    { "type": "text", "id": "r1_name", "label": "Name 1", "default": "Maya R." },
+    { "type": "text", "id": "r1_meta", "label": "Meta 1", "default": "Pink · Home fitness" },
+
+    { "type": "header", "content": "Review 2" },
+    { "type": "image_picker", "id": "before_image_2", "label": "Before image 2" },
+    { "type": "text", "id": "before_asset_2", "label": "Before asset 2", "default": "hula-review-2-before.jpg" },
+    { "type": "text", "id": "before_media_id_2", "label": "Before media ID 2" },
+    { "type": "image_picker", "id": "after_image_2", "label": "After image 2" },
+    { "type": "text", "id": "after_asset_2", "label": "After asset 2", "default": "hula-review-2-after.jpg" },
+    { "type": "text", "id": "after_media_id_2", "label": "After media ID 2" },
+    { "type": "textarea", "id": "r2_quote", "label": "Quote 2", "default": "I finally stopped fighting the hoop. The gravity ball guides the motion so I can focus on the rhythm." },
+    { "type": "text", "id": "r2_name", "label": "Name 2", "default": "Elena K." },
+    { "type": "text", "id": "r2_meta", "label": "Meta 2", "default": "Purple · Apartment workout" },
+
+    { "type": "header", "content": "Review 3" },
+    { "type": "image_picker", "id": "before_image_3", "label": "Before image 3" },
+    { "type": "text", "id": "before_asset_3", "label": "Before asset 3", "default": "hula-review-3-before.jpg" },
+    { "type": "text", "id": "before_media_id_3", "label": "Before media ID 3" },
+    { "type": "image_picker", "id": "after_image_3", "label": "After image 3" },
+    { "type": "text", "id": "after_asset_3", "label": "After asset 3", "default": "hula-review-3-after.jpg" },
+    { "type": "text", "id": "after_media_id_3", "label": "After media ID 3" },
+    { "type": "textarea", "id": "r3_quote", "label": "Quote 3", "default": "The old hoop lived in the middle of my living room. Now the sections pack down and the space feels clear again." },
+    { "type": "text", "id": "r3_name", "label": "Name 3", "default": "Sofia L." },
+    { "type": "text", "id": "r3_meta", "label": "Meta 3", "default": "Compact storage" },
+
+    { "type": "header", "content": "Review 4" },
+    { "type": "image_picker", "id": "before_image_4", "label": "Before image 4" },
+    { "type": "text", "id": "before_asset_4", "label": "Before asset 4", "default": "hula-review-4-before.jpg" },
+    { "type": "text", "id": "before_media_id_4", "label": "Before media ID 4" },
+    { "type": "image_picker", "id": "after_image_4", "label": "After image 4" },
+    { "type": "text", "id": "after_asset_4", "label": "After asset 4", "default": "hula-review-4-after.jpg" },
+    { "type": "text", "id": "after_media_id_4", "label": "After media ID 4" },
+    { "type": "textarea", "id": "r4_quote", "label": "Quote 4", "default": "Adding and removing sections gave me a waist fit that actually feels personal — no more oversized hoop." },
+    { "type": "text", "id": "r4_name", "label": "Name 4", "default": "Ava M." },
+    { "type": "text", "id": "r4_meta", "label": "Meta 4", "default": "Blue · Adjustable fit" }
   ],
   "presets": [{ "name": "JOYNURE Hula difference" }]
 }
