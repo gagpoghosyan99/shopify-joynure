@@ -17,15 +17,18 @@
             assign img_key = 'image_' | append: i
             assign cap_key = 'caption_' | append: i
             assign mid_key = 'media_id_' | append: i
+            assign asset_key = 'asset_' | append: i
             assign img = section.settings[img_key]
             assign caption = section.settings[cap_key]
             assign mid = section.settings[mid_key]
+            assign asset = section.settings[asset_key]
           %}
           <figure class="joynure-hula-card-3d joynure-hula-strip__card">
             <div class="joynure-hula-card-3d__media">
               {% render 'joynure-hula-media',
                 product: product,
                 setting_image: img,
+                asset_file: asset,
                 media_id: mid,
                 alt: caption,
                 class: 'joynure-hula-landing__media',
@@ -58,15 +61,19 @@
       "default": "Real home-fitness moments in Pink, Purple, and Blue."
     },
     { "type": "image_picker", "id": "image_1", "label": "Image 1" },
+    { "type": "text", "id": "asset_1", "label": "Theme asset 1", "default": "hula-life-1.jpg" },
     { "type": "text", "id": "media_id_1", "label": "Fallback media ID 1", "default": "45010736709905" },
     { "type": "text", "id": "caption_1", "label": "Caption 1", "default": "Easy home movement" },
     { "type": "image_picker", "id": "image_2", "label": "Image 2" },
+    { "type": "text", "id": "asset_2", "label": "Theme asset 2", "default": "hula-life-2.jpg" },
     { "type": "text", "id": "media_id_2", "label": "Fallback media ID 2", "default": "45011048595729" },
     { "type": "text", "id": "caption_2", "label": "Caption 2", "default": "Adjustable fit" },
     { "type": "image_picker", "id": "image_3", "label": "Image 3" },
+    { "type": "text", "id": "asset_3", "label": "Theme asset 3", "default": "hula-life-3.jpg" },
     { "type": "text", "id": "media_id_3", "label": "Fallback media ID 3", "default": "45011048661265" },
     { "type": "text", "id": "caption_3", "label": "Caption 3", "default": "Compact home fitness" },
     { "type": "image_picker", "id": "image_4", "label": "Image 4" },
+    { "type": "text", "id": "asset_4", "label": "Theme asset 4", "default": "hula-life-4.jpg" },
     { "type": "text", "id": "media_id_4", "label": "Fallback media ID 4", "default": "45011023069457" },
     { "type": "text", "id": "caption_4", "label": "Caption 4", "default": "Choose your color" }
   ],

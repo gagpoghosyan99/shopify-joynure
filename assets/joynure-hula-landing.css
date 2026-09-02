@@ -1007,7 +1007,15 @@
 
 .joynure-hula-difference__card .joynure-hula-card-3d__media img {
   aspect-ratio: 1;
-  min-height: 11rem;
+  min-height: calc(13rem + 30px);
+}
+
+.joynure-hula-difference__card .joynure-hula-card-3d__body {
+  padding: 1.25rem 1.3rem 1.45rem;
+}
+
+.joynure-hula-difference__card .joynure-hula-card-3d__body h3 {
+  font-size: 1.12rem;
 }
 
 /* How it works — 3D step cards with images */
@@ -1094,31 +1102,52 @@
 
 .joynure-hula-final__swatch {
   appearance: none;
-  border: 1.5px solid var(--jh-line);
-  border-radius: 14px;
-  min-height: 3rem;
-  padding: 0.55rem 0.75rem;
-  background: linear-gradient(180deg, #fff 0%, #faf9f7 100%);
+  border: 2px solid transparent;
+  border-radius: 16px;
+  min-height: 3.4rem;
+  padding: 0.7rem 0.85rem;
+  color: #fff;
   font: inherit;
-  font-weight: 650;
+  font-weight: 700;
   cursor: pointer;
   box-shadow:
-    0 1px 0 rgb(255 255 255 / 90%) inset,
-    0 4px 0 rgb(36 49 46 / 6%),
-    0 8px 18px rgb(31 92 85 / 8%);
-  transition: transform 180ms ease, box-shadow 180ms ease;
+    0 1px 0 rgb(255 255 255 / 45%) inset,
+    0 5px 0 rgb(0 0 0 / 14%),
+    0 12px 22px rgb(36 49 46 / 14%);
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.joynure-hula-final__swatch[data-color='Pink'],
+.joynure-hula-final__swatch[data-label='Pink'] {
+  background: linear-gradient(180deg, #ff8fa3 0%, #ec4899 100%);
+  border-color: #db2777;
+}
+
+.joynure-hula-final__swatch[data-color='Purple'],
+.joynure-hula-final__swatch[data-label='Purple'] {
+  background: linear-gradient(180deg, #c4b5fd 0%, #8b5cf6 100%);
+  border-color: #7c3aed;
+}
+
+.joynure-hula-final__swatch[data-color='Blue'],
+.joynure-hula-final__swatch[data-label='Blue'] {
+  background: linear-gradient(180deg, #7dd3fc 0%, #0ea5e9 100%);
+  border-color: #0284c7;
 }
 
 @media (hover: hover) {
   .joynure-hula-final__swatch:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    filter: brightness(1.05);
   }
 }
 
 .joynure-hula-final__swatch[aria-pressed='true'] {
-  transform: translateY(2px);
-  border-color: var(--jh-teal);
+  transform: translateY(3px);
+  outline: 2px solid var(--jh-teal);
+  outline-offset: 3px;
   box-shadow:
-    0 2px 0 rgb(31 92 85 / 16%),
-    0 6px 14px rgb(31 92 85 / 12%);
+    0 1px 0 rgb(255 255 255 / 35%) inset,
+    0 2px 0 rgb(0 0 0 / 18%),
+    0 6px 14px rgb(36 49 46 / 16%);
 }

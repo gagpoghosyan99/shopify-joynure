@@ -16,12 +16,14 @@
             assign xk = 't' | append: i | append: '_text'
             assign ik = 'image_' | append: i
             assign mk = 'media_id_' | append: i
+            assign ak = 'asset_' | append: i
           %}
           <article class="joynure-hula-card-3d joynure-hula-difference__card">
             <div class="joynure-hula-card-3d__media">
               {% render 'joynure-hula-media',
                 product: product,
                 setting_image: section.settings[ik],
+                asset_file: section.settings[ak],
                 media_id: section.settings[mk],
                 alt: section.settings[tk],
                 class: 'joynure-hula-landing__media',
@@ -55,18 +57,22 @@
       "default": "Four reasons the JOYNURE hoop feels different from a basic fixed hoop."
     },
     { "type": "image_picker", "id": "image_1", "label": "Card 1 image" },
+    { "type": "text", "id": "asset_1", "label": "Card 1 theme asset", "default": "hula-diff-adjustable.jpg" },
     { "type": "text", "id": "media_id_1", "label": "Card 1 media ID", "default": "45010736709905" },
     { "type": "text", "id": "t1_title", "label": "Card 1 title", "default": "Adjustable fit" },
     { "type": "textarea", "id": "t1_text", "label": "Card 1 text", "default": "Add or remove sections for a waist fit that feels personal." },
     { "type": "image_picker", "id": "image_2", "label": "Card 2 image" },
+    { "type": "text", "id": "asset_2", "label": "Card 2 theme asset", "default": "hula-diff-weighted.jpg" },
     { "type": "text", "id": "media_id_2", "label": "Card 2 media ID", "default": "45010744803601" },
     { "type": "text", "id": "t2_title", "label": "Card 2 title", "default": "Weighted movement" },
     { "type": "textarea", "id": "t2_text", "label": "Card 2 text", "default": "A gravity ball on the track adds engaging motion to home workouts." },
     { "type": "image_picker", "id": "image_3", "label": "Card 3 image" },
+    { "type": "text", "id": "asset_3", "label": "Card 3 theme asset", "default": "hula-diff-compact.jpg" },
     { "type": "text", "id": "media_id_3", "label": "Card 3 media ID", "default": "45011048595729" },
     { "type": "text", "id": "t3_title", "label": "Card 3 title", "default": "Compact storage" },
     { "type": "textarea", "id": "t3_text", "label": "Card 3 text", "default": "Detachable sections pack down when you are done." },
     { "type": "image_picker", "id": "image_4", "label": "Card 4 image" },
+    { "type": "text", "id": "asset_4", "label": "Card 4 theme asset", "default": "hula-diff-colors.jpg" },
     { "type": "text", "id": "media_id_4", "label": "Card 4 media ID", "default": "45011048661265" },
     { "type": "text", "id": "t4_title", "label": "Card 4 title", "default": "Three colors" },
     { "type": "textarea", "id": "t4_text", "label": "Card 4 text", "default": "Pink, Purple, and Blue finishes to match your space." }

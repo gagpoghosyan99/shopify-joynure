@@ -10,6 +10,7 @@
           {% render 'joynure-hula-media',
             product: product,
             setting_image: section.settings.image,
+            asset_file: section.settings.asset_file,
             media_id: section.settings.media_id,
             alt: section.settings.heading,
             class: 'joynure-hula-landing__media joynure-hula-landing__media--contain',
@@ -57,6 +58,7 @@
       "default": "Modular sections, a smooth track, and an adjustable cord work together for home movement."
     },
     { "type": "image_picker", "id": "image", "label": "Detail image" },
+    { "type": "text", "id": "asset_file", "label": "Theme asset", "default": "hula-mechanism.jpg" },
     { "type": "text", "id": "media_id", "label": "Fallback media ID", "default": "45010788942097" },
     { "type": "text", "id": "i1_title", "label": "Point 1 title", "default": "Adjustable 24-section design" },
     { "type": "textarea", "id": "i1_text", "label": "Point 1 text", "default": "Add or remove sections to refine the hoop size for a comfortable waist fit." },
