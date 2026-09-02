@@ -54,13 +54,23 @@
                 endcapture
                 assign clean_color = clean_color | strip
                 assign color_key = clean_color | downcase
+                assign raw_key = raw_color | downcase
                 assign swatch_class = 'joynure-hula-final__swatch'
-                if color_key == 'pink'
+                if color_key == 'pink' or raw_key contains 'pink'
                   assign swatch_class = swatch_class | append: ' joynure-hula-final__swatch--pink'
-                elsif color_key == 'purple'
+                  if clean_color == blank
+                    assign clean_color = 'Pink'
+                  endif
+                elsif color_key == 'purple' or raw_key contains 'purple'
                   assign swatch_class = swatch_class | append: ' joynure-hula-final__swatch--purple'
-                elsif color_key == 'blue'
+                  if clean_color == blank
+                    assign clean_color = 'Purple'
+                  endif
+                elsif color_key == 'blue' or raw_key contains 'blue'
                   assign swatch_class = swatch_class | append: ' joynure-hula-final__swatch--blue'
+                  if clean_color == blank
+                    assign clean_color = 'Blue'
+                  endif
                 endif
                 assign pressed = false
                 if variant.id == current_variant.id
