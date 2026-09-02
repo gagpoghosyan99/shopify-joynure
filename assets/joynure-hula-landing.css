@@ -1117,20 +1117,17 @@
   transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
 }
 
-.joynure-hula-final__swatch[data-color='Pink'],
-.joynure-hula-final__swatch[data-label='Pink'] {
+.joynure-hula-final__swatch--pink {
   background: linear-gradient(180deg, #ff8fa3 0%, #ec4899 100%);
   border-color: #db2777;
 }
 
-.joynure-hula-final__swatch[data-color='Purple'],
-.joynure-hula-final__swatch[data-label='Purple'] {
+.joynure-hula-final__swatch--purple {
   background: linear-gradient(180deg, #c4b5fd 0%, #8b5cf6 100%);
   border-color: #7c3aed;
 }
 
-.joynure-hula-final__swatch[data-color='Blue'],
-.joynure-hula-final__swatch[data-label='Blue'] {
+.joynure-hula-final__swatch--blue {
   background: linear-gradient(180deg, #7dd3fc 0%, #0ea5e9 100%);
   border-color: #0284c7;
 }
