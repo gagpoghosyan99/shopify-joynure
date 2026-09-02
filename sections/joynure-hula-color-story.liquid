@@ -1,0 +1,83 @@
+{%- capture enabled_flag -%}
+  {%- render 'joynure-hula-landing-enabled', product: product -%}
+{%- endcapture -%}
+{%- if enabled_flag == 'true' -%}
+  {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
+  <section class="joynure-hula-landing joynure-hula-landing__section" {{ section.shopify_attributes }}>
+    <div class="joynure-hula-landing__inner">
+      <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">
+        <span class="joynure-hula-landing__title-accent">Find</span> Your Color
+      </h2>
+      <p class="joynure-hula-landing__lede joynure-hula-landing__lede--center">{{ section.settings.lede | escape }}</p>
+      <div class="joynure-hula-colors__banners">
+        {% for color in (1..3) %}
+          {% liquid
+            case color
+              when 1
+                assign name = section.settings.pink_title
+                assign text = section.settings.pink_text
+                assign img = section.settings.pink_image
+                assign mid = section.settings.pink_media_id
+                assign tone = 'pink'
+              when 2
+                assign name = section.settings.purple_title
+                assign text = section.settings.purple_text
+                assign img = section.settings.purple_image
+                assign mid = section.settings.purple_media_id
+                assign tone = 'purple'
+              when 3
+                assign name = section.settings.blue_title
+                assign text = section.settings.blue_text
+                assign img = section.settings.blue_image
+                assign mid = section.settings.blue_media_id
+                assign tone = 'blue'
+            endcase
+          %}
+          <article class="joynure-hula-colors__banner joynure-hula-colors__banner--{{ tone }}">
+            <div class="joynure-hula-colors__banner-media">
+              {% render 'joynure-hula-media',
+                product: product,
+                setting_image: img,
+                media_id: mid,
+                alt: name,
+                class: 'joynure-hula-landing__media',
+                loading: 'lazy',
+                sizes: '100vw'
+              %}
+            </div>
+            <div class="joynure-hula-colors__banner-meta">
+              <span class="joynure-hula-colors__badge">{{ name | escape }}</span>
+              <h3>{{ name | escape }}</h3>
+              <p>{{ text | escape }}</p>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Hula color story",
+  "tag": "section",
+  "class": "joynure-hula-landing-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "textarea", "id": "lede", "label": "Supporting copy", "default": "Three finishes. One adjustable smart hoop experience." },
+    { "type": "image_picker", "id": "pink_image", "label": "Pink image" },
+    { "type": "text", "id": "pink_media_id", "label": "Pink media ID", "default": "45010744803601" },
+    { "type": "text", "id": "pink_title", "label": "Pink title", "default": "Pink" },
+    { "type": "textarea", "id": "pink_text", "label": "Pink text", "default": "A bright everyday finish for home movement sessions." },
+    { "type": "image_picker", "id": "purple_image", "label": "Purple image" },
+    { "type": "text", "id": "purple_media_id", "label": "Purple media ID", "default": "45011048595729" },
+    { "type": "text", "id": "purple_title", "label": "Purple title", "default": "Purple" },
+    { "type": "textarea", "id": "purple_text", "label": "Purple text", "default": "A bold option for a more expressive home-fitness look." },
+    { "type": "image_picker", "id": "blue_image", "label": "Blue image" },
+    { "type": "text", "id": "blue_media_id", "label": "Blue media ID", "default": "45011048661265" },
+    { "type": "text", "id": "blue_title", "label": "Blue title", "default": "Blue" },
+    { "type": "textarea", "id": "blue_text", "label": "Blue text", "default": "A clean, calm finish that fits quietly into living spaces." }
+  ],
+  "presets": [{ "name": "JOYNURE Hula color story" }]
+}
+{% endschema %}

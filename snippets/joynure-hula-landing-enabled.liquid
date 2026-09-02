@@ -1,0 +1,11 @@
+{%- doc -%}
+  Returns "true" only for the JOYNURE Smart Weighted Hula Hoop product.
+  Used to scope long-form landing sections so Pet/Baby PDPs stay unchanged.
+{%- enddoc -%}
+{%- liquid
+  if product != blank and product.handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop'
+    echo 'true'
+  else
+    echo 'false'
+  endif
+-%}

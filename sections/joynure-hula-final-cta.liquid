@@ -1,0 +1,132 @@
+{%- capture enabled_flag -%}
+  {%- render 'joynure-hula-landing-enabled', product: product -%}
+{%- endcapture -%}
+{%- if enabled_flag == 'true' -%}
+  {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'joynure-hula-landing.js' | asset_url }}" type="module"></script>
+
+  {%- liquid
+    assign current_variant = product.selected_or_first_available_variant
+    assign money_price = current_variant.price | money
+  -%}
+
+  <section class="joynure-hula-landing joynure-hula-landing__section joynure-hula-landing__section--wash" {{ section.shopify_attributes }}>
+    <div class="joynure-hula-landing__inner joynure-hula-final">
+      <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">{{ section.settings.heading | escape }}</h2>
+      <p class="joynure-hula-landing__lede joynure-hula-landing__lede--center">{{ section.settings.lede | escape }}</p>
+
+      <joynure-hula-final-cta class="joynure-hula-final__panel">
+        <div class="joynure-hula-final__media">
+          {% if current_variant.featured_image != blank %}
+            {{
+              current_variant.featured_image
+              | image_url: width: 900
+              | image_tag:
+                class: 'joynure-hula-landing__media joynure-hula-landing__media--contain',
+                alt: product.title,
+                loading: 'lazy',
+                widths: '400, 600, 900',
+                data-joynure-hula-final-media: true
+            }}
+          {% else %}
+            {% render 'joynure-hula-media',
+              product: product,
+              setting_image: section.settings.image,
+              media_id: section.settings.media_id,
+              alt: product.title,
+              class: 'joynure-hula-landing__media joynure-hula-landing__media--contain',
+              loading: 'lazy'
+            %}
+          {% endif %}
+        </div>
+
+        <div>
+          <p class="joynure-hula-landing__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          <h3 class="joynure-hula-landing__title" style="font-size:1.5rem;">{{ section.settings.product_label | default: product.title | escape }}</h3>
+          <p class="joynure-hula-final__price" data-joynure-hula-final-price>{{ money_price }}</p>
+
+          <div class="joynure-hula-final__colors" role="group" aria-label="Choose color">
+            {% for variant in product.variants %}
+              {% liquid
+                assign raw_color = variant.option1
+                capture clean_color
+                  render 'joynure-variant-label', label: raw_color
+                endcapture
+                assign clean_color = clean_color | strip
+                assign color_key = clean_color | downcase
+                assign raw_key = raw_color | downcase
+                assign swatch_class = 'joynure-hula-final__swatch'
+                if color_key == 'pink' or raw_key contains 'pink'
+                  assign swatch_class = swatch_class | append: ' joynure-hula-final__swatch--pink'
+                  if clean_color == blank
+                    assign clean_color = 'Pink'
+                  endif
+                elsif color_key == 'purple' or raw_key contains 'purple'
+                  assign swatch_class = swatch_class | append: ' joynure-hula-final__swatch--purple'
+                  if clean_color == blank
+                    assign clean_color = 'Purple'
+                  endif
+                elsif color_key == 'blue' or raw_key contains 'blue'
+                  assign swatch_class = swatch_class | append: ' joynure-hula-final__swatch--blue'
+                  if clean_color == blank
+                    assign clean_color = 'Blue'
+                  endif
+                endif
+                assign pressed = false
+                if variant.id == current_variant.id
+                  assign pressed = true
+                endif
+                assign image_url = ''
+                if variant.featured_image != blank
+                  assign image_url = variant.featured_image | image_url: width: 900
+                endif
+              %}
+              <button
+                type="button"
+                class="{{ swatch_class }}"
+                data-joynure-hula-color
+                data-variant-id="{{ variant.id }}"
+                data-display-label="{{ clean_color | escape }}"
+                data-price="{{ variant.price | money | escape }}"
+                data-image="{{ image_url | escape }}"
+                aria-pressed="{% if pressed %}true{% else %}false{% endif %}"
+              >
+                {{ clean_color | escape }}
+              </button>
+            {% endfor %}
+          </div>
+
+          <button
+            type="button"
+            class="joynure-hula-final__atc"
+            data-joynure-hula-final-atc
+            data-variant-id="{{ current_variant.id }}"
+          >
+            {{ section.settings.button_label | escape }}
+          </button>
+          <p class="joynure-hula-final__note">{{ section.settings.note | escape }}</p>
+        </div>
+      </joynure-hula-final-cta>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Hula final CTA",
+  "tag": "section",
+  "class": "joynure-hula-landing-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Ready to Get Moving?" },
+    { "type": "textarea", "id": "lede", "label": "Supporting copy", "default": "Choose your color and start your JOYNURE home-fitness routine." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "JOYNURE / Home Fitness" },
+    { "type": "text", "id": "product_label", "label": "Product label", "default": "Smart Weighted Hula Hoop" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Add to Cart" },
+    { "type": "text", "id": "note", "label": "Note", "default": "Uses your selected Shopify variant — not a separate form." },
+    { "type": "image_picker", "id": "image", "label": "Fallback image" },
+    { "type": "text", "id": "media_id", "label": "Fallback media ID", "default": "45010727797009" }
+  ],
+  "presets": [{ "name": "JOYNURE Hula final CTA" }]
+}
+{% endschema %}

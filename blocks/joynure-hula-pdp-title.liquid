@@ -1,0 +1,48 @@
+{%- liquid
+  assign show_hula_title = false
+  if closest.product.handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop'
+    assign show_hula_title = true
+  endif
+-%}
+
+{%- if show_hula_title -%}
+  <div class="joynure-hula-title-block" {{ block.shopify_attributes }}>
+    <h1 class="joynure-hula-title">
+      <span class="joynure-hula-title__brand">{{ block.settings.brand | default: 'JOYNURE' | escape }}</span>
+      {{ block.settings.title | default: 'Smart Weighted Hula Hoop' | escape }}
+    </h1>
+    {%- if block.settings.subtitle != blank -%}
+      <p class="joynure-hula-title__sub">{{ block.settings.subtitle | escape }}</p>
+    {%- endif -%}
+  </div>
+{%- elsif closest.product != blank -%}
+  <h1 class="product-title" {{ block.shopify_attributes }}>{{ closest.product.title | escape }}</h1>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Hula title",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand",
+      "label": "Brand",
+      "default": "JOYNURE"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Smart Weighted Hula Hoop"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Adjustable 24-Section Fitness Hoop"
+    }
+  ],
+  "presets": [{ "name": "JOYNURE Hula title" }]
+}
+{% endschema %}

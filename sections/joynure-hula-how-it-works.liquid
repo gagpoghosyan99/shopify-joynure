@@ -1,0 +1,89 @@
+{%- capture enabled_flag -%}
+  {%- render 'joynure-hula-landing-enabled', product: product -%}
+{%- endcapture -%}
+{%- if enabled_flag == 'true' -%}
+  {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
+  <section class="joynure-hula-landing joynure-hula-landing__section joynure-hula-landing__section--blush" {{ section.shopify_attributes }}>
+    <div class="joynure-hula-landing__inner">
+      <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">{{ section.settings.heading | escape }}</h2>
+      <p class="joynure-hula-landing__lede joynure-hula-landing__lede--center">{{ section.settings.lede | escape }}</p>
+      <div class="joynure-hula-how__hero joynure-hula-card-3d joynure-hula-card-3d--hero">
+        <div class="joynure-hula-card-3d__media">
+          {% render 'joynure-hula-media',
+            product: product,
+            setting_image: section.settings.image,
+            asset_file: section.settings.asset_file,
+            media_id: section.settings.media_id,
+            alt: section.settings.heading,
+            class: 'joynure-hula-landing__media',
+            loading: 'lazy',
+            sizes: '100vw'
+          %}
+        </div>
+      </div>
+      <div class="joynure-hula-how__steps joynure-hula-how__steps--3d">
+        {% for i in (1..3) %}
+          {% liquid
+            assign tkey = 's' | append: i | append: '_title'
+            assign xkey = 's' | append: i | append: '_text'
+            assign ikey = 's' | append: i | append: '_image'
+            assign mkey = 's' | append: i | append: '_media_id'
+            assign akey = 's' | append: i | append: '_asset'
+            assign num = i | prepend: '0'
+          %}
+          <article class="joynure-hula-card-3d joynure-hula-how__step">
+            <div class="joynure-hula-card-3d__media joynure-hula-how__step-media">
+              {% render 'joynure-hula-media',
+                product: product,
+                setting_image: section.settings[ikey],
+                asset_file: section.settings[akey],
+                media_id: section.settings[mkey],
+                alt: section.settings[tkey],
+                class: 'joynure-hula-landing__media',
+                loading: 'lazy',
+                sizes: '(min-width: 750px) 30vw, 88vw'
+              %}
+            </div>
+            <div class="joynure-hula-card-3d__body">
+              <p class="joynure-hula-how__num">{{ num }}</p>
+              <h3>{{ section.settings[tkey] | escape }}</h3>
+              <p>{{ section.settings[xkey] | escape }}</p>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Hula how it works",
+  "tag": "section",
+  "class": "joynure-hula-landing-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "See How It Works" },
+    { "type": "textarea", "id": "lede", "label": "Supporting copy", "default": "A simple adjustable design that turns everyday movement into a more engaging home workout." },
+    { "type": "image_picker", "id": "image", "label": "Hero image" },
+    { "type": "text", "id": "asset_file", "label": "Hero theme asset", "default": "hula-how-hero.jpg" },
+    { "type": "text", "id": "media_id", "label": "Hero media ID", "default": "45010744803601" },
+    { "type": "text", "id": "s1_title", "label": "Step 1 title", "default": "Adjust Your Fit" },
+    { "type": "textarea", "id": "s1_text", "label": "Step 1 text", "default": "Add or remove sections for a comfortable waist fit." },
+    { "type": "image_picker", "id": "s1_image", "label": "Step 1 image" },
+    { "type": "text", "id": "s1_asset", "label": "Step 1 theme asset", "default": "hula-how-step1.jpg" },
+    { "type": "text", "id": "s1_media_id", "label": "Step 1 media ID", "default": "45010794578193" },
+    { "type": "text", "id": "s2_title", "label": "Step 2 title", "default": "Attach the Weight" },
+    { "type": "textarea", "id": "s2_text", "label": "Step 2 text", "default": "Secure the cord and weighted gravity ball to the track." },
+    { "type": "image_picker", "id": "s2_image", "label": "Step 2 image" },
+    { "type": "text", "id": "s2_asset", "label": "Step 2 theme asset", "default": "hula-how-step2.jpg" },
+    { "type": "text", "id": "s2_media_id", "label": "Step 2 media ID", "default": "45010994266385" },
+    { "type": "text", "id": "s3_title", "label": "Step 3 title", "default": "Start Moving" },
+    { "type": "textarea", "id": "s3_text", "label": "Step 3 text", "default": "Use steady waist movement to guide the rotating ball around the track." },
+    { "type": "image_picker", "id": "s3_image", "label": "Step 3 image" },
+    { "type": "text", "id": "s3_asset", "label": "Step 3 theme asset", "default": "hula-how-step3.jpg" },
+    { "type": "text", "id": "s3_media_id", "label": "Step 3 media ID", "default": "45011023102225" }
+  ],
+  "presets": [{ "name": "JOYNURE Hula how it works" }]
+}
+{% endschema %}

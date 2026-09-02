@@ -1,0 +1,64 @@
+{%- capture enabled_flag -%}
+  {%- render 'joynure-hula-landing-enabled', product: product -%}
+{%- endcapture -%}
+{%- if enabled_flag == 'true' -%}
+  {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
+  <section class="joynure-hula-landing joynure-hula-landing__section" {{ section.shopify_attributes }}>
+    <div class="joynure-hula-landing__inner joynure-hula-specs__grid">
+      <div>
+        <h2 class="joynure-hula-landing__title">Product <span class="joynure-hula-landing__title-accent">Specifications</span></h2>
+        <ul class="joynure-hula-specs__list">
+          {% for i in (1..7) %}
+            {% liquid
+              assign lk = 'l' | append: i
+              assign vk = 'v' | append: i
+            %}
+            <li>
+              <strong>{{ section.settings[lk] | escape }}</strong>
+              <span>{{ section.settings[vk] | escape }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="joynure-hula-specs__media">
+        {% render 'joynure-hula-media',
+          product: product,
+          setting_image: section.settings.image,
+          media_id: section.settings.media_id,
+          alt: 'JOYNURE Smart Weighted Hula Hoop',
+          class: 'joynure-hula-landing__media joynure-hula-landing__media--contain',
+          loading: 'lazy',
+          sizes: '(min-width: 750px) 40vw, 100vw'
+        %}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Hula specs",
+  "tag": "section",
+  "class": "joynure-hula-landing-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Specs image" },
+    { "type": "text", "id": "media_id", "label": "Fallback media ID", "default": "45010727797009" },
+    { "type": "text", "id": "l1", "label": "Label 1", "default": "Sections" },
+    { "type": "text", "id": "v1", "label": "Value 1", "default": "24 adjustable / removable sections" },
+    { "type": "text", "id": "l2", "label": "Label 2", "default": "Max waist" },
+    { "type": "text", "id": "v2", "label": "Value 2", "default": "Approximately 115 cm / 45 in" },
+    { "type": "text", "id": "l3", "label": "Label 3", "default": "Material" },
+    { "type": "text", "id": "v3", "label": "Value 3", "default": "ABS" },
+    { "type": "text", "id": "l4", "label": "Label 4", "default": "Cord components" },
+    { "type": "text", "id": "v4", "label": "Value 4", "default": "PVC / nylon rope components" },
+    { "type": "text", "id": "l5", "label": "Label 5", "default": "Mechanism" },
+    { "type": "text", "id": "v5", "label": "Value 5", "default": "Adjustable weighted gravity ball" },
+    { "type": "text", "id": "l6", "label": "Label 6", "default": "Colors" },
+    { "type": "text", "id": "v6", "label": "Value 6", "default": "Pink / Purple / Blue" },
+    { "type": "text", "id": "l7", "label": "Label 7", "default": "Package size" },
+    { "type": "text", "id": "v7", "label": "Value 7", "default": "Approximately 31 × 28.5 × 7.5 cm" }
+  ],
+  "presets": [{ "name": "JOYNURE Hula specs" }]
+}
+{% endschema %}

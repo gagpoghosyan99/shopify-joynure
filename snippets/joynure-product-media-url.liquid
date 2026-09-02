@@ -1,0 +1,15 @@
+{%- doc -%}
+  Resolves a product media image by numeric media ID.
+
+  @param {object} product - Product
+  @param {string|number} media_id - Product media id
+
+  Outputs nothing when not found.
+{%- enddoc -%}
+{%- liquid
+  assign media_id_num = media_id | plus: 0
+  assign found = product.media | where: 'id', media_id_num
+  if found.size > 0
+    echo found.first | image_url: width: 2000
+  endif
+-%}

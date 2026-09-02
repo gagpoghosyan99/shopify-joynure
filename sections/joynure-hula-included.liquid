@@ -1,0 +1,49 @@
+{%- capture enabled_flag -%}
+  {%- render 'joynure-hula-landing-enabled', product: product -%}
+{%- endcapture -%}
+{%- if enabled_flag == 'true' -%}
+  {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
+  <section class="joynure-hula-landing joynure-hula-landing__section joynure-hula-landing__section--blush" {{ section.shopify_attributes }}>
+    <div class="joynure-hula-landing__inner joynure-hula-included__grid">
+      <div>
+        {% render 'joynure-hula-media',
+          product: product,
+          setting_image: section.settings.image,
+          media_id: section.settings.media_id,
+          alt: section.settings.heading,
+          class: 'joynure-hula-landing__media joynure-hula-landing__media--contain',
+          loading: 'lazy',
+          sizes: '(min-width: 750px) 55vw, 100vw'
+        %}
+      </div>
+      <div>
+        <h2 class="joynure-hula-landing__title">{{ section.settings.heading | escape }}</h2>
+        <p class="joynure-hula-landing__lede">{{ section.settings.lede | escape }}</p>
+        <ul class="joynure-hula-included__list">
+          <li>{{ section.settings.item_1 | escape }}</li>
+          <li>{{ section.settings.item_2 | escape }}</li>
+          <li>{{ section.settings.item_3 | escape }}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Hula included",
+  "tag": "section",
+  "class": "joynure-hula-landing-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What's Included" },
+    { "type": "textarea", "id": "lede", "label": "Supporting copy", "default": "Everything you need to get started." },
+    { "type": "image_picker", "id": "image", "label": "Kit image" },
+    { "type": "text", "id": "media_id", "label": "Fallback media ID", "default": "45011023069457" },
+    { "type": "text", "id": "item_1", "label": "Item 1", "default": "1 × Adjustable 24-section hoop" },
+    { "type": "text", "id": "item_2", "label": "Item 2", "default": "1 × Weighted gravity ball" },
+    { "type": "text", "id": "item_3", "label": "Item 3", "default": "1 × Adjustable rope/cord" }
+  ],
+  "presets": [{ "name": "JOYNURE Hula included" }]
+}
+{% endschema %}

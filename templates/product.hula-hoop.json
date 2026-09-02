@@ -1,12 +1,4 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */{
+{
   "sections": {
     "main": {
       "type": "product-information",
@@ -372,7 +364,6 @@
     "main",
     "joynure_hula_benefits",
     "joynure_hula_difference",
-    "joynure_hula_survey",
     "joynure_hula_lifestyle_strip",
     "joynure_hula_how_it_works",
     "joynure_hula_mechanism",
