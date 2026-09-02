@@ -4,25 +4,27 @@
 {%- if enabled_flag == 'true' -%}
   {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
   <section class="joynure-hula-landing joynure-hula-landing__section" {{ section.shopify_attributes }}>
-    <div class="joynure-hula-landing__inner joynure-hula-mechanism__grid">
-      <div class="joynure-hula-card-3d joynure-hula-card-3d--hero joynure-hula-mechanism__visual">
-        <div class="joynure-hula-card-3d__media">
-          {% render 'joynure-hula-media',
-            product: product,
-            setting_image: section.settings.image,
-            asset_file: section.settings.asset_file,
-            media_id: section.settings.media_id,
-            alt: section.settings.heading,
-            class: 'joynure-hula-landing__media joynure-hula-landing__media--contain',
-            loading: 'lazy',
-            sizes: '(min-width: 990px) 50vw, 100vw'
-          %}
-        </div>
-      </div>
-      <div>
+    <div class="joynure-hula-landing__inner">
+      <div class="joynure-hula-mechanism__intro">
         <p class="joynure-hula-landing__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-        <h2 class="joynure-hula-landing__title">{{ section.settings.heading | escape }}</h2>
-        <p class="joynure-hula-landing__lede">{{ section.settings.lede | escape }}</p>
+        <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">{{ section.settings.heading | escape }}</h2>
+        <p class="joynure-hula-landing__lede joynure-hula-landing__lede--center">{{ section.settings.lede | escape }}</p>
+      </div>
+      <div class="joynure-hula-mechanism__grid">
+        <div class="joynure-hula-card-3d joynure-hula-mechanism__visual">
+          <div class="joynure-hula-card-3d__media">
+            {% render 'joynure-hula-media',
+              product: product,
+              setting_image: section.settings.image,
+              asset_file: section.settings.asset_file,
+              media_id: section.settings.media_id,
+              alt: section.settings.heading,
+              class: 'joynure-hula-landing__media',
+              loading: 'lazy',
+              sizes: '(min-width: 990px) 50vw, 100vw'
+            %}
+          </div>
+        </div>
         <div class="joynure-hula-mechanism__cards">
           {% for i in (1..4) %}
             {% liquid
