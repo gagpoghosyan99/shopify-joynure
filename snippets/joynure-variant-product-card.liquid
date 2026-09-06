@@ -16,6 +16,28 @@
     assign card_image = product.featured_media.preview_image
   endif
 
+  # Live-model collection card overrides for Hula color variants (4:5 theme assets)
+  assign hula_card_asset = blank
+  if product.handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop'
+    capture clean_color_for_card
+      render 'joynure-variant-label', label: variant.title
+    endcapture
+    # Prefer cleaned option1 color label
+    assign color_raw = variant.option1 | default: variant.title
+    capture clean_color_for_card
+      render 'joynure-variant-label', label: color_raw
+    endcapture
+    assign clean_color_for_card = clean_color_for_card | strip | downcase
+    case clean_color_for_card
+      when 'pink'
+        assign hula_card_asset = 'hula-card-pink-model.jpg'
+      when 'purple'
+        assign hula_card_asset = 'hula-card-purple-model.jpg'
+      when 'blue'
+        assign hula_card_asset = 'hula-card-blue-model.jpg'
+    endcase
+  endif
+
   assign has_quick_add = false
   if settings.quick_add and variant.available
     assign has_quick_add = true
@@ -48,8 +70,12 @@
   endif
 
   assign featured_media_url = blank
-  if settings.transition_to_main_product and card_image != blank
-    assign featured_media_url = card_image | image_url: width: 500
+  if settings.transition_to_main_product
+    if hula_card_asset != blank
+      assign featured_media_url = hula_card_asset | asset_url
+    elsif card_image != blank
+      assign featured_media_url = card_image | image_url: width: 500
+    endif
   endif
   assign add_label = 'actions.add' | t
 %}
@@ -115,7 +141,20 @@
         href="{{ variant_url }}"
         aria-label="{{ card_title | escape }}"
       >
-        {% if card_image != blank %}
+        {% if hula_card_asset != blank %}
+          {{
+            hula_card_asset
+            | asset_url
+            | image_tag:
+              loading: 'lazy',
+              widths: '400, 600, 800, 1000',
+              sizes: '(min-width: 990px) 28vw, (min-width: 750px) 33vw, 90vw',
+              class: 'product-media__image media-fit',
+              alt: card_title,
+              width: 960,
+              height: 1200
+          }}
+        {% elsif card_image != blank %}
           {{
             card_image
             | image_url: width: 800
@@ -123,7 +162,7 @@
               loading: 'lazy',
               sizes: '(min-width: 750px) 25vw, 50vw',
               widths: '200, 300, 400, 500, 600, 800',
-              class: 'product-media-container media-fit product-media-container--image',
+              class: 'product-media__image media-fit',
               alt: card_title
           }}
         {% endif %}
@@ -175,11 +214,11 @@
       {% endif %}
     </div>
 
-    <a class="contents user-select-text" ref="productTitleLink" href="{{ variant_url }}">
-      <p role="heading" aria-level="3" class="text-block">{{ card_title | escape }}</p>
+    <a class="contents user-select-text" ref="productTitleLink" href="{{ variant_url }}" style="text-align:center;">
+      <p role="heading" aria-level="3" class="text-block" style="text-align:center;">{{ card_title | escape }}</p>
     </a>
 
-    <div ref="priceContainer">
+    <div ref="priceContainer" style="text-align:center;">
       {% if show_compare_price %}
         <span class="price-item__group price">
           <span class="visually-hidden">{{ 'content.price_sale' | t }}&nbsp;</span>

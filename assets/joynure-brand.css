@@ -110,3 +110,24 @@
     margin-inline: auto;
   }
 }
+
+/* Hula collection card polish — all breakpoints */
+.joynure-collection-hula-grid .card-gallery {
+  width: 100%;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.joynure-collection-hula-grid .card-gallery img,
+.joynure-collection-hula-grid .product-media__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.joynure-collection-hula-grid .product-card .text-block,
+.joynure-collection-hula-grid .product-card [role='heading'],
+.joynure-collection-hula-grid .product-card [ref='priceContainer'],
+.joynure-collection-hula-grid .product-card .price {
+  text-align: center;
+}
