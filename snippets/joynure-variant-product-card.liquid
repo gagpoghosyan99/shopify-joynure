@@ -142,18 +142,17 @@
         aria-label="{{ card_title | escape }}"
       >
         {% if hula_card_asset != blank %}
-          {{
-            hula_card_asset
-            | asset_url
-            | image_tag:
-              loading: 'lazy',
-              widths: '400, 600, 800, 1000',
-              sizes: '(min-width: 990px) 28vw, (min-width: 750px) 33vw, 90vw',
-              class: 'product-media__image media-fit',
-              alt: card_title,
-              width: 960,
-              height: 1200
-          }}
+          {%- comment -%} Theme assets cannot use image_tag; render a 4:5 <img> matching card gallery ratio. {%- endcomment -%}
+          <img
+            src="{{ hula_card_asset | asset_url }}"
+            alt="{{ card_title | escape }}"
+            class="product-media__image media-fit"
+            loading="lazy"
+            width="960"
+            height="1200"
+            sizes="(min-width: 990px) 28vw, (min-width: 750px) 33vw, 90vw"
+            style="width: 100%; height: 100%; object-fit: cover; object-position: center;"
+          >
         {% elsif card_image != blank %}
           {{
             card_image
