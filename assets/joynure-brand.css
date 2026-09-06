@@ -68,28 +68,45 @@
   }
 }
 
-/* Collection grids: fill the row for common split-card counts */
+/* Collection grids: fill the row for common split-card counts.
+   Use :nth-of-type so a leading <script> inside the UL does not
+   inflate the child index (which incorrectly forced 4 columns for 3 cards). */
 @media screen and (min-width: 750px) {
-  .joynure-collection-hula-grid .product-grid.product-grid--grid,
-  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(3):last-child) {
+  /* Hula: always 3 equal full-row cards for Pink / Purple / Blue */
+  .joynure-collection-hula-grid .product-grid.product-grid--grid {
+    --product-grid-columns-desktop: repeat(3, minmax(0, 1fr)) !important;
+    width: 100%;
+  }
+
+  .joynure-collection-hula-grid .product-grid__item {
+    max-width: none;
+  }
+
+  .product-grid.product-grid--grid:has(> .product-grid__item:nth-of-type(3):last-of-type) {
     --product-grid-columns-desktop: repeat(3, minmax(0, 1fr));
   }
 
-  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(4):last-child) {
+  .product-grid.product-grid--grid:has(> .product-grid__item:nth-of-type(4):last-of-type) {
     --product-grid-columns-desktop: repeat(4, minmax(0, 1fr));
   }
 
-  .product-grid.product-grid--grid:has(> .product-grid__item:nth-child(8):last-child) {
+  .product-grid.product-grid--grid:has(> .product-grid__item:nth-of-type(8):last-of-type) {
     --product-grid-columns-desktop: repeat(4, minmax(0, 1fr));
   }
 }
 
 @media screen and (min-width: 990px) {
   .joynure-collection-pet-grid .product-grid.product-grid--grid {
-    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr));
+    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
   }
 
   .joynure-collection-baby-grid .product-grid.product-grid--grid {
-    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr));
+    --product-grid-columns-desktop: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  /* Hula cards: full-width trio, but keep a calm max size on ultra-wide */
+  .joynure-collection-hula-grid .product-grid.product-grid--grid {
+    max-width: 1120px;
+    margin-inline: auto;
   }
 }
