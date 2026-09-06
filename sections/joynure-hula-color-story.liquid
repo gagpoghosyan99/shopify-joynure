@@ -18,18 +18,21 @@
                 assign text = section.settings.pink_text
                 assign img = section.settings.pink_image
                 assign mid = section.settings.pink_media_id
+                assign asset = section.settings.pink_asset_file | default: 'hula-color-pink.jpg'
                 assign tone = 'pink'
               when 2
                 assign name = section.settings.purple_title
                 assign text = section.settings.purple_text
                 assign img = section.settings.purple_image
                 assign mid = section.settings.purple_media_id
+                assign asset = section.settings.purple_asset_file | default: 'hula-color-purple.jpg'
                 assign tone = 'purple'
               when 3
                 assign name = section.settings.blue_title
                 assign text = section.settings.blue_text
                 assign img = section.settings.blue_image
                 assign mid = section.settings.blue_media_id
+                assign asset = section.settings.blue_asset_file | default: 'hula-color-blue.jpg'
                 assign tone = 'blue'
             endcase
           %}
@@ -38,6 +41,7 @@
               {% render 'joynure-hula-media',
                 product: product,
                 setting_image: img,
+                asset_file: asset,
                 media_id: mid,
                 alt: name,
                 class: 'joynure-hula-landing__media',
@@ -66,14 +70,17 @@
   "settings": [
     { "type": "textarea", "id": "lede", "label": "Supporting copy", "default": "Three finishes. One adjustable smart hoop experience." },
     { "type": "image_picker", "id": "pink_image", "label": "Pink image" },
+    { "type": "text", "id": "pink_asset_file", "label": "Pink theme asset", "default": "hula-color-pink.jpg" },
     { "type": "text", "id": "pink_media_id", "label": "Pink media ID", "default": "45010744803601" },
     { "type": "text", "id": "pink_title", "label": "Pink title", "default": "Pink" },
     { "type": "textarea", "id": "pink_text", "label": "Pink text", "default": "A bright everyday finish for home movement sessions." },
     { "type": "image_picker", "id": "purple_image", "label": "Purple image" },
+    { "type": "text", "id": "purple_asset_file", "label": "Purple theme asset", "default": "hula-color-purple.jpg" },
     { "type": "text", "id": "purple_media_id", "label": "Purple media ID", "default": "45011048595729" },
     { "type": "text", "id": "purple_title", "label": "Purple title", "default": "Purple" },
     { "type": "textarea", "id": "purple_text", "label": "Purple text", "default": "A bold option for a more expressive home-fitness look." },
     { "type": "image_picker", "id": "blue_image", "label": "Blue image" },
+    { "type": "text", "id": "blue_asset_file", "label": "Blue theme asset", "default": "hula-color-blue.jpg" },
     { "type": "text", "id": "blue_media_id", "label": "Blue media ID", "default": "45011048661265" },
     { "type": "text", "id": "blue_title", "label": "Blue title", "default": "Blue" },
     { "type": "textarea", "id": "blue_text", "label": "Blue text", "default": "A clean, calm finish that fits quietly into living spaces." }

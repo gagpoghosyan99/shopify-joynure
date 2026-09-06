@@ -24,6 +24,7 @@
         {% render 'joynure-hula-media',
           product: product,
           setting_image: section.settings.image,
+          asset_file: section.settings.asset_file | default: 'hula-specs.jpg',
           media_id: section.settings.media_id,
           alt: 'JOYNURE Smart Weighted Hula Hoop',
           class: 'joynure-hula-landing__media joynure-hula-landing__media--contain',
@@ -43,6 +44,7 @@
   "enabled_on": { "templates": ["product"] },
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Specs image" },
+    { "type": "text", "id": "asset_file", "label": "Theme asset", "default": "hula-specs.jpg" },
     { "type": "text", "id": "media_id", "label": "Fallback media ID", "default": "45010727797009" },
     { "type": "text", "id": "l1", "label": "Label 1", "default": "Sections" },
     { "type": "text", "id": "v1", "label": "Value 1", "default": "24 adjustable / removable sections" },

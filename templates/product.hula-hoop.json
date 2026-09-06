@@ -327,9 +327,10 @@
       "settings": {
         "heading": "What's Included",
         "lede": "Everything you need to get started.",
-        "item_1": "1 × Adjustable 24-section hoop",
-        "item_2": "1 × Weighted gravity ball",
-        "item_3": "1 × Adjustable rope/cord"
+        "item_1": "1 \u00d7 Adjustable 24-section hoop",
+        "item_2": "1 \u00d7 Weighted gravity ball",
+        "item_3": "1 \u00d7 Adjustable rope/cord",
+        "asset_file": "hula-included.jpg"
       }
     },
     "joynure_hula_motion_gallery": {
@@ -341,7 +342,11 @@
     },
     "joynure_hula_color_story": {
       "type": "joynure-hula-color-story",
-      "settings": {}
+      "settings": {
+        "pink_asset_file": "hula-color-pink.jpg",
+        "purple_asset_file": "hula-color-purple.jpg",
+        "blue_asset_file": "hula-color-blue.jpg"
+      }
     },
     "joynure_hula_comparison": {
       "type": "joynure-hula-comparison",
@@ -349,7 +354,9 @@
     },
     "joynure_hula_specs": {
       "type": "joynure-hula-specs",
-      "settings": {}
+      "settings": {
+        "asset_file": "hula-specs.jpg"
+      }
     },
     "joynure_hula_faq": {
       "type": "joynure-hula-faq",
@@ -357,13 +364,16 @@
     },
     "joynure_hula_final_cta": {
       "type": "joynure-hula-final-cta",
-      "settings": {}
+      "settings": {
+        "asset_file": "hula-final-cta.jpg"
+      }
     }
   },
   "order": [
     "main",
     "joynure_hula_benefits",
     "joynure_hula_difference",
+    "joynure_hula_survey",
     "joynure_hula_lifestyle_strip",
     "joynure_hula_how_it_works",
     "joynure_hula_mechanism",
