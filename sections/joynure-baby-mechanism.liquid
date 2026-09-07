@@ -7,11 +7,9 @@
     if product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
       assign is_mat = true
     endif
-    assign mech_asset = section.settings.asset_file | default: 'baby-mechanism-hero.jpg'
+    assign mech_asset = 'baby-nail-mechanism-hero.jpg'
     if is_mat
-      if section.settings.asset_file == blank or section.settings.asset_file == 'baby-mechanism-hero.jpg'
-        assign mech_asset = 'baby-mat-mechanism-hero.jpg'
-      endif
+      assign mech_asset = 'baby-mat-mechanism-hero.jpg'
       assign mech_eyebrow = section.settings.eyebrow_mat | default: 'Travel-ready build'
       assign mech_heading = section.settings.heading_mat | default: 'Built to Fold — Then Wipe Clean'
       assign mech_lede = section.settings.lede_mat | default: 'A waterproof padded surface with a clutch fold for diaper bags, cars, and day trips.'

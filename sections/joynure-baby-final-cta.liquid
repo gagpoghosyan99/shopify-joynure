@@ -12,11 +12,9 @@
     if product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
       assign is_mat = true
     endif
-    assign final_asset = section.settings.asset_file | default: 'baby-final-cta.jpg'
+    assign final_asset = 'baby-nail-final-cta.jpg'
     if is_mat
-      if section.settings.asset_file == blank or section.settings.asset_file == 'baby-final-cta.jpg'
-        assign final_asset = 'baby-mat-final-cta.jpg'
-      endif
+      assign final_asset = 'baby-mat-final-cta.jpg'
       assign final_heading = section.settings.heading_mat | default: 'Ready for Calmer Changes?'
       assign final_lede = section.settings.lede_mat | default: 'Choose your color and pack a wipe-clean padded mat for home and travel.'
       assign final_eyebrow = section.settings.eyebrow_mat | default: 'JOYNURE / Baby Care'

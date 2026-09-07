@@ -309,14 +309,14 @@
         "heading": "See the difference",
         "lede": "From hard public surfaces to a soft, wipe-clean pad \u2014 changes that feel calmer anywhere.",
         "lede_mat": "From hard public surfaces to a soft, wipe-clean pad \u2014 changes that feel calmer anywhere.",
-        "before_asset_1": "baby-review-1-before.jpg",
-        "after_asset_1": "baby-review-1-after.jpg",
-        "before_asset_2": "baby-review-2-before.jpg",
-        "after_asset_2": "baby-review-2-after.jpg",
-        "before_asset_3": "baby-review-3-before.jpg",
-        "after_asset_3": "baby-review-3-after.jpg",
-        "before_asset_4": "baby-review-4-before.jpg",
-        "after_asset_4": "baby-review-4-after.jpg"
+        "before_asset_1": "baby-mat-review-1-before.jpg",
+        "after_asset_1": "baby-mat-review-1-after.jpg",
+        "before_asset_2": "baby-mat-review-2-before.jpg",
+        "after_asset_2": "baby-mat-review-2-after.jpg",
+        "before_asset_3": "baby-mat-review-3-before.jpg",
+        "after_asset_3": "baby-mat-review-3-after.jpg",
+        "before_asset_4": "baby-mat-review-4-before.jpg",
+        "after_asset_4": "baby-mat-review-4-after.jpg"
       }
     },
     "joynure_baby_survey": {
@@ -324,7 +324,7 @@
       "settings": {
         "heading": "Why parents pack JOYNURE everywhere.",
         "heading_mat": "Why parents pack JOYNURE everywhere.",
-        "asset_file": "baby-survey-hero.jpg"
+        "asset_file": "baby-mat-mechanism-hero.jpg"
       }
     },
     "joynure_baby_lifestyle_strip": {
@@ -332,13 +332,13 @@
       "settings": {
         "eyebrow": "Ready wherever baby is",
         "lede": "Unfold, change, wipe clean \u2014 soft padding for home, travel, and on-the-go moments.",
-        "asset_1": "baby-life-1.jpg",
-        "asset_2": "baby-life-2.jpg",
-        "asset_3": "baby-life-3.jpg",
-        "asset_4": "baby-life-4.jpg",
-        "asset_5": "baby-life-5.jpg",
-        "asset_6": "baby-life-6.jpg",
-        "asset_7": "baby-life-7.jpg"
+        "asset_1": "baby-mat-life-1.jpg",
+        "asset_2": "baby-mat-life-2.jpg",
+        "asset_3": "baby-mat-life-3.jpg",
+        "asset_4": "baby-mat-life-4.jpg",
+        "asset_5": "baby-mat-life-5.jpg",
+        "asset_6": "baby-mat-life-6.jpg",
+        "asset_7": "baby-mat-life-7.jpg"
       }
     },
     "joynure_baby_how_it_works": {
@@ -353,9 +353,9 @@
         "s2_text": "Soft cushioning protects baby on floors, benches, and park tables.",
         "s3_title": "Wipe & Fold",
         "s3_text": "Wipe the waterproof top clean, fold into a clutch, and pack away.",
-        "s1_asset": "baby-how-step1.jpg",
-        "s2_asset": "baby-how-step2.jpg",
-        "s3_asset": "baby-how-step3.jpg"
+        "s1_asset": "baby-mat-how-step1.jpg",
+        "s2_asset": "baby-mat-how-step2.jpg",
+        "s3_asset": "baby-mat-how-step3.jpg"
       }
     },
     "joynure_baby_mechanism": {
@@ -380,10 +380,10 @@
         "t3_text": "Wipe the waterproof top after the change.",
         "t4_title": "Fold & Pack",
         "t4_text": "Fold back into a clutch and return it to your bag.",
-        "asset_1": "baby-steps-1.jpg",
-        "asset_2": "baby-steps-2.jpg",
-        "asset_3": "baby-steps-3.jpg",
-        "asset_4": "baby-steps-4.jpg"
+        "asset_1": "baby-mat-steps-1.jpg",
+        "asset_2": "baby-mat-steps-2.jpg",
+        "asset_3": "baby-mat-steps-3.jpg",
+        "asset_4": "baby-mat-steps-4.jpg"
       }
     },
     "joynure_baby_features": {

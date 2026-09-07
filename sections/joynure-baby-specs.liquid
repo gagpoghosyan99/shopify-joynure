@@ -7,11 +7,9 @@
     if product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
       assign is_mat = true
     endif
-    assign specs_asset = section.settings.asset_file | default: 'baby-specs.jpg'
+    assign specs_asset = 'baby-nail-specs.jpg'
     if is_mat
-      if section.settings.asset_file == blank or section.settings.asset_file == 'baby-specs.jpg'
-        assign specs_asset = 'baby-mat-specs.jpg'
-      endif
+      assign specs_asset = 'baby-mat-specs.jpg'
       assign specs_alt = 'JOYNURE Foldable Baby Changing Mat'
       assign v1 = 'Portable foldable changing mat'
       assign v2 = 'Waterproof wipe-clean surface'

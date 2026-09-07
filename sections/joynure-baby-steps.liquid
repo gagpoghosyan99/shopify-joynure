@@ -35,6 +35,7 @@
             assign asset = section.settings[akey]
             assign num = i | prepend: '0'
             if is_mat
+              assign asset = 'baby-mat-steps-' | append: i | append: '.jpg'
               case i
                 when 1
                   assign title = 'Unfold the Mat'
@@ -49,6 +50,8 @@
                   assign title = 'Fold & Pack'
                   assign text = 'Fold back into a clutch and return it to your bag.'
               endcase
+            else
+              assign asset = 'baby-nail-steps-' | append: i | append: '.jpg'
             endif
           %}
           <article class="joynure-hula-card-3d joynure-hula-steps__card">

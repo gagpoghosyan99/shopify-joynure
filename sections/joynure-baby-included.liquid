@@ -7,11 +7,9 @@
     if product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
       assign is_mat = true
     endif
-    assign included_asset = section.settings.asset_file | default: 'baby-included.jpg'
+    assign included_asset = 'baby-nail-included.jpg'
     if is_mat
-      if section.settings.asset_file == blank or section.settings.asset_file == 'baby-included.jpg'
-        assign included_asset = 'baby-mat-included.jpg'
-      endif
+      assign included_asset = 'baby-mat-included.jpg'
       assign inc_heading = section.settings.heading_mat | default: section.settings.heading
       assign inc_lede = section.settings.lede_mat | default: 'One foldable mat. Ready for home and travel changes.'
       assign item_1 = section.settings.item_1_mat | default: '1 × Portable Foldable Baby Changing Mat'

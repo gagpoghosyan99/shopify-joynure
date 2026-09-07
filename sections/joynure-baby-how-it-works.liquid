@@ -7,11 +7,15 @@
     if product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
       assign is_mat = true
     endif
-    assign hero_asset = section.settings.asset_file | default: 'baby-how-hero.jpg'
+    assign hero_asset = section.settings.asset_file | default: 'baby-nail-how-hero.jpg'
+    assign s1_asset = section.settings.s1_asset | default: 'baby-nail-how-step1.jpg'
+    assign s2_asset = section.settings.s2_asset | default: 'baby-nail-how-step2.jpg'
+    assign s3_asset = section.settings.s3_asset | default: 'baby-nail-how-step3.jpg'
     if is_mat
-      if section.settings.asset_file == blank or section.settings.asset_file == 'baby-how-hero.jpg'
-        assign hero_asset = 'baby-mat-how-hero.jpg'
-      endif
+      assign hero_asset = 'baby-mat-how-hero.jpg'
+      assign s1_asset = 'baby-mat-how-step1.jpg'
+      assign s2_asset = 'baby-mat-how-step2.jpg'
+      assign s3_asset = 'baby-mat-how-step3.jpg'
       assign how_heading = section.settings.heading_mat | default: section.settings.heading
       assign how_lede = section.settings.lede_mat | default: 'Unfold. Change. Wipe clean. A padded travel mat that keeps routines simple anywhere.'
       assign s1_title = section.settings.s1_title_mat | default: 'Unfold Flat'
@@ -21,6 +25,10 @@
       assign s3_title = section.settings.s3_title_mat | default: 'Wipe & Fold'
       assign s3_text = section.settings.s3_text_mat | default: 'Wipe the waterproof top clean, fold into a clutch, and pack away.'
     else
+      assign hero_asset = 'baby-nail-how-hero.jpg'
+      assign s1_asset = 'baby-nail-how-step1.jpg'
+      assign s2_asset = 'baby-nail-how-step2.jpg'
+      assign s3_asset = 'baby-nail-how-step3.jpg'
       assign how_heading = section.settings.heading
       assign how_lede = section.settings.lede
       assign s1_title = section.settings.s1_title
@@ -61,12 +69,15 @@
               when 1
                 assign step_title = s1_title
                 assign step_text = s1_text
+                assign step_asset = s1_asset
               when 2
                 assign step_title = s2_title
                 assign step_text = s2_text
+                assign step_asset = s2_asset
               when 3
                 assign step_title = s3_title
                 assign step_text = s3_text
+                assign step_asset = s3_asset
             endcase
           %}
           <article class="joynure-hula-card-3d joynure-hula-how__step">
@@ -74,7 +85,7 @@
               {% render 'joynure-hula-media',
                 product: product,
                 setting_image: section.settings[ikey],
-                asset_file: section.settings[akey],
+                asset_file: step_asset,
                 media_id: section.settings[mkey],
                 alt: step_title,
                 class: 'joynure-hula-landing__media',

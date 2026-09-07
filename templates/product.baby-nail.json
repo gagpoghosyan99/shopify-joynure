@@ -299,20 +299,20 @@
       "settings": {
         "heading": "See the difference",
         "lede": "From stressful clippers to a quiet electric trim \u2014 calmer nail care for tiny fingers and toes.",
-        "before_asset_1": "baby-review-1-before.jpg",
-        "after_asset_1": "baby-review-1-after.jpg",
-        "before_asset_2": "baby-review-2-before.jpg",
-        "after_asset_2": "baby-review-2-after.jpg",
-        "before_asset_3": "baby-review-3-before.jpg",
-        "after_asset_3": "baby-review-3-after.jpg",
-        "before_asset_4": "baby-review-4-before.jpg",
-        "after_asset_4": "baby-review-4-after.jpg"
+        "before_asset_1": "baby-nail-review-1-before.jpg",
+        "after_asset_1": "baby-nail-review-1-after.jpg",
+        "before_asset_2": "baby-nail-review-2-before.jpg",
+        "after_asset_2": "baby-nail-review-2-after.jpg",
+        "before_asset_3": "baby-nail-review-3-before.jpg",
+        "after_asset_3": "baby-nail-review-3-after.jpg",
+        "before_asset_4": "baby-nail-review-4-before.jpg",
+        "after_asset_4": "baby-nail-review-4-after.jpg"
       }
     },
     "joynure_baby_survey": {
       "type": "joynure-baby-survey",
       "settings": {
-        "asset_file": "baby-survey-hero.jpg"
+        "asset_file": "baby-nail-survey-hero.jpg"
       }
     },
     "joynure_baby_lifestyle_strip": {
@@ -320,13 +320,13 @@
       "settings": {
         "eyebrow": "Gentle care, every day",
         "lede": "Quiet trims for bedtime, bath time, and travel \u2014 soft pads for tiny fingers and toes.",
-        "asset_1": "baby-life-1.jpg",
-        "asset_2": "baby-life-2.jpg",
-        "asset_3": "baby-life-3.jpg",
-        "asset_4": "baby-life-4.jpg",
-        "asset_5": "baby-life-5.jpg",
-        "asset_6": "baby-life-6.jpg",
-        "asset_7": "baby-life-7.jpg"
+        "asset_1": "baby-nail-life-1.jpg",
+        "asset_2": "baby-nail-life-2.jpg",
+        "asset_3": "baby-nail-life-3.jpg",
+        "asset_4": "baby-nail-life-4.jpg",
+        "asset_5": "baby-nail-life-5.jpg",
+        "asset_6": "baby-nail-life-6.jpg",
+        "asset_7": "baby-nail-life-7.jpg"
       }
     },
     "joynure_baby_how_it_works": {
@@ -334,16 +334,16 @@
       "settings": {
         "heading": "See How It Works",
         "lede": "Charge. Choose a pad. Trim gently. Quiet electric care for tiny nails.",
-        "asset_file": "baby-how-hero.jpg",
-        "s1_asset": "baby-how-step1.jpg",
-        "s2_asset": "baby-how-step2.jpg",
-        "s3_asset": "baby-how-step3.jpg"
+        "asset_file": "baby-nail-how-hero.jpg",
+        "s1_asset": "baby-nail-how-step1.jpg",
+        "s2_asset": "baby-nail-how-step2.jpg",
+        "s3_asset": "baby-nail-how-step3.jpg"
       }
     },
     "joynure_baby_mechanism": {
       "type": "joynure-baby-mechanism",
       "settings": {
-        "asset_file": "baby-mechanism-hero.jpg",
+        "asset_file": "baby-nail-mechanism-hero.jpg",
         "heading": "Built to Trim \u2014 Softly & Quietly",
         "lede": "A quiet motor, soft rotating pads, and LED light for safer nail care on tiny fingers and toes."
       }
@@ -351,10 +351,10 @@
     "joynure_baby_steps": {
       "type": "joynure-baby-steps",
       "settings": {
-        "asset_1": "baby-steps-1.jpg",
-        "asset_2": "baby-steps-2.jpg",
-        "asset_3": "baby-steps-3.jpg",
-        "asset_4": "baby-steps-4.jpg"
+        "asset_1": "baby-nail-steps-1.jpg",
+        "asset_2": "baby-nail-steps-2.jpg",
+        "asset_3": "baby-nail-steps-3.jpg",
+        "asset_4": "baby-nail-steps-4.jpg"
       }
     },
     "joynure_baby_features": {
@@ -372,7 +372,7 @@
         "item_1": "1 \u00d7 Electric Baby Nail Trimmer",
         "item_2": "Soft age-stage pad set",
         "item_3": "LED light for precise, gentle care",
-        "asset_file": "baby-included.jpg"
+        "asset_file": "baby-nail-included.jpg"
       }
     },
     "joynure_baby_color_story": {
@@ -394,7 +394,7 @@
     "joynure_baby_specs": {
       "type": "joynure-baby-specs",
       "settings": {
-        "asset_file": "baby-specs.jpg",
+        "asset_file": "baby-nail-specs.jpg",
         "v1": "Electric baby nail trimmer set",
         "v2": "Soft rotating pads + LED assist",
         "v3": "Newborn through toddler pad set",
@@ -415,7 +415,7 @@
         "lede": "Choose Blue or Pink and keep tiny nails soft, quiet, and stress-free.",
         "eyebrow": "JOYNURE / Baby Care",
         "product_label": "Electric Baby Nail Trimmer Set",
-        "asset_file": "baby-final-cta.jpg"
+        "asset_file": "baby-nail-final-cta.jpg"
       }
     }
   },

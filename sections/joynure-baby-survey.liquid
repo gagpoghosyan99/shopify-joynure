@@ -7,6 +7,11 @@
     if product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
       assign is_mat = true
     endif
+    if is_mat
+      assign survey_asset = 'baby-mat-mechanism-hero.jpg'
+    else
+      assign survey_asset = 'baby-nail-survey-hero.jpg'
+    endif
   -%}
   {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
   <section class="joynure-hula-landing joynure-hula-landing__section joynure-hula-survey" {{ section.shopify_attributes }}>
@@ -28,7 +33,7 @@
             {% render 'joynure-hula-media',
               product: product,
               setting_image: section.settings.image,
-              asset_file: section.settings.asset_file,
+              asset_file: survey_asset,
               media_id: section.settings.media_id,
               alt: section.settings.heading,
               class: 'joynure-hula-landing__media',

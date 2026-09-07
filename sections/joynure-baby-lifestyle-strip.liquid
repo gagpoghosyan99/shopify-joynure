@@ -36,6 +36,7 @@
             assign mid = section.settings[mid_key]
             assign asset = section.settings[asset_key]
             if is_mat
+              assign asset = 'baby-mat-life-' | append: i | append: '.jpg'
               case i
                 when 1
                   assign caption = 'Unfold on any clean surface'
@@ -52,6 +53,8 @@
                 when 7
                   assign caption = 'Keep one in the car kit'
               endcase
+            else
+              assign asset = 'baby-nail-life-' | append: i | append: '.jpg'
             endif
           %}
           {% if asset != blank or img != blank or mid != blank %}

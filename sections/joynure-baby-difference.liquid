@@ -37,21 +37,46 @@
             assign quote = section.settings[quote_key]
             assign rname = section.settings[name_key]
             assign meta = section.settings[meta_key]
+            assign before_file = section.settings[before_asset]
+            assign after_file = section.settings[after_asset]
 
             if is_mat
               case i
                 when 1
                   assign quote = 'Public restrooms used to stress me out. Now we unfold the mat and it feels like home.'
                   assign meta = 'Black · Travel changes'
+                  assign before_file = 'baby-mat-review-1-before.jpg'
+                  assign after_file = 'baby-mat-review-1-after.jpg'
                 when 2
                   assign quote = 'It folds into our diaper bag without taking over. Wipe it down and we are ready again.'
                   assign meta = 'Colorful · Diaper bag'
+                  assign before_file = 'baby-mat-review-2-before.jpg'
+                  assign after_file = 'baby-mat-review-2-after.jpg'
                 when 3
                   assign quote = 'Park picnic tables are finally usable. Soft padding, waterproof, and easy to clean.'
                   assign meta = 'White Grey · Outdoor days'
+                  assign before_file = 'baby-mat-review-3-before.jpg'
+                  assign after_file = 'baby-mat-review-3-after.jpg'
                 when 4
                   assign quote = 'We keep one in the car. No more scrambling for thin disposable pads that slip around.'
                   assign meta = 'Gray · Car kit'
+                  assign before_file = 'baby-mat-review-4-before.jpg'
+                  assign after_file = 'baby-mat-review-4-after.jpg'
+              endcase
+            else
+              case i
+                when 1
+                  assign before_file = 'baby-nail-review-1-before.jpg'
+                  assign after_file = 'baby-nail-review-1-after.jpg'
+                when 2
+                  assign before_file = 'baby-nail-review-2-before.jpg'
+                  assign after_file = 'baby-nail-review-2-after.jpg'
+                when 3
+                  assign before_file = 'baby-nail-review-3-before.jpg'
+                  assign after_file = 'baby-nail-review-3-after.jpg'
+                when 4
+                  assign before_file = 'baby-nail-review-4-before.jpg'
+                  assign after_file = 'baby-nail-review-4-after.jpg'
               endcase
             endif
           %}
@@ -63,7 +88,7 @@
                   {% render 'joynure-hula-media',
                     product: product,
                     setting_image: section.settings[before_picker],
-                    asset_file: section.settings[before_asset],
+                    asset_file: before_file,
                     media_id: section.settings[before_mid],
                     alt: section.settings.before_label,
                     class: 'joynure-hula-landing__media',
@@ -78,7 +103,7 @@
                   {% render 'joynure-hula-media',
                     product: product,
                     setting_image: section.settings[after_picker],
-                    asset_file: section.settings[after_asset],
+                    asset_file: after_file,
                     media_id: section.settings[after_mid],
                     alt: section.settings.after_label,
                     class: 'joynure-hula-landing__media',
