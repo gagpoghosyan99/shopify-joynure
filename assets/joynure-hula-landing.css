@@ -168,6 +168,14 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
     overflow: visible;
   }
+
+  /* Pet strip has 7 usable photos — keep a scrollable high-res grid */
+  .joynure-pet-strip__track.joynure-hula-strip__track {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(22%, 1fr);
+    grid-template-columns: none;
+    overflow-x: auto;
+  }
 }
 
 .joynure-hula-strip__card {
