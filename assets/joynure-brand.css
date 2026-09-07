@@ -162,13 +162,20 @@
 
 .joynure-collection-hula-grid .product-card:hover .joynure-hula-card-media--has-hover .joynure-hula-card-media__hover,
 .joynure-collection-hula-grid .product-card:focus-within .joynure-hula-card-media--has-hover .joynure-hula-card-media__hover,
-.joynure-collection-hula-grid .product-grid__item:hover .joynure-hula-card-media--has-hover .joynure-hula-card-media__hover {
+.joynure-collection-hula-grid .product-grid__item:hover .joynure-hula-card-media--has-hover .joynure-hula-card-media__hover,
+.joynure-collection-pet-grid .product-card:hover .joynure-hula-card-media--has-hover .joynure-hula-card-media__hover,
+.joynure-collection-pet-grid .product-card:focus-within .joynure-hula-card-media--has-hover .joynure-hula-card-media__hover,
+.joynure-collection-pet-grid .product-grid__item:hover .joynure-hula-card-media--has-hover .joynure-hula-card-media__hover {
   opacity: 1;
 }
 
 .joynure-collection-hula-grid .product-card .text-block,
 .joynure-collection-hula-grid .product-card [role='heading'],
 .joynure-collection-hula-grid .product-card [ref='priceContainer'],
-.joynure-collection-hula-grid .product-card .price {
+.joynure-collection-hula-grid .product-card .price,
+.joynure-collection-pet-grid .product-card .text-block,
+.joynure-collection-pet-grid .product-card [role='heading'],
+.joynure-collection-pet-grid .product-card [ref='priceContainer'],
+.joynure-collection-pet-grid .product-card .price {
   text-align: center;
 }

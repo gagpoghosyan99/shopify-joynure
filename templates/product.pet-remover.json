@@ -1,12 +1,4 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */{
+{
   "sections": {
     "main": {
       "type": "product-information",
@@ -128,8 +120,8 @@
                   "type": "joynure-hula-pdp-title",
                   "settings": {
                     "brand": "JOYNURE",
-                    "title": "Smart Weighted Hula Hoop",
-                    "subtitle": "Adjustable 24-Section Fitness Hoop"
+                    "title": "2-in-1 Reusable Pet Hair Remover",
+                    "subtitle": "Self-Cleaning · Fabric-Friendly · No Sticky Sheets"
                   },
                   "blocks": {}
                 },
@@ -298,75 +290,6 @@
         "padding-block-end": 0
       }
     },
-    "joynure_hula_benefits": {
-      "type": "joynure-hula-benefits",
-      "settings": {}
-    },
-    "joynure_hula_lifestyle_strip": {
-      "type": "joynure-hula-lifestyle-strip",
-      "settings": {}
-    },
-    "joynure_hula_difference": {
-      "type": "joynure-hula-difference",
-      "settings": {}
-    },
-    "joynure_hula_survey": {
-      "type": "joynure-hula-survey",
-      "settings": {}
-    },
-    "joynure_hula_how_it_works": {
-      "type": "joynure-hula-how-it-works",
-      "settings": {}
-    },
-    "joynure_hula_mechanism": {
-      "type": "joynure-hula-mechanism",
-      "settings": {}
-    },
-    "joynure_hula_steps": {
-      "type": "joynure-hula-steps",
-      "settings": {}
-    },
-    "joynure_hula_features": {
-      "type": "joynure-hula-features",
-      "settings": {}
-    },
-    "joynure_hula_included": {
-      "type": "joynure-hula-included",
-      "settings": {
-        "heading": "What's Included",
-        "lede": "Everything you need to get started.",
-        "item_1": "1 × Adjustable 24-section hoop",
-        "item_2": "1 × Weighted gravity ball",
-        "item_3": "1 × Adjustable rope/cord"
-      }
-    },
-    "joynure_hula_motion_gallery": {
-      "type": "joynure-hula-motion-gallery",
-      "disabled": true,
-      "settings": {
-        "enabled": false
-      }
-    },
-    "joynure_hula_color_story": {
-      "type": "joynure-hula-color-story",
-      "settings": {}
-    },
-    "joynure_hula_comparison": {
-      "type": "joynure-hula-comparison",
-      "settings": {}
-    },
-    "joynure_hula_specs": {
-      "type": "joynure-hula-specs",
-      "settings": {}
-    },
-    "joynure_hula_faq": {
-      "type": "joynure-hula-faq",
-      "settings": {}
-    },
-    "joynure_hula_final_cta": {
-      "type": "joynure-hula-final-cta",
-      "settings": {}
-    },
     "joynure_pet_benefits": {
       "type": "joynure-pet-benefits",
       "settings": {}
@@ -437,21 +360,6 @@
   },
   "order": [
     "main",
-    "joynure_hula_benefits",
-    "joynure_hula_difference",
-    "joynure_hula_survey",
-    "joynure_hula_lifestyle_strip",
-    "joynure_hula_how_it_works",
-    "joynure_hula_mechanism",
-    "joynure_hula_steps",
-    "joynure_hula_features",
-    "joynure_hula_included",
-    "joynure_hula_motion_gallery",
-    "joynure_hula_color_story",
-    "joynure_hula_comparison",
-    "joynure_hula_specs",
-    "joynure_hula_faq",
-    "joynure_hula_final_cta",
     "joynure_pet_benefits",
     "joynure_pet_difference",
     "joynure_pet_survey",

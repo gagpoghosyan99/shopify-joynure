@@ -3,9 +3,9 @@
   Used when Admin has not attached per-variant featured images (all colors share one gallery).
 
   @param {string} color - Color label (clean "Purple" or supplier "Color Box Purple 24Sections")
-  @param {object} [product] - Optional product; when present, only Hula uses the Hula ID maps
+  @param {object} [product] - Optional product; scopes Hula vs Pet ID maps
 
-  Outputs blank for unknown colors / non-Hula products when product is passed.
+  Outputs blank for unknown colors / unsupported products when product is passed.
 {%- enddoc -%}
 {%- liquid
   assign color_raw = color | strip
@@ -24,14 +24,7 @@
     assign color_key = color_raw | strip | downcase
   endif
 
-  # When product is provided, only map Hula (other products use their own maps elsewhere / exact keys).
-  # When product is blank, keep Hula maps for backward compatibility.
-  assign apply_hula = false
   if product_handle == blank or product_handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop'
-    assign apply_hula = true
-  endif
-
-  if apply_hula
     # Ordered hero-first (packshot / primary → lifestyle → details → assembly).
     # Mixed three-color group shot intentionally omitted from every color.
     if color_key == 'pink' or color_key contains 'pink'
@@ -40,6 +33,17 @@
       assign ids = '45011048431889,45011048595729,45011048726801,45011021922577,45011048530193,45011048497425'
     elsif color_key == 'blue' or color_key contains 'blue'
       assign ids = '45011048562961,45011048661265,45011048694033,45011048628497,45011048464657'
+    endif
+  elsif product_handle == '2-in-1-reusable-pet-hair-remover'
+    # Packshot / lifestyle first, then detail / mechanism shots. Mixed multi-color omitted.
+    if color_key == 'blue' or color_key contains 'blue'
+      assign ids = '45015235363089,45015235199249,45015236018449,45015235625233,45015235494161,45015236182289'
+    elsif color_key == 'green' or color_key contains 'green'
+      assign ids = '45015235166481,45015236083985,45015235526929,45015236313361'
+    elsif color_key == 'pink' or color_key contains 'pink'
+      assign ids = '45015235297553,45015235952913,45015235395857,45015235559697,45015235690769,45015235821841'
+    elsif color_key == 'white' or color_key contains 'white'
+      assign ids = '45015235264785,45015236116753,45015236051217,45015235658001,45015235723537'
     endif
   endif
 -%}
