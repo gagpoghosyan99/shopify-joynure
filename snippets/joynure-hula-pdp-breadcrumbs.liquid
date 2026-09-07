@@ -2,8 +2,10 @@
   Breadcrumb trail for modern PDPs. Hidden on Hula long-form PDP (customers see clean hero).
 {%- enddoc -%}
 
-{%- if product.handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop' -%}
-  {%- comment -%} Intentionally hidden for Hula PDP {%- endcomment -%}
+{%- if product.handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop'
+  or product.handle == '2-in-1-reusable-pet-hair-remover'
+-%}
+  {%- comment -%} Intentionally hidden for long-form PDPs {%- endcomment -%}
 {%- else -%}
   {%- capture joynure_hula_pdp_flag -%}
     {%- render 'joynure-hula-pdp-enabled', product: product -%}
