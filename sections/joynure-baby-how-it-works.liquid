@@ -1,0 +1,146 @@
+{%- capture enabled_flag -%}
+  {%- render 'joynure-baby-landing-enabled', product: product -%}
+{%- endcapture -%}
+{%- if enabled_flag == 'true' -%}
+  {%- liquid
+    assign is_mat = false
+    if product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
+      assign is_mat = true
+    endif
+    assign hero_asset = section.settings.asset_file | default: 'baby-nail-how-hero.jpg'
+    assign s1_asset = section.settings.s1_asset | default: 'baby-nail-how-step1.jpg'
+    assign s2_asset = section.settings.s2_asset | default: 'baby-nail-how-step2.jpg'
+    assign s3_asset = section.settings.s3_asset | default: 'baby-nail-how-step3.jpg'
+    if is_mat
+      assign hero_asset = 'baby-mat-how-hero.jpg'
+      assign s1_asset = 'baby-mat-how-step1.jpg'
+      assign s2_asset = 'baby-mat-how-step2.jpg'
+      assign s3_asset = 'baby-mat-how-step3.jpg'
+      assign how_heading = section.settings.heading_mat | default: section.settings.heading
+      assign how_lede = section.settings.lede_mat | default: 'Unfold. Change. Wipe clean. A padded travel mat that keeps routines simple anywhere.'
+      assign s1_title = section.settings.s1_title_mat | default: 'Unfold Flat'
+      assign s1_text = section.settings.s1_text_mat | default: 'Open the clutch into a full padded changing surface.'
+      assign s2_title = section.settings.s2_title_mat | default: 'Change Comfortably'
+      assign s2_text = section.settings.s2_text_mat | default: 'Soft cushioning protects baby on floors, benches, and park tables.'
+      assign s3_title = section.settings.s3_title_mat | default: 'Wipe & Fold'
+      assign s3_text = section.settings.s3_text_mat | default: 'Wipe the waterproof top clean, fold into a clutch, and pack away.'
+    else
+      assign hero_asset = 'baby-nail-how-hero.jpg'
+      assign s1_asset = 'baby-nail-how-step1.jpg'
+      assign s2_asset = 'baby-nail-how-step2.jpg'
+      assign s3_asset = 'baby-nail-how-step3.jpg'
+      assign how_heading = section.settings.heading
+      assign how_lede = section.settings.lede
+      assign s1_title = section.settings.s1_title
+      assign s1_text = section.settings.s1_text
+      assign s2_title = section.settings.s2_title
+      assign s2_text = section.settings.s2_text
+      assign s3_title = section.settings.s3_title
+      assign s3_text = section.settings.s3_text
+    endif
+  -%}
+  {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
+  <section class="joynure-hula-landing joynure-hula-landing__section joynure-hula-landing__section--blush" {{ section.shopify_attributes }}>
+    <div class="joynure-hula-landing__inner">
+      <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">{{ how_heading | escape }}</h2>
+      <p class="joynure-hula-landing__lede joynure-hula-landing__lede--center">{{ how_lede | escape }}</p>
+      <div class="joynure-hula-how__hero joynure-hula-card-3d joynure-hula-card-3d--hero">
+        <div class="joynure-hula-card-3d__media">
+          {% render 'joynure-hula-media',
+            product: product,
+            setting_image: section.settings.image,
+            asset_file: hero_asset,
+            media_id: section.settings.media_id,
+            alt: how_heading,
+            class: 'joynure-hula-landing__media',
+            loading: 'lazy',
+            sizes: '100vw'
+          %}
+        </div>
+      </div>
+      <div class="joynure-hula-how__steps joynure-hula-how__steps--3d">
+        {% for i in (1..3) %}
+          {% liquid
+            assign ikey = 's' | append: i | append: '_image'
+            assign mkey = 's' | append: i | append: '_media_id'
+            assign akey = 's' | append: i | append: '_asset'
+            assign num = i | prepend: '0'
+            case i
+              when 1
+                assign step_title = s1_title
+                assign step_text = s1_text
+                assign step_asset = s1_asset
+              when 2
+                assign step_title = s2_title
+                assign step_text = s2_text
+                assign step_asset = s2_asset
+              when 3
+                assign step_title = s3_title
+                assign step_text = s3_text
+                assign step_asset = s3_asset
+            endcase
+          %}
+          <article class="joynure-hula-card-3d joynure-hula-how__step">
+            <div class="joynure-hula-card-3d__media joynure-hula-how__step-media">
+              {% render 'joynure-hula-media',
+                product: product,
+                setting_image: section.settings[ikey],
+                asset_file: step_asset,
+                media_id: section.settings[mkey],
+                alt: step_title,
+                class: 'joynure-hula-landing__media',
+                loading: 'lazy',
+                sizes: '(min-width: 750px) 30vw, 88vw'
+              %}
+            </div>
+            <div class="joynure-hula-card-3d__body">
+              <p class="joynure-hula-how__num">{{ num }}</p>
+              <h3>{{ step_title | escape }}</h3>
+              <p>{{ step_text | escape }}</p>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Baby how it works",
+  "tag": "section",
+  "class": "joynure-hula-landing-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "See How It Works" },
+    { "type": "text", "id": "heading_mat", "label": "Heading (mat)", "default": "See How It Works" },
+    { "type": "textarea", "id": "lede", "label": "Supporting copy", "default": "Charge. Choose a pad. Trim gently. Quiet electric care for tiny nails." },
+    { "type": "textarea", "id": "lede_mat", "label": "Supporting copy (mat)", "default": "Unfold. Change. Wipe clean. A padded travel mat that keeps routines simple anywhere." },
+    { "type": "image_picker", "id": "image", "label": "Hero image" },
+    { "type": "text", "id": "asset_file", "label": "Hero theme asset", "default": "baby-how-hero.jpg" },
+    { "type": "text", "id": "media_id", "label": "Hero media ID" },
+    { "type": "text", "id": "s1_title", "label": "Step 1 title", "default": "Pick the Right Pad" },
+    { "type": "textarea", "id": "s1_text", "label": "Step 1 text", "default": "Choose a soft pad matched to your baby’s age stage." },
+    { "type": "text", "id": "s1_title_mat", "label": "Step 1 title (mat)", "default": "Unfold Flat" },
+    { "type": "textarea", "id": "s1_text_mat", "label": "Step 1 text (mat)", "default": "Open the clutch into a full padded changing surface." },
+    { "type": "image_picker", "id": "s1_image", "label": "Step 1 image" },
+    { "type": "text", "id": "s1_asset", "label": "Step 1 theme asset", "default": "baby-how-step1.jpg" },
+    { "type": "text", "id": "s1_media_id", "label": "Step 1 media ID" },
+    { "type": "text", "id": "s2_title", "label": "Step 2 title", "default": "Light & Trim" },
+    { "type": "textarea", "id": "s2_text", "label": "Step 2 text", "default": "Turn on the LED and gently guide the trimmer along the nail edge." },
+    { "type": "text", "id": "s2_title_mat", "label": "Step 2 title (mat)", "default": "Change Comfortably" },
+    { "type": "textarea", "id": "s2_text_mat", "label": "Step 2 text (mat)", "default": "Soft cushioning protects baby on floors, benches, and park tables." },
+    { "type": "image_picker", "id": "s2_image", "label": "Step 2 image" },
+    { "type": "text", "id": "s2_asset", "label": "Step 2 theme asset", "default": "baby-how-step2.jpg" },
+    { "type": "text", "id": "s2_media_id", "label": "Step 2 media ID" },
+    { "type": "text", "id": "s3_title", "label": "Step 3 title", "default": "Finish Softly" },
+    { "type": "textarea", "id": "s3_text", "label": "Step 3 text", "default": "Smooth any rough edges, then store the set for next time." },
+    { "type": "text", "id": "s3_title_mat", "label": "Step 3 title (mat)", "default": "Wipe & Fold" },
+    { "type": "textarea", "id": "s3_text_mat", "label": "Step 3 text (mat)", "default": "Wipe the waterproof top clean, fold into a clutch, and pack away." },
+    { "type": "image_picker", "id": "s3_image", "label": "Step 3 image" },
+    { "type": "text", "id": "s3_asset", "label": "Step 3 theme asset", "default": "baby-how-step3.jpg" },
+    { "type": "text", "id": "s3_media_id", "label": "Step 3 media ID" }
+  ],
+  "presets": [{ "name": "JOYNURE Baby how it works" }]
+}
+{% endschema %}

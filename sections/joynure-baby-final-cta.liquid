@@ -1,0 +1,190 @@
+{%- capture enabled_flag -%}
+  {%- render 'joynure-baby-landing-enabled', product: product -%}
+{%- endcapture -%}
+{%- if enabled_flag == 'true' -%}
+  {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'joynure-hula-landing.js' | asset_url }}" type="module"></script>
+
+  {%- liquid
+    assign current_variant = product.selected_or_first_available_variant
+    assign money_price = current_variant.price | money
+    assign is_mat = false
+    if product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
+      assign is_mat = true
+    endif
+    assign final_asset = 'baby-nail-final-cta.jpg'
+    if is_mat
+      assign final_asset = 'baby-mat-final-cta.jpg'
+      assign final_heading = section.settings.heading_mat | default: 'Ready for Calmer Changes?'
+      assign final_lede = section.settings.lede_mat | default: 'Choose your color and pack a wipe-clean padded mat for home and travel.'
+      assign final_eyebrow = section.settings.eyebrow_mat | default: 'JOYNURE / Baby Care'
+      assign final_label = section.settings.product_label_mat | default: 'Foldable Baby Changing Mat'
+    else
+      assign final_heading = section.settings.heading
+      assign final_lede = section.settings.lede
+      assign final_eyebrow = section.settings.eyebrow
+      assign final_label = section.settings.product_label
+    endif
+  -%}
+
+  <section class="joynure-hula-landing joynure-hula-landing__section joynure-hula-landing__section--wash" {{ section.shopify_attributes }}>
+    <div class="joynure-hula-landing__inner joynure-hula-final">
+      <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">{{ final_heading | escape }}</h2>
+      <p class="joynure-hula-landing__lede joynure-hula-landing__lede--center">{{ final_lede | escape }}</p>
+
+      <joynure-hula-final-cta class="joynure-hula-final__panel">
+        <div class="joynure-hula-final__media">
+          {% render 'joynure-hula-media',
+            product: product,
+            setting_image: section.settings.image,
+            asset_file: final_asset,
+            media_id: section.settings.media_id,
+            alt: product.title,
+            class: 'joynure-hula-landing__media joynure-hula-landing__media--contain',
+            loading: 'lazy'
+          %}
+          {%- comment -%} Keep variant image available for JS color swaps when present. {%- endcomment -%}
+          {% if current_variant.featured_image != blank %}
+            <img
+              src="{{ current_variant.featured_image | image_url: width: 900 }}"
+              alt=""
+              width="900"
+              height="900"
+              hidden
+              data-joynure-hula-final-media
+              data-variant-id="{{ current_variant.id }}"
+            >
+          {% endif %}
+        </div>
+
+        <div>
+          <p class="joynure-hula-landing__eyebrow">{{ final_eyebrow | escape }}</p>
+          <h3 class="joynure-hula-landing__title" style="font-size:1.5rem;">{{ final_label | default: product.title | escape }}</h3>
+          <p class="joynure-hula-final__price" data-joynure-hula-final-price>{{ money_price }}</p>
+
+          <div class="joynure-hula-final__colors" role="group" aria-label="Choose color">
+            {% for variant in product.variants %}
+              {% liquid
+                assign raw_color = variant.option1
+                capture clean_color
+                  render 'joynure-variant-label', label: raw_color
+                endcapture
+                assign clean_color = clean_color | strip
+                assign color_key = clean_color | downcase
+                assign raw_key = raw_color | downcase
+                assign swatch_class = 'joynure-hula-final__swatch'
+
+                if color_key contains 'colorful' or raw_key contains 'colorful'
+                  assign swatch_class = swatch_class | append: ' joynure-hula-final__swatch--colorful'
+                  if clean_color == blank
+                    assign clean_color = 'Colorful'
+                  endif
+                elsif color_key contains 'white black' or color_key contains 'white-black' or raw_key contains 'white black' or raw_key contains 'white-black'
+                  assign swatch_class = swatch_class | append: ' joynure-hula-final__swatch--white-black'
+                  if clean_color == blank
+                    assign clean_color = 'White Black'
+                  endif
+                elsif color_key contains 'white grey' or color_key contains 'white gray' or color_key contains 'white-grey' or color_key contains 'white-gray' or raw_key contains 'white grey' or raw_key contains 'white gray' or raw_key contains 'white-grey' or raw_key contains 'white-gray'
+                  assign swatch_class = swatch_class | append: ' joynure-hula-final__swatch--white-grey'
+                  if clean_color == blank
+                    assign clean_color = 'White Grey'
+                  endif
+                elsif color_key contains 'black grey' or color_key contains 'black gray' or color_key contains 'black-grey' or color_key contains 'black-gray' or raw_key contains 'black grey' or raw_key contains 'black gray' or raw_key contains 'black-grey' or raw_key contains 'black-gray'
+                  assign swatch_class = swatch_class | append: ' joynure-hula-final__swatch--gray'
+                  if clean_color == blank
+                    assign clean_color = 'Black Grey'
+                  endif
+                elsif color_key == 'black' or raw_key == 'black' or raw_key contains ' black' or color_key contains 'black'
+                  assign swatch_class = swatch_class | append: ' joynure-hula-final__swatch--black'
+                  if clean_color == blank
+                    assign clean_color = 'Black'
+                  endif
+                elsif color_key == 'gray' or color_key == 'grey' or raw_key == 'gray' or raw_key == 'grey' or color_key contains 'gray' or color_key contains 'grey' or raw_key contains 'gray' or raw_key contains 'grey'
+                  assign swatch_class = swatch_class | append: ' joynure-hula-final__swatch--gray'
+                  if clean_color == blank
+                    assign clean_color = 'Gray'
+                  endif
+                elsif color_key == 'pink' or raw_key contains 'pink'
+                  assign swatch_class = swatch_class | append: ' joynure-hula-final__swatch--pink'
+                  if clean_color == blank
+                    assign clean_color = 'Pink'
+                  endif
+                elsif color_key == 'blue' or raw_key contains 'blue'
+                  assign swatch_class = swatch_class | append: ' joynure-hula-final__swatch--blue'
+                  if clean_color == blank
+                    assign clean_color = 'Blue'
+                  endif
+                elsif color_key == 'green' or raw_key contains 'green'
+                  assign swatch_class = swatch_class | append: ' joynure-hula-final__swatch--green'
+                  if clean_color == blank
+                    assign clean_color = 'Green'
+                  endif
+                elsif color_key == 'white' or raw_key contains 'white'
+                  assign swatch_class = swatch_class | append: ' joynure-hula-final__swatch--white'
+                  if clean_color == blank
+                    assign clean_color = 'White'
+                  endif
+                endif
+                assign pressed = false
+                if variant.id == current_variant.id
+                  assign pressed = true
+                endif
+                assign image_url = ''
+                if variant.featured_image != blank
+                  assign image_url = variant.featured_image | image_url: width: 900
+                endif
+              %}
+              <button
+                type="button"
+                class="{{ swatch_class }}"
+                data-joynure-hula-color
+                data-variant-id="{{ variant.id }}"
+                data-display-label="{{ clean_color | escape }}"
+                data-price="{{ variant.price | money | escape }}"
+                data-image="{{ image_url | escape }}"
+                aria-pressed="{% if pressed %}true{% else %}false{% endif %}"
+              >
+                {{ clean_color | escape }}
+              </button>
+            {% endfor %}
+          </div>
+
+          <button
+            type="button"
+            class="joynure-hula-final__atc"
+            data-joynure-hula-final-atc
+            data-variant-id="{{ current_variant.id }}"
+          >
+            {{ section.settings.button_label | escape }}
+          </button>
+          <p class="joynure-hula-final__note">{{ section.settings.note | escape }}</p>
+        </div>
+      </joynure-hula-final-cta>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Baby final CTA",
+  "tag": "section",
+  "class": "joynure-hula-landing-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Ready for Gentler Nail Care?" },
+    { "type": "text", "id": "heading_mat", "label": "Heading (mat)", "default": "Ready for Calmer Changes?" },
+    { "type": "textarea", "id": "lede", "label": "Supporting copy", "default": "Choose Blue or Pink and keep tiny nails soft, quiet, and stress-free." },
+    { "type": "textarea", "id": "lede_mat", "label": "Supporting copy (mat)", "default": "Choose your color and pack a wipe-clean padded mat for home and travel." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "JOYNURE / Baby Care" },
+    { "type": "text", "id": "eyebrow_mat", "label": "Eyebrow (mat)", "default": "JOYNURE / Baby Care" },
+    { "type": "text", "id": "product_label", "label": "Product label", "default": "Electric Baby Nail Trimmer Set" },
+    { "type": "text", "id": "product_label_mat", "label": "Product label (mat)", "default": "Foldable Baby Changing Mat" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Add to Cart" },
+    { "type": "text", "id": "note", "label": "Note", "default": "Uses your selected Shopify variant — not a separate form." },
+    { "type": "image_picker", "id": "image", "label": "Fallback image" },
+    { "type": "text", "id": "asset_file", "label": "Theme asset", "default": "baby-final-cta.jpg" },
+    { "type": "text", "id": "media_id", "label": "Fallback media ID" }
+  ],
+  "presets": [{ "name": "JOYNURE Baby final CTA" }]
+}
+{% endschema %}

@@ -1,0 +1,50 @@
+{%- capture enabled_flag -%}
+  {%- render 'joynure-hula-landing-enabled', product: product -%}
+{%- endcapture -%}
+{%- if enabled_flag == 'true' -%}
+  {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
+  <section class="joynure-hula-landing joynure-hula-landing__section" {{ section.shopify_attributes }}>
+    <div class="joynure-hula-landing__inner">
+      <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">{{ section.settings.heading | escape }}</h2>
+      <p class="joynure-hula-landing__lede joynure-hula-landing__lede--center">{{ section.settings.lede | escape }}</p>
+      <div class="joynure-hula-features__grid">
+        {% for i in (1..6) %}
+          {% liquid
+            assign tk = 'c' | append: i | append: '_title'
+            assign xk = 'c' | append: i | append: '_text'
+          %}
+          <article class="joynure-hula-features__card">
+            <h3>{{ section.settings[tk] | escape }}</h3>
+            <p>{{ section.settings[xk] | escape }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Hula features",
+  "tag": "section",
+  "class": "joynure-hula-landing-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Built for Everyday Home Fitness" },
+    { "type": "textarea", "id": "lede", "label": "Supporting copy", "default": "Thoughtful construction details that support a flexible home routine." },
+    { "type": "text", "id": "c1_title", "label": "Card 1 title", "default": "Adjustable Fit" },
+    { "type": "textarea", "id": "c1_text", "label": "Card 1 text", "default": "24 detachable sections." },
+    { "type": "text", "id": "c2_title", "label": "Card 2 title", "default": "Compact Setup" },
+    { "type": "textarea", "id": "c2_text", "label": "Card 2 text", "default": "Designed for convenient home use." },
+    { "type": "text", "id": "c3_title", "label": "Card 3 title", "default": "Adjustable Resistance Feel" },
+    { "type": "textarea", "id": "c3_text", "label": "Card 3 text", "default": "Change the cord radius according to comfort and experience." },
+    { "type": "text", "id": "c4_title", "label": "Card 4 title", "default": "Easy Storage" },
+    { "type": "textarea", "id": "c4_text", "label": "Card 4 text", "default": "Detachable construction makes storage simpler." },
+    { "type": "text", "id": "c5_title", "label": "Card 5 title", "default": "Three Colors" },
+    { "type": "textarea", "id": "c5_text", "label": "Card 5 text", "default": "Pink, Purple and Blue." },
+    { "type": "text", "id": "c6_title", "label": "Card 6 title", "default": "Beginner Friendly" },
+    { "type": "textarea", "id": "c6_text", "label": "Card 6 text", "default": "Start slowly and build your routine according to comfort." }
+  ],
+  "presets": [{ "name": "JOYNURE Hula features" }]
+}
+{% endschema %}
