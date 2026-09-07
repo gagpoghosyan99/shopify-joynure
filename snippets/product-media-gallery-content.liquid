@@ -103,7 +103,7 @@
 -%}
 {%- capture joynure_color_media_ids -%}
   {%- if block_settings.hide_variants and selected_color_label != blank -%}
-    {%- render 'joynure-color-media-ids', color: selected_color_label -%}
+    {%- render 'joynure-color-media-ids', color: selected_color_label, product: selected_product -%}
   {%- endif -%}
 {%- endcapture -%}
 {%- liquid
