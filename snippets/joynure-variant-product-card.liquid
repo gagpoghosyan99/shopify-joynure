@@ -11,6 +11,9 @@
 
 {% liquid
   assign variant_url = product.url | append: '?variant=' | append: variant.id
+  if product.handle == '2-in-1-reusable-pet-hair-remover'
+    assign variant_url = variant_url | append: '&view=pet-remover'
+  endif
   assign card_image = variant.featured_image
   if card_image == blank
     assign card_image = product.featured_media.preview_image

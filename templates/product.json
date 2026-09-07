@@ -337,7 +337,8 @@
         "lede": "Everything you need to get started.",
         "item_1": "1 × Adjustable 24-section hoop",
         "item_2": "1 × Weighted gravity ball",
-        "item_3": "1 × Adjustable rope/cord"
+        "item_3": "1 × Adjustable rope/cord",
+        "asset_file": "hula-included.jpg"
       }
     },
     "joynure_hula_motion_gallery": {
@@ -349,7 +350,11 @@
     },
     "joynure_hula_color_story": {
       "type": "joynure-hula-color-story",
-      "settings": {}
+      "settings": {
+        "pink_asset_file": "hula-color-pink.jpg",
+        "purple_asset_file": "hula-color-purple.jpg",
+        "blue_asset_file": "hula-color-blue.jpg"
+      }
     },
     "joynure_hula_comparison": {
       "type": "joynure-hula-comparison",
@@ -357,7 +362,9 @@
     },
     "joynure_hula_specs": {
       "type": "joynure-hula-specs",
-      "settings": {}
+      "settings": {
+        "asset_file": "hula-specs.jpg"
+      }
     },
     "joynure_hula_faq": {
       "type": "joynure-hula-faq",
@@ -365,73 +372,8 @@
     },
     "joynure_hula_final_cta": {
       "type": "joynure-hula-final-cta",
-      "settings": {}
-    },
-    "joynure_pet_benefits": {
-      "type": "joynure-pet-benefits",
-      "settings": {}
-    },
-    "joynure_pet_difference": {
-      "type": "joynure-pet-difference",
-      "settings": {}
-    },
-    "joynure_pet_survey": {
-      "type": "joynure-pet-survey",
-      "settings": {}
-    },
-    "joynure_pet_lifestyle_strip": {
-      "type": "joynure-pet-lifestyle-strip",
-      "settings": {}
-    },
-    "joynure_pet_how_it_works": {
-      "type": "joynure-pet-how-it-works",
-      "settings": {}
-    },
-    "joynure_pet_mechanism": {
-      "type": "joynure-pet-mechanism",
-      "settings": {}
-    },
-    "joynure_pet_steps": {
-      "type": "joynure-pet-steps",
-      "settings": {}
-    },
-    "joynure_pet_features": {
-      "type": "joynure-pet-features",
-      "settings": {}
-    },
-    "joynure_pet_included": {
-      "type": "joynure-pet-included",
       "settings": {
-        "heading": "What's Included",
-        "lede": "One compact tool. Ready for everyday pet-hair cleanup.",
-        "item_1": "1 × 2-in-1 Reusable Pet Hair Remover",
-        "item_2": "Built-in self-cleaning collection chamber",
-        "item_3": "Ready to use — no batteries or refill sheets",
-        "asset_file": "pet-included.jpg"
-      }
-    },
-    "joynure_pet_color_story": {
-      "type": "joynure-pet-color-story",
-      "settings": {}
-    },
-    "joynure_pet_comparison": {
-      "type": "joynure-pet-comparison",
-      "settings": {}
-    },
-    "joynure_pet_specs": {
-      "type": "joynure-pet-specs",
-      "settings": {
-        "asset_file": "pet-specs.jpg"
-      }
-    },
-    "joynure_pet_faq": {
-      "type": "joynure-pet-faq",
-      "settings": {}
-    },
-    "joynure_pet_final_cta": {
-      "type": "joynure-pet-final-cta",
-      "settings": {
-        "asset_file": "pet-final-cta.jpg"
+        "asset_file": "hula-final-cta.jpg"
       }
     }
   },
@@ -451,20 +393,6 @@
     "joynure_hula_comparison",
     "joynure_hula_specs",
     "joynure_hula_faq",
-    "joynure_hula_final_cta",
-    "joynure_pet_benefits",
-    "joynure_pet_difference",
-    "joynure_pet_survey",
-    "joynure_pet_lifestyle_strip",
-    "joynure_pet_how_it_works",
-    "joynure_pet_mechanism",
-    "joynure_pet_steps",
-    "joynure_pet_features",
-    "joynure_pet_included",
-    "joynure_pet_color_story",
-    "joynure_pet_comparison",
-    "joynure_pet_specs",
-    "joynure_pet_faq",
-    "joynure_pet_final_cta"
+    "joynure_hula_final_cta"
   ]
 }
