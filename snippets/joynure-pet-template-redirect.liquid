@@ -1,0 +1,21 @@
+{%- comment -%}
+  Pet long-form lives on the pet-remover alternate template to stay under Shopify's
+  25-section product template limit (Hula uses the default product template).
+{%- endcomment -%}
+{%- if product.handle == '2-in-1-reusable-pet-hair-remover' -%}
+  {%- if template.suffix != 'pet-remover' -%}
+    <script>
+      (function () {
+        try {
+          var url = new URL(window.location.href);
+          if (url.searchParams.get('view') === 'pet-remover') return;
+          url.searchParams.set('view', 'pet-remover');
+          window.location.replace(url.toString());
+        } catch (e) {}
+      })();
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="0;url={{ product.url }}?view=pet-remover{% if product.selected_or_first_available_variant %}&variant={{ product.selected_or_first_available_variant.id }}{% endif %}">
+    </noscript>
+  {%- endif -%}
+{%- endif -%}

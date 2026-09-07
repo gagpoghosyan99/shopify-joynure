@@ -64,6 +64,9 @@
     {% endif %}
 
     {{ content_for_header }}
+    {% if template.name == 'product' and product != blank %}
+      {% render 'joynure-pet-template-redirect', product: product %}
+    {% endif %}
   </head>
 
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">

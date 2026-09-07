@@ -1,23 +1,50 @@
 {%- doc -%}
-  Returns a comma-separated list of product media IDs for a color on the Hula hoop PDP.
+  Returns a comma-separated list of product media IDs for a color on color-isolated PDPs.
   Used when Admin has not attached per-variant featured images (all colors share one gallery).
 
-  @param {string} color - Normalized color label: Pink, Purple, or Blue
+  @param {string} color - Color label (clean "Purple" or supplier "Color Box Purple 24Sections")
+  @param {object} [product] - Optional product; scopes Hula vs Pet ID maps
 
-  Outputs blank for unknown colors.
+  Outputs blank for unknown colors / unsupported products when product is passed.
 {%- enddoc -%}
 {%- liquid
-  assign color_key = color | strip | downcase
+  assign color_raw = color | strip
   assign ids = ''
+  assign product_handle = ''
+  if product != blank
+    assign product_handle = product.handle
+  endif
 
-  # Ordered hero-first (studio pedestal / primary shot, then lifestyle, details, assembly).
-  # Mixed three-color group shot intentionally omitted from every color.
-  if color_key == 'pink'
-    assign ids = '45010727797009,45010736709905,45010744803601,45010788942097,45010794578193,45010801230097,45010994266385,45011023102225'
-  elsif color_key == 'purple'
-    assign ids = '45011048431889,45011048595729,45011048726801,45011021922577,45011048530193,45011048497425'
-  elsif color_key == 'blue'
-    assign ids = '45011048562961,45011048661265,45011048694033,45011048628497,45011048464657'
+  # Normalize supplier labels like "Color Box Purple 24Sections" → "Purple"
+  capture color_clean
+    render 'joynure-variant-label', label: color_raw
+  endcapture
+  assign color_key = color_clean | strip | downcase
+  if color_key == blank
+    assign color_key = color_raw | strip | downcase
+  endif
+
+  if product_handle == blank or product_handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop'
+    # Ordered hero-first (packshot / primary → lifestyle → details → assembly).
+    # Mixed three-color group shot intentionally omitted from every color.
+    if color_key == 'pink' or color_key contains 'pink'
+      assign ids = '45010727797009,45010736709905,45010744803601,45010788942097,45010794578193,45010801230097,45010994266385,45011023102225'
+    elsif color_key == 'purple' or color_key contains 'purple'
+      assign ids = '45011048431889,45011048595729,45011048726801,45011021922577,45011048530193,45011048497425'
+    elsif color_key == 'blue' or color_key contains 'blue'
+      assign ids = '45011048562961,45011048661265,45011048694033,45011048628497,45011048464657'
+    endif
+  elsif product_handle == '2-in-1-reusable-pet-hair-remover'
+    # Packshot / lifestyle first, then detail / mechanism shots. Mixed multi-color omitted.
+    if color_key == 'blue' or color_key contains 'blue'
+      assign ids = '45015235363089,45015235199249,45015236018449,45015235625233,45015235494161,45015236182289'
+    elsif color_key == 'green' or color_key contains 'green'
+      assign ids = '45015235166481,45015236083985,45015235526929,45015236313361'
+    elsif color_key == 'pink' or color_key contains 'pink'
+      assign ids = '45015235297553,45015235952913,45015235395857,45015235559697,45015235690769,45015235821841'
+    elsif color_key == 'white' or color_key contains 'white'
+      assign ids = '45015235264785,45015236116753,45015236051217,45015235658001,45015235723537'
+    endif
   endif
 -%}
 {{- ids -}}

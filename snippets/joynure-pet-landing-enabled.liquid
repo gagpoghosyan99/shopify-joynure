@@ -1,0 +1,11 @@
+{%- doc -%}
+  Returns "true" only for the JOYNURE 2-in-1 Reusable Pet Hair Remover.
+  Scopes long-form pet landing sections so Hula/Baby PDPs stay unchanged.
+{%- enddoc -%}
+{%- liquid
+  if product != blank and product.handle == '2-in-1-reusable-pet-hair-remover'
+    echo 'true'
+  else
+    echo 'false'
+  endif
+-%}

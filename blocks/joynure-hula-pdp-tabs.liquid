@@ -29,7 +29,48 @@
         data-panel="description"
       >
         <div class="joynure-pdp-tabs__rte rte">
-          {{ closest.product.description }}
+          {%- if closest.product.handle == '2-in-1-reusable-pet-hair-remover' -%}
+            <h2>A cleaner home in a few swipes</h2>
+            <p>Remove stubborn pet hair, lint, and fuzz without disposable sticky sheets. The JOYNURE 2-in-1 Reusable Pet Hair Remover collects debris in a built-in chamber so everyday cleanup stays quick, simple, and mess-free.</p>
+            <h3>Why you’ll love it</h3>
+            <ul>
+              <li><strong>Fast hair removal</strong> — swipe across fabric to collect pet hair, lint, and dust.</li>
+              <li><strong>Self-cleaning design</strong> — twist the handle to clear the brush into the chamber.</li>
+              <li><strong>Easy to empty</strong> — release and empty without touching collected hair.</li>
+              <li><strong>Reusable &amp; economical</strong> — no adhesive sheets, batteries, or replacement rolls.</li>
+              <li><strong>Compact &amp; portable</strong> — keep one at home, in a bag, or in the car.</li>
+              <li><strong>Fabric-friendly</strong> — designed for clothing, upholstery, and everyday textiles.</li>
+            </ul>
+            <h3>Perfect for</h3>
+            <ul>
+              <li>Sofas and chairs</li>
+              <li>Clothing and coats</li>
+              <li>Bedding and comforters</li>
+              <li>Car seats</li>
+              <li>Cotton, linen, wool, and similar fabric surfaces</li>
+            </ul>
+            <h3>How to use</h3>
+            <ol>
+              <li>Swipe the brush across the fabric to collect hair and lint.</li>
+              <li>Twist the handle left and right to move debris into the chamber.</li>
+              <li>Press the release button and empty the chamber.</li>
+              <li>Reuse whenever you need.</li>
+            </ol>
+            <h3>Product details</h3>
+            <ul>
+              <li>Type: Reusable pet hair remover</li>
+              <li>Cleaning method: Electrostatic adsorption</li>
+              <li>Colors: Blue, Green, Pink, White</li>
+              <li>Size: 18.3 × 4.3 × 4.3 cm / 7.2 × 1.7 × 1.7 in</li>
+            </ul>
+            <h3>Package includes</h3>
+            <ul>
+              <li>1 × 2-in-1 Reusable Pet Hair Remover</li>
+            </ul>
+            <p><em>Actual color may vary slightly with lighting and screens. Minor size differences may occur due to manual measurement.</em></p>
+          {%- else -%}
+            {{ closest.product.description }}
+          {%- endif -%}
         </div>
       </div>
 
