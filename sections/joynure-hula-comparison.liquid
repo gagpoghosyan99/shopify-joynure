@@ -1,0 +1,75 @@
+{%- capture enabled_flag -%}
+  {%- render 'joynure-hula-landing-enabled', product: product -%}
+{%- endcapture -%}
+{%- if enabled_flag == 'true' -%}
+  {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
+  <section class="joynure-hula-landing joynure-hula-landing__section joynure-hula-landing__section--blush" {{ section.shopify_attributes }}>
+    <div class="joynure-hula-landing__inner">
+      <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">
+        Why Choose <span class="joynure-hula-landing__title-accent">JOYNURE</span>?
+      </h2>
+      <p class="joynure-hula-landing__lede joynure-hula-landing__lede--center">{{ section.settings.lede | escape }}</p>
+      <div class="joynure-hula-compare__wrap">
+        <table class="joynure-hula-compare__table">
+          <thead>
+            <tr>
+              <th scope="col">Feature</th>
+              <th scope="col">{{ section.settings.col_a | escape }}</th>
+              <th scope="col">{{ section.settings.col_b | escape }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in (1..5) %}
+              {% liquid
+                assign fk = 'r' | append: i | append: '_feature'
+                assign ak = 'r' | append: i | append: '_a'
+                assign bk = 'r' | append: i | append: '_b'
+              %}
+              <tr>
+                <td data-label="Feature">{{ section.settings[fk] | escape }}</td>
+                <td data-label="{{ section.settings.col_a | escape }}">
+                  <span class="joynure-hula-compare__yes" aria-hidden="true">✓</span>
+                  {{ section.settings[ak] | escape }}
+                </td>
+                <td data-label="{{ section.settings.col_b | escape }}">
+                  <span class="joynure-hula-compare__no" aria-hidden="true">–</span>
+                  {{ section.settings[bk] | escape }}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Hula comparison",
+  "tag": "section",
+  "class": "joynure-hula-landing-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "textarea", "id": "lede", "label": "Supporting copy", "default": "A factual look at design differences — not workout outcome claims." },
+    { "type": "text", "id": "col_a", "label": "Column A", "default": "JOYNURE Smart Weighted Hoop" },
+    { "type": "text", "id": "col_b", "label": "Column B", "default": "Traditional Hula Hoop" },
+    { "type": "text", "id": "r1_feature", "label": "Row 1 feature", "default": "Adjustable sizing" },
+    { "type": "text", "id": "r1_a", "label": "Row 1 JOYNURE", "default": "Yes — add or remove sections" },
+    { "type": "text", "id": "r1_b", "label": "Row 1 traditional", "default": "Usually fixed" },
+    { "type": "text", "id": "r2_feature", "label": "Row 2 feature", "default": "Weighted rotating system" },
+    { "type": "text", "id": "r2_a", "label": "Row 2 JOYNURE", "default": "Yes — gravity ball on track" },
+    { "type": "text", "id": "r2_b", "label": "Row 2 traditional", "default": "No" },
+    { "type": "text", "id": "r3_feature", "label": "Row 3 feature", "default": "Detachable sections" },
+    { "type": "text", "id": "r3_a", "label": "Row 3 JOYNURE", "default": "Yes" },
+    { "type": "text", "id": "r3_b", "label": "Row 3 traditional", "default": "Usually no" },
+    { "type": "text", "id": "r4_feature", "label": "Row 4 feature", "default": "Adjustable cord" },
+    { "type": "text", "id": "r4_a", "label": "Row 4 JOYNURE", "default": "Yes" },
+    { "type": "text", "id": "r4_b", "label": "Row 4 traditional", "default": "Not applicable" },
+    { "type": "text", "id": "r5_feature", "label": "Row 5 feature", "default": "Compact storage" },
+    { "type": "text", "id": "r5_a", "label": "Row 5 JOYNURE", "default": "Easier — disassembles" },
+    { "type": "text", "id": "r5_b", "label": "Row 5 traditional", "default": "More space required" }
+  ],
+  "presets": [{ "name": "JOYNURE Hula comparison" }]
+}
+{% endschema %}

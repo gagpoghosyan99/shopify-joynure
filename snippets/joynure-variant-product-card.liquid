@@ -16,6 +16,33 @@
     assign card_image = product.featured_media.preview_image
   endif
 
+  # Hula collection cards: primary packshot + hover lifestyle (color-isolated)
+  assign hula_card_primary = blank
+  assign hula_card_hover = blank
+  if product.handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop'
+    assign color_raw = variant.option1 | default: variant.title
+    capture clean_color_for_card
+      render 'joynure-variant-label', label: color_raw
+    endcapture
+    assign clean_color_for_card = clean_color_for_card | strip | downcase
+    case clean_color_for_card
+      when 'pink'
+        assign hula_card_primary = 'hula-card-pink-packshot.jpg'
+        assign hula_card_hover = 'hula-card-pink-lifestyle.jpg'
+      when 'purple'
+        assign hula_card_primary = 'hula-card-purple-packshot.jpg'
+        assign hula_card_hover = 'hula-card-purple-lifestyle.jpg'
+      when 'blue'
+        assign hula_card_primary = 'hula-card-blue-packshot.jpg'
+        assign hula_card_hover = 'hula-card-blue-lifestyle.jpg'
+    endcase
+  endif
+  assign hula_card_asset = hula_card_primary
+  assign hula_show_hover = false
+  if hula_card_primary != blank and hula_card_hover != blank and settings.show_second_image_on_hover
+    assign hula_show_hover = true
+  endif
+
   assign has_quick_add = false
   if settings.quick_add and variant.available
     assign has_quick_add = true
@@ -48,8 +75,12 @@
   endif
 
   assign featured_media_url = blank
-  if settings.transition_to_main_product and card_image != blank
-    assign featured_media_url = card_image | image_url: width: 500
+  if settings.transition_to_main_product
+    if hula_card_asset != blank
+      assign featured_media_url = hula_card_asset | asset_url
+    elsif card_image != blank
+      assign featured_media_url = card_image | image_url: width: 500
+    endif
   endif
   assign add_label = 'actions.add' | t
 %}
@@ -115,7 +146,31 @@
         href="{{ variant_url }}"
         aria-label="{{ card_title | escape }}"
       >
-        {% if card_image != blank %}
+        {% if hula_card_primary != blank %}
+          <span class="joynure-hula-card-media{% if hula_show_hover %} joynure-hula-card-media--has-hover{% endif %}">
+            <img
+              src="{{ hula_card_primary | asset_url }}"
+              alt="{{ card_title | escape }}"
+              class="product-media__image media-fit joynure-hula-card-media__primary"
+              loading="lazy"
+              width="960"
+              height="1200"
+              sizes="(min-width: 990px) 28vw, (min-width: 750px) 33vw, 90vw"
+            >
+            {% if hula_show_hover %}
+              <img
+                src="{{ hula_card_hover | asset_url }}"
+                alt=""
+                aria-hidden="true"
+                class="product-media__image media-fit joynure-hula-card-media__hover"
+                loading="lazy"
+                width="960"
+                height="1200"
+                sizes="(min-width: 990px) 28vw, (min-width: 750px) 33vw, 90vw"
+              >
+            {% endif %}
+          </span>
+        {% elsif card_image != blank %}
           {{
             card_image
             | image_url: width: 800
@@ -123,7 +178,7 @@
               loading: 'lazy',
               sizes: '(min-width: 750px) 25vw, 50vw',
               widths: '200, 300, 400, 500, 600, 800',
-              class: 'product-media-container media-fit product-media-container--image',
+              class: 'product-media__image media-fit',
               alt: card_title
           }}
         {% endif %}
@@ -175,11 +230,11 @@
       {% endif %}
     </div>
 
-    <a class="contents user-select-text" ref="productTitleLink" href="{{ variant_url }}">
-      <p role="heading" aria-level="3" class="text-block">{{ card_title | escape }}</p>
+    <a class="contents user-select-text" ref="productTitleLink" href="{{ variant_url }}" style="text-align:center;">
+      <p role="heading" aria-level="3" class="text-block" style="text-align:center;">{{ card_title | escape }}</p>
     </a>
 
-    <div ref="priceContainer">
+    <div ref="priceContainer" style="text-align:center;">
       {% if show_compare_price %}
         <span class="price-item__group price">
           <span class="visually-hidden">{{ 'content.price_sale' | t }}&nbsp;</span>
