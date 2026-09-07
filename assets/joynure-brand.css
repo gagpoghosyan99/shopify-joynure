@@ -116,6 +116,7 @@
   width: 100%;
   border-radius: 1rem;
   overflow: hidden;
+  position: relative;
 }
 
 .joynure-collection-hula-grid .card-gallery img,
@@ -123,6 +124,39 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+}
+
+/* Primary packshot + hover lifestyle for Hula color cards */
+.joynure-hula-card-media {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 5;
+}
+
+.joynure-hula-card-media__primary,
+.joynure-hula-card-media__hover {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.joynure-hula-card-media--has-hover .joynure-hula-card-media__hover {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .joynure-collection-hula-grid .product-card:hover .joynure-hula-card-media--has-hover .joynure-hula-card-media__hover,
+  .joynure-collection-hula-grid .product-card:focus-within .joynure-hula-card-media--has-hover .joynure-hula-card-media__hover {
+    opacity: 1;
+  }
 }
 
 .joynure-collection-hula-grid .product-card .text-block,

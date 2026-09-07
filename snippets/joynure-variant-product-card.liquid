@@ -16,13 +16,10 @@
     assign card_image = product.featured_media.preview_image
   endif
 
-  # Live-model collection card overrides for Hula color variants (4:5 theme assets)
-  assign hula_card_asset = blank
+  # Hula collection cards: primary packshot + hover lifestyle (color-isolated)
+  assign hula_card_primary = blank
+  assign hula_card_hover = blank
   if product.handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop'
-    capture clean_color_for_card
-      render 'joynure-variant-label', label: variant.title
-    endcapture
-    # Prefer cleaned option1 color label
     assign color_raw = variant.option1 | default: variant.title
     capture clean_color_for_card
       render 'joynure-variant-label', label: color_raw
@@ -30,12 +27,20 @@
     assign clean_color_for_card = clean_color_for_card | strip | downcase
     case clean_color_for_card
       when 'pink'
-        assign hula_card_asset = 'hula-card-pink-model.jpg'
+        assign hula_card_primary = 'hula-card-pink-packshot.jpg'
+        assign hula_card_hover = 'hula-card-pink-lifestyle.jpg'
       when 'purple'
-        assign hula_card_asset = 'hula-card-purple-model.jpg'
+        assign hula_card_primary = 'hula-card-purple-packshot.jpg'
+        assign hula_card_hover = 'hula-card-purple-lifestyle.jpg'
       when 'blue'
-        assign hula_card_asset = 'hula-card-blue-model.jpg'
+        assign hula_card_primary = 'hula-card-blue-packshot.jpg'
+        assign hula_card_hover = 'hula-card-blue-lifestyle.jpg'
     endcase
+  endif
+  assign hula_card_asset = hula_card_primary
+  assign hula_show_hover = false
+  if hula_card_primary != blank and hula_card_hover != blank and settings.show_second_image_on_hover
+    assign hula_show_hover = true
   endif
 
   assign has_quick_add = false
@@ -141,18 +146,30 @@
         href="{{ variant_url }}"
         aria-label="{{ card_title | escape }}"
       >
-        {% if hula_card_asset != blank %}
-          {%- comment -%} Theme assets cannot use image_tag; render a 4:5 <img> matching card gallery ratio. {%- endcomment -%}
-          <img
-            src="{{ hula_card_asset | asset_url }}"
-            alt="{{ card_title | escape }}"
-            class="product-media__image media-fit"
-            loading="lazy"
-            width="960"
-            height="1200"
-            sizes="(min-width: 990px) 28vw, (min-width: 750px) 33vw, 90vw"
-            style="width: 100%; height: 100%; object-fit: cover; object-position: center;"
-          >
+        {% if hula_card_primary != blank %}
+          <span class="joynure-hula-card-media{% if hula_show_hover %} joynure-hula-card-media--has-hover{% endif %}">
+            <img
+              src="{{ hula_card_primary | asset_url }}"
+              alt="{{ card_title | escape }}"
+              class="product-media__image media-fit joynure-hula-card-media__primary"
+              loading="lazy"
+              width="960"
+              height="1200"
+              sizes="(min-width: 990px) 28vw, (min-width: 750px) 33vw, 90vw"
+            >
+            {% if hula_show_hover %}
+              <img
+                src="{{ hula_card_hover | asset_url }}"
+                alt=""
+                aria-hidden="true"
+                class="product-media__image media-fit joynure-hula-card-media__hover"
+                loading="lazy"
+                width="960"
+                height="1200"
+                sizes="(min-width: 990px) 28vw, (min-width: 750px) 33vw, 90vw"
+              >
+            {% endif %}
+          </span>
         {% elsif card_image != blank %}
           {{
             card_image
