@@ -1,0 +1,14 @@
+{%- doc -%}
+  Returns "true" for JOYNURE Baby Care long-form products (nail trimmer + changing mat).
+{%- enddoc -%}
+{%- liquid
+  if product != blank
+    if product.handle == 'lectric-baby-nail-trimmer-set-gentle-safe-nail-care' or product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
+      echo 'true'
+    else
+      echo 'false'
+    endif
+  else
+    echo 'false'
+  endif
+-%}

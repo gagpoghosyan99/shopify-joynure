@@ -1,0 +1,209 @@
+{%- capture enabled_flag -%}
+  {%- render 'joynure-baby-landing-enabled', product: product -%}
+{%- endcapture -%}
+{%- if enabled_flag == 'true' -%}
+  {%- liquid
+    assign is_mat = false
+    if product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
+      assign is_mat = true
+    endif
+    if is_mat
+      assign color_lede = section.settings.lede_mat | default: section.settings.lede
+      if color_lede == blank or color_lede contains 'Blue' or color_lede contains 'Pink' or color_lede contains 'trimmer'
+        assign color_lede = 'Six finishes. One foldable changing mat for home and travel.'
+      endif
+    else
+      assign color_lede = section.settings.lede
+    endif
+  -%}
+  {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
+  <section class="joynure-hula-landing joynure-hula-landing__section" {{ section.shopify_attributes }}>
+    <div class="joynure-hula-landing__inner">
+      <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">
+        <span class="joynure-hula-landing__title-accent">Find</span> Your Color
+      </h2>
+      <p class="joynure-hula-landing__lede joynure-hula-landing__lede--center">{{ color_lede | escape }}</p>
+      <div class="joynure-hula-colors__banners joynure-baby-colors__banners{% if is_mat %} joynure-baby-colors__banners--mat{% else %} joynure-baby-colors__banners--nail{% endif %}">
+        {%- if is_mat -%}
+          {% for color in (1..6) %}
+            {% liquid
+              case color
+                when 1
+                  assign name = section.settings.black_title | default: 'Black'
+                  assign text = section.settings.black_text | default: 'A sleek everyday finish that hides wear from travel days.'
+                  assign img = section.settings.black_image
+                  assign mid = section.settings.black_media_id
+                  assign asset = section.settings.black_asset_file | default: 'baby-color-black.jpg'
+                  assign tone = 'black'
+                when 2
+                  assign name = section.settings.black_grey_title | default: 'Black Grey'
+                  assign text = section.settings.black_grey_text | default: 'Soft two-tone contrast for modern diaper bags.'
+                  assign img = section.settings.black_grey_image
+                  assign mid = section.settings.black_grey_media_id
+                  assign asset = section.settings.black_grey_asset_file | default: 'baby-color-black-grey.jpg'
+                  assign tone = 'black-grey'
+                when 3
+                  assign name = section.settings.colorful_title | default: 'Colorful'
+                  assign text = section.settings.colorful_text | default: 'Playful pattern energy for bright nursery corners.'
+                  assign img = section.settings.colorful_image
+                  assign mid = section.settings.colorful_media_id
+                  assign asset = section.settings.colorful_asset_file | default: 'baby-color-colorful.jpg'
+                  assign tone = 'colorful'
+                when 4
+                  assign name = section.settings.white_black_title | default: 'White Black'
+                  assign text = section.settings.white_black_text | default: 'Crisp light-and-dark pairing that stays camera-ready.'
+                  assign img = section.settings.white_black_image
+                  assign mid = section.settings.white_black_media_id
+                  assign asset = section.settings.white_black_asset_file | default: 'baby-color-white-black.jpg'
+                  assign tone = 'white-black'
+                when 5
+                  assign name = section.settings.white_grey_title | default: 'White Grey'
+                  assign text = section.settings.white_grey_text | default: 'Airy neutrals that blend into calm home spaces.'
+                  assign img = section.settings.white_grey_image
+                  assign mid = section.settings.white_grey_media_id
+                  assign asset = section.settings.white_grey_asset_file | default: 'baby-color-white-grey.jpg'
+                  assign tone = 'white-grey'
+                when 6
+                  assign name = section.settings.gray_title | default: 'Gray'
+                  assign text = section.settings.gray_text | default: 'A versatile mid-tone for everyday on-the-go changes.'
+                  assign img = section.settings.gray_image
+                  assign mid = section.settings.gray_media_id
+                  assign asset = section.settings.gray_asset_file | default: 'baby-color-gray.jpg'
+                  assign tone = 'gray'
+              endcase
+            %}
+            <article class="joynure-hula-colors__banner joynure-hula-colors__banner--{{ tone }} joynure-baby-colors__banner">
+              <div class="joynure-hula-colors__banner-media">
+                {% render 'joynure-hula-media',
+                  product: product,
+                  setting_image: img,
+                  asset_file: asset,
+                  media_id: mid,
+                  alt: name,
+                  class: 'joynure-hula-landing__media',
+                  loading: 'lazy',
+                  sizes: '100vw'
+                %}
+              </div>
+              <div class="joynure-hula-colors__banner-meta">
+                <span class="joynure-hula-colors__badge">{{ name | escape }}</span>
+                <h3>{{ name | escape }}</h3>
+                <p>{{ text | escape }}</p>
+              </div>
+            </article>
+          {% endfor %}
+        {%- else -%}
+          {% for color in (1..2) %}
+            {% liquid
+              case color
+                when 1
+                  assign name = section.settings.blue_title | default: 'Blue'
+                  assign text = section.settings.blue_text | default: 'A calm sky finish for nursery drawers and travel kits.'
+                  assign img = section.settings.blue_image
+                  assign mid = section.settings.blue_media_id
+                  assign asset = section.settings.blue_asset_file | default: 'baby-color-blue.jpg'
+                  assign tone = 'blue'
+                when 2
+                  assign name = section.settings.pink_title | default: 'Pink'
+                  assign text = section.settings.pink_text | default: 'A soft blush finish that feels gentle in bedtime routines.'
+                  assign img = section.settings.pink_image
+                  assign mid = section.settings.pink_media_id
+                  assign asset = section.settings.pink_asset_file | default: 'baby-color-pink.jpg'
+                  assign tone = 'pink'
+              endcase
+            %}
+            <article class="joynure-hula-colors__banner joynure-hula-colors__banner--{{ tone }} joynure-baby-colors__banner">
+              <div class="joynure-hula-colors__banner-media">
+                {% render 'joynure-hula-media',
+                  product: product,
+                  setting_image: img,
+                  asset_file: asset,
+                  media_id: mid,
+                  alt: name,
+                  class: 'joynure-hula-landing__media',
+                  loading: 'lazy',
+                  sizes: '100vw'
+                %}
+              </div>
+              <div class="joynure-hula-colors__banner-meta">
+                <span class="joynure-hula-colors__badge">{{ name | escape }}</span>
+                <h3>{{ name | escape }}</h3>
+                <p>{{ text | escape }}</p>
+              </div>
+            </article>
+          {% endfor %}
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Baby color story",
+  "tag": "section",
+  "class": "joynure-hula-landing-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "textarea", "id": "lede", "label": "Supporting copy (nail)", "default": "Two finishes. One quiet electric nail trimmer for gentle care." },
+    { "type": "textarea", "id": "lede_mat", "label": "Supporting copy (mat)", "default": "Six finishes. One foldable changing mat for home and travel." },
+
+    { "type": "header", "content": "Nail — Blue" },
+    { "type": "image_picker", "id": "blue_image", "label": "Blue image" },
+    { "type": "text", "id": "blue_asset_file", "label": "Blue theme asset", "default": "baby-color-blue.jpg" },
+    { "type": "text", "id": "blue_media_id", "label": "Blue media ID" },
+    { "type": "text", "id": "blue_title", "label": "Blue title", "default": "Blue" },
+    { "type": "textarea", "id": "blue_text", "label": "Blue text", "default": "A calm sky finish for nursery drawers and travel kits." },
+
+    { "type": "header", "content": "Nail — Pink" },
+    { "type": "image_picker", "id": "pink_image", "label": "Pink image" },
+    { "type": "text", "id": "pink_asset_file", "label": "Pink theme asset", "default": "baby-color-pink.jpg" },
+    { "type": "text", "id": "pink_media_id", "label": "Pink media ID" },
+    { "type": "text", "id": "pink_title", "label": "Pink title", "default": "Pink" },
+    { "type": "textarea", "id": "pink_text", "label": "Pink text", "default": "A soft blush finish that feels gentle in bedtime routines." },
+
+    { "type": "header", "content": "Mat — Black" },
+    { "type": "image_picker", "id": "black_image", "label": "Black image" },
+    { "type": "text", "id": "black_asset_file", "label": "Black theme asset", "default": "baby-color-black.jpg" },
+    { "type": "text", "id": "black_media_id", "label": "Black media ID" },
+    { "type": "text", "id": "black_title", "label": "Black title", "default": "Black" },
+    { "type": "textarea", "id": "black_text", "label": "Black text", "default": "A sleek everyday finish that hides wear from travel days." },
+
+    { "type": "header", "content": "Mat — Black Grey" },
+    { "type": "image_picker", "id": "black_grey_image", "label": "Black Grey image" },
+    { "type": "text", "id": "black_grey_asset_file", "label": "Black Grey theme asset", "default": "baby-color-black-grey.jpg" },
+    { "type": "text", "id": "black_grey_media_id", "label": "Black Grey media ID" },
+    { "type": "text", "id": "black_grey_title", "label": "Black Grey title", "default": "Black Grey" },
+    { "type": "textarea", "id": "black_grey_text", "label": "Black Grey text", "default": "Soft two-tone contrast for modern diaper bags." },
+
+    { "type": "header", "content": "Mat — Colorful" },
+    { "type": "image_picker", "id": "colorful_image", "label": "Colorful image" },
+    { "type": "text", "id": "colorful_asset_file", "label": "Colorful theme asset", "default": "baby-color-colorful.jpg" },
+    { "type": "text", "id": "colorful_media_id", "label": "Colorful media ID" },
+    { "type": "text", "id": "colorful_title", "label": "Colorful title", "default": "Colorful" },
+    { "type": "textarea", "id": "colorful_text", "label": "Colorful text", "default": "Playful pattern energy for bright nursery corners." },
+
+    { "type": "header", "content": "Mat — White Black" },
+    { "type": "image_picker", "id": "white_black_image", "label": "White Black image" },
+    { "type": "text", "id": "white_black_asset_file", "label": "White Black theme asset", "default": "baby-color-white-black.jpg" },
+    { "type": "text", "id": "white_black_media_id", "label": "White Black media ID" },
+    { "type": "text", "id": "white_black_title", "label": "White Black title", "default": "White Black" },
+    { "type": "textarea", "id": "white_black_text", "label": "White Black text", "default": "Crisp light-and-dark pairing that stays camera-ready." },
+
+    { "type": "header", "content": "Mat — White Grey" },
+    { "type": "image_picker", "id": "white_grey_image", "label": "White Grey image" },
+    { "type": "text", "id": "white_grey_asset_file", "label": "White Grey theme asset", "default": "baby-color-white-grey.jpg" },
+    { "type": "text", "id": "white_grey_media_id", "label": "White Grey media ID" },
+    { "type": "text", "id": "white_grey_title", "label": "White Grey title", "default": "White Grey" },
+    { "type": "textarea", "id": "white_grey_text", "label": "White Grey text", "default": "Airy neutrals that blend into calm home spaces." },
+
+    { "type": "header", "content": "Mat — Gray" },
+    { "type": "image_picker", "id": "gray_image", "label": "Gray image" },
+    { "type": "text", "id": "gray_asset_file", "label": "Gray theme asset", "default": "baby-color-gray.jpg" },
+    { "type": "text", "id": "gray_media_id", "label": "Gray media ID" },
+    { "type": "text", "id": "gray_title", "label": "Gray title", "default": "Gray" },
+    { "type": "textarea", "id": "gray_text", "label": "Gray text", "default": "A versatile mid-tone for everyday on-the-go changes." }
+  ],
+  "presets": [{ "name": "JOYNURE Baby color story" }]
+}
+{% endschema %}

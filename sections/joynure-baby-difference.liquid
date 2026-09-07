@@ -1,0 +1,176 @@
+{%- capture enabled_flag -%}
+  {%- render 'joynure-baby-landing-enabled', product: product -%}
+{%- endcapture -%}
+{%- if enabled_flag == 'true' -%}
+  {%- liquid
+    assign is_mat = false
+    if product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
+      assign is_mat = true
+    endif
+    if is_mat
+      assign diff_heading = section.settings.heading_mat | default: section.settings.heading
+      assign diff_lede = section.settings.lede_mat | default: 'From hard public surfaces to a soft, wipe-clean pad — changes that feel calmer anywhere.'
+    else
+      assign diff_heading = section.settings.heading
+      assign diff_lede = section.settings.lede
+    endif
+  -%}
+  {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
+  <section class="joynure-hula-landing joynure-hula-landing__section joynure-hula-landing__section--blush" {{ section.shopify_attributes }}>
+    <div class="joynure-hula-landing__inner">
+      <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">
+        {{ diff_heading | escape }}
+      </h2>
+      <p class="joynure-hula-landing__lede joynure-hula-landing__lede--center">{{ diff_lede | escape }}</p>
+      <div class="joynure-hula-difference__grid joynure-hula-reviews__grid">
+        {% for i in (1..4) %}
+          {% liquid
+            assign quote_key = 'r' | append: i | append: '_quote'
+            assign name_key = 'r' | append: i | append: '_name'
+            assign meta_key = 'r' | append: i | append: '_meta'
+            assign before_picker = 'before_image_' | append: i
+            assign after_picker = 'after_image_' | append: i
+            assign before_asset = 'before_asset_' | append: i
+            assign after_asset = 'after_asset_' | append: i
+            assign before_mid = 'before_media_id_' | append: i
+            assign after_mid = 'after_media_id_' | append: i
+            assign quote = section.settings[quote_key]
+            assign rname = section.settings[name_key]
+            assign meta = section.settings[meta_key]
+
+            if is_mat
+              case i
+                when 1
+                  assign quote = 'Public restrooms used to stress me out. Now we unfold the mat and it feels like home.'
+                  assign meta = 'Black · Travel changes'
+                when 2
+                  assign quote = 'It folds into our diaper bag without taking over. Wipe it down and we are ready again.'
+                  assign meta = 'Colorful · Diaper bag'
+                when 3
+                  assign quote = 'Park picnic tables are finally usable. Soft padding, waterproof, and easy to clean.'
+                  assign meta = 'White Grey · Outdoor days'
+                when 4
+                  assign quote = 'We keep one in the car. No more scrambling for thin disposable pads that slip around.'
+                  assign meta = 'Gray · Car kit'
+              endcase
+            endif
+          %}
+          <article class="joynure-hula-card-3d joynure-hula-review-card">
+            <div class="joynure-hula-review-card__ba" aria-label="Before and after photos">
+              <figure class="joynure-hula-review-card__shot">
+                <span class="joynure-hula-review-card__badge joynure-hula-review-card__badge--before">{{ section.settings.before_label | escape }}</span>
+                <div class="joynure-hula-card-3d__media">
+                  {% render 'joynure-hula-media',
+                    product: product,
+                    setting_image: section.settings[before_picker],
+                    asset_file: section.settings[before_asset],
+                    media_id: section.settings[before_mid],
+                    alt: section.settings.before_label,
+                    class: 'joynure-hula-landing__media',
+                    loading: 'lazy',
+                    sizes: '(min-width: 990px) 11vw, (min-width: 750px) 22vw, 44vw'
+                  %}
+                </div>
+              </figure>
+              <figure class="joynure-hula-review-card__shot">
+                <span class="joynure-hula-review-card__badge joynure-hula-review-card__badge--after">{{ section.settings.after_label | escape }}</span>
+                <div class="joynure-hula-card-3d__media">
+                  {% render 'joynure-hula-media',
+                    product: product,
+                    setting_image: section.settings[after_picker],
+                    asset_file: section.settings[after_asset],
+                    media_id: section.settings[after_mid],
+                    alt: section.settings.after_label,
+                    class: 'joynure-hula-landing__media',
+                    loading: 'lazy',
+                    sizes: '(min-width: 990px) 11vw, (min-width: 750px) 22vw, 44vw'
+                  %}
+                </div>
+              </figure>
+            </div>
+            <div class="joynure-hula-card-3d__body joynure-hula-review-card__body">
+              <div class="joynure-hula-review-card__stars" aria-hidden="true">★★★★★</div>
+              <p class="joynure-hula-review-card__quote">“{{ quote | escape }}”</p>
+              <p class="joynure-hula-review-card__name">{{ rname | escape }}</p>
+              {% if meta != blank %}
+                <p class="joynure-hula-review-card__meta">{{ meta | escape }}</p>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Baby difference",
+  "tag": "section",
+  "class": "joynure-hula-landing-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "See the difference" },
+    { "type": "text", "id": "heading_mat", "label": "Heading (mat)", "default": "See the difference" },
+    {
+      "type": "textarea",
+      "id": "lede",
+      "label": "Supporting copy",
+      "default": "From stressful clippers to a quiet electric trim — calmer nail care for tiny fingers and toes."
+    },
+    {
+      "type": "textarea",
+      "id": "lede_mat",
+      "label": "Supporting copy (mat)",
+      "default": "From hard public surfaces to a soft, wipe-clean pad — changes that feel calmer anywhere."
+    },
+    { "type": "text", "id": "before_label", "label": "Before label", "default": "Before" },
+    { "type": "text", "id": "after_label", "label": "After label", "default": "After" },
+
+    { "type": "header", "content": "Review 1" },
+    { "type": "image_picker", "id": "before_image_1", "label": "Before image 1" },
+    { "type": "text", "id": "before_asset_1", "label": "Before asset 1", "default": "baby-review-1-before.jpg" },
+    { "type": "text", "id": "before_media_id_1", "label": "Before media ID 1" },
+    { "type": "image_picker", "id": "after_image_1", "label": "After image 1" },
+    { "type": "text", "id": "after_asset_1", "label": "After asset 1", "default": "baby-review-1-after.jpg" },
+    { "type": "text", "id": "after_media_id_1", "label": "After media ID 1" },
+    { "type": "textarea", "id": "r1_quote", "label": "Quote 1", "default": "Nail clippers used to make us both cry. The electric trimmer is quiet and so much gentler." },
+    { "type": "text", "id": "r1_name", "label": "Name 1", "default": "Jordan P." },
+    { "type": "text", "id": "r1_meta", "label": "Meta 1", "default": "Blue · Bedtime nails" },
+
+    { "type": "header", "content": "Review 2" },
+    { "type": "image_picker", "id": "before_image_2", "label": "Before image 2" },
+    { "type": "text", "id": "before_asset_2", "label": "Before asset 2", "default": "baby-review-2-before.jpg" },
+    { "type": "text", "id": "before_media_id_2", "label": "Before media ID 2" },
+    { "type": "image_picker", "id": "after_image_2", "label": "After image 2" },
+    { "type": "text", "id": "after_asset_2", "label": "After asset 2", "default": "baby-review-2-after.jpg" },
+    { "type": "text", "id": "after_media_id_2", "label": "After media ID 2" },
+    { "type": "textarea", "id": "r2_quote", "label": "Quote 2", "default": "The LED light is a game changer for tiny toes at night. Soft pads, no sharp edges." },
+    { "type": "text", "id": "r2_name", "label": "Name 2", "default": "Samira L." },
+    { "type": "text", "id": "r2_meta", "label": "Meta 2", "default": "Pink · Newborn toes" },
+
+    { "type": "header", "content": "Review 3" },
+    { "type": "image_picker", "id": "before_image_3", "label": "Before image 3" },
+    { "type": "text", "id": "before_asset_3", "label": "Before asset 3", "default": "baby-review-3-before.jpg" },
+    { "type": "text", "id": "before_media_id_3", "label": "Before media ID 3" },
+    { "type": "image_picker", "id": "after_image_3", "label": "After image 3" },
+    { "type": "text", "id": "after_asset_3", "label": "After asset 3", "default": "baby-review-3-after.jpg" },
+    { "type": "text", "id": "after_media_id_3", "label": "After media ID 3" },
+    { "type": "textarea", "id": "r3_quote", "label": "Quote 3", "default": "We swap pads as she grows. Same trimmer from newborn through toddler — finally feels easy." },
+    { "type": "text", "id": "r3_name", "label": "Name 3", "default": "Chris M." },
+    { "type": "text", "id": "r3_meta", "label": "Meta 3", "default": "Blue · Age-stage pads" },
+
+    { "type": "header", "content": "Review 4" },
+    { "type": "image_picker", "id": "before_image_4", "label": "Before image 4" },
+    { "type": "text", "id": "before_asset_4", "label": "Before asset 4", "default": "baby-review-4-before.jpg" },
+    { "type": "text", "id": "before_media_id_4", "label": "Before media ID 4" },
+    { "type": "image_picker", "id": "after_image_4", "label": "After image 4" },
+    { "type": "text", "id": "after_asset_4", "label": "After asset 4", "default": "baby-review-4-after.jpg" },
+    { "type": "text", "id": "after_media_id_4", "label": "After media ID 4" },
+    { "type": "textarea", "id": "r4_quote", "label": "Quote 4", "default": "I was scared of clipping too close. This files gently and my baby barely notices." },
+    { "type": "text", "id": "r4_name", "label": "Name 4", "default": "Elena R." },
+    { "type": "text", "id": "r4_meta", "label": "Meta 4", "default": "Pink · Gentle filing" }
+  ],
+  "presets": [{ "name": "JOYNURE Baby difference" }]
+}
+{% endschema %}

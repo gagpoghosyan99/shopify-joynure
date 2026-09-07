@@ -1,0 +1,31 @@
+{%- doc -%}
+  Resolves a theme asset filename for changing-mat packshots (folded clutch or opened flat-lay).
+  Generated packshots match the Black folded studio format: white BG, black trim/handle, soft shadow.
+
+  @param {string} color - Color option value (e.g. Black grey, Colorful, gray)
+  @param {string} [mode] - "folded" (default) or "opened"
+
+  Outputs blank when no curated theme packshot exists for that color/mode.
+{%- enddoc -%}
+{%- liquid
+  assign color_key = color | strip | downcase
+  assign pack_mode = mode | default: 'folded' | strip | downcase
+  assign asset_name = ''
+
+  if pack_mode != 'folded' and pack_mode != 'opened'
+    assign pack_mode = 'folded'
+  endif
+
+  if color_key == 'black grey' or color_key == 'black gray'
+    assign asset_name = 'joynure-mat-' | append: pack_mode | append: '-black-grey.png'
+  elsif color_key == 'white black'
+    assign asset_name = 'joynure-mat-' | append: pack_mode | append: '-white-black.png'
+  elsif color_key == 'white grey' or color_key == 'white gray'
+    assign asset_name = 'joynure-mat-' | append: pack_mode | append: '-white-grey.png'
+  elsif color_key == 'colorful'
+    assign asset_name = 'joynure-mat-' | append: pack_mode | append: '-colorful.png'
+  elsif color_key == 'gray' or color_key == 'grey'
+    assign asset_name = 'joynure-mat-' | append: pack_mode | append: '-gray.png'
+  endif
+-%}
+{{- asset_name -}}

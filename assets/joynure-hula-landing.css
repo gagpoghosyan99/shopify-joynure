@@ -505,7 +505,13 @@
 .joynure-hula-colors__banner--purple .joynure-hula-colors__banner-media::after,
 .joynure-hula-colors__banner--blue .joynure-hula-colors__banner-media::after,
 .joynure-hula-colors__banner--green .joynure-hula-colors__banner-media::after,
-.joynure-hula-colors__banner--white .joynure-hula-colors__banner-media::after {
+.joynure-hula-colors__banner--white .joynure-hula-colors__banner-media::after,
+.joynure-hula-colors__banner--black .joynure-hula-colors__banner-media::after,
+.joynure-hula-colors__banner--black-grey .joynure-hula-colors__banner-media::after,
+.joynure-hula-colors__banner--colorful .joynure-hula-colors__banner-media::after,
+.joynure-hula-colors__banner--white-black .joynure-hula-colors__banner-media::after,
+.joynure-hula-colors__banner--white-grey .joynure-hula-colors__banner-media::after,
+.joynure-hula-colors__banner--gray .joynure-hula-colors__banner-media::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -513,14 +519,26 @@
   background: linear-gradient(90deg, rgb(0 0 0 / 48%) 0%, rgb(0 0 0 / 8%) 55%, transparent 100%);
 }
 
-.joynure-pet-colors__banners {
+.joynure-pet-colors__banners,
+.joynure-baby-colors__banners {
   display: grid;
   gap: 1rem;
 }
 
 @media screen and (min-width: 750px) {
-  .joynure-pet-colors__banners {
+  .joynure-pet-colors__banners,
+  .joynure-baby-colors__banners--nail {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .joynure-baby-colors__banners--mat {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .joynure-baby-colors__banners--mat {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -901,6 +919,33 @@
   color: #24312e !important;
 }
 
+.joynure-hula-final__swatch--black {
+  background: linear-gradient(180deg, #4b5563 0%, #111827 100%) !important;
+  border-color: #030712 !important;
+}
+
+.joynure-hula-final__swatch--gray {
+  background: linear-gradient(180deg, #d1d5db 0%, #6b7280 100%) !important;
+  border-color: #4b5563 !important;
+}
+
+.joynure-hula-final__swatch--colorful {
+  background: linear-gradient(135deg, #f97316 0%, #ec4899 40%, #6366f1 75%, #14b8a6 100%) !important;
+  border-color: #7c3aed !important;
+}
+
+.joynure-hula-final__swatch--white-black {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 45%, #1f2937 100%) !important;
+  border-color: #111827 !important;
+  color: #111827 !important;
+}
+
+.joynure-hula-final__swatch--white-grey {
+  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%) !important;
+  border-color: #94a3b8 !important;
+  color: #24312e !important;
+}
+
 @media (hover: hover) {
   .joynure-hula-final__swatch:hover {
     transform: translateY(-4px);
@@ -937,6 +982,26 @@
 
 .joynure-hula-final__swatch--white[aria-pressed='true'] {
   background: linear-gradient(180deg, #fafaf9 0%, #d6d3d1 100%) !important;
+}
+
+.joynure-hula-final__swatch--black[aria-pressed='true'] {
+  background: linear-gradient(180deg, #374151 0%, #030712 100%) !important;
+}
+
+.joynure-hula-final__swatch--gray[aria-pressed='true'] {
+  background: linear-gradient(180deg, #9ca3af 0%, #4b5563 100%) !important;
+}
+
+.joynure-hula-final__swatch--colorful[aria-pressed='true'] {
+  background: linear-gradient(135deg, #ea580c 0%, #db2777 40%, #4f46e5 75%, #0d9488 100%) !important;
+}
+
+.joynure-hula-final__swatch--white-black[aria-pressed='true'] {
+  background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 45%, #0f172a 100%) !important;
+}
+
+.joynure-hula-final__swatch--white-grey[aria-pressed='true'] {
+  background: linear-gradient(180deg, #f8fafc 0%, #94a3b8 100%) !important;
 }
 
 .joynure-hula-final__atc {

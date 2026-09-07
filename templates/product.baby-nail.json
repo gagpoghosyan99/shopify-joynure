@@ -1,0 +1,439 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "disclosures_g9mWze": {
+          "type": "disclosures",
+          "name": "t:names.disclosures",
+          "settings": {
+            "heading": "Disclosures",
+            "heading_preset": "h5",
+            "open_by_default": false,
+            "icon": "caret",
+            "disclosure_heading_preset": "h6",
+            "text_color": "",
+            "dividers": true,
+            "divider_color": "{{ settings.color_palette.color2 }}",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "carousel",
+            "media_columns": "two",
+            "image_gap": 4,
+            "large_first_image": false,
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "thumbnails",
+            "thumbnail_position": "bottom",
+            "thumbnail_width": 64,
+            "thumbnail_radius": 8,
+            "aspect_ratio": "1",
+            "constrain_to_viewport": true,
+            "media_fit": "contain",
+            "media_radius": 16,
+            "extend_media": false,
+            "zoom": true,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 28,
+            "sticky_details_desktop": true,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "group_icgrde": {
+              "type": "group",
+              "name": "t:names.header",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 12,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "joynure_hula_title": {
+                  "type": "joynure-hula-pdp-title",
+                  "settings": {
+                    "brand": "JOYNURE",
+                    "title": "Electric Baby Nail Trimmer Set",
+                    "subtitle": "Quiet \u00b7 Soft Pads \u00b7 LED \u00b7 Age-Stage Care"
+                  },
+                  "blocks": {}
+                },
+                "joynure_benefit_subtitle": {
+                  "type": "joynure-hula-pdp-benefit-subtitle",
+                  "settings": {},
+                  "blocks": {}
+                },
+                "price_tVjtKg": {
+                  "type": "price",
+                  "settings": {
+                    "show_sale_price_first": true,
+                    "show_installments": false,
+                    "show_tax_info": false,
+                    "type_preset": "paragraph",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "text_color": "",
+                    "padding-block-start": 4,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "joynure_availability": {
+                  "type": "joynure-hula-pdp-availability",
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "joynure_hula_title",
+                "joynure_benefit_subtitle",
+                "price_tVjtKg",
+                "joynure_availability"
+              ]
+            },
+            "divider_VJhene": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "divider_color": "{{ settings.color_palette.color2 }}",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "joynure_pdp_tabs": {
+              "type": "joynure-hula-pdp-tabs",
+              "settings": {},
+              "blocks": {}
+            },
+            "variant_picker_R3rGDr": {
+              "type": "variant-picker",
+              "settings": {
+                "variant_style": "buttons",
+                "show_swatches": false,
+                "option_label_text_color": "",
+                "variant_style_class": "default",
+                "custom_variant_background": "{{ settings.color_palette.background }}",
+                "custom_variant_text": "{{ settings.color_palette.foreground }}",
+                "custom_variant_border": "{{ settings.color_palette.foreground }}",
+                "selected_variant_style_class": "default",
+                "custom_selected_variant_background": "{{ settings.color_palette.foreground }}",
+                "custom_selected_variant_text": "{{ settings.color_palette.background }}",
+                "custom_selected_variant_border": "{{ settings.color_palette.foreground }}",
+                "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "buy_buttons_eYQEYi": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "text_color": "",
+                "show_pickup_availability": false,
+                "gift_card_form": true,
+                "recipient_button_style": "default",
+                "recipient_button_background": "{{ settings.color_palette.background }}",
+                "recipient_button_text": "{{ settings.color_palette.foreground }}",
+                "recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_style": "default",
+                "selected_recipient_button_background": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_text": "{{ settings.color_palette.background }}",
+                "selected_recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "input_style": "default",
+                "input_background_color": "{{ settings.color_palette.background }}",
+                "input_text_color": "{{ settings.color_palette.foreground }}",
+                "input_border_color": "{{ settings.color_palette.foreground }}",
+                "border_width": 1,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {
+                    "input_style": "default",
+                    "input_background_color": "{{ settings.color_palette.background }}",
+                    "input_text_color": "{{ settings.color_palette.foreground }}",
+                    "input_border_color": "{{ settings.color_palette.foreground }}",
+                    "border_width": 1,
+                    "border_radius": 0
+                  },
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            }
+          },
+          "block_order": [
+            "group_icgrde",
+            "divider_VJhene",
+            "variant_picker_R3rGDr",
+            "buy_buttons_eYQEYi",
+            "joynure_pdp_tabs"
+          ]
+        }
+      },
+      "block_order": [
+        "disclosures_g9mWze"
+      ],
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": true,
+        "limit_details_width": false,
+        "gap": 48,
+        "enable_sticky_add_to_cart": true,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "joynure_baby_benefits": {
+      "type": "joynure-baby-benefits",
+      "settings": {}
+    },
+    "joynure_baby_difference": {
+      "type": "joynure-baby-difference",
+      "settings": {
+        "heading": "See the difference",
+        "lede": "From stressful clippers to a quiet electric trim \u2014 calmer nail care for tiny fingers and toes.",
+        "before_asset_1": "baby-review-1-before.jpg",
+        "after_asset_1": "baby-review-1-after.jpg",
+        "before_asset_2": "baby-review-2-before.jpg",
+        "after_asset_2": "baby-review-2-after.jpg",
+        "before_asset_3": "baby-review-3-before.jpg",
+        "after_asset_3": "baby-review-3-after.jpg",
+        "before_asset_4": "baby-review-4-before.jpg",
+        "after_asset_4": "baby-review-4-after.jpg"
+      }
+    },
+    "joynure_baby_survey": {
+      "type": "joynure-baby-survey",
+      "settings": {
+        "asset_file": "baby-survey-hero.jpg"
+      }
+    },
+    "joynure_baby_lifestyle_strip": {
+      "type": "joynure-baby-lifestyle-strip",
+      "settings": {
+        "eyebrow": "Gentle care, every day",
+        "lede": "Quiet trims for bedtime, bath time, and travel \u2014 soft pads for tiny fingers and toes.",
+        "asset_1": "baby-life-1.jpg",
+        "asset_2": "baby-life-2.jpg",
+        "asset_3": "baby-life-3.jpg",
+        "asset_4": "baby-life-4.jpg",
+        "asset_5": "baby-life-5.jpg",
+        "asset_6": "baby-life-6.jpg",
+        "asset_7": "baby-life-7.jpg"
+      }
+    },
+    "joynure_baby_how_it_works": {
+      "type": "joynure-baby-how-it-works",
+      "settings": {
+        "heading": "See How It Works",
+        "lede": "Charge. Choose a pad. Trim gently. Quiet electric care for tiny nails.",
+        "asset_file": "baby-how-hero.jpg",
+        "s1_asset": "baby-how-step1.jpg",
+        "s2_asset": "baby-how-step2.jpg",
+        "s3_asset": "baby-how-step3.jpg"
+      }
+    },
+    "joynure_baby_mechanism": {
+      "type": "joynure-baby-mechanism",
+      "settings": {
+        "asset_file": "baby-mechanism-hero.jpg",
+        "heading": "Built to Trim \u2014 Softly & Quietly",
+        "lede": "A quiet motor, soft rotating pads, and LED light for safer nail care on tiny fingers and toes."
+      }
+    },
+    "joynure_baby_steps": {
+      "type": "joynure-baby-steps",
+      "settings": {
+        "asset_1": "baby-steps-1.jpg",
+        "asset_2": "baby-steps-2.jpg",
+        "asset_3": "baby-steps-3.jpg",
+        "asset_4": "baby-steps-4.jpg"
+      }
+    },
+    "joynure_baby_features": {
+      "type": "joynure-baby-features",
+      "settings": {
+        "heading": "Built for Gentle Nail Care",
+        "lede": "Practical details that make electric nail care feel simple and safe."
+      }
+    },
+    "joynure_baby_included": {
+      "type": "joynure-baby-included",
+      "settings": {
+        "heading": "What's Included",
+        "lede": "One quiet electric set. Ready for gentle nail care.",
+        "item_1": "1 \u00d7 Electric Baby Nail Trimmer",
+        "item_2": "Soft age-stage pad set",
+        "item_3": "LED light for precise, gentle care",
+        "asset_file": "baby-included.jpg"
+      }
+    },
+    "joynure_baby_color_story": {
+      "type": "joynure-baby-color-story",
+      "settings": {
+        "lede": "Two finishes. One quiet electric nail trimmer for gentle care.",
+        "blue_asset_file": "baby-color-blue.jpg",
+        "pink_asset_file": "baby-color-pink.jpg"
+      }
+    },
+    "joynure_baby_comparison": {
+      "type": "joynure-baby-comparison",
+      "settings": {
+        "lede": "A practical look at JOYNURE vs scissors and clippers for tiny nails.",
+        "col_a": "JOYNURE Nail Trimmer",
+        "col_b": "Scissors / clippers"
+      }
+    },
+    "joynure_baby_specs": {
+      "type": "joynure-baby-specs",
+      "settings": {
+        "asset_file": "baby-specs.jpg",
+        "v1": "Electric baby nail trimmer set",
+        "v2": "Soft rotating pads + LED assist",
+        "v3": "Newborn through toddler pad set",
+        "v4": "Quiet rechargeable / battery electric",
+        "v5": "Fingers, toes, bedtime nail care",
+        "v6": "Blue / Pink",
+        "v7": "1 \u00d7 electric nail trimmer + soft pads"
+      }
+    },
+    "joynure_baby_faq": {
+      "type": "joynure-baby-faq",
+      "settings": {}
+    },
+    "joynure_baby_final_cta": {
+      "type": "joynure-baby-final-cta",
+      "settings": {
+        "heading": "Ready for Gentler Nail Care?",
+        "lede": "Choose Blue or Pink and keep tiny nails soft, quiet, and stress-free.",
+        "eyebrow": "JOYNURE / Baby Care",
+        "product_label": "Electric Baby Nail Trimmer Set",
+        "asset_file": "baby-final-cta.jpg"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "joynure_baby_benefits",
+    "joynure_baby_difference",
+    "joynure_baby_survey",
+    "joynure_baby_lifestyle_strip",
+    "joynure_baby_how_it_works",
+    "joynure_baby_mechanism",
+    "joynure_baby_steps",
+    "joynure_baby_features",
+    "joynure_baby_included",
+    "joynure_baby_color_story",
+    "joynure_baby_comparison",
+    "joynure_baby_specs",
+    "joynure_baby_faq",
+    "joynure_baby_final_cta"
+  ]
+}
