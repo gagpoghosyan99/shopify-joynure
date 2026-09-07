@@ -179,3 +179,77 @@
 .joynure-collection-pet-grid .product-card .price {
   text-align: center;
 }
+
+
+/* Baby Care — nail cards + mat carousel */
+@media screen and (min-width: 750px) {
+  .joynure-collection-baby-grid .product-grid.product-grid--grid {
+    --product-grid-columns-desktop: repeat(12, minmax(0, 1fr));
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card:nth-child(1 of .joynure-baby-nail-card) {
+    grid-column: 1 / span 6;
+  }
+  .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card:nth-child(2 of .joynure-baby-nail-card) {
+    grid-column: 7 / span 6;
+  }
+  .joynure-collection-baby-grid .product-grid__item.joynure-baby-mat-row {
+    grid-column: 1 / -1;
+  }
+}
+@media screen and (min-width: 990px) {
+  .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card:nth-child(1 of .joynure-baby-nail-card) {
+    grid-column: 2 / span 5;
+  }
+  .joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card:nth-child(2 of .joynure-baby-nail-card) {
+    grid-column: 7 / span 5;
+  }
+}
+.joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card .text-block,
+.joynure-baby-mat-carousel__slide .text-block,
+.joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card [role='heading'],
+.joynure-baby-mat-carousel__slide [role='heading'],
+.joynure-collection-baby-grid .product-grid__item.joynure-baby-nail-card [ref='priceContainer'],
+.joynure-baby-mat-carousel__slide [ref='priceContainer'] {
+  text-align: center;
+}
+.joynure-collection-baby-grid .product-card:hover .joynure-hula-card-media--has-hover .joynure-hula-card-media__hover,
+.joynure-collection-baby-grid .product-card:focus-within .joynure-hula-card-media--has-hover .joynure-hula-card-media__hover,
+.joynure-collection-baby-grid .product-grid__item:hover .joynure-hula-card-media--has-hover .joynure-hula-card-media__hover,
+.joynure-baby-mat-carousel__slide:hover .joynure-hula-card-media--has-hover .joynure-hula-card-media__hover {
+  opacity: 1;
+}
+.joynure-baby-mat-carousel {
+  --joynure-baby-mat-gap: 0.65rem;
+  --joynure-baby-mat-visible: 1.15;
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+.joynure-baby-mat-carousel__track {
+  display: flex;
+  gap: var(--joynure-baby-mat-gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.25rem;
+}
+@media screen and (min-width: 750px) {
+  .joynure-baby-mat-carousel {
+    --joynure-baby-mat-gap: 0.85rem;
+    --joynure-baby-mat-visible: 2.5;
+  }
+}
+@media screen and (min-width: 990px) {
+  .joynure-baby-mat-carousel {
+    --joynure-baby-mat-gap: 1rem;
+    --joynure-baby-mat-visible: 4;
+  }
+}
+.joynure-baby-mat-carousel__track::-webkit-scrollbar { display: none; }
+.joynure-baby-mat-carousel__slide {
+  flex: 0 0 calc((100% - (var(--joynure-baby-mat-visible) - 1) * var(--joynure-baby-mat-gap)) / var(--joynure-baby-mat-visible));
+  scroll-snap-align: start;
+  min-width: 0;
+}

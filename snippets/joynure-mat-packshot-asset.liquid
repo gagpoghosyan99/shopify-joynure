@@ -26,6 +26,8 @@
     assign asset_name = 'joynure-mat-' | append: pack_mode | append: '-colorful.png'
   elsif color_key == 'gray' or color_key == 'grey'
     assign asset_name = 'joynure-mat-' | append: pack_mode | append: '-gray.png'
+  elsif color_key == 'black'
+    assign asset_name = 'joynure-mat-' | append: pack_mode | append: '-black.png'
   endif
 -%}
 {{- asset_name -}}

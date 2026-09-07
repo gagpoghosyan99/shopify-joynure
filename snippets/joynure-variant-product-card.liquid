@@ -13,13 +13,17 @@
   assign variant_url = product.url | append: '?variant=' | append: variant.id
   if product.handle == '2-in-1-reusable-pet-hair-remover'
     assign variant_url = variant_url | append: '&view=pet-remover'
+  elsif product.handle == 'lectric-baby-nail-trimmer-set-gentle-safe-nail-care'
+    assign variant_url = variant_url | append: '&view=baby-nail'
+  elsif product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
+    assign variant_url = variant_url | append: '&view=baby-mat'
   endif
   assign card_image = variant.featured_image
   if card_image == blank
     assign card_image = product.featured_media.preview_image
   endif
 
-  # Hula / Pet collection cards: primary packshot + hover lifestyle (color-isolated)
+  # Hula / Pet / Baby collection cards: primary packshot + hover lifestyle (color-isolated)
   assign hula_card_primary = blank
   assign hula_card_hover = blank
   if product.handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop'
@@ -59,6 +63,30 @@
         assign hula_card_primary = 'pet-card-white-packshot.jpg'
         assign hula_card_hover = 'pet-card-white-lifestyle.jpg'
     endcase
+  elsif product.handle == 'lectric-baby-nail-trimmer-set-gentle-safe-nail-care'
+    assign color_raw = variant.option1 | default: variant.title
+    capture clean_color_for_card
+      render 'joynure-variant-label', label: color_raw
+    endcapture
+    assign clean_color_for_card = clean_color_for_card | strip | downcase
+    case clean_color_for_card
+      when 'blue'
+        assign hula_card_primary = 'nail-card-blue-packshot.jpg'
+        assign hula_card_hover = 'nail-card-blue-lifestyle.jpg'
+      when 'pink'
+        assign hula_card_primary = 'nail-card-pink-packshot.jpg'
+        assign hula_card_hover = 'nail-card-pink-lifestyle.jpg'
+    endcase
+  elsif product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
+    assign color_raw = variant.option1 | default: variant.title
+    capture mat_primary
+      render 'joynure-mat-packshot-asset', color: color_raw, mode: 'folded'
+    endcapture
+    capture mat_hover
+      render 'joynure-mat-packshot-asset', color: color_raw, mode: 'opened'
+    endcapture
+    assign hula_card_primary = mat_primary | strip
+    assign hula_card_hover = mat_hover | strip
   endif
   assign hula_card_asset = hula_card_primary
   assign hula_show_hover = false
