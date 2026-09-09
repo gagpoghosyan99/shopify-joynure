@@ -1,0 +1,60 @@
+{%- liquid
+  assign show_custom_title = false
+  assign title_text = block.settings.title
+  assign subtitle_text = block.settings.subtitle
+  if closest.product.handle == 'smart-weighted-hula-hoop-adjustable-24-section-fitness-hoop'
+    assign show_custom_title = true
+    if title_text == blank
+      assign title_text = 'Smart Weighted Hula Hoop'
+    endif
+    if subtitle_text == blank
+      assign subtitle_text = 'Adjustable 24-Section Fitness Hoop'
+    endif
+  elsif closest.product.handle == '2-in-1-reusable-pet-hair-remover'
+    assign show_custom_title = true
+    assign title_text = '2-in-1 Reusable Pet Hair Remover'
+    assign subtitle_text = 'Self-Cleaning · Fabric-Friendly · No Sticky Sheets'
+  endif
+-%}
+
+{%- if show_custom_title -%}
+  <div class="joynure-hula-title-block" {{ block.shopify_attributes }}>
+    <h1 class="joynure-hula-title">
+      <span class="joynure-hula-title__brand">{{ block.settings.brand | default: 'JOYNURE' | escape }}</span>
+      {{ title_text | escape }}
+    </h1>
+    {%- if subtitle_text != blank -%}
+      <p class="joynure-hula-title__sub">{{ subtitle_text | escape }}</p>
+    {%- endif -%}
+  </div>
+{%- elsif closest.product != blank -%}
+  <h1 class="product-title" {{ block.shopify_attributes }}>{{ closest.product.title | escape }}</h1>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Hula title",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand",
+      "label": "Brand",
+      "default": "JOYNURE"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Smart Weighted Hula Hoop"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Adjustable 24-Section Fitness Hoop"
+    }
+  ],
+  "presets": [{ "name": "JOYNURE Hula title" }]
+}
+{% endschema %}

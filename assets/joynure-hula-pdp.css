@@ -1,0 +1,376 @@
+/* JOYNURE Hula PDP buy-box — brand palette (teal / coral / cream / charcoal)
+   Scoped to .joynure-hula-pdp only (hula-hoop template).
+*/
+
+.joynure-hula-pdp {
+  --jh-teal: var(--joynure-teal, #1f5c55);
+  --jh-teal-deep: #174842;
+  --jh-coral: var(--joynure-coral, #ff7a68);
+  --jh-cream: var(--joynure-cream, #fff8f0);
+  --jh-gold: var(--joynure-gold, #f2c66d);
+  --jh-ink: var(--joynure-charcoal, #24312e);
+  --jh-muted: rgb(36 49 46 / 68%);
+  --jh-line: var(--joynure-border, rgb(36 49 46 / 12%));
+  --jh-radius: 0.85rem;
+}
+
+.joynure-hula-pdp .product-information,
+.joynure-hula-pdp .product-details {
+  color: var(--jh-ink);
+}
+
+/* Title hierarchy */
+.joynure-hula-pdp .joynure-hula-title {
+  margin: 0;
+  font-size: clamp(1.55rem, 2.4vw, 2.15rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  color: var(--jh-ink);
+}
+
+.joynure-hula-pdp .joynure-hula-title__brand {
+  color: var(--jh-teal);
+}
+
+.joynure-hula-pdp .joynure-hula-title__sub {
+  margin: 0.4rem 0 0;
+  color: var(--jh-muted);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.joynure-hula-pdp .joynure-pdp-benefit-subtitle {
+  max-width: 36ch;
+  color: var(--jh-muted);
+  font-size: 0.98rem;
+}
+
+/* Price — nurture teal */
+.joynure-hula-pdp .price,
+.joynure-hula-pdp .price-item,
+.joynure-hula-pdp [ref='priceContainer'] {
+  color: var(--jh-teal);
+  font-weight: 700;
+  font-size: 1.45rem;
+}
+
+/* Color buttons — FULL Pink / Purple / Blue (override Horizon sliding pill) */
+.joynure-hula-pdp .variant-option--buttons {
+  display: grid !important;
+  grid-template-columns: 1fr;
+  gap: 0.75rem !important;
+  width: 100%;
+}
+
+@media screen and (min-width: 480px) {
+  .joynure-hula-pdp .variant-option--buttons {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.joynure-hula-pdp .variant-option__button-label {
+  display: flex !important;
+  flex: 1 1 auto !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 3.6rem !important;
+  padding: 0.85rem 1rem !important;
+  border-radius: 16px !important;
+  border: 2px solid transparent !important;
+  overflow: visible !important;
+  font-weight: 700 !important;
+  font-size: 1.05rem !important;
+  letter-spacing: 0.03em !important;
+  color: #fff !important;
+  background-clip: padding-box !important;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 45%) inset,
+    0 5px 0 rgb(0 0 0 / 14%),
+    0 12px 24px rgb(36 49 46 / 14%) !important;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease !important;
+}
+
+/* Kill Horizon animated selected pill + fake border pseudos */
+.joynure-hula-pdp .variant-option__button-label__pill {
+  display: none !important;
+  background: transparent !important;
+  transform: none !important;
+  width: 0 !important;
+}
+
+.joynure-hula-pdp .variant-option__button-label::before,
+.joynure-hula-pdp .variant-option__button-label::after {
+  content: none !important;
+  display: none !important;
+  border: 0 !important;
+  clip-path: none !important;
+}
+
+.joynure-hula-pdp .variant-option__button-label__text {
+  z-index: 2 !important;
+  color: inherit !important;
+  font-weight: 700 !important;
+}
+
+/* Full color fills */
+.joynure-hula-pdp .variant-option__button-label:has([data-display-label='Pink']),
+.joynure-hula-pdp .variant-option__button-label:has([value*='Pink' i]) {
+  background: linear-gradient(180deg, #ff8fa3 0%, #f472b6 55%, #ec4899 100%) !important;
+  border-color: #db2777 !important;
+  color: #fff !important;
+}
+
+.joynure-hula-pdp .variant-option__button-label:has([data-display-label='Purple']),
+.joynure-hula-pdp .variant-option__button-label:has([value*='Purple' i]) {
+  background: linear-gradient(180deg, #c4b5fd 0%, #a78bfa 55%, #8b5cf6 100%) !important;
+  border-color: #7c3aed !important;
+  color: #fff !important;
+}
+
+.joynure-hula-pdp .variant-option__button-label:has([data-display-label='Blue']),
+.joynure-hula-pdp .variant-option__button-label:has([value*='blue' i]) {
+  background: linear-gradient(180deg, #7dd3fc 0%, #38bdf8 55%, #0ea5e9 100%) !important;
+  border-color: #0284c7 !important;
+  color: #fff !important;
+}
+
+@media (hover: hover) {
+  .joynure-hula-pdp .variant-option__button-label:hover {
+    transform: translateY(-4px) !important;
+    filter: brightness(1.05);
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 55%) inset,
+      0 8px 0 rgb(0 0 0 / 16%),
+      0 18px 30px rgb(36 49 46 / 18%) !important;
+  }
+}
+
+/* Selected — pressed 3D */
+.joynure-hula-pdp .variant-option__button-label:has(:checked),
+.joynure-hula-pdp .variant-option__button-label:has([data-current-checked='true']) {
+  transform: translateY(3px) !important;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 35%) inset,
+    0 2px 0 rgb(0 0 0 / 18%),
+    0 6px 14px rgb(36 49 46 / 16%) !important;
+  outline: 2px solid var(--jh-teal);
+  outline-offset: 3px;
+}
+
+.joynure-hula-pdp .variant-option__button-label:has([data-display-label='Pink']:checked),
+.joynure-hula-pdp .variant-option__button-label:has([value*='Pink' i]:checked),
+.joynure-hula-pdp .variant-option__button-label:has([data-display-label='Pink'][data-current-checked='true']),
+.joynure-hula-pdp .variant-option__button-label:has([value*='Pink' i][data-current-checked='true']) {
+  background: linear-gradient(180deg, #fb7185 0%, #db2777 100%) !important;
+}
+
+.joynure-hula-pdp .variant-option__button-label:has([data-display-label='Purple']:checked),
+.joynure-hula-pdp .variant-option__button-label:has([value*='Purple' i]:checked),
+.joynure-hula-pdp .variant-option__button-label:has([data-display-label='Purple'][data-current-checked='true']),
+.joynure-hula-pdp .variant-option__button-label:has([value*='Purple' i][data-current-checked='true']) {
+  background: linear-gradient(180deg, #a78bfa 0%, #6d28d9 100%) !important;
+}
+
+.joynure-hula-pdp .variant-option__button-label:has([data-display-label='Blue']:checked),
+.joynure-hula-pdp .variant-option__button-label:has([value*='blue' i]:checked),
+.joynure-hula-pdp .variant-option__button-label:has([data-display-label='Blue'][data-current-checked='true']),
+.joynure-hula-pdp .variant-option__button-label:has([value*='blue' i][data-current-checked='true']) {
+  background: linear-gradient(180deg, #38bdf8 0%, #0369a1 100%) !important;
+}
+
+.joynure-hula-pdp .variant-option__button-label:has(:checked) span,
+.joynure-hula-pdp .variant-option__button-label:has([data-current-checked='true']) span {
+  color: #fff !important;
+}
+
+.joynure-hula-pdp .variant-option__button-label:focus-within {
+  outline: 2px solid var(--jh-teal);
+  outline-offset: 3px;
+}
+
+/* Primary ATC — nurture teal */
+.joynure-hula-pdp .add-to-cart-button,
+.joynure-hula-pdp .product-form-buttons .button {
+  border-radius: 999px !important;
+  background: var(--jh-teal) !important;
+  border-color: var(--jh-teal) !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  min-height: 3.15rem;
+  box-shadow: 0 10px 24px rgb(31 92 85 / 22%);
+}
+
+.joynure-hula-pdp .add-to-cart-button:hover,
+.joynure-hula-pdp .product-form-buttons .button:hover {
+  background: var(--jh-teal-deep) !important;
+  border-color: var(--jh-teal-deep) !important;
+}
+
+/* Soft cream buy-box surface */
+.joynure-hula-pdp .product-details {
+  background: linear-gradient(180deg, var(--jh-cream) 0%, #fff 100%);
+}
+
+.joynure-hula-pdp .joynure-pdp-trust-row__icon {
+  color: var(--jh-coral);
+}
+
+/* Sticky ATC — teal */
+.joynure-hula-pdp .joynure-pdp-phase-b-sticky .add-to-cart-button,
+.joynure-pdp-phase-b-sticky.joynure-hula-sticky .add-to-cart-button {
+  background: var(--jh-teal) !important;
+  border-color: var(--jh-teal) !important;
+  color: #fff !important;
+  border-radius: 999px !important;
+}
+
+.joynure-hula-pdp .joynure-pdp-breadcrumbs {
+  display: none !important;
+}
+
+.joynure-hula-pdp .media-gallery__grid,
+.joynure-hula-pdp .product-media-container {
+  border-radius: 1rem;
+}
+
+/* Main photo — clear left/right arrow controls on both sides */
+.joynure-hula-pdp slideshow-component,
+.joynure-hula-pdp .product-media-gallery__slideshow {
+  position: relative;
+}
+
+.joynure-hula-pdp slideshow-arrows,
+.joynure-hula-pdp slideshow-arrows.mobile\:hidden {
+  display: flex !important;
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 0.7rem;
+  pointer-events: none;
+  mix-blend-mode: normal !important;
+}
+
+.joynure-hula-pdp slideshow-arrows .slideshow-control--previous,
+.joynure-hula-pdp slideshow-arrows .slideshow-control--next {
+  pointer-events: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 2.85rem !important;
+  height: 2.85rem !important;
+  min-width: 2.85rem !important;
+  min-height: 2.85rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: rgb(36 49 46 / 82%) !important;
+  color: #fff !important;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 25%) inset,
+    0 8px 20px rgb(0 0 0 / 28%) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.joynure-hula-pdp slideshow-arrows .slideshow-control .svg-wrapper,
+.joynure-hula-pdp slideshow-arrows .slideshow-control .svg-wrapper svg {
+  display: block !important;
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+  opacity: 1 !important;
+  color: #fff !important;
+  --icon-stroke-width: 2px;
+}
+
+.joynure-hula-pdp slideshow-arrows .slideshow-control .svg-wrapper svg path {
+  stroke: #fff !important;
+  stroke-width: 2px !important;
+  opacity: 1 !important;
+}
+
+@media (hover: hover) {
+  .joynure-hula-pdp slideshow-arrows .slideshow-control--previous:hover,
+  .joynure-hula-pdp slideshow-arrows .slideshow-control--next:hover {
+    background: var(--jh-teal) !important;
+    transform: scale(1.07);
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 30%) inset,
+      0 10px 24px rgb(31 92 85 / 35%) !important;
+  }
+}
+
+/* Wider left/right click zones on the main photo */
+.joynure-hula-pdp slideshow-arrows .slideshow-control--previous::after,
+.joynure-hula-pdp slideshow-arrows .slideshow-control--next::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3.5rem;
+  height: min(70%, 22rem);
+  border-radius: 1rem;
+  background: transparent;
+}
+
+.joynure-hula-pdp slideshow-arrows .slideshow-control--previous {
+  position: relative;
+}
+
+.joynure-hula-pdp slideshow-arrows .slideshow-control--previous::after {
+  right: 0;
+  left: -0.35rem;
+}
+
+.joynure-hula-pdp slideshow-arrows .slideshow-control--next {
+  position: relative;
+}
+
+.joynure-hula-pdp slideshow-arrows .slideshow-control--next::after {
+  left: 0;
+  right: -0.35rem;
+}
+
+@media screen and (max-width: 749px) {
+  .joynure-hula-pdp slideshow-arrows,
+  .joynure-hula-pdp slideshow-arrows.mobile\:hidden {
+    display: flex !important;
+  }
+
+  .joynure-hula-pdp slideshow-arrows .slideshow-control--previous,
+  .joynure-hula-pdp slideshow-arrows .slideshow-control--next {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    min-width: 2.5rem !important;
+    min-height: 2.5rem !important;
+  }
+}
+
+/* Quantity controls — soft coral tint */
+.joynure-hula-pdp .quantity-selector,
+.joynure-hula-pdp .quantity {
+  background: rgb(255 122 104 / 10%);
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .joynure-hula-pdp .variant-option__button-label,
+  .joynure-hula-pdp .add-to-cart-button {
+    transition: none;
+  }
+}

@@ -82,11 +82,94 @@
   overflow: clip;
 }
 
-.joynure-pdp-modern .slideshow-control--next,
-.joynure-pdp-modern .slideshow-control--previous {
-  background: var(--color-background);
-  border-radius: 999px;
-  box-shadow: 0 8px 24px rgb(36 49 46 / 12%);
+/* Gallery arrows — visible circular controls (not black squares / mix-blend ghosts) */
+.joynure-pdp-modern slideshow-component,
+.joynure-pdp-modern .product-media-gallery__slideshow {
+  position: relative;
+}
+
+.joynure-pdp-modern slideshow-arrows,
+.joynure-pdp-modern slideshow-arrows.mobile\:hidden {
+  display: flex !important;
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 0.7rem;
+  pointer-events: none;
+  mix-blend-mode: normal !important;
+}
+
+.joynure-pdp-modern slideshow-arrows .slideshow-control--previous,
+.joynure-pdp-modern slideshow-arrows .slideshow-control--next {
+  pointer-events: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 2.85rem !important;
+  height: 2.85rem !important;
+  min-width: 2.85rem !important;
+  min-height: 2.85rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: rgb(36 49 46 / 82%) !important;
+  color: #fff !important;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 25%) inset,
+    0 8px 20px rgb(0 0 0 / 28%) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.joynure-pdp-modern slideshow-arrows .slideshow-control .svg-wrapper,
+.joynure-pdp-modern slideshow-arrows .slideshow-control .svg-wrapper svg {
+  display: block !important;
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+  opacity: 1 !important;
+  color: #fff !important;
+  --icon-stroke-width: 2px;
+}
+
+.joynure-pdp-modern slideshow-arrows .slideshow-control .svg-wrapper svg path {
+  stroke: #fff !important;
+  stroke-width: 2px !important;
+  opacity: 1 !important;
+}
+
+@media (hover: hover) {
+  .joynure-pdp-modern slideshow-arrows .slideshow-control--previous:hover,
+  .joynure-pdp-modern slideshow-arrows .slideshow-control--next:hover {
+    background: #1f5c55 !important;
+    transform: scale(1.07);
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 30%) inset,
+      0 10px 24px rgb(31 92 85 / 35%) !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .joynure-pdp-modern slideshow-arrows,
+  .joynure-pdp-modern slideshow-arrows.mobile\:hidden {
+    display: flex !important;
+  }
+
+  .joynure-pdp-modern slideshow-arrows .slideshow-control--previous,
+  .joynure-pdp-modern slideshow-arrows .slideshow-control--next {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    min-width: 2.5rem !important;
+    min-height: 2.5rem !important;
+  }
 }
 
 /* Title typography */
@@ -257,4 +340,15 @@
   .joynure-pdp-tabs__nav::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* Pet people gallery slides — keep product intro photos fully visible */
+.joynure-pdp-modern .joynure-pet-people-media,
+.joynure-pdp-modern .joynure-pet-people-slide {
+  background: #f4f2ee;
+}
+.joynure-pdp-modern .joynure-pet-people-media .product-media__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
