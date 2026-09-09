@@ -157,14 +157,30 @@
     endif
   endif
 
+  # Pet people / product-introduction theme assets (per color), appended after product media.
+  assign pet_people_assets = ''
+  assign pet_people_list = '' | split: ','
+  assign pet_people_count = 0
+  if selected_product.handle == '2-in-1-reusable-pet-hair-remover' and selected_color_label != blank
+    capture pet_people_assets
+      render 'joynure-pet-people-assets', color: selected_color_label
+    endcapture
+    assign pet_people_assets = pet_people_assets | strip
+    if pet_people_assets != blank
+      assign pet_people_list = pet_people_assets | split: ','
+      assign pet_people_count = pet_people_list.size
+    endif
+  endif
+  assign gallery_slide_count = sorted_media.size | plus: pet_people_count
+
   # Use a counter instead of dots when there are many images to avoid cropping/overflow.
-  if slideshow_controls_style == 'dots' and sorted_media.size > 15
+  if slideshow_controls_style == 'dots' and gallery_slide_count > 15
     assign slideshow_controls_style = 'counter'
   endif
 
   assign render_slideshow_arrows = false
 
-  if sorted_media.size <= 1
+  if gallery_slide_count <= 1
     assign slideshow_class = 'product-media-gallery__slideshow--single-media slideshow--single-media'
   else
     assign slideshow_class = ''
@@ -457,16 +473,55 @@
           media_fit: block_settings.media_fit,
         %}
       {% endfor %}
+      {% if pet_people_count > 0 %}
+        {% for asset_name in pet_people_list %}
+          {% liquid
+            assign asset_name = asset_name | strip
+            if asset_name == blank
+              continue
+            endif
+            assign people_index = sorted_media.size | plus: forloop.index0
+            assign people_alt = selected_product.title | append: ' — ' | append: selected_color_label | append: ' lifestyle'
+          %}
+          {% capture children %}
+            <div class="product-media product-media--image joynure-pet-people-media">
+              <img
+                src="{{ asset_name | asset_url }}"
+                alt="{{ people_alt | escape }}"
+                class="product-media__image"
+                width="1200"
+                height="1600"
+                loading="{% if people_index == 0 %}eager{% else %}lazy{% endif %}"
+                sizes="{{ sizes }}"
+              >
+            </div>
+          {% endcapture %}
+          {% capture class %}
+            {{ product_media_container_class }} product-media-container--image joynure-pet-people-slide
+          {% endcapture %}
+          {% capture style %}
+            --media-preview-ratio: 0.75;
+          {% endcapture %}
+          {% render 'slideshow-slide',
+            index: people_index,
+            children: children,
+            class: class,
+            style: style,
+            media_fit: block_settings.media_fit,
+          %}
+        {% endfor %}
+      {% endif %}
     {% endcapture %}
 
-    {% if sorted_media.size > 1 %}
+    {% if gallery_slide_count > 1 %}
       {% capture controls %}
         {% if render_slideshow_controls %}
           {%- render 'slideshow-controls',
             class: slideshow_controls_class,
             style: slideshow_controls_style,
-            item_count: sorted_media.size,
+            item_count: gallery_slide_count,
             thumbnails: sorted_media,
+            extra_asset_files: pet_people_assets,
             controls_on_media: controls_on_media,
             pagination_position: pagination_position,
             aspect_ratio: block_settings.aspect_ratio,
@@ -478,8 +533,9 @@
           {%- render 'slideshow-controls',
             class: 'desktop:hidden media-gallery__mobile-controls',
             style: block_settings.slideshow_mobile_controls_style,
-            item_count: sorted_media.size,
+            item_count: gallery_slide_count,
             thumbnails: sorted_media,
+            extra_asset_files: pet_people_assets,
             controls_on_media: mobile_controls_on_media,
             pagination_position: 'center',
             aspect_ratio: block_settings.aspect_ratio,
@@ -499,7 +555,7 @@
       ref: 'slideshow',
       class: slideshow_class,
       slides: slides,
-      slide_count: sorted_media.size,
+      slide_count: gallery_slide_count,
       slideshow_arrows: slideshow_arrows,
       arrows_position: icons_position,
       controls: controls
