@@ -1,0 +1,18 @@
+{%- doc -%}
+  Returns comma-separated theme asset filenames for Pet Hair Remover people/lifestyle gallery shots.
+  @param {string} color - Clean color label (Blue, Green, Pink, White)
+{%- enddoc -%}
+{%- liquid
+  assign color_key = color | strip | downcase
+  assign assets = ''
+  if color_key == 'blue' or color_key contains 'blue'
+    assign assets = 'pet-people-blue-intro.jpg,pet-people-blue-sofa.jpg,pet-people-blue-car.jpg'
+  elsif color_key == 'green' or color_key contains 'green'
+    assign assets = 'pet-people-green-intro.jpg,pet-people-green-coat.jpg,pet-people-green-chair.jpg'
+  elsif color_key == 'pink' or color_key contains 'pink'
+    assign assets = 'pet-people-pink-intro.jpg,pet-people-pink-bedding.jpg,pet-people-pink-jacket.jpg'
+  elsif color_key == 'white' or color_key contains 'white'
+    assign assets = 'pet-people-white-intro.jpg,pet-people-white-coat.jpg,pet-people-white-sofa.jpg'
+  endif
+-%}
+{{- assets -}}
