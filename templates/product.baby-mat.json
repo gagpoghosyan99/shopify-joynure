@@ -1,0 +1,517 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "disclosures_g9mWze": {
+          "type": "disclosures",
+          "name": "t:names.disclosures",
+          "settings": {
+            "heading": "Disclosures",
+            "heading_preset": "h5",
+            "open_by_default": false,
+            "icon": "caret",
+            "disclosure_heading_preset": "h6",
+            "text_color": "",
+            "dividers": true,
+            "divider_color": "{{ settings.color_palette.color2 }}",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "carousel",
+            "media_columns": "two",
+            "image_gap": 4,
+            "large_first_image": false,
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "thumbnails",
+            "thumbnail_position": "bottom",
+            "thumbnail_width": 64,
+            "thumbnail_radius": 8,
+            "aspect_ratio": "1",
+            "constrain_to_viewport": true,
+            "media_fit": "contain",
+            "media_radius": 16,
+            "extend_media": false,
+            "zoom": true,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 28,
+            "sticky_details_desktop": true,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "group_icgrde": {
+              "type": "group",
+              "name": "t:names.header",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 12,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "joynure_hula_title": {
+                  "type": "joynure-hula-pdp-title",
+                  "settings": {
+                    "brand": "JOYNURE",
+                    "title": "Foldable Baby Changing Mat",
+                    "subtitle": "Waterproof \u00b7 Travel Clutch \u00b7 Wipe-Clean \u00b7 Padded"
+                  },
+                  "blocks": {}
+                },
+                "joynure_benefit_subtitle": {
+                  "type": "joynure-hula-pdp-benefit-subtitle",
+                  "settings": {},
+                  "blocks": {}
+                },
+                "price_tVjtKg": {
+                  "type": "price",
+                  "settings": {
+                    "show_sale_price_first": true,
+                    "show_installments": false,
+                    "show_tax_info": false,
+                    "type_preset": "paragraph",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "text_color": "",
+                    "padding-block-start": 4,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "joynure_availability": {
+                  "type": "joynure-hula-pdp-availability",
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "joynure_hula_title",
+                "joynure_benefit_subtitle",
+                "price_tVjtKg",
+                "joynure_availability"
+              ]
+            },
+            "divider_VJhene": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "divider_color": "{{ settings.color_palette.color2 }}",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "joynure_pdp_tabs": {
+              "type": "joynure-hula-pdp-tabs",
+              "settings": {},
+              "blocks": {}
+            },
+            "variant_picker_R3rGDr": {
+              "type": "variant-picker",
+              "settings": {
+                "variant_style": "buttons",
+                "show_swatches": false,
+                "option_label_text_color": "",
+                "variant_style_class": "default",
+                "custom_variant_background": "{{ settings.color_palette.background }}",
+                "custom_variant_text": "{{ settings.color_palette.foreground }}",
+                "custom_variant_border": "{{ settings.color_palette.foreground }}",
+                "selected_variant_style_class": "default",
+                "custom_selected_variant_background": "{{ settings.color_palette.foreground }}",
+                "custom_selected_variant_text": "{{ settings.color_palette.background }}",
+                "custom_selected_variant_border": "{{ settings.color_palette.foreground }}",
+                "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "buy_buttons_eYQEYi": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "text_color": "",
+                "show_pickup_availability": false,
+                "gift_card_form": true,
+                "recipient_button_style": "default",
+                "recipient_button_background": "{{ settings.color_palette.background }}",
+                "recipient_button_text": "{{ settings.color_palette.foreground }}",
+                "recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_style": "default",
+                "selected_recipient_button_background": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_text": "{{ settings.color_palette.background }}",
+                "selected_recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "input_style": "default",
+                "input_background_color": "{{ settings.color_palette.background }}",
+                "input_text_color": "{{ settings.color_palette.foreground }}",
+                "input_border_color": "{{ settings.color_palette.foreground }}",
+                "border_width": 1,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {
+                    "input_style": "default",
+                    "input_background_color": "{{ settings.color_palette.background }}",
+                    "input_text_color": "{{ settings.color_palette.foreground }}",
+                    "input_border_color": "{{ settings.color_palette.foreground }}",
+                    "border_width": 1,
+                    "border_radius": 0
+                  },
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            }
+          },
+          "block_order": [
+            "group_icgrde",
+            "divider_VJhene",
+            "variant_picker_R3rGDr",
+            "buy_buttons_eYQEYi",
+            "joynure_pdp_tabs"
+          ]
+        }
+      },
+      "block_order": [
+        "disclosures_g9mWze"
+      ],
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": true,
+        "limit_details_width": false,
+        "gap": 48,
+        "enable_sticky_add_to_cart": true,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "joynure_baby_benefits": {
+      "type": "joynure-baby-benefits",
+      "settings": {
+        "b1_label": "Wipe-clean waterproof",
+        "b1_text": "Waterproof surface that wipes clean after every change.",
+        "b2_label": "Travel clutch fold",
+        "b2_text": "Folds into a compact clutch for bags, strollers, and day trips.",
+        "b3_label": "Padded comfort",
+        "b3_text": "Soft cushioning for changes on floors, parks, and public spaces.",
+        "b4_label": "Six color choices",
+        "b4_text": "Pick a finish that matches your diaper bag and nursery style."
+      }
+    },
+    "joynure_baby_difference": {
+      "type": "joynure-baby-difference",
+      "settings": {
+        "heading": "See the difference",
+        "lede": "From hard public surfaces to a soft, wipe-clean pad \u2014 changes that feel calmer anywhere.",
+        "lede_mat": "From hard public surfaces to a soft, wipe-clean pad \u2014 changes that feel calmer anywhere.",
+        "before_asset_1": "baby-mat-review-1-before.jpg",
+        "after_asset_1": "baby-mat-review-1-after.jpg",
+        "before_asset_2": "baby-mat-review-2-before.jpg",
+        "after_asset_2": "baby-mat-review-2-after.jpg",
+        "before_asset_3": "baby-mat-review-3-before.jpg",
+        "after_asset_3": "baby-mat-review-3-after.jpg",
+        "before_asset_4": "baby-mat-review-4-before.jpg",
+        "after_asset_4": "baby-mat-review-4-after.jpg"
+      }
+    },
+    "joynure_baby_survey": {
+      "type": "joynure-baby-survey",
+      "settings": {
+        "heading": "Why parents pack JOYNURE everywhere.",
+        "heading_mat": "Why parents pack JOYNURE everywhere.",
+        "asset_file": "baby-mat-mechanism-hero.jpg"
+      }
+    },
+    "joynure_baby_lifestyle_strip": {
+      "type": "joynure-baby-lifestyle-strip",
+      "settings": {
+        "eyebrow": "Ready wherever baby is",
+        "lede": "Unfold, change, wipe clean \u2014 soft padding for home, travel, and on-the-go moments.",
+        "asset_1": "baby-mat-life-1.jpg",
+        "asset_2": "baby-mat-life-2.jpg",
+        "asset_3": "baby-mat-life-3.jpg",
+        "asset_4": "baby-mat-life-4.jpg",
+        "asset_5": "baby-mat-life-5.jpg",
+        "asset_6": "baby-mat-life-6.jpg",
+        "asset_7": "baby-mat-life-7.jpg"
+      }
+    },
+    "joynure_baby_how_it_works": {
+      "type": "joynure-baby-how-it-works",
+      "settings": {
+        "heading": "See How It Works",
+        "lede": "Unfold. Change. Wipe clean. A padded travel mat that keeps routines simple anywhere.",
+        "asset_file": "baby-mat-how-hero.jpg",
+        "s1_title": "Unfold Flat",
+        "s1_text": "Open the clutch into a full padded changing surface.",
+        "s2_title": "Change Comfortably",
+        "s2_text": "Soft cushioning protects baby on floors, benches, and park tables.",
+        "s3_title": "Wipe & Fold",
+        "s3_text": "Wipe the waterproof top clean, fold into a clutch, and pack away.",
+        "s1_asset": "baby-mat-how-step1.jpg",
+        "s2_asset": "baby-mat-how-step2.jpg",
+        "s3_asset": "baby-mat-how-step3.jpg"
+      }
+    },
+    "joynure_baby_mechanism": {
+      "type": "joynure-baby-mechanism",
+      "settings": {
+        "eyebrow": "Travel-ready build",
+        "heading": "Built to Fold \u2014 Then Wipe Clean",
+        "lede": "A waterproof padded surface with a clutch fold for diaper bags, cars, and day trips.",
+        "asset_file": "baby-mat-mechanism-hero.jpg"
+      }
+    },
+    "joynure_baby_steps": {
+      "type": "joynure-baby-steps",
+      "settings": {
+        "heading": "Ready in Four Simple Steps",
+        "lede": "Four simple moves from packed clutch to clean fold-away.",
+        "t1_title": "Unfold the Mat",
+        "t1_text": "Open the clutch into a full padded changing surface.",
+        "t2_title": "Change on Padding",
+        "t2_text": "Lay baby on the soft core \u2014 safer than hard public surfaces.",
+        "t3_title": "Wipe Clean",
+        "t3_text": "Wipe the waterproof top after the change.",
+        "t4_title": "Fold & Pack",
+        "t4_text": "Fold back into a clutch and return it to your bag.",
+        "asset_1": "baby-mat-steps-1.jpg",
+        "asset_2": "baby-mat-steps-2.jpg",
+        "asset_3": "baby-mat-steps-3.jpg",
+        "asset_4": "baby-mat-steps-4.jpg"
+      }
+    },
+    "joynure_baby_features": {
+      "type": "joynure-baby-features",
+      "settings": {
+        "heading": "Built for On-the-Go Changes",
+        "lede": "Practical details that make travel changing feel simple and reliable.",
+        "c1_title": "Waterproof Surface",
+        "c1_text": "Wipe clean after every change \u2014 no soak-through mess.",
+        "c2_title": "Clutch-Fold Travel",
+        "c2_text": "Folds compact for diaper bags, strollers, and cars.",
+        "c3_title": "Padded Comfort",
+        "c3_text": "Soft cushioning on floors, benches, and park tables.",
+        "c4_title": "Reusable Daily",
+        "c4_text": "Skip thin disposable pads that tear and slip.",
+        "c5_title": "Six Colors",
+        "c5_text": "Black, Black Grey, Colorful, White Black, White Grey, Gray.",
+        "c6_title": "Home & Away Ready",
+        "c6_text": "One mat for nursery drawers and travel days alike."
+      }
+    },
+    "joynure_baby_included": {
+      "type": "joynure-baby-included",
+      "settings": {
+        "heading": "What's Included",
+        "lede": "One foldable mat. Ready for home and travel changes.",
+        "item_1": "1 \u00d7 Portable Foldable Baby Changing Mat",
+        "item_2": "Waterproof wipe-clean surface",
+        "item_3": "Clutch-fold design for diaper bags",
+        "asset_file": "baby-mat-included.jpg"
+      }
+    },
+    "joynure_baby_color_story": {
+      "type": "joynure-baby-color-story",
+      "settings": {
+        "lede": "Six finishes. One foldable changing mat for home and travel.",
+        "lede_mat": "Six finishes. One foldable changing mat for home and travel.",
+        "black_asset_file": "baby-color-black.jpg",
+        "black_grey_asset_file": "baby-color-black-grey.jpg",
+        "colorful_asset_file": "baby-color-colorful.jpg",
+        "white_black_asset_file": "baby-color-white-black.jpg",
+        "white_grey_asset_file": "baby-color-white-grey.jpg",
+        "gray_asset_file": "baby-color-gray.jpg"
+      }
+    },
+    "joynure_baby_comparison": {
+      "type": "joynure-baby-comparison",
+      "settings": {
+        "lede": "A practical look at JOYNURE vs thin disposable pads and hard public surfaces.",
+        "col_a": "JOYNURE Changing Mat",
+        "col_b": "Thin disposables / hard surfaces",
+        "r1_feature": "Comfort",
+        "r1_a": "Padded soft surface",
+        "r1_b": "Hard floors or thin sheets",
+        "r2_feature": "Cleanability",
+        "r2_a": "Wipe-clean waterproof top",
+        "r2_b": "Tear and toss / wipe nowhere",
+        "r3_feature": "Travel",
+        "r3_a": "Clutch-fold for bags",
+        "r3_b": "Bulky packs or nothing",
+        "r4_feature": "Reuse",
+        "r4_a": "Reusable every day",
+        "r4_b": "Single-use waste",
+        "r5_feature": "Color choices",
+        "r5_a": "Six finishes",
+        "r5_b": "Limited or none"
+      }
+    },
+    "joynure_baby_specs": {
+      "type": "joynure-baby-specs",
+      "settings": {
+        "asset_file": "baby-mat-specs.jpg",
+        "v1": "Portable foldable changing mat",
+        "v2": "Waterproof wipe-clean surface",
+        "v3": "Folds to clutch size for travel",
+        "v4": "Padded comfort core",
+        "v5": "Home, car, park, restrooms",
+        "v6": "Black / Black Grey / Colorful / White Black / White Grey / Gray",
+        "v7": "1 \u00d7 foldable baby changing mat"
+      }
+    },
+    "joynure_baby_faq": {
+      "type": "joynure-baby-faq",
+      "settings": {
+        "q1": "How do I use the changing mat?",
+        "a1": "Unfold the clutch into a flat padded surface, change baby, wipe the waterproof top clean, then fold and pack away.",
+        "q2": "Is it waterproof?",
+        "a2": "Yes. The top surface is designed to wipe clean after messes without soaking through.",
+        "q3": "Does it fit in a diaper bag?",
+        "a3": "Yes. It folds into a compact clutch for diaper bags, strollers, and car kits.",
+        "q4": "Can I use it on public surfaces?",
+        "a4": "Yes \u2014 that is the point. Soft padding for floors, park tables, and restroom counters.",
+        "q5": "Which colors are available?",
+        "a5": "Black, Black Grey, Colorful, White Black, White Grey, and Gray.",
+        "q6": "Is it reusable?",
+        "a6": "Yes. Wipe clean and reuse instead of buying thin disposable pads.",
+        "q7": "How should I store it?",
+        "a7": "Fold into the clutch and keep it in a diaper bag, car console, or nursery drawer.",
+        "q8": "What comes in the package?",
+        "a8": "One portable foldable baby changing mat with waterproof wipe-clean surface."
+      }
+    },
+    "joynure_baby_final_cta": {
+      "type": "joynure-baby-final-cta",
+      "settings": {
+        "heading": "Ready for Calmer Changes?",
+        "lede": "Choose your color and pack a wipe-clean padded mat for home and travel.",
+        "eyebrow": "JOYNURE / Baby Care",
+        "product_label": "Foldable Baby Changing Mat",
+        "asset_file": "baby-mat-final-cta.jpg"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "joynure_baby_benefits",
+    "joynure_baby_difference",
+    "joynure_baby_survey",
+    "joynure_baby_lifestyle_strip",
+    "joynure_baby_how_it_works",
+    "joynure_baby_mechanism",
+    "joynure_baby_steps",
+    "joynure_baby_features",
+    "joynure_baby_included",
+    "joynure_baby_color_story",
+    "joynure_baby_comparison",
+    "joynure_baby_specs",
+    "joynure_baby_faq",
+    "joynure_baby_final_cta"
+  ]
+}

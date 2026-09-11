@@ -1,0 +1,37 @@
+{%- comment -%}
+  Baby long-form lives on baby-nail / baby-mat alternate templates to stay under
+  Shopify's 25-section product template limit (Hula uses the default product template).
+{%- endcomment -%}
+{%- if product.handle == 'lectric-baby-nail-trimmer-set-gentle-safe-nail-care' -%}
+  {%- if template.suffix != 'baby-nail' -%}
+    <script>
+      (function () {
+        try {
+          var url = new URL(window.location.href);
+          if (url.searchParams.get('view') === 'baby-nail') return;
+          url.searchParams.set('view', 'baby-nail');
+          window.location.replace(url.toString());
+        } catch (e) {}
+      })();
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="0;url={{ product.url }}?view=baby-nail{% if product.selected_or_first_available_variant %}&variant={{ product.selected_or_first_available_variant.id }}{% endif %}">
+    </noscript>
+  {%- endif -%}
+{%- elsif product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad' -%}
+  {%- if template.suffix != 'baby-mat' -%}
+    <script>
+      (function () {
+        try {
+          var url = new URL(window.location.href);
+          if (url.searchParams.get('view') === 'baby-mat') return;
+          url.searchParams.set('view', 'baby-mat');
+          window.location.replace(url.toString());
+        } catch (e) {}
+      })();
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="0;url={{ product.url }}?view=baby-mat{% if product.selected_or_first_available_variant %}&variant={{ product.selected_or_first_available_variant.id }}{% endif %}">
+    </noscript>
+  {%- endif -%}
+{%- endif -%}

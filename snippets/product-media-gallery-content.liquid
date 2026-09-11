@@ -31,20 +31,13 @@
   assign variant_images = selected_product.images | where: 'attached_to_variant?', true | map: 'src'
   assign first_3d_model = selected_product.media | where: 'media_type', 'model' | first
 
-  # Normalize Color/Colour option to Pink / Purple / Blue for gallery isolation.
+  # Pass raw Color/Colour option through; joynure-color-media-ids normalizes per product.
   assign selected_color_label = ''
   for option in selected_product.options_with_values
     assign opt_name = option.name | downcase
     if opt_name == 'color' or opt_name == 'colour'
       assign option_index = option.position | minus: 1
-      assign raw_color = selected_variant.options[option_index] | downcase
-      if raw_color contains 'pink'
-        assign selected_color_label = 'Pink'
-      elsif raw_color contains 'purple'
-        assign selected_color_label = 'Purple'
-      elsif raw_color contains 'blue'
-        assign selected_color_label = 'Blue'
-      endif
+      assign selected_color_label = selected_variant.options[option_index]
       break
     endif
   endfor
@@ -103,7 +96,7 @@
 -%}
 {%- capture joynure_color_media_ids -%}
   {%- if block_settings.hide_variants and selected_color_label != blank -%}
-    {%- render 'joynure-color-media-ids', color: selected_color_label -%}
+    {%- render 'joynure-color-media-ids', color: selected_color_label, product: selected_product -%}
   {%- endif -%}
 {%- endcapture -%}
 {%- liquid
@@ -153,14 +146,40 @@
     endif
   endif
 
+  # People / product-introduction theme assets (per color), appended after product media.
+  assign people_assets = ''
+  assign people_list = '' | split: ','
+  assign people_count = 0
+  if selected_color_label != blank
+    if selected_product.handle == '2-in-1-reusable-pet-hair-remover'
+      capture people_assets
+        render 'joynure-pet-people-assets', color: selected_color_label
+      endcapture
+    elsif selected_product.handle == 'lectric-baby-nail-trimmer-set-gentle-safe-nail-care' or selected_product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
+      capture people_assets
+        render 'joynure-baby-people-assets', color: selected_color_label, product: selected_product
+      endcapture
+    endif
+    assign people_assets = people_assets | strip
+    if people_assets != blank
+      assign people_list = people_assets | split: ','
+      assign people_count = people_list.size
+    endif
+  endif
+  # Keep pet_* aliases used below for slide/control injection.
+  assign pet_people_assets = people_assets
+  assign pet_people_list = people_list
+  assign pet_people_count = people_count
+  assign gallery_slide_count = sorted_media.size | plus: people_count
+
   # Use a counter instead of dots when there are many images to avoid cropping/overflow.
-  if slideshow_controls_style == 'dots' and sorted_media.size > 15
+  if slideshow_controls_style == 'dots' and gallery_slide_count > 15
     assign slideshow_controls_style = 'counter'
   endif
 
   assign render_slideshow_arrows = false
 
-  if sorted_media.size <= 1
+  if gallery_slide_count <= 1
     assign slideshow_class = 'product-media-gallery__slideshow--single-media slideshow--single-media'
   else
     assign slideshow_class = ''
@@ -453,16 +472,55 @@
           media_fit: block_settings.media_fit,
         %}
       {% endfor %}
+      {% if pet_people_count > 0 %}
+        {% for asset_name in pet_people_list %}
+          {% liquid
+            assign asset_name = asset_name | strip
+            if asset_name == blank
+              continue
+            endif
+            assign people_index = sorted_media.size | plus: forloop.index0
+            assign people_alt = selected_product.title | append: ' — ' | append: selected_color_label | append: ' lifestyle'
+          %}
+          {% capture children %}
+            <div class="product-media product-media--image joynure-pet-people-media">
+              <img
+                src="{{ asset_name | asset_url }}"
+                alt="{{ people_alt | escape }}"
+                class="product-media__image"
+                width="1200"
+                height="1600"
+                loading="{% if people_index == 0 %}eager{% else %}lazy{% endif %}"
+                sizes="{{ sizes }}"
+              >
+            </div>
+          {% endcapture %}
+          {% capture class %}
+            {{ product_media_container_class }} product-media-container--image joynure-pet-people-slide
+          {% endcapture %}
+          {% capture style %}
+            --media-preview-ratio: 0.75;
+          {% endcapture %}
+          {% render 'slideshow-slide',
+            index: people_index,
+            children: children,
+            class: class,
+            style: style,
+            media_fit: block_settings.media_fit,
+          %}
+        {% endfor %}
+      {% endif %}
     {% endcapture %}
 
-    {% if sorted_media.size > 1 %}
+    {% if gallery_slide_count > 1 %}
       {% capture controls %}
         {% if render_slideshow_controls %}
           {%- render 'slideshow-controls',
             class: slideshow_controls_class,
             style: slideshow_controls_style,
-            item_count: sorted_media.size,
+            item_count: gallery_slide_count,
             thumbnails: sorted_media,
+            extra_asset_files: pet_people_assets,
             controls_on_media: controls_on_media,
             pagination_position: pagination_position,
             aspect_ratio: block_settings.aspect_ratio,
@@ -474,8 +532,9 @@
           {%- render 'slideshow-controls',
             class: 'desktop:hidden media-gallery__mobile-controls',
             style: block_settings.slideshow_mobile_controls_style,
-            item_count: sorted_media.size,
+            item_count: gallery_slide_count,
             thumbnails: sorted_media,
+            extra_asset_files: pet_people_assets,
             controls_on_media: mobile_controls_on_media,
             pagination_position: 'center',
             aspect_ratio: block_settings.aspect_ratio,
@@ -495,7 +554,7 @@
       ref: 'slideshow',
       class: slideshow_class,
       slides: slides,
-      slide_count: sorted_media.size,
+      slide_count: gallery_slide_count,
       slideshow_arrows: slideshow_arrows,
       arrows_position: icons_position,
       controls: controls

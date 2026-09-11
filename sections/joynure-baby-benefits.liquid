@@ -1,0 +1,95 @@
+{%- capture enabled_flag -%}
+  {%- render 'joynure-baby-landing-enabled', product: product -%}
+{%- endcapture -%}
+{%- if enabled_flag == 'true' -%}
+  {%- liquid
+    assign is_mat = false
+    if product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
+      assign is_mat = true
+    endif
+  -%}
+  {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
+  <section class="joynure-hula-landing joynure-hula-benefits" {{ section.shopify_attributes }}>
+    <div class="joynure-hula-landing__inner">
+      <div class="joynure-hula-benefits__grid">
+        <article class="joynure-hula-benefits__item">
+          <svg class="joynure-hula-benefits__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M4 12h16M8 8l-2 4 2 4M16 8l2 4-2 4"/>
+          </svg>
+          {%- if is_mat -%}
+            <p class="joynure-hula-benefits__label">{{ section.settings.b1_label_mat | default: section.settings.b1_label | escape }}</p>
+            <p class="joynure-hula-benefits__text">{{ section.settings.b1_text_mat | default: 'Waterproof surface that wipes clean after every change.' | escape }}</p>
+          {%- else -%}
+            <p class="joynure-hula-benefits__label">{{ section.settings.b1_label | escape }}</p>
+            <p class="joynure-hula-benefits__text">{{ section.settings.b1_text | escape }}</p>
+          {%- endif -%}
+        </article>
+        <article class="joynure-hula-benefits__item">
+          <svg class="joynure-hula-benefits__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M5 12.5 9.5 17 19 7"/>
+          </svg>
+          {%- if is_mat -%}
+            <p class="joynure-hula-benefits__label">{{ section.settings.b2_label_mat | default: 'Travel clutch fold' | escape }}</p>
+            <p class="joynure-hula-benefits__text">{{ section.settings.b2_text_mat | default: 'Folds into a compact clutch for bags, strollers, and day trips.' | escape }}</p>
+          {%- else -%}
+            <p class="joynure-hula-benefits__label">{{ section.settings.b2_label | escape }}</p>
+            <p class="joynure-hula-benefits__text">{{ section.settings.b2_text | escape }}</p>
+          {%- endif -%}
+        </article>
+        <article class="joynure-hula-benefits__item">
+          <svg class="joynure-hula-benefits__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="4" y="7" width="16" height="12" rx="2"/><path d="M8 7V5h8v2"/>
+          </svg>
+          {%- if is_mat -%}
+            <p class="joynure-hula-benefits__label">{{ section.settings.b3_label_mat | default: 'Padded comfort' | escape }}</p>
+            <p class="joynure-hula-benefits__text">{{ section.settings.b3_text_mat | default: 'Soft cushioning for changes on floors, parks, and public spaces.' | escape }}</p>
+          {%- else -%}
+            <p class="joynure-hula-benefits__label">{{ section.settings.b3_label | escape }}</p>
+            <p class="joynure-hula-benefits__text">{{ section.settings.b3_text | escape }}</p>
+          {%- endif -%}
+        </article>
+        <article class="joynure-hula-benefits__item">
+          <svg class="joynure-hula-benefits__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="8"/><path d="M8 12h8"/>
+          </svg>
+          {%- if is_mat -%}
+            <p class="joynure-hula-benefits__label">{{ section.settings.b4_label_mat | default: 'Six color choices' | escape }}</p>
+            <p class="joynure-hula-benefits__text">{{ section.settings.b4_text_mat | default: 'Pick a finish that matches your diaper bag and nursery style.' | escape }}</p>
+          {%- else -%}
+            <p class="joynure-hula-benefits__label">{{ section.settings.b4_label | escape }}</p>
+            <p class="joynure-hula-benefits__text">{{ section.settings.b4_text | escape }}</p>
+          {%- endif -%}
+        </article>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Baby benefits",
+  "tag": "section",
+  "class": "joynure-hula-landing-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "b1_label", "label": "Benefit 1 label", "default": "Quiet electric trim" },
+    { "type": "text", "id": "b1_text", "label": "Benefit 1 text", "default": "Soft rotating pads trim tiny nails without sharp scissors." },
+    { "type": "text", "id": "b2_label", "label": "Benefit 2 label", "default": "LED-guided care" },
+    { "type": "text", "id": "b2_text", "label": "Benefit 2 text", "default": "Built-in light helps you see fingers and toes clearly." },
+    { "type": "text", "id": "b3_label", "label": "Benefit 3 label", "default": "Age-stage pads" },
+    { "type": "text", "id": "b3_text", "label": "Benefit 3 text", "default": "Swap pads as nails grow from newborn through toddler." },
+    { "type": "text", "id": "b4_label", "label": "Benefit 4 label", "default": "Gentle on skin" },
+    { "type": "text", "id": "b4_text", "label": "Benefit 4 text", "default": "Designed to file safely — less risk than clippers on wiggly hands." },
+    { "type": "header", "content": "Mat overrides (optional)" },
+    { "type": "text", "id": "b1_label_mat", "label": "Mat benefit 1 label", "default": "Wipe-clean waterproof" },
+    { "type": "text", "id": "b1_text_mat", "label": "Mat benefit 1 text", "default": "Waterproof surface that wipes clean after every change." },
+    { "type": "text", "id": "b2_label_mat", "label": "Mat benefit 2 label", "default": "Travel clutch fold" },
+    { "type": "text", "id": "b2_text_mat", "label": "Mat benefit 2 text", "default": "Folds into a compact clutch for bags, strollers, and day trips." },
+    { "type": "text", "id": "b3_label_mat", "label": "Mat benefit 3 label", "default": "Padded comfort" },
+    { "type": "text", "id": "b3_text_mat", "label": "Mat benefit 3 text", "default": "Soft cushioning for changes on floors, parks, and public spaces." },
+    { "type": "text", "id": "b4_label_mat", "label": "Mat benefit 4 label", "default": "Six color choices" },
+    { "type": "text", "id": "b4_text_mat", "label": "Mat benefit 4 text", "default": "Pick a finish that matches your diaper bag and nursery style." }
+  ],
+  "presets": [{ "name": "JOYNURE Baby benefits" }]
+}
+{% endschema %}

@@ -1,0 +1,142 @@
+{%- capture enabled_flag -%}
+  {%- render 'joynure-baby-landing-enabled', product: product -%}
+{%- endcapture -%}
+{%- if enabled_flag == 'true' -%}
+  {%- liquid
+    assign is_mat = false
+    if product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
+      assign is_mat = true
+    endif
+    if is_mat
+      assign cmp_lede = section.settings.lede_mat | default: 'A practical look at JOYNURE vs thin disposable pads and hard public surfaces.'
+      assign col_a = section.settings.col_a_mat | default: 'JOYNURE Changing Mat'
+      assign col_b = section.settings.col_b_mat | default: 'Thin disposables / hard surfaces'
+      assign r1_f = 'Comfort'
+      assign r1_a = 'Padded soft surface'
+      assign r1_b = 'Hard floors or thin sheets'
+      assign r2_f = 'Cleanability'
+      assign r2_a = 'Wipe-clean waterproof top'
+      assign r2_b = 'Tear and toss / wipe nowhere'
+      assign r3_f = 'Travel'
+      assign r3_a = 'Clutch-fold for bags'
+      assign r3_b = 'Bulky packs or nothing'
+      assign r4_f = 'Reuse'
+      assign r4_a = 'Reusable every day'
+      assign r4_b = 'Single-use waste'
+      assign r5_f = 'Color choices'
+      assign r5_a = 'Six finishes'
+      assign r5_b = 'Limited or none'
+    else
+      assign cmp_lede = section.settings.lede
+      assign col_a = section.settings.col_a
+      assign col_b = section.settings.col_b
+      assign r1_f = section.settings.r1_feature
+      assign r1_a = section.settings.r1_a
+      assign r1_b = section.settings.r1_b
+      assign r2_f = section.settings.r2_feature
+      assign r2_a = section.settings.r2_a
+      assign r2_b = section.settings.r2_b
+      assign r3_f = section.settings.r3_feature
+      assign r3_a = section.settings.r3_a
+      assign r3_b = section.settings.r3_b
+      assign r4_f = section.settings.r4_feature
+      assign r4_a = section.settings.r4_a
+      assign r4_b = section.settings.r4_b
+      assign r5_f = section.settings.r5_feature
+      assign r5_a = section.settings.r5_a
+      assign r5_b = section.settings.r5_b
+    endif
+  -%}
+  {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
+  <section class="joynure-hula-landing joynure-hula-landing__section joynure-hula-landing__section--blush" {{ section.shopify_attributes }}>
+    <div class="joynure-hula-landing__inner">
+      <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">
+        Why Choose <span class="joynure-hula-landing__title-accent">JOYNURE</span>?
+      </h2>
+      <p class="joynure-hula-landing__lede joynure-hula-landing__lede--center">{{ cmp_lede | escape }}</p>
+      <div class="joynure-hula-compare__wrap">
+        <table class="joynure-hula-compare__table">
+          <thead>
+            <tr>
+              <th scope="col">Feature</th>
+              <th scope="col">{{ col_a | escape }}</th>
+              <th scope="col">{{ col_b | escape }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in (1..5) %}
+              {% liquid
+                case i
+                  when 1
+                    assign fk = r1_f
+                    assign ak = r1_a
+                    assign bk = r1_b
+                  when 2
+                    assign fk = r2_f
+                    assign ak = r2_a
+                    assign bk = r2_b
+                  when 3
+                    assign fk = r3_f
+                    assign ak = r3_a
+                    assign bk = r3_b
+                  when 4
+                    assign fk = r4_f
+                    assign ak = r4_a
+                    assign bk = r4_b
+                  when 5
+                    assign fk = r5_f
+                    assign ak = r5_a
+                    assign bk = r5_b
+                endcase
+              %}
+              <tr>
+                <td data-label="Feature">{{ fk | escape }}</td>
+                <td data-label="{{ col_a | escape }}">
+                  <span class="joynure-hula-compare__yes" aria-hidden="true">✓</span>
+                  {{ ak | escape }}
+                </td>
+                <td data-label="{{ col_b | escape }}">
+                  <span class="joynure-hula-compare__no" aria-hidden="true">–</span>
+                  {{ bk | escape }}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Baby comparison",
+  "tag": "section",
+  "class": "joynure-hula-landing-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "textarea", "id": "lede", "label": "Supporting copy", "default": "A practical look at JOYNURE vs scissors and clippers for tiny nails." },
+    { "type": "textarea", "id": "lede_mat", "label": "Supporting copy (mat)", "default": "A practical look at JOYNURE vs thin disposable pads and hard public surfaces." },
+    { "type": "text", "id": "col_a", "label": "Column A", "default": "JOYNURE Nail Trimmer" },
+    { "type": "text", "id": "col_b", "label": "Column B", "default": "Scissors / clippers" },
+    { "type": "text", "id": "col_a_mat", "label": "Column A (mat)", "default": "JOYNURE Changing Mat" },
+    { "type": "text", "id": "col_b_mat", "label": "Column B (mat)", "default": "Thin disposables / hard surfaces" },
+    { "type": "text", "id": "r1_feature", "label": "Row 1 feature", "default": "Safety feel" },
+    { "type": "text", "id": "r1_a", "label": "Row 1 JOYNURE", "default": "Soft rotating pads" },
+    { "type": "text", "id": "r1_b", "label": "Row 1 traditional", "default": "Sharp blades" },
+    { "type": "text", "id": "r2_feature", "label": "Row 2 feature", "default": "Noise" },
+    { "type": "text", "id": "r2_a", "label": "Row 2 JOYNURE", "default": "Quiet electric motor" },
+    { "type": "text", "id": "r2_b", "label": "Row 2 traditional", "default": "Sudden snips" },
+    { "type": "text", "id": "r3_feature", "label": "Row 3 feature", "default": "Visibility" },
+    { "type": "text", "id": "r3_a", "label": "Row 3 JOYNURE", "default": "Built-in LED light" },
+    { "type": "text", "id": "r3_b", "label": "Row 3 traditional", "default": "Room light only" },
+    { "type": "text", "id": "r4_feature", "label": "Row 4 feature", "default": "Growth stages" },
+    { "type": "text", "id": "r4_a", "label": "Row 4 JOYNURE", "default": "Age-stage pad set" },
+    { "type": "text", "id": "r4_b", "label": "Row 4 traditional", "default": "One tool for all ages" },
+    { "type": "text", "id": "r5_feature", "label": "Row 5 feature", "default": "Stress level" },
+    { "type": "text", "id": "r5_a", "label": "Row 5 JOYNURE", "default": "Calmer bedtime routine" },
+    { "type": "text", "id": "r5_b", "label": "Row 5 traditional", "default": "More clipper anxiety" }
+  ],
+  "presets": [{ "name": "JOYNURE Baby comparison" }]
+}
+{% endschema %}

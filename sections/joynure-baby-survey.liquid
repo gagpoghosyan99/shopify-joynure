@@ -1,0 +1,178 @@
+{%- capture enabled_flag -%}
+  {%- render 'joynure-baby-landing-enabled', product: product -%}
+{%- endcapture -%}
+{%- if enabled_flag == 'true' -%}
+  {%- liquid
+    assign is_mat = false
+    if product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
+      assign is_mat = true
+    endif
+    if is_mat
+      assign survey_asset = 'baby-mat-mechanism-hero.jpg'
+    else
+      assign survey_asset = 'baby-nail-survey-hero.jpg'
+    endif
+  -%}
+  {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
+  <section class="joynure-hula-landing joynure-hula-landing__section joynure-hula-survey" {{ section.shopify_attributes }}>
+    <div class="joynure-hula-landing__inner">
+      <div class="joynure-hula-survey__intro">
+        <p class="joynure-hula-landing__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">
+          {%- if is_mat -%}
+            {{ section.settings.heading_mat | default: 'Why parents pack JOYNURE everywhere.' | escape }}
+          {%- else -%}
+            {{ section.settings.heading | escape }}
+          {%- endif -%}
+        </h2>
+      </div>
+
+      <div class="joynure-hula-survey__grid">
+        <div class="joynure-hula-card-3d joynure-hula-survey__photo">
+          <div class="joynure-hula-card-3d__media">
+            {% render 'joynure-hula-media',
+              product: product,
+              setting_image: section.settings.image,
+              asset_file: survey_asset,
+              media_id: section.settings.media_id,
+              alt: section.settings.heading,
+              class: 'joynure-hula-landing__media',
+              loading: 'lazy',
+              sizes: '(min-width: 990px) 42vw, 100vw'
+            %}
+          </div>
+        </div>
+
+        <div class="joynure-hula-survey__panel" role="list">
+          {% for i in (1..6) %}
+            {% liquid
+              assign pk = 'p' | append: i | append: '_percent'
+              assign tk = 'p' | append: i | append: '_title'
+              assign xk = 'p' | append: i | append: '_text'
+              assign ik = 'p' | append: i | append: '_icon'
+              assign title = section.settings[tk]
+              assign text = section.settings[xk]
+              if is_mat
+                case i
+                  when 1
+                    assign title = 'Wipe-clean surface'
+                    assign text = 'Waterproof top cleans with a quick wipe'
+                  when 2
+                    assign title = 'Clutch-fold travel'
+                    assign text = 'Folds compact for bags and strollers'
+                  when 3
+                    assign title = 'Padded comfort'
+                    assign text = 'Softer than hard floors or public counters'
+                  when 4
+                    assign title = 'Ready anywhere'
+                    assign text = 'Home, car, park, and restroom changes'
+                  when 5
+                    assign title = 'Reusable everyday'
+                    assign text = 'Skip thin disposable pads that tear'
+                  when 6
+                    assign title = 'Six color choices'
+                    assign text = 'Black, Black Grey, Colorful, White Black, White Grey, Gray'
+                endcase
+              endif
+            %}
+            <div class="joynure-hula-survey__row" role="listitem">
+              <span class="joynure-hula-survey__icon" aria-hidden="true">
+                {% case section.settings[ik] %}
+                  {% when 'core' %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg>
+                  {% when 'energy' %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 4 14h7l-1 8 10-14h-7l0-6z"/></svg>
+                  {% when 'habit' %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12.5 9.5 17 19 7"/></svg>
+                  {% when 'fit' %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 10h8v8H8z"/><path d="M10 8V6a2 2 0 0 1 4 0v2"/></svg>
+                  {% when 'confidence' %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
+                  {% else %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h16M8 8l-2 4 2 4M16 8l2 4-2 4"/></svg>
+                {% endcase %}
+              </span>
+              <div class="joynure-hula-survey__copy">
+                <p class="joynure-hula-survey__title">{{ title | escape }}</p>
+                <p class="joynure-hula-survey__text">{{ text | escape }}</p>
+              </div>
+              <p class="joynure-hula-survey__percent">{{ section.settings[pk] | escape }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Baby survey",
+  "tag": "section",
+  "class": "joynure-hula-landing-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Loved by parents" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why parents keep JOYNURE close." },
+    { "type": "text", "id": "heading_mat", "label": "Heading (mat)", "default": "Why parents pack JOYNURE everywhere." },
+    { "type": "image_picker", "id": "image", "label": "Lifestyle photo" },
+    { "type": "text", "id": "asset_file", "label": "Theme asset", "default": "baby-survey-hero.jpg" },
+    { "type": "text", "id": "media_id", "label": "Fallback media ID" },
+
+    { "type": "header", "content": "Result 1" },
+    { "type": "select", "id": "p1_icon", "label": "Icon 1", "default": "waist", "options": [
+      { "value": "waist", "label": "Waist" }, { "value": "core", "label": "Core" }, { "value": "energy", "label": "Energy" },
+      { "value": "habit", "label": "Habit" }, { "value": "fit", "label": "Fit" }, { "value": "confidence", "label": "Confidence" }
+    ]},
+    { "type": "text", "id": "p1_percent", "label": "Percent 1", "default": "01" },
+    { "type": "text", "id": "p1_title", "label": "Title 1", "default": "Quiet electric trim" },
+    { "type": "text", "id": "p1_text", "label": "Text 1", "default": "Soft pads instead of sharp scissors" },
+
+    { "type": "header", "content": "Result 2" },
+    { "type": "select", "id": "p2_icon", "label": "Icon 2", "default": "core", "options": [
+      { "value": "waist", "label": "Waist" }, { "value": "core", "label": "Core" }, { "value": "energy", "label": "Energy" },
+      { "value": "habit", "label": "Habit" }, { "value": "fit", "label": "Fit" }, { "value": "confidence", "label": "Confidence" }
+    ]},
+    { "type": "text", "id": "p2_percent", "label": "Percent 2", "default": "02" },
+    { "type": "text", "id": "p2_title", "label": "Title 2", "default": "LED-guided care" },
+    { "type": "text", "id": "p2_text", "label": "Text 2", "default": "See tiny nails clearly at bedtime" },
+
+    { "type": "header", "content": "Result 3" },
+    { "type": "select", "id": "p3_icon", "label": "Icon 3", "default": "energy", "options": [
+      { "value": "waist", "label": "Waist" }, { "value": "core", "label": "Core" }, { "value": "energy", "label": "Energy" },
+      { "value": "habit", "label": "Habit" }, { "value": "fit", "label": "Fit" }, { "value": "confidence", "label": "Confidence" }
+    ]},
+    { "type": "text", "id": "p3_percent", "label": "Percent 3", "default": "03" },
+    { "type": "text", "id": "p3_title", "label": "Title 3", "default": "Age-stage pads" },
+    { "type": "text", "id": "p3_text", "label": "Text 3", "default": "Swap pads as nails grow" },
+
+    { "type": "header", "content": "Result 4" },
+    { "type": "select", "id": "p4_icon", "label": "Icon 4", "default": "habit", "options": [
+      { "value": "waist", "label": "Waist" }, { "value": "core", "label": "Core" }, { "value": "energy", "label": "Energy" },
+      { "value": "habit", "label": "Habit" }, { "value": "fit", "label": "Fit" }, { "value": "confidence", "label": "Confidence" }
+    ]},
+    { "type": "text", "id": "p4_percent", "label": "Percent 4", "default": "04" },
+    { "type": "text", "id": "p4_title", "label": "Title 4", "default": "Gentle on fingers" },
+    { "type": "text", "id": "p4_text", "label": "Text 4", "default": "Files safely — less clipper stress" },
+
+    { "type": "header", "content": "Result 5" },
+    { "type": "select", "id": "p5_icon", "label": "Icon 5", "default": "fit", "options": [
+      { "value": "waist", "label": "Waist" }, { "value": "core", "label": "Core" }, { "value": "energy", "label": "Energy" },
+      { "value": "habit", "label": "Habit" }, { "value": "fit", "label": "Fit" }, { "value": "confidence", "label": "Confidence" }
+    ]},
+    { "type": "text", "id": "p5_percent", "label": "Percent 5", "default": "05" },
+    { "type": "text", "id": "p5_title", "label": "Title 5", "default": "Travel-kit size" },
+    { "type": "text", "id": "p5_text", "label": "Text 5", "default": "Fits diaper bags and nightstands" },
+
+    { "type": "header", "content": "Result 6" },
+    { "type": "select", "id": "p6_icon", "label": "Icon 6", "default": "confidence", "options": [
+      { "value": "waist", "label": "Waist" }, { "value": "core", "label": "Core" }, { "value": "energy", "label": "Energy" },
+      { "value": "habit", "label": "Habit" }, { "value": "fit", "label": "Fit" }, { "value": "confidence", "label": "Confidence" }
+    ]},
+    { "type": "text", "id": "p6_percent", "label": "Percent 6", "default": "06" },
+    { "type": "text", "id": "p6_title", "label": "Title 6", "default": "Blue or Pink" },
+    { "type": "text", "id": "p6_text", "label": "Text 6", "default": "Two finishes for your nursery kit" }
+  ],
+  "presets": [{ "name": "JOYNURE Baby survey" }]
+}
+{% endschema %}

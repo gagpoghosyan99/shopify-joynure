@@ -124,29 +124,12 @@
                 "padding-inline-end": 0
               },
               "blocks": {
-                "text_xrnftG": {
-                  "type": "text",
-                  "name": "t:names.product_title",
+                "joynure_hula_title": {
+                  "type": "joynure-hula-pdp-title",
                   "settings": {
-                    "text": "<h1>{{ closest.product.title }}</h1>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "h3",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "text_color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "brand": "JOYNURE",
+                    "title": "Smart Weighted Hula Hoop",
+                    "subtitle": "Adjustable 24-Section Fitness Hoop"
                   },
                   "blocks": {}
                 },
@@ -184,7 +167,7 @@
                 }
               },
               "block_order": [
-                "text_xrnftG",
+                "joynure_hula_title",
                 "joynure_benefit_subtitle",
                 "price_tVjtKg",
                 "joynure_availability"
@@ -315,23 +298,101 @@
         "padding-block-end": 0
       }
     },
-    "joynure_reveal": {
-      "type": "joynure-reveal",
+    "joynure_hula_benefits": {
+      "type": "joynure-hula-benefits",
+      "settings": {}
+    },
+    "joynure_hula_lifestyle_strip": {
+      "type": "joynure-hula-lifestyle-strip",
+      "settings": {}
+    },
+    "joynure_hula_difference": {
+      "type": "joynure-hula-difference",
+      "settings": {}
+    },
+    "joynure_hula_survey": {
+      "type": "joynure-hula-survey",
+      "settings": {}
+    },
+    "joynure_hula_how_it_works": {
+      "type": "joynure-hula-how-it-works",
+      "settings": {}
+    },
+    "joynure_hula_mechanism": {
+      "type": "joynure-hula-mechanism",
+      "settings": {}
+    },
+    "joynure_hula_steps": {
+      "type": "joynure-hula-steps",
+      "settings": {}
+    },
+    "joynure_hula_features": {
+      "type": "joynure-hula-features",
+      "settings": {}
+    },
+    "joynure_hula_included": {
+      "type": "joynure-hula-included",
       "settings": {
-        "heading": "See the difference",
-        "description": "Drag the slider to compare before and after.",
-        "before_label": "Before",
-        "after_label": "After",
-        "orientation": "horizontal",
-        "initial_position": 50,
-        "show_labels": true,
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "heading": "What's Included",
+        "lede": "Everything you need to get started.",
+        "item_1": "1 × Adjustable 24-section hoop",
+        "item_2": "1 × Weighted gravity ball",
+        "item_3": "1 × Adjustable rope/cord",
+        "asset_file": "hula-included.jpg"
+      }
+    },
+    "joynure_hula_motion_gallery": {
+      "type": "joynure-hula-motion-gallery",
+      "disabled": true,
+      "settings": {
+        "enabled": false
+      }
+    },
+    "joynure_hula_color_story": {
+      "type": "joynure-hula-color-story",
+      "settings": {
+        "pink_asset_file": "hula-color-pink.jpg",
+        "purple_asset_file": "hula-color-purple.jpg",
+        "blue_asset_file": "hula-color-blue.jpg"
+      }
+    },
+    "joynure_hula_comparison": {
+      "type": "joynure-hula-comparison",
+      "settings": {}
+    },
+    "joynure_hula_specs": {
+      "type": "joynure-hula-specs",
+      "settings": {
+        "asset_file": "hula-specs.jpg"
+      }
+    },
+    "joynure_hula_faq": {
+      "type": "joynure-hula-faq",
+      "settings": {}
+    },
+    "joynure_hula_final_cta": {
+      "type": "joynure-hula-final-cta",
+      "settings": {
+        "asset_file": "hula-final-cta.jpg"
       }
     }
   },
   "order": [
     "main",
-    "joynure_reveal"
+    "joynure_hula_benefits",
+    "joynure_hula_difference",
+    "joynure_hula_survey",
+    "joynure_hula_lifestyle_strip",
+    "joynure_hula_how_it_works",
+    "joynure_hula_mechanism",
+    "joynure_hula_steps",
+    "joynure_hula_features",
+    "joynure_hula_included",
+    "joynure_hula_motion_gallery",
+    "joynure_hula_color_story",
+    "joynure_hula_comparison",
+    "joynure_hula_specs",
+    "joynure_hula_faq",
+    "joynure_hula_final_cta"
   ]
 }

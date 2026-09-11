@@ -1,0 +1,89 @@
+{%- capture enabled_flag -%}
+  {%- render 'joynure-baby-landing-enabled', product: product -%}
+{%- endcapture -%}
+{%- if enabled_flag == 'true' -%}
+  {%- liquid
+    assign is_mat = false
+    if product.handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
+      assign is_mat = true
+    endif
+    if is_mat
+      assign feat_heading = section.settings.heading_mat | default: 'Built for On-the-Go Changes'
+      assign feat_lede = section.settings.lede_mat | default: 'Practical details that make travel changing feel simple and reliable.'
+    else
+      assign feat_heading = section.settings.heading
+      assign feat_lede = section.settings.lede
+    endif
+  -%}
+  {{ 'joynure-hula-landing.css' | asset_url | stylesheet_tag }}
+  <section class="joynure-hula-landing joynure-hula-landing__section" {{ section.shopify_attributes }}>
+    <div class="joynure-hula-landing__inner">
+      <h2 class="joynure-hula-landing__title joynure-hula-landing__title--center">{{ feat_heading | escape }}</h2>
+      <p class="joynure-hula-landing__lede joynure-hula-landing__lede--center">{{ feat_lede | escape }}</p>
+      <div class="joynure-hula-features__grid">
+        {% for i in (1..6) %}
+          {% liquid
+            assign tk = 'c' | append: i | append: '_title'
+            assign xk = 'c' | append: i | append: '_text'
+            assign ct = section.settings[tk]
+            assign cx = section.settings[xk]
+            if is_mat
+              case i
+                when 1
+                  assign ct = 'Waterproof Surface'
+                  assign cx = 'Wipe clean after every change — no soak-through mess.'
+                when 2
+                  assign ct = 'Clutch-Fold Travel'
+                  assign cx = 'Folds compact for diaper bags, strollers, and cars.'
+                when 3
+                  assign ct = 'Padded Comfort'
+                  assign cx = 'Soft cushioning on floors, benches, and park tables.'
+                when 4
+                  assign ct = 'Reusable Daily'
+                  assign cx = 'Skip thin disposable pads that tear and slip.'
+                when 5
+                  assign ct = 'Six Colors'
+                  assign cx = 'Black, Black Grey, Colorful, White Black, White Grey, Gray.'
+                when 6
+                  assign ct = 'Home & Away Ready'
+                  assign cx = 'One mat for nursery drawers and travel days alike.'
+              endcase
+            endif
+          %}
+          <article class="joynure-hula-features__card">
+            <h3>{{ ct | escape }}</h3>
+            <p>{{ cx | escape }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "JOYNURE Baby features",
+  "tag": "section",
+  "class": "joynure-hula-landing-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Built for Gentle Nail Care" },
+    { "type": "text", "id": "heading_mat", "label": "Heading (mat)", "default": "Built for On-the-Go Changes" },
+    { "type": "textarea", "id": "lede", "label": "Supporting copy", "default": "Practical details that make electric nail care feel simple and safe." },
+    { "type": "textarea", "id": "lede_mat", "label": "Supporting copy (mat)", "default": "Practical details that make travel changing feel simple and reliable." },
+    { "type": "text", "id": "c1_title", "label": "Card 1 title", "default": "Quiet Electric Motor" },
+    { "type": "textarea", "id": "c1_text", "label": "Card 1 text", "default": "Low-noise trimming that helps keep bedtime calm." },
+    { "type": "text", "id": "c2_title", "label": "Card 2 title", "default": "Soft Rotating Pads" },
+    { "type": "textarea", "id": "c2_text", "label": "Card 2 text", "default": "Gentle filing instead of sharp scissors or clippers." },
+    { "type": "text", "id": "c3_title", "label": "Card 3 title", "default": "LED Light Assist" },
+    { "type": "textarea", "id": "c3_text", "label": "Card 3 text", "default": "See tiny nail edges clearly on fingers and toes." },
+    { "type": "text", "id": "c4_title", "label": "Card 4 title", "default": "Age-Stage Pads" },
+    { "type": "textarea", "id": "c4_text", "label": "Card 4 text", "default": "Swap pads as nails grow from newborn through toddler." },
+    { "type": "text", "id": "c5_title", "label": "Card 5 title", "default": "Two Colors" },
+    { "type": "textarea", "id": "c5_text", "label": "Card 5 text", "default": "Blue and Pink finishes for your nursery kit." },
+    { "type": "text", "id": "c6_title", "label": "Card 6 title", "default": "Travel-Kit Size" },
+    { "type": "textarea", "id": "c6_text", "label": "Card 6 text", "default": "Compact enough for a diaper bag or nightstand drawer." }
+  ],
+  "presets": [{ "name": "JOYNURE Baby features" }]
+}
+{% endschema %}

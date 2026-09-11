@@ -1,0 +1,36 @@
+{%- doc -%}
+  Returns comma-separated theme asset filenames for Baby Care people/lifestyle gallery shots.
+  @param {string} color - Raw color option label
+  @param {object} [product] - Product (nail vs mat)
+{%- enddoc -%}
+{%- liquid
+  assign color_key = color | strip | downcase
+  assign assets = ''
+  assign handle = ''
+  if product != blank
+    assign handle = product.handle
+  endif
+
+  if handle == 'lectric-baby-nail-trimmer-set-gentle-safe-nail-care'
+    if color_key == 'blue' or color_key contains 'blue'
+      assign assets = 'baby-people-nail-blue-intro.jpg,baby-people-nail-blue-use.jpg,baby-people-nail-blue-bag.jpg'
+    elsif color_key == 'pink' or color_key contains 'pink'
+      assign assets = 'baby-people-nail-pink-intro.jpg,baby-people-nail-pink-use.jpg,baby-people-nail-pink-bag.jpg'
+    endif
+  elsif handle == 'portable-foldable-baby-changing-mat-waterproof-travel-changing-pad'
+    if color_key == 'black grey' or color_key == 'black gray' or color_key == 'black-grey'
+      assign assets = 'baby-people-mat-black-grey-intro.jpg,baby-people-mat-black-grey-use.jpg'
+    elsif color_key == 'white black' or color_key == 'white-black'
+      assign assets = 'baby-people-mat-white-black-intro.jpg,baby-people-mat-white-black-use.jpg'
+    elsif color_key == 'white grey' or color_key == 'white gray' or color_key == 'white-grey'
+      assign assets = 'baby-people-mat-white-grey-intro.jpg,baby-people-mat-white-grey-use.jpg'
+    elsif color_key == 'colorful' or color_key contains 'color'
+      assign assets = 'baby-people-mat-colorful-intro.jpg,baby-people-mat-colorful-use.jpg'
+    elsif color_key == 'gray' or color_key == 'grey'
+      assign assets = 'baby-people-mat-gray-intro.jpg,baby-people-mat-gray-use.jpg'
+    elsif color_key == 'black'
+      assign assets = 'baby-people-mat-black-intro.jpg,baby-people-mat-black-use.jpg'
+    endif
+  endif
+-%}
+{{- assets -}}
